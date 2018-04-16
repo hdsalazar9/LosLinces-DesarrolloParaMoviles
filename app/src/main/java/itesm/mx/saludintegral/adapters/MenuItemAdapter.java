@@ -1,4 +1,4 @@
-package itesm.mx.saludintegral;
+package itesm.mx.saludintegral.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import itesm.mx.saludintegral.R;
 
 /**
  * Clase MenuItemAdapter: un ArrayAdapter para los items de los menus que utilice la aplicación.
