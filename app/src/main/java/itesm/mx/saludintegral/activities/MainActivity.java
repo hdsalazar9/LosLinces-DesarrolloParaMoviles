@@ -1,4 +1,4 @@
-package itesm.mx.saludintegral;
+package itesm.mx.saludintegral.activities;
 
 /*
 * Esta es la development branch
@@ -7,6 +7,8 @@ package itesm.mx.saludintegral;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import itesm.mx.saludintegral.R;
 
 public class MainActivity extends AppCompatActivity {
 

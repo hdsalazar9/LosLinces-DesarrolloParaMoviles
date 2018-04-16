@@ -1,4 +1,4 @@
-package itesm.mx.saludintegral;
+package itesm.mx.saludintegral.adapters;
 
 /**
  * Clase MenuItem:
@@ -14,16 +14,16 @@ public class MenuItem {
     private String sTitle;
     private int iImage;
 
-    MenuItem(String sTitle, int iImage){
+    public MenuItem(String sTitle, int iImage){
         this.sTitle=sTitle;
         this.iImage=iImage;
     }
 
-    String getTitle(){
+    public String getTitle(){
         return this.sTitle;
     }
 
-    int getImage(){
+    public int getImage(){
         return this.iImage;
     }
 }
