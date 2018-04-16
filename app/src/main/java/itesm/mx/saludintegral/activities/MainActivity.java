@@ -8,7 +8,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
 import itesm.mx.saludintegral.R;
+import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
+import itesm.mx.saludintegral.models.InfoPersonal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,8 +27,17 @@ public class MainActivity extends AppCompatActivity {
         menu principal de actividades.
 
          */
-
-        Intent i = new Intent(this, MainMenu.class);
-        startActivity(i);
+        InfoPersonalOperations database = new InfoPersonalOperations(getApplicationContext());
+        database.open();
+        ArrayList<InfoPersonal> arrInfo = database.getAllProducts();
+        System.out.println(arrInfo.size());
+        if(arrInfo.size() > 0){ //Si no esta vacio, ya se registro mandarlo al menu principal
+            Intent i = new Intent(this, MainMenu.class);
+            startActivity(i);
+        }
+        else{ //Si no se ha registrado, mandarlo a registrarse
+            Intent i = new Intent(this, RegistroActivity.class);
+            startActivity(i);
+        }
     }
 }

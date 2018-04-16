@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Salud Integral</string>
+    <string name="activity_registro_TomarFoto">Tomar Foto</string>
+    <string name="activity_registro_MensajeInicial">Regístrate para comenzar a usar la aplicación</string>
+    <string name="activity_registro_nombre">Nombre</string>
+    <string name="activity_registro_nombre_hint">Escribe tu nombre</string>
+    <string name="activity_registro_apodo">Apodo</string>
+    <string name="activity_registro_apodo_hint">Escribe tu apodo</string>
+    <string name="activity_registro_FechaNacimiento">Fecha de nacimiento</string>
+    <string name="activity_registro_FechaNacimiento_hint">Escribe tu fecha de nacimiento</string>
+    <string name="activity_registro_pais">País</string>
+    <string name="activity_registro_pais_hint">Escribe tu país</string>
+    <string name="activity_registro_ciudad">Ciudad</string>
+    <string name="activity_registro_ciudad_hint">Escribe tu ciudad</string>
+    <string name="activity_registro_Continuar">Continuar</string>
 </resources>
