@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Salud Integral</string>
+    <string name="fragment_tomar_medicamento_ingerido">Ya la ingerí</string>
+    <string name="fragment_tomar_medicamento_eliminar">Eliminar</string>
 </resources>
