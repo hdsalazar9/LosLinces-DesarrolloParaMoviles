@@ -15,11 +15,15 @@ import java.util.Date;
 @Parcel
 public class Cumpleano {
 
-    private long id;
-    private String nombre;
-    private Date fecha;
-    private String tipo;
-    private String telefono;
+    long id;
+    String nombre;
+    Date fecha;
+    String tipo;
+    String telefono;
+
+
+    public Cumpleano() {
+    }
 
     public Cumpleano(long id, String nombre, Date fecha, String tipo, String telefono) {
         this.id = id;

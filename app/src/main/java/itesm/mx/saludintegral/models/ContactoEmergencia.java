@@ -12,9 +12,12 @@ import org.parceler.Parcel;
 @Parcel
 public class ContactoEmergencia {
 
-    private long id;
-    private String nombre;
-    private String telefono;
+    long id;
+    String nombre;
+    String telefono;
+
+    public ContactoEmergencia() {
+    }
 
     public ContactoEmergencia(long id, String nombre, String telefono) {
         this.id = id;
