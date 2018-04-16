@@ -2,8 +2,10 @@ package itesm.mx.saludintegral.models;
 
 import org.parceler.Parcel;
 
+
 import java.util.Date;
 import java.sql.Time;
+
 
 /**
  * Clase Medicamento:
