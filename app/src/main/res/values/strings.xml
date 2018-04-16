@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Salud Integral</string>
+    <string name="fragment_tomar_medicamento_ingerido">Ya la ingerí</string>
+    <string name="fragment_tomar_medicamento_eliminar">Eliminar</string>
+
+
+    <string name="fragment_addmedicamento_nombreMed">"Nombre del medicamento:"</string>
+    <string name="fragment_addmedicamento_gramajeMed">"Gramaje:"</string>
+    <string name="fragment_addmedicamento_cantidadMed">"Cantidad a ingerir por recordatorio:"</string>
+    <string name="fragment_addmedicamento_periodicidadMed">"Periodicidad"</string>
+    <string name="fragment_addmedicamento_horaMed">"Hora de ingesta:"</string>
+    <string name="fragment_addmedicamento_cadaCuandoMed">"Cada cuántas horas se ingiere el medicamento:"</string>
+    <string name="fragment_addmedicamento_comienzoMed">"Fecha de inicio:"</string>
+    <string name="fragment_addmedicamento_terminoMed">"Fecha de término:"</string>
+    <string name="fragment_addmedicamento_ingerirAntesDespuesMed">"Ingerir medicamento antes/despues de comer"</string>
+    <string name="fragment_addmedicamento_fotoMed">"Tomar foto del medicamento"</string>
+    <string name="fragment_addmedicamento_addMed">"Añadir"</string>
 </resources>

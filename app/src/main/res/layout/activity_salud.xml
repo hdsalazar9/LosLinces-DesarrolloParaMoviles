@@ -4,6 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="itesm.mx.saludintegral.activities.MainActivity">
+    tools:context="itesm.mx.saludintegral.activities.SaludActivity">
 
+    <FrameLayout
+        android:id="@+id/frameLayout_ActivitySalud"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp">
+
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>
