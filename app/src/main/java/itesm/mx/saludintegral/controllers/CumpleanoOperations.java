@@ -64,7 +64,7 @@ public class CumpleanoOperations {
             if (cursor.moveToFirst()){
                 do{
                     Date dateC=null;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
                     try {
                         dateC= dateFormat.parse(cursor.getString(2));
                     } catch (ParseException e) {
@@ -91,7 +91,7 @@ public class CumpleanoOperations {
             if(cursor.moveToFirst()){
                 do{
                     Date dateC=null;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
                     try {
                         dateC= dateFormat.parse(cursor.getString(2));
                     } catch (ParseException e) {

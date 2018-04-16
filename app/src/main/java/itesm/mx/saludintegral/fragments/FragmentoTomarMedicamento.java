@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.parceler.Parcels;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
         tvPeriodo=(TextView)view.findViewById(R.id.textView_periodo);
         Bundle args = getArguments();
         if(args != null){
-            medicamento=args.getParcelable("medicamento");
+            medicamento= Parcels.unwrap(args.getParcelable("medicamento"));
         }
         tvNombre.setText(medicamento.getNombre());
         tvTiempo.setText(MedicamentoAdapter.getTimeLeft(medicamento.getHora().toString(),medicamento.getCadaCuanto()));
@@ -83,10 +85,10 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     public void onClick(View v) {   //*Agregar aquí código de respuesta acertada/equivocada
         switch (v.getId()){
             case R.id.button_borrar:
-
+                removeProduct();
                 break;
             case R.id.button_ingerido:
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                SimpleDateFormat format = new SimpleDateFormat("DD-MM-YYYY HH:mm");
                 Date currentTime = new Date();
                 Date dateC=null;
                 long n=0;
@@ -103,13 +105,13 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     }
 
     public void removeProduct(){
-        String name = medicamento.getNombre();
+        /*String name = medicamento.getNombre();
         boolean result = dao2.deleteMedicamento(name);
         if(result){
             mCallback.onResponseTomar();
         }else{
             Toast.makeText(getContext(), "No Match Found", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     //Interfaz para que la actividad pueda responder al click en lista

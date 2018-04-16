@@ -47,6 +47,8 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         switch (menuItem.getTitle()){
             case ("Salud"):
                 /* Ir a actividad de Salud */
+                intent=new Intent(this, SaludActivity.class);
+                startActivity(intent);
                 break;
             case ("Social"):
                 /* Ir a actividad de Social */

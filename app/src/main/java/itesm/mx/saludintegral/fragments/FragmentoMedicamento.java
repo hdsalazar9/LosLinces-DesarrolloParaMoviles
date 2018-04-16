@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class FragmentoMedicamento extends ListFragment implements AdapterView.On
         //listAux=listEvento;
         adapter = new MedicamentoAdapter(getContext(), listMedicamento);
         setListAdapter(adapter);
+        Log.d("DEBUG","Tamano " + String.valueOf(listMedicamento.size()));
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,9 +77,11 @@ public class FragmentoMedicamento extends ListFragment implements AdapterView.On
     public ArrayList<Medicamento> mostrarMedicamentos(){
         ArrayList<Medicamento> medicamentoList=dao.getAllProducts();
         if(medicamentoList!=null){
+            Log.d("DEBUG","Medicamento list NO vacia");
             return medicamentoList;
         }
         else {
+            Log.d("DEBUG","Medicamento list vacia");
             return null;
         }
     }

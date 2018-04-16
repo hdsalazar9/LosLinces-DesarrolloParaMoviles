@@ -3,6 +3,7 @@ package itesm.mx.saludintegral.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class MedicamentoAdapter extends ArrayAdapter<Medicamento> {
         TextView tvConsumo= (TextView)convertView.findViewById(R.id.text_consumo);
         ImageView pictureIV=(ImageView) convertView.findViewById(R.id.image_producto);
         tvNombre.setText(medicamento.getNombre());
-        tvConsumo.setText(getTimeLeft(medicamento.getHora().toString(),medicamento.getCadaCuanto()));
+        tvConsumo.setText("Faltan: "+getTimeLeft(medicamento.getHora().toString(),medicamento.getCadaCuanto()));
         byte[] image=medicamento.getFoto();
         if(image!=null)
         {
@@ -69,11 +70,14 @@ public class MedicamentoAdapter extends ArrayAdapter<Medicamento> {
         String horaActual=format.format(currentTime);
         String resultado="Retraso";
         int iHoraInicial=Integer.parseInt(horaInicial.substring(0,2));
-        int iMinInicial=Integer.parseInt(horaInicial.substring(3,5));
+        int iMinInicial=Integer.parseInt(horaInicial.substring(3,5))==0?60:Integer.parseInt(horaInicial.substring(3,5));
         int iHoraAct=Integer.parseInt(horaActual.substring(0,2));
         int iMinAct=Integer.parseInt(horaActual.substring(3,5));
-        String sHora=(iHoraAct-cadaCuanto)<10?"0"+String.valueOf(iHoraAct-cadaCuanto):String.valueOf(iHoraAct-cadaCuanto);
-        resultado=sHora+":"+horaActual.substring(0,2);
+        while(iHoraAct>iHoraInicial+cadaCuanto){
+            iHoraInicial=iHoraInicial+cadaCuanto;
+        }
+        String sHora=(iHoraInicial+cadaCuanto)-iHoraAct<10?"0"+String.valueOf((iHoraInicial+cadaCuanto)-iHoraAct):String.valueOf((iHoraInicial+cadaCuanto)-iHoraAct);
+        resultado=sHora+":"+String.valueOf(iMinInicial-iMinAct);
         return resultado;
     }
 }
