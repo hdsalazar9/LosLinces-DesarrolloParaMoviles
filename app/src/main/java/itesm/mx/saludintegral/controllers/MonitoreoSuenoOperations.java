@@ -62,7 +62,7 @@ public class MonitoreoSuenoOperations {
             if (cursor.moveToFirst()){
                 do{
                     Date dateC=null;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
                     try {
                         dateC= dateFormat.parse(cursor.getString(1));
                     } catch (ParseException e) {
@@ -88,7 +88,7 @@ public class MonitoreoSuenoOperations {
             if(cursor.moveToFirst()){
                 do{
                     Date dateC=null;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
                     try {
                         dateC= dateFormat.parse(cursor.getString(1));
                     } catch (ParseException e) {
