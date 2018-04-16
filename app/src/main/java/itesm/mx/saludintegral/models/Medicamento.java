@@ -19,17 +19,20 @@ import java.sql.Time;
 @Parcel
 public class Medicamento {
 
-    private long id;
-    private String nombre;
-    private Double gramaje;
-    private int cantidad;
-    private String perodicidad;
-    private Time hora;
-    private int cadaCuanto; //Cada cuantas horas se toma, en caso de ser 0 solo se toma una vez
-    private Date fechaComienzo;
-    private Date fechaTermino;
-    private Boolean antesDespuesDeComer;
-    private byte[] foto;
+    long id;
+    String nombre;
+    Double gramaje;
+    int cantidad;
+    String perodicidad;
+    Time hora;
+    int cadaCuanto; //Cada cuantas horas se toma, en caso de ser 0 solo se toma una vez
+    Date fechaComienzo;
+    Date fechaTermino;
+    Boolean antesDespuesDeComer;
+    byte[] foto;
+
+    public Medicamento() {
+    }
 
     public Medicamento(long id, String nombre, Double gramaje, int cantidad, String perodicidad, Time hora, int cadaCuanto, Date fechaComienzo, Date fechaTermino, Boolean antesDespuesDeComer, byte[] foto) {
         this.id = id;

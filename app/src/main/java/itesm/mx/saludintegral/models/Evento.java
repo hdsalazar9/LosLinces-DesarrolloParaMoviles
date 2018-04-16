@@ -16,12 +16,16 @@ import java.util.Date;
 @Parcel
 public class Evento {
 
-    private long id;
-    private String name;
-    private String descripcion;
-    private Date fecha;
-    private Boolean periodicidad;
-    private String tipo;
+    long id;
+    String name;
+    String descripcion;
+    Date fecha;
+    Boolean periodicidad;
+    String tipo;
+
+
+    public Evento() {
+    }
 
     public Evento(long id, String name, String descripcion, Date fecha, Boolean periodicidad, String tipo) {
         this.id = id;
