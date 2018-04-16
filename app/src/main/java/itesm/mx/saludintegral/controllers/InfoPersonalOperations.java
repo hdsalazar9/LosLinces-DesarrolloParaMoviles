@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
+import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.InfoPersonal;
 
 /**
@@ -20,10 +22,10 @@ import itesm.mx.saludintegral.models.InfoPersonal;
 
 public class InfoPersonalOperations {
     private SQLiteDatabase db;
-    private InfoPersonalDBHelper dbHelper;
+    private SaludIntegralDBHelper dbHelper;
     private InfoPersonal infoPersonal;
 
-    public InfoPersonalOperations(Context context){dbHelper=new InfoPersonalDBHelper(context);}
+    public InfoPersonalOperations(Context context){dbHelper=new SaludIntegralDBHelper(context);}
     public void open()throws SQLException {
         try {
             db=dbHelper.getWritableDatabase();
@@ -56,7 +58,7 @@ public class InfoPersonalOperations {
 
     public ArrayList<InfoPersonal> findEvent(String productName){
         ArrayList<InfoPersonal> listaInfoPersonal=new ArrayList<InfoPersonal>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventoTable.COLUMN_NAME_NOMBRE+
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
                 " = \""+ productName+"\"";
         try {
             Cursor cursor=db.rawQuery(query, null);
@@ -85,7 +87,7 @@ public class InfoPersonalOperations {
 
     public ArrayList<InfoPersonal> getAllProducts(){
         ArrayList<InfoPersonal> listaInfoPersonal=new ArrayList<InfoPersonal>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
