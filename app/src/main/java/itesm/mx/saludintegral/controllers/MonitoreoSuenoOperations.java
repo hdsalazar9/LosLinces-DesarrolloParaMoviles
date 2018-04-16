@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
+import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.MonitoreoSueno;
 
 /**
@@ -20,10 +22,10 @@ import itesm.mx.saludintegral.models.MonitoreoSueno;
 
 public class MonitoreoSuenoOperations {
     private SQLiteDatabase db;
-    private MonitoreoSuenoDBHelper dbHelper;
+    private SaludIntegralDBHelper dbHelper;
     private MonitoreoSueno monitoreoSueno;
 
-    public MonitoreoSuenoOperations(Context context){dbHelper=new MonitoreoSuenoDBHelper(context);}
+    public MonitoreoSuenoOperations(Context context){dbHelper=new SaludIntegralDBHelper(context);}
     public void open()throws SQLException {
         try {
             db=dbHelper.getWritableDatabase();
@@ -52,7 +54,7 @@ public class MonitoreoSuenoOperations {
 
     public ArrayList<MonitoreoSueno> findEvent(String productName){
         ArrayList<MonitoreoSueno> listaMonitoreoSuenos=new ArrayList<MonitoreoSueno>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventoTable.COLUMN_NAME_NOMBRE+
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
                 " = \""+ productName+"\"";
         try {
             Cursor cursor=db.rawQuery(query, null);
@@ -80,7 +82,7 @@ public class MonitoreoSuenoOperations {
 
     public ArrayList<MonitoreoSueno> getAllProducts(){
         ArrayList<MonitoreoSueno> listaMonitoreoSuenos=new ArrayList<MonitoreoSueno>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){

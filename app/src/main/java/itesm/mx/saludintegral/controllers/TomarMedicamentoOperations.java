@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
+import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.TomarMedicamento;
 
 /**
@@ -20,10 +22,10 @@ import itesm.mx.saludintegral.models.TomarMedicamento;
 
 public class TomarMedicamentoOperations {
     private SQLiteDatabase db;
-    private TomarMedicamentoDBHelper dbHelper;
+    private SaludIntegralDBHelper dbHelper;
     private TomarMedicamento tomarMedicamento;
 
-    public TomarMedicamentoOperations(Context context){dbHelper=new TomarMedicamentoDBHelper(context);}
+    public TomarMedicamentoOperations(Context context){dbHelper=new SaludIntegralDBHelper(context);}
     public void open()throws SQLException {
         try {
             db=dbHelper.getWritableDatabase();
@@ -53,7 +55,7 @@ public class TomarMedicamentoOperations {
 
     public ArrayList<TomarMedicamento> findEvent(String productName){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventoTable.COLUMN_NAME_NOMBRE+
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
                 " = \""+ productName+"\"";
         try {
             Cursor cursor=db.rawQuery(query, null);
@@ -83,7 +85,7 @@ public class TomarMedicamentoOperations {
 
     public ArrayList<TomarMedicamento> getAllProducts(){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){

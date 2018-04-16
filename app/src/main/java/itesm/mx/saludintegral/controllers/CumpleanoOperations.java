@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
+import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.Cumpleano;
 
 /**
@@ -20,10 +22,10 @@ import itesm.mx.saludintegral.models.Cumpleano;
 
 public class CumpleanoOperations {
     private SQLiteDatabase db;
-    private CumpleanoDBHelper dbHelper;
+    private SaludIntegralDBHelper dbHelper;
     private Cumpleano cumpleano;
 
-    public CumpleanoOperations(Context context){dbHelper=new CumpleanoDBHelper(context);}
+    public CumpleanoOperations(Context context){dbHelper=new SaludIntegralDBHelper(context);}
     public void open()throws SQLException {
         try {
             db=dbHelper.getWritableDatabase();
@@ -54,7 +56,7 @@ public class CumpleanoOperations {
 
     public ArrayList<Cumpleano> findEvent(String productName){
         ArrayList<Cumpleano> listaCumpleanos=new ArrayList<Cumpleano>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventoTable.COLUMN_NAME_NOMBRE+
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
                 " = \""+ productName+"\"";
         try {
             Cursor cursor=db.rawQuery(query, null);
@@ -83,7 +85,7 @@ public class CumpleanoOperations {
 
     public ArrayList<Cumpleano> getAllProducts(){
         ArrayList<Cumpleano> listaCumpleanos=new ArrayList<Cumpleano>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){

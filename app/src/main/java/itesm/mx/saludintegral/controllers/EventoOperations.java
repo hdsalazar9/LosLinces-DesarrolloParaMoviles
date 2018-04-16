@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
+import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.Evento;
 
 /**
@@ -20,10 +22,10 @@ import itesm.mx.saludintegral.models.Evento;
 
 public class EventoOperations {
     private SQLiteDatabase db;
-    private EventoDBHelper dbHelper;
+    private SaludIntegralDBHelper dbHelper;
     private Evento evento;
 
-    public EventoOperations(Context context){dbHelper=new EventoDBHelper(context);}
+    public EventoOperations(Context context){dbHelper=new SaludIntegralDBHelper(context);}
     public void open()throws SQLException {
         try {
             db=dbHelper.getWritableDatabase();
@@ -39,12 +41,12 @@ public class EventoOperations {
         long newRowId=0;
         try{
             ContentValues values=new ContentValues();
-            values.put(DataBaseSchema.EventoTable.COLUMN_NAME_NOMBRE, evento.getName());
-            values.put(DataBaseSchema.EventoTable.COLUMN_NAME_DESCRICPION, evento.getDescripcion());
-            values.put(DataBaseSchema.EventoTable.COLUMN_NAME_FECHA, evento.getFecha().toString());
-            values.put(DataBaseSchema.EventoTable.COLUMN_NAME_PERIODICIDAD, String.valueOf(evento.getPeriodicidad()));
-            values.put(DataBaseSchema.EventoTable.COLUMN_NAME_TIPO, evento.getTipo());
-            newRowId=db.insert(DataBaseSchema.EventoTable.TABLE_NAME, null, values);
+            values.put(DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE, evento.getName());
+            values.put(DataBaseSchema.EventosTable.COLUMN_NAME_DESCRICPION, evento.getDescripcion());
+            values.put(DataBaseSchema.EventosTable.COLUMN_NAME_FECHA, evento.getFecha().toString());
+            values.put(DataBaseSchema.EventosTable.COLUMN_NAME_PERIODICIDAD, String.valueOf(evento.getPeriodicidad()));
+            values.put(DataBaseSchema.EventosTable.COLUMN_NAME_TIPO, evento.getTipo());
+            newRowId=db.insert(DataBaseSchema.EventosTable.TABLE_NAME, null, values);
             Log.d("Product added", "Product added");
         }
         catch (SQLException e){
@@ -55,7 +57,7 @@ public class EventoOperations {
 
     public ArrayList<Evento> findEvent(String productName){
         ArrayList<Evento> listaEventos=new ArrayList<Evento>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventoTable.COLUMN_NAME_NOMBRE+
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
                 " = \""+ productName+"\"";
         try {
             Cursor cursor=db.rawQuery(query, null);
@@ -85,7 +87,7 @@ public class EventoOperations {
 
     public ArrayList<Evento> getAllProducts(){
         ArrayList<Evento> listaEventos=new ArrayList<Evento>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){

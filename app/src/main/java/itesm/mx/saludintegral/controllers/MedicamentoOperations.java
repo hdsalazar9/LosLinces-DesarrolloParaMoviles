@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
+import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.Medicamento;
 
 /**
@@ -21,10 +23,10 @@ import itesm.mx.saludintegral.models.Medicamento;
 
 public class MedicamentoOperations {
     private SQLiteDatabase db;
-    private MedicamentoDBHelper dbHelper;
+    private SaludIntegralDBHelper dbHelper;
     private Medicamento medicamento;
 
-    public MedicamentoOperations(Context context){dbHelper=new MedicamentoDBHelper(context);}
+    public MedicamentoOperations(Context context){dbHelper=new SaludIntegralDBHelper(context);}
     public void open()throws SQLException {
         try {
             db=dbHelper.getWritableDatabase();
@@ -100,7 +102,7 @@ public class MedicamentoOperations {
 
     public ArrayList<Medicamento> getAllProducts(){
         ArrayList<Medicamento> listaMedicamentos=new ArrayList<Medicamento>();
-        String query="SELECT * FROM "+DataBaseSchema.EventoTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
