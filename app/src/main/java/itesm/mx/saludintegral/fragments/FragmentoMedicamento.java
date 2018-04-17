@@ -134,6 +134,4 @@ public class FragmentoMedicamento extends ListFragment implements AdapterView.On
             }
         }
     }
-
-
 }

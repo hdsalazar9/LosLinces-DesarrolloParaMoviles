@@ -51,16 +51,19 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
         dao.open();
         dao2 = new MedicamentoOperations(getContext());
         dao2.open();
-        tvNombre=(TextView) view.findViewById(R.id.text_nombre);
+        tvNombre=(TextView) view.findViewById(R.id.textView_nombre);
         tvTiempo=(TextView)view.findViewById(R.id.textView_tiempo);
         tvPeriodo=(TextView)view.findViewById(R.id.textView_periodo);
         Bundle args = getArguments();
-        if(args != null){
-            medicamento= Parcels.unwrap(args.getParcelable("medicamento"));
+        medicamento=new Medicamento();
+        if(args != null) {
+            medicamento =(Medicamento) Parcels.unwrap(args.getParcelable("medicamento"));
+                tvNombre.setText("Nombre: "+medicamento.getNombre());
+                tvTiempo.setText("Tiempo: "+MedicamentoAdapter.getTimeLeft(medicamento.getHora().toString(), medicamento.getCadaCuanto()));
+                tvPeriodo.setText("Periodo: "+String.valueOf(medicamento.getCadaCuanto()));
+
+
         }
-        tvNombre.setText(medicamento.getNombre());
-        tvTiempo.setText(MedicamentoAdapter.getTimeLeft(medicamento.getHora().toString(),medicamento.getCadaCuanto()));
-        tvPeriodo.setText(String.valueOf(medicamento.getCadaCuanto()));
         return view;
     }
     public TomarMedicamento newTomarMedicamento(TomarMedicamento tomarMedicamento){
@@ -100,6 +103,7 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
                 }
                 TomarMedicamento tomar=new TomarMedicamento(n, medicamento.getId(), true, dateC);
                 newTomarMedicamento(tomar);
+                mCallback.onResponseTomar();
                  break;
         }
     }
@@ -129,10 +133,10 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
             //Actividad respondera a la interface
             activity = (Activity) context;
             try{
-                mCallback = (FragmentoTomarMedicamento.OnResponseTomar) activity;
+                mCallback = (OnResponseTomar) activity;
             }   catch(ClassCastException e){
                 throw new ClassCastException(activity.toString() +
-                        " must implement OnResponseListener.");
+                        " must implement OnResponseTomar.");
             }
         }
     }
