@@ -87,7 +87,7 @@ public class InfoPersonalOperations {
 
     public ArrayList<InfoPersonal> getAllProducts(){
         ArrayList<InfoPersonal> listaInfoPersonal=new ArrayList<InfoPersonal>();
-        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.InfoPersonalTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
