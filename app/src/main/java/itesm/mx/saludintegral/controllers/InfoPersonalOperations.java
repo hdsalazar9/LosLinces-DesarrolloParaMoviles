@@ -93,7 +93,7 @@ public class InfoPersonalOperations {
             if(cursor.moveToFirst()){
                 do{
                     Date dateC=null;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-yyyy");
                     try {
                         dateC= dateFormat.parse(cursor.getString(2));
                     } catch (ParseException e) {
