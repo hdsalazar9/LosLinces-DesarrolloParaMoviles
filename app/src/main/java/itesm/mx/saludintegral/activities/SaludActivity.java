@@ -12,7 +12,7 @@ import itesm.mx.saludintegral.fragments.FragmentoMenuSalud;
 import itesm.mx.saludintegral.fragments.FragmentoTomarMedicamento;
 import itesm.mx.saludintegral.models.Medicamento;
 
-public class SaludActivity extends AppCompatActivity implements FragmentoMenuSalud.OnSelectedListener, FragmentoMedicamento.OnResponseListener{
+public class SaludActivity extends AppCompatActivity implements FragmentoMenuSalud.OnSelectedListener, FragmentoMedicamento.OnResponseListener, FragmentoTomarMedicamento.OnResponseTomar{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
             FragmentoTomarMedicamento fragmentoTomarMedicamento=new FragmentoTomarMedicamento();
             Bundle bundle = new Bundle();
             bundle.putParcelable("medicamento", Parcels.wrap(medicamento));
+            fragmentoTomarMedicamento.setArguments(bundle);
             android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frameLayout_ActivitySalud, fragmentoTomarMedicamento);
             transaction.addToBackStack(null);
@@ -62,5 +63,13 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
             transaction.addToBackStack(null);
             transaction.commit();
         }
+    }
+
+    public void onResponseTomar(){
+        FragmentoMedicamento fragmentoMedicamento=new FragmentoMedicamento();
+        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
