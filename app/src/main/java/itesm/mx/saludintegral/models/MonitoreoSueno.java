@@ -14,9 +14,12 @@ import java.util.Date;
 @Parcel
 public class MonitoreoSueno {
 
-    private long id;
-    private Date fecha;
-    private Double horas;
+    long id;
+    Date fecha;
+    Double horas;
+
+    public MonitoreoSueno() {
+    }
 
     public MonitoreoSueno(long id, Date fecha, Double horas) {
         this.id = id;

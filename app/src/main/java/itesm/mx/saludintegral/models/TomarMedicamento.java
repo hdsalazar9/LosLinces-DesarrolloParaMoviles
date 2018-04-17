@@ -13,10 +13,12 @@ import java.util.Date;
 
 @Parcel
 public class TomarMedicamento {
-    private long id;
-    private long idMedicamento;
-    private Boolean tomadoATiempo;
-    private Date fechaHora;
+    long id;
+    long idMedicamento;
+    Boolean tomadoATiempo;
+    Date fechaHora;
+
+    public TomarMedicamento() {}
 
     public TomarMedicamento(long id, long idMedicamento, Boolean tomadoATiempo, Date fechaHora) {
         this.id = id;

@@ -1,4 +1,4 @@
-package itesm.mx.saludintegral;
+package itesm.mx.saludintegral.activities;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -8,6 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
+
+import itesm.mx.saludintegral.adapters.MenuItem;
+import itesm.mx.saludintegral.adapters.MenuItemAdapter;
+import itesm.mx.saludintegral.R;
 
 /*
 Main Menu Activity: Referente a "Page 4" del prototipo de Ninjamock
@@ -43,6 +47,8 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         switch (menuItem.getTitle()){
             case ("Salud"):
                 /* Ir a actividad de Salud */
+                intent=new Intent(this, SaludActivity.class);
+                startActivity(intent);
                 break;
             case ("Social"):
                 /* Ir a actividad de Social */

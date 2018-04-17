@@ -13,12 +13,15 @@ import java.util.Date;
 
 @Parcel
 public class InfoPersonal {
-    private String nombre;
-    private String apodo;
-    private Date fechaNacimiento;
-    private String ciudad;
-    private String pais;
-    private byte[] foto;
+    String nombre;
+    String apodo;
+    Date fechaNacimiento;
+    String ciudad;
+    String pais;
+    byte[] foto;
+
+    public InfoPersonal() {
+    }
 
     public InfoPersonal(String nombre, String apodo, Date fechaNacimiento, String ciudad, String pais, byte[] foto) {
         this.nombre = nombre;
