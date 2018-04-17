@@ -66,7 +66,7 @@ public class EventoOperations {
                 do{
                     Date dateC=null;
                     boolean b = cursor.getString(4).equals("true");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm");
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {
@@ -94,7 +94,7 @@ public class EventoOperations {
                 do{
                     Date dateC=null;
                     boolean b = cursor.getString(4).equals("true");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm");
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {

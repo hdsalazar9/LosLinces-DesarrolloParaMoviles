@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import java.sql.Time;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -76,7 +77,7 @@ public class MedicamentoOperations {
                     boolean b = cursor.getString(9).equals("true");
                         SimpleDateFormat format = new SimpleDateFormat("HH:mm"); // 12 hour format
                         Date d1 = null;
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
                         try {
                             dateC= dateFormat.parse(cursor.getString(7));
                             dateT= dateFormat.parse(cursor.getString(8));
@@ -102,12 +103,12 @@ public class MedicamentoOperations {
 
     public ArrayList<Medicamento> getAllProducts(){
         ArrayList<Medicamento> listaMedicamentos=new ArrayList<Medicamento>();
-        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.MedicamentoTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
-                    java.sql.Time ppstime=null;
+                    Time ppstime=Time.valueOf(cursor.getString(5));
                     Date dateC=null;
                     Date dateT=null;
                     boolean b = cursor.getString(9).equals("true");
@@ -117,11 +118,10 @@ public class MedicamentoOperations {
                     try {
                         dateC= dateFormat.parse(cursor.getString(7));
                         dateT= dateFormat.parse(cursor.getString(8));
-                        d1 = (Date)format.parse(cursor.getString(5));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    ppstime= new java.sql.Time(d1.getTime());
+                    ppstime=Time.valueOf(cursor.getString(5));
                     medicamento=new Medicamento(cursor.getInt(0),cursor.getString(1),
                             cursor.getDouble(2),cursor.getInt(3),cursor.getString(4),ppstime, cursor.getInt(6),
                             dateC, dateT,b,
