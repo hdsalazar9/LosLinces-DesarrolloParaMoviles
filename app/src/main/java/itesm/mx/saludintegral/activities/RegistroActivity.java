@@ -118,7 +118,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
                 //Obtener la fecha desde lo escrito por el usuario
                 Date date = null;
-                SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-yyyy");
                 try {
                     date= dateFormat.parse(etFechaDeNacimiento.getText().toString());
                 } catch (ParseException e) {

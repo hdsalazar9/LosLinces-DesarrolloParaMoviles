@@ -133,7 +133,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         iCantidad = Integer.parseInt(etCantidadIngerir.getText().toString());
         strPeriodicidad = etPeriodicidad.getText().toString();
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-yyyy");
         String strHora = etHoraIngesta.getText().toString();
         // Tiene que ser ingresada en el formato de hh:mm:ss
         timeHora = Time.valueOf(strHora);
