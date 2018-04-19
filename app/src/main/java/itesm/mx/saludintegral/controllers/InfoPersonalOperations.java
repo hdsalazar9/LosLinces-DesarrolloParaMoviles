@@ -85,8 +85,8 @@ public class InfoPersonalOperations {
         return listaInfoPersonal;
     }
 
-    public ArrayList<InfoPersonal> getAllProducts(){
-        ArrayList<InfoPersonal> listaInfoPersonal=new ArrayList<InfoPersonal>();
+    public InfoPersonal getAllProducts(){
+        InfoPersonal listaInfoPersonal= new InfoPersonal();
         String query="SELECT * FROM "+DataBaseSchema.InfoPersonalTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
@@ -101,7 +101,7 @@ public class InfoPersonalOperations {
                     }
                     infoPersonal=new InfoPersonal(cursor.getString(1),
                             cursor.getString(2),dateC,cursor.getString(4),cursor.getString(5),cursor.getBlob(6));
-                    listaInfoPersonal.add(infoPersonal);
+                    listaInfoPersonal = infoPersonal;
                 }while (cursor.moveToNext());
             }
             cursor.close();
