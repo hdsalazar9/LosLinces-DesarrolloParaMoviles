@@ -5,4 +5,5 @@ package itesm.mx.saludintegral.util;
  */
 
 public class Miscellaneous {
+    public static String strDatePicker = "";
 }

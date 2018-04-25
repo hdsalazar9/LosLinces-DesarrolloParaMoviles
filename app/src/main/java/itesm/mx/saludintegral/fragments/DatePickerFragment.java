@@ -16,7 +16,7 @@ import itesm.mx.saludintegral.util.Miscellaneous;
  * Created by FernandoDavid on 23/04/2018.
  */
 
-public class DataPickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     EditText etFecha;
 

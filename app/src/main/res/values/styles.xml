@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Hint" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorHint">@android:color/black</item>
+
+    </style>
+
 </resources>

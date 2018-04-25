@@ -27,9 +27,9 @@
                 <ImageView
                     android:id="@+id/iv_fotoMed"
                     android:layout_width="215dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="79dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:srcCompat="@drawable/pills" />
 
                 <Button
                     android:id="@+id/btn_tomarFotoMed"
@@ -61,7 +61,8 @@
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
                 android:textColorHint="?attr/colorBackgroundFloating"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -79,9 +80,11 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/fragment_addmedicamento_hint_gramajeMed"
-                android:inputType="textPersonName"
+                android:inputType="numberDecimal"
+                android:textColor="@android:color/black"
                 android:textColorHint="?attr/colorBackgroundFloating"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -101,9 +104,22 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/fragment_addmedicamento_hint_cantidadMed"
-                android:inputType="textPersonName"
+                android:inputType="number"
+                android:textColor="@android:color/black"
                 android:textColorHint="?attr/colorBackgroundFloating"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="@string/fragment_addmedicamento_periodicidadMed"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <CheckBox
                 android:id="@+id/cb_Lunes"
@@ -166,36 +182,14 @@
                 android:textSize="20sp" />
 
             <CheckBox
-                android:id="@+id/cb_Viernes"
+                android:id="@+id/cb_Domingo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="?attr/colorBackgroundFloating"
-                android:text="CheckBox"
+                android:text="@string/fragment_addmedicamento_domingo"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
                 android:textColor="?attr/colorBackgroundFloating"
                 android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:text="@string/fragment_addmedicamento_periodicidadMed"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/et_periodicidadMed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/fragment_addmedicamento_hint_periodicidadMed"
-                android:inputType="textPersonName"
-                android:textColorHint="?attr/colorBackgroundFloating"
-                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -213,9 +207,17 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/fragment_addmedicamento_hint_horaMed"
-                android:inputType="textPersonName"
+                android:inputType="none"
+                android:textColor="@android:color/black"
                 android:textColorHint="?attr/colorBackgroundFloating"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
+
+            <Button
+                android:id="@+id/btn_horaIngesta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/getHora" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -232,10 +234,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/fragment_addmedicamento_hint_periodicidadMed"
-                android:inputType="textPersonName"
+                android:hint="@string/fragment_addmedicamento_hint_cadaCuantoMed"
+                android:inputType="number"
+                android:textColor="@android:color/black"
                 android:textColorHint="?attr/colorBackgroundFloating"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -256,8 +260,17 @@
                 android:ems="10"
                 android:hint="@string/fragment_addmedicamento_hint_comienzoMed"
                 android:inputType="textPersonName"
+                android:onClick="onClick"
+                android:textColor="@android:color/black"
                 android:textColorHint="?attr/colorBackgroundFloating"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
+
+            <Button
+                android:id="@+id/btn_fechaInicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/getFecha" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -278,8 +291,16 @@
                 android:ems="10"
                 android:hint="@string/fragment_addmedicamento_hint_terminoMed"
                 android:inputType="textPersonName"
+                android:textColor="@android:color/black"
                 android:textColorHint="?attr/colorBackgroundFloating"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
+
+            <Button
+                android:id="@+id/btn_fechaTermino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/getFecha" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -319,16 +340,6 @@
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
-                <RadioButton
-                    android:id="@+id/radio_NoAplica"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@android:color/black"
-                    android:text="@string/fragment_addmedicamento_noAplica"
-                    android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp" />
             </RadioGroup>
 
             <Button
