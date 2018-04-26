@@ -2,6 +2,8 @@ package itesm.mx.saludintegral.activities;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -45,8 +47,10 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         info = ipo.getAllProducts();
 
-        setUserInfo();
+        ivProfilePicture = (ImageView) findViewById(R.id.ivProfileImage);
+        tvUserName = (TextView) findViewById(R.id.tvUserName);
 
+        setUserInfo();
 
         setListAdapter(menuItemArrayAdapter);
 
@@ -107,14 +111,15 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
     public void setUserInfo(){
 
-        ivProfilePicture = (ImageView) findViewById(R.id.ivProfileImage);
-        tvUserName = (TextView) findViewById(R.id.tvUserName);
-
         tvUserName.setText("Hola, " + info.getApodo());
+
+        Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
+
+        ivProfilePicture.setImageBitmap(Bitmap.createScaledBitmap(bmp, 30,
+                30, false));
 
         ivProfilePicture.setOnClickListener(this);
 
     }
-
 
 }
