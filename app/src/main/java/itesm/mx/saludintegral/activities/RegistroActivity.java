@@ -20,6 +20,7 @@ import java.util.Date;
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
 import itesm.mx.saludintegral.models.InfoPersonal;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
