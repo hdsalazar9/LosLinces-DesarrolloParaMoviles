@@ -6,21 +6,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
 import itesm.mx.saludintegral.R;
+import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
+import itesm.mx.saludintegral.models.InfoPersonal;
 
 /*
 Main Menu Activity: Referente a "Page 4" del prototipo de Ninjamock
 */
 
-public class MainMenu extends ListActivity implements AdapterView.OnItemClickListener {
+public class MainMenu extends ListActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
+
+    InfoPersonal info;
+    InfoPersonalOperations ipo;
 
     private ArrayAdapter<MenuItem> menuItemArrayAdapter;
     private ArrayList<MenuItem> menuItems;
+    ImageView ivProfilePicture;
+    TextView tvUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +38,15 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         menuItems = getMenuItems();
         menuItemArrayAdapter = new MenuItemAdapter(this, menuItems);
+
+        ipo = new InfoPersonalOperations(this);
+
+        ipo.open();
+
+        info = ipo.getAllProducts();
+
+        setUserInfo();
+
 
         setListAdapter(menuItemArrayAdapter);
 
@@ -63,6 +81,11 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
     }
 
+    @Override
+    public void onClick(View v){
+
+    }
+
     public ArrayList<MenuItem> getMenuItems(){
         MenuItem mItem;
         ArrayList<MenuItem> Menu = new ArrayList<>();
@@ -81,4 +104,17 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         return Menu;
     }
+
+    public void setUserInfo(){
+
+        ivProfilePicture = (ImageView) findViewById(R.id.ivProfileImage);
+        tvUserName = (TextView) findViewById(R.id.tvUserName);
+
+        tvUserName.setText("Hola, " + info.getApodo());
+
+        ivProfilePicture.setOnClickListener(this);
+
+    }
+
+
 }
