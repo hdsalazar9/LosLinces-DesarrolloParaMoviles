@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="itesm.mx.saludintegral.activities.SaludActivity">
+    tools:context="itesm.mx.saludintegral.activities.EspiritualActivity">
 
     <FrameLayout
-        android:id="@+id/frameLayout_ActivitySalud"
+        android:id="@+id/frameLayout_ActivityEspiritual"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp">
+        android:layout_height="match_parent">
 
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>

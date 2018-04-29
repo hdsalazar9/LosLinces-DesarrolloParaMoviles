@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.MedicamentoOperations;
@@ -232,58 +235,104 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
 
     public Medicamento newMedicamento() {
-        Medicamento medicament;
-        int iDiasSeleccionados=0;
+        Log.d("FUNCION","newMedicamento()");
+        Medicamento medicament = new Medicamento();
         strPeriodicidad = getDias();
 
-        if (strPeriodicidad.length() == 0 || etNombre.getText().toString().length() == 0 || etGramaje.getText().toString().length() == 0 || etCantidadIngerir.getText().toString().length() == 0 || iDiasSeleccionados > 0 || etNombre.getText().toString().length() == 0 || etCadaCuanto.getText().toString().length() == 0 || strAntesDespues.length() == 0) {
-            Toast.makeText(getContext(),"Ingrese todos los datos especificados",Toast.LENGTH_LONG).show();
-            medicament = new Medicamento();
+        if (etNombre.getText().toString().length() == 0) {
+            Toast.makeText(getContext(), "Ingresar nombre de medicamento", Toast.LENGTH_SHORT).show();
+            return medicament;
         }
-        else
-        {
-            strNombre = etNombre.getText().toString();
-            dGramaje = Double.parseDouble(etGramaje.getText().toString());
-            iCantidad = Integer.parseInt(etCantidadIngerir.getText().toString());
-            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-            SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-yyyy");
 
-            // Tiene que ser ingresada en el formato de hh:mm:ss
-            strHora = etHoraIngesta.getText().toString() + ":00";
-            timeHora = Time.valueOf(strHora);
-            try {
-                dateInicio = dateFormat.parse(etFechaInicio.getText().toString());
-                dateTermino = dateFormat.parse(etFechaInicio.getText().toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            iCadaCuanto = Integer.parseInt(etCadaCuanto.getText().toString());
-            String strAntesDespuesComer = strAntesDespues;
-            if (strAntesDespuesComer.equals("Antes")) {
-                bAntesDespuesComer = true;
-            } else {
-                bAntesDespuesComer = false;
-            }
-
-            if (bitmap == null) {
-                ivFoto.buildDrawingCache();
-                bitmap = (Bitmap) ivFoto.getDrawingCache();
-
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
-
-                byteFoto = stream.toByteArray();
-            }
-            long l =0;
-            medicament = new Medicamento(l, strNombre, dGramaje, iCantidad, strPeriodicidad, timeHora, iCadaCuanto, dateInicio, dateTermino, bAntesDespuesComer, byteFoto);
-            long id = dao.addEvento(medicament);
-            medicament.setId(id);
-
-            FragmentoMedicamento fragmentoMedicamento = new FragmentoMedicamento();
-            getFragmentManager().beginTransaction().replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento).commit();
-
-
+        if (etGramaje.getText().toString().length() == 0) {
+            Toast.makeText(getContext(), "Ingresar gramaje", Toast.LENGTH_SHORT).show();
+            return medicament;
         }
+
+        if (etCantidadIngerir.getText().toString().length() == 0) {
+            Toast.makeText(getContext(), "Ingresar cantidad a consumir", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        if (strPeriodicidad.length() == 0) {
+            Toast.makeText(getContext(), "Seleccionar días", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        if (etCadaCuanto.getText().toString().length() == 0) {
+            Toast.makeText(getContext(), "Ingresar cada cuánto se debe de consumir el medicamento", Toast.LENGTH_LONG).show();
+            return medicament;
+        }
+
+        if (etFechaInicio.getText().length() == 0 ) {
+            Toast.makeText(getContext(), "Seleccione fecha de Inicio", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        if (etFechaTermino.getText().length() == 0 ) {
+            Toast.makeText(getContext(), "Seleccione fecha de Termino", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        if (strAntesDespues.length() == 0 ) {
+            Toast.makeText(getContext(), "Seleccione si se consume antes o después de comer", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        strNombre = etNombre.getText().toString();
+        dGramaje = Double.parseDouble(etGramaje.getText().toString());
+        iCantidad = Integer.parseInt(etCantidadIngerir.getText().toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
+        // Tiene que ser ingresada en el formato de hh:mm:ss
+        strHora = etHoraIngesta.getText().toString() + ":00";
+        timeHora = Time.valueOf(strHora);
+
+        String strFechaInicio = etFechaInicio.getText().toString();
+        String strFechaTermino = etFechaTermino.getText().toString();
+
+        try {
+            dateInicio = dateFormat.parse(strFechaInicio);
+            dateTermino = dateFormat.parse(strFechaTermino);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("FECHAS","dateInicio: " + dateInicio);
+        Log.d("FECHAS","dateTermino: " + dateTermino);
+
+        Log.d("FECHAS","dateTermino despues de dateInicio?? " + dateTermino.after(dateInicio));
+
+        if(dateInicio.after(dateTermino)) {
+            Toast.makeText(getContext(), "Fecha término tiene que preceder a la fecha de inicio",Toast.LENGTH_LONG).show();
+            return medicament;
+        }
+
+        iCadaCuanto = Integer.parseInt(etCadaCuanto.getText().toString());
+        String strAntesDespuesComer = strAntesDespues;
+        if (strAntesDespuesComer.equals("Antes")) {
+            bAntesDespuesComer = true;
+        } else {
+            bAntesDespuesComer = false;
+        }
+
+        if (bitmap == null) {
+            ivFoto.buildDrawingCache();
+            bitmap = (Bitmap) ivFoto.getDrawingCache();
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
+
+            byteFoto = stream.toByteArray();
+        }
+        long l =0;
+        medicament = new Medicamento(l, strNombre, dGramaje, iCantidad, strPeriodicidad, timeHora, iCadaCuanto, dateInicio, dateTermino, bAntesDespuesComer, byteFoto);
+        long id = dao.addEvento(medicament);
+        medicament.setId(id);
+
+        FragmentoMedicamento fragmentoMedicamento = new FragmentoMedicamento();
+        getFragmentManager().beginTransaction().replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento).commit();
+
         return medicament;
     }
 
