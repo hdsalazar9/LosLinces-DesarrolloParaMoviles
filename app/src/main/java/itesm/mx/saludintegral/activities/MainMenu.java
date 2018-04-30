@@ -112,7 +112,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
     public void setUserInfo(){
 
-        tvUserName.setText("Hola, " + info.getApodo());
+        tvUserName.setText(("Hola, " + info.getNombre()));
 
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
 

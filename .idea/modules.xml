@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LosLinces-DesarrolloParaMoviles.iml" filepath="$PROJECT_DIR$/LosLinces-DesarrolloParaMoviles.iml" />
+      <module fileurl="file://C:\Users\Jesus\Desktop\androidfinal\LosLinces-DesarrolloParaMoviles\LosLinces-DesarrolloParaMoviles.iml" filepath="C:\Users\Jesus\Desktop\androidfinal\LosLinces-DesarrolloParaMoviles\LosLinces-DesarrolloParaMoviles.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Jesus\Desktop\androidfinal\LosLinces-DesarrolloParaMoviles\app\app.iml" filepath="C:\Users\Jesus\Desktop\androidfinal\LosLinces-DesarrolloParaMoviles\app\app.iml" />
     </modules>
   </component>
 </project>
