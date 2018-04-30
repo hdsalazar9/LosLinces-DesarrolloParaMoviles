@@ -19,9 +19,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainMenu" />
-        <activity android:name=".activities.RegistroActivity"></activity>
-        <activity android:name=".activities.SaludActivity"></activity>
+        <activity android:name=".activities.RegistroActivity" />
+        <activity android:name=".activities.SaludActivity" />
+        <activity android:name=".activities.ExampleReceiver" />
+        <receiver android:name=".util.Receiver" />
     </application>
 
 </manifest>
-
