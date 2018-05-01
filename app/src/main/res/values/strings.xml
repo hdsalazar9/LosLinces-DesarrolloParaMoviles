@@ -50,4 +50,8 @@
     <string name="fragment_addmedicamento_viernes">"Viernes"</string>
     <string name="fragment_addmedicamento_sabado">"Sábado"</string>
     <string name="fragment_addmedicamento_domingo">"Domingo"</string>
+
+    <string name="channel_name">"MiCanal"</string>
+    <string name="channel_description">"Este es mi canal"</string>
+
 </resources>
