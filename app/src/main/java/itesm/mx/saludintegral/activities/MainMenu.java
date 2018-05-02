@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
 import itesm.mx.saludintegral.R;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 /*
 Main Menu Activity: Referente a "Page 4" del prototipo de Ninjamock
@@ -52,12 +53,18 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
                 break;
             case ("Social"):
                 /* Ir a actividad de Social */
+                intent=new Intent(this, SocialActivity.class);
+                startActivity(intent);
                 break;
-            case ("Ejercicio"):
-                /* Ir a actividad de Ejercicio */
+            case ("Cognicion"):
+                /* Ir a actividad de Cognicion */
+                intent=new Intent(this, CognicionActivity.class);
+                startActivity(intent);
                 break;
             case ("Espiritual"):
-                /* Ir a actividad de Ejercicio */
+                /* Ir a actividad de Espiritual */
+                intent=new Intent(this, EspiritualActivity.class);
+                startActivity(intent);
                 break;
         }
 
@@ -73,7 +80,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         mItem = new MenuItem("Social", R.drawable.social_icon);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Ejercicio", R.drawable.exercise_icon);
+        mItem = new MenuItem("Cognicion", R.drawable.exercise_icon);
         Menu.add(mItem);
 
         mItem = new MenuItem("Espiritual", R.drawable.spiritual_icon);

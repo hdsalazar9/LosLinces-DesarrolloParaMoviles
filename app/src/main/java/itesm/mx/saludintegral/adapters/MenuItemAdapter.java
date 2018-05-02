@@ -52,7 +52,7 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorSocial, null));
                 break;
-            case "Ejercicio":
+            case "Cognicion":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorEjercicio, null));
                 break;
