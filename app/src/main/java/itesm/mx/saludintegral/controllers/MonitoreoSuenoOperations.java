@@ -62,7 +62,8 @@ public class MonitoreoSuenoOperations {
             if (cursor.moveToFirst()){
                 do{
                     Date dateC=null;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
+                    //SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy");
                     try {
                         dateC= dateFormat.parse(cursor.getString(1));
                     } catch (ParseException e) {

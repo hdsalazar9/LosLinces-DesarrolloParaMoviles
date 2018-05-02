@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import itesm.mx.saludintegral.R;
-import itesm.mx.saludintegral.fragments.AddEventoFragment;
+import itesm.mx.saludintegral.fragments.CalendarioFragment;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
 public class CognicionActivity extends AppCompatActivity {
@@ -34,10 +32,10 @@ public class CognicionActivity extends AppCompatActivity {
 
         Miscellaneous.strTipo = strTipo;
 
-        AddEventoFragment addEventoFragment = new AddEventoFragment();
+        CalendarioFragment calendarioFragment = new CalendarioFragment();
 
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-        t.replace(R.id.frameLayout_ActivityCognicion, addEventoFragment);
+        t.replace(R.id.frameLayout_ActivityCognicion, calendarioFragment);
         t.commit();
     }
 }

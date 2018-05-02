@@ -20,19 +20,17 @@ public class Evento {
     String name;
     String descripcion;
     Date fecha;
-    Boolean periodicidad;
     String tipo;
 
 
     public Evento() {
     }
 
-    public Evento(long id, String name, String descripcion, Date fecha, Boolean periodicidad, String tipo) {
+    public Evento(long id, String name, String descripcion, Date fecha, String tipo) {
         this.id = id;
         this.name = name;
         this.descripcion = descripcion;
         this.fecha = fecha;
-        this.periodicidad = periodicidad;
         this.tipo = tipo;
     }
 
@@ -66,14 +64,6 @@ public class Evento {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public Boolean getPeriodicidad() {
-        return periodicidad;
-    }
-
-    public void setPeriodicidad(Boolean periodicidad) {
-        this.periodicidad = periodicidad;
     }
 
     public String getTipo() {

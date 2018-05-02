@@ -44,7 +44,6 @@ public class EventoOperations {
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE, evento.getName());
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_DESCRICPION, evento.getDescripcion());
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_FECHA, evento.getFecha().toString());
-            values.put(DataBaseSchema.EventosTable.COLUMN_NAME_PERIODICIDAD, String.valueOf(evento.getPeriodicidad()));
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_TIPO, evento.getTipo());
             newRowId=db.insert(DataBaseSchema.EventosTable.TABLE_NAME, null, values);
             Log.d("Product added", "Product added");
@@ -65,15 +64,15 @@ public class EventoOperations {
             if (cursor.moveToFirst()){
                 do{
                     Date dateC=null;
-                    boolean b = cursor.getString(4).equals("true");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm");
+                    //SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy");
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC,b, cursor.getString(5));
+                            cursor.getString(2),dateC, cursor.getString(4));
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
             }
@@ -93,7 +92,6 @@ public class EventoOperations {
             if(cursor.moveToFirst()){
                 do{
                     Date dateC=null;
-                    boolean b = cursor.getString(4).equals("true");
                     SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm");
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
@@ -101,7 +99,7 @@ public class EventoOperations {
                         e.printStackTrace();
                     }
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC,b, cursor.getString(5));
+                            cursor.getString(2),dateC, cursor.getString(4));
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
             }

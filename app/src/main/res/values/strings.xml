@@ -51,5 +51,11 @@
     <string name="fragment_addmedicamento_sabado">"Sábado"</string>
     <string name="fragment_addmedicamento_domingo">"Domingo"</string>
 
-    <string name="fragment_addevento_add">"Añadir Evento"</string>
+    <string name="fragment_calendario_add">"Añadir Evento"</string>
+
+    <string name="fragment_addevento_nombre">"Nombre: "</string>
+    <string name="fragment_addevento_descripcion">"Descripcion: "</string>
+    <string name="fragment_addevento_fecha">"Fecha: "</string>
+    <string name="fragment_addevento_periodicidad">"Periodicidad: "</string>
+    <string name="fragment_addevento_tipo">"Tipo: "</string>
 </resources>

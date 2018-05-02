@@ -8,30 +8,74 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/calendario"
+        <TextView
+            android:id="@+id/textView14"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4">
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_addevento_nombre" />
 
-        </FrameLayout>
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/et_addevento_nombre"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:gravity="bottom"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
 
-            <Button
-                android:id="@+id/btn_addEvento"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:text="@string/fragment_addevento_add"
-                android:textSize="24sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_addevento_descripcion" />
 
+        <EditText
+            android:id="@+id/et_addevento_descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_addevento_fecha" />
+
+        <EditText
+            android:id="@+id/et_addevento_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_addevento_periodicidad" />
+
+        <EditText
+            android:id="@+id/et_addevento_periodicidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_addevento_tipo" />
+
+        <EditText
+            android:id="@+id/et_addevento_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

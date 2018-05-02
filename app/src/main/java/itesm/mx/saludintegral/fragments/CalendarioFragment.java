@@ -23,7 +23,7 @@ import itesm.mx.saludintegral.R;
  * Created by FernandoDavid on 01/05/2018.
  */
 
-public class AddEventoFragment extends Fragment implements View.OnClickListener {
+public class CalendarioFragment extends Fragment implements View.OnClickListener {
 
     Button btnAddEvento;
 
@@ -40,7 +40,7 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Infalte the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_addevento, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
 
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
 
@@ -66,6 +66,11 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btn_addEvento:
+                /* Despliega la forma a llenar del tipo de Evento
+                 * Checa en qué lugar está (Miscelalaneous.strTipo) y, en base a eso, cambia el fragmento correspondiente
+                 * frameLayout_ActivitySocial,frameLayout_ActivityCognicion, etc.
+                 */
+
                 Toast.makeText(getContext() , "Se despliega el fragmento para añadir un evento",
                         Toast.LENGTH_SHORT).show();
                 break;
