@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -23,6 +24,8 @@ import itesm.mx.saludintegral.activities.ExampleReceiver;
 
 public class Receiver extends BroadcastReceiver{
 
+    NotificationChannel channel;
+
 
     public void initChannels(Context context) {
         if (Build.VERSION.SDK_INT < 26) {
@@ -30,13 +33,12 @@ public class Receiver extends BroadcastReceiver{
         }
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationChannel channel = new NotificationChannel("default",
+        channel = new NotificationChannel("default",
                 "Channel name",
                 NotificationManager.IMPORTANCE_DEFAULT);
         channel.setDescription("Channel description");
         notificationManager.createNotificationChannel(channel);
     }
-
 
     Receiver(){
     }
@@ -44,13 +46,14 @@ public class Receiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context,Intent intent){
 
-        showNotification(context);
-        System.out.println("running");
-        Log.e("Alarm","running");
-
-
-        Log.d("Recibido", "Recibido");
-
+        if (Build.VERSION.SDK_INT < 26) {
+            showNotification(context);
+            Log.d("Recibido", "Recibido");
+        }
+        else{
+            showNotification26(context);
+            Log.d("Recibido26", "Recibido26");
+        }
     }
 
     private void showNotification(Context context) {
@@ -58,16 +61,45 @@ public class Receiver extends BroadcastReceiver{
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.mipmap.ic_launcher_round)
+                        .setSmallIcon(R.drawable.heart_icon)
+                        .setVibrate(new long[] { 1000, 1000, 1000 })
                         .setContentTitle("Salud Integral")
-                        .setContentText("Te toca tomarte tu medicina pls");
+                        .setContentText("Te toca tomarte tu medicina pls")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);
         mBuilder.setAutoCancel(true);
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(1, mBuilder.build());
+    }
 
+    private void showNotification26(Context context) {
+
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, ExampleReceiver.class), 0);
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        channel = new NotificationChannel("default",
+                "Salud Integral",
+                NotificationManager.IMPORTANCE_HIGH);
+        channel.setDescription("Notificaciones de Salud Integral");
+        mNotificationManager.createNotificationChannel(channel);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context, "default")
+                        .setSmallIcon(R.drawable.heart_icon)
+                        .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                                R.drawable.medicina_icon))
+                        .setVibrate(new long[] { 1000, 1000, 1000 })
+                        .setContentTitle("Salud Integral")
+                        .setContentText("Te toca tomarte tu medicina pls")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        mBuilder.setContentIntent(contentIntent);
+        mBuilder.setAutoCancel(true);
+
+        mNotificationManager.notify(1, mBuilder.build());
     }
 
 }
