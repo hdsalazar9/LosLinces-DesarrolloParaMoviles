@@ -114,7 +114,9 @@ public class MedicamentoOperations {
                     boolean b = cursor.getString(9).equals("true");
                     SimpleDateFormat format = new SimpleDateFormat("HH:mm"); // 12 hour format
                     Date d1 = null;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+                    //SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy");
                     try {
                         dateC= dateFormat.parse(cursor.getString(7));
                         dateT= dateFormat.parse(cursor.getString(8));
@@ -127,6 +129,7 @@ public class MedicamentoOperations {
                             dateC, dateT,b,
                             cursor.getBlob(10));
                     listaMedicamentos.add(medicamento);
+                    Log.d("DATABASE",""+dateC);
                 }while (cursor.moveToNext());
             }
             cursor.close();

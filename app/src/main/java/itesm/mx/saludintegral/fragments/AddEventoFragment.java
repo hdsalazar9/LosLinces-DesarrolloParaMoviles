@@ -57,6 +57,8 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
 
         caldroidFragment.setCaldroidListener(listener);
 
+        btnAddEvento.setOnClickListener(this);
+
         return rootView;
     }
 

@@ -50,4 +50,6 @@
     <string name="fragment_addmedicamento_viernes">"Viernes"</string>
     <string name="fragment_addmedicamento_sabado">"Sábado"</string>
     <string name="fragment_addmedicamento_domingo">"Domingo"</string>
+
+    <string name="fragment_addevento_add">"Añadir Evento"</string>
 </resources>
