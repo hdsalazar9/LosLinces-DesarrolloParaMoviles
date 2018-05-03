@@ -1,6 +1,9 @@
 package itesm.mx.saludintegral.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -29,6 +32,9 @@ import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.MedicamentoOperations;
 import itesm.mx.saludintegral.models.Medicamento;
 import itesm.mx.saludintegral.util.Miscellaneous;
+import itesm.mx.saludintegral.util.Receiver;
+
+import static java.lang.Math.toIntExact;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -80,6 +86,8 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     String strHora="00:00:00";
     int iYearInicio, iMesInicio, iDiaInicio, iYearTermino, iMesTermino, iDiaTermino;
     static final int DIALOG_ID = 0;
+
+    private PendingIntent pendingIntent;
 
     public AddMedicamentoFragment() {
         // Required empty public constructor.
@@ -141,6 +149,8 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
         etHoraIngesta.setText("00:00");
 
+
+
         return rootView;
     }
 
@@ -150,6 +160,9 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_addMed:
                 medicamento = newMedicamento();
+                Intent alarmIntent = new Intent(getContext(), Receiver.class);
+                pendingIntent = PendingIntent.getBroadcast(getContext(), (int) medicamento.getId(), alarmIntent, 0);
+                start(medicamento.getCadaCuanto());
                 break;
 
             case R.id.btn_tomarFotoMed:
@@ -175,6 +188,15 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
                 break;
         }
     }
+
+    public void start(int horas) {
+
+        AlarmManager manager = (AlarmManager) getContext().getSystemService(getContext().ALARM_SERVICE);
+        int interval = 1000*60*60*horas;
+
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+    }
+
 
     public void getHourPicked() {
         DialogFragment newFragment = new TimePickerFragment();

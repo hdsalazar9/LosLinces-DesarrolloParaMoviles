@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.activities.ExampleReceiver;
+import itesm.mx.saludintegral.activities.SaludActivity;
 
 /**
  * Created by Jesus on 4/30/2018.
@@ -50,7 +51,7 @@ public class Receiver extends BroadcastReceiver{
                         .setSmallIcon(R.drawable.heart_icon)
                         .setVibrate(new long[] { 1000, 1000, 1000 })
                         .setContentTitle("Salud Integral")
-                        .setContentText("Te toca tomarte tu medicina pls")
+                        .setContentText("Te toca tomar una medicina!")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);
@@ -62,7 +63,7 @@ public class Receiver extends BroadcastReceiver{
 
     private void showNotification26(Context context) {
 
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, ExampleReceiver.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, SaludActivity.class), 0);
 
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -80,7 +81,7 @@ public class Receiver extends BroadcastReceiver{
                                 R.drawable.medicina_icon))
                         .setVibrate(new long[] { 1000, 1000, 1000 })
                         .setContentTitle("Salud Integral")
-                        .setContentText("Te toca tomarte tu medicina pls")
+                        .setContentText("Te toca tomar una medicina!")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setAutoCancel(true);

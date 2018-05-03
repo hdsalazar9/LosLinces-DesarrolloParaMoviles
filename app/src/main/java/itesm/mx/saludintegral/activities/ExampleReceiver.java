@@ -67,7 +67,7 @@ public class ExampleReceiver extends AppCompatActivity {
 
     public void startAt10() {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        int interval = 1000 * 60 * 20;
+        int interval = 1000 * 60 * 2;
 
         /* Set the alarm to start at 10:30 AM */
         Calendar calendar = Calendar.getInstance();

@@ -9,7 +9,7 @@
     <string name="activity_registro_nombre">Nombre</string>
     <string name="activity_registro_nombre_hint">Escribe tu nombre</string>
     <string name="activity_registro_apodo">Apellido</string>
-    <string name="activity_registro_apodo_hint">Escribe tu apodo</string>
+    <string name="activity_registro_apodo_hint">Escribe tu apellido</string>
     <string name="activity_registro_FechaNacimiento">Fecha de nacimiento</string>
     <string name="activity_registro_FechaNacimiento_hint">Escribe tu fecha de nacimiento</string>
     <string name="activity_registro_pais">País</string>
