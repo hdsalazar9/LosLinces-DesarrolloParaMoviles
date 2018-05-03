@@ -114,19 +114,19 @@ public class EventoOperations {
     }
 
     public ArrayList<Evento> getAllProductsFromMonthAndType(Integer iMonth, String sType){
-        String sMonth = Miscellaneous.getMonthFromInt(iMonth);
+        String sMonth = Miscellaneous.getMonthFromInt(iMonth+1);
 
         ArrayList<Evento> listaEventos = new ArrayList<Evento>();
         String query = "SELECT * FROM "+ DataBaseSchema.EventosTable.TABLE_NAME +
                 " WHERE " + DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " LIKE '%" + sMonth + "%' AND " +
-                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = " + sType;
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
 
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
                     Date dateC=null;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy");
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {

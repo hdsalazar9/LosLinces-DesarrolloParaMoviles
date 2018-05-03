@@ -1,10 +1,12 @@
 package itesm.mx.saludintegral.fragments;
 
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +33,7 @@ import itesm.mx.saludintegral.util.Miscellaneous;
  * Created by FernandoDavid on 01/05/2018.
  */
 
-public class CalendarioFragment extends Fragment implements View.OnClickListener {
+public class CalendarioFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     Button btnAddEvento;
     private EventoOperations database;
@@ -41,8 +43,22 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
     CaldroidListener listener = new CaldroidListener() {
         @Override
         public void onSelectDate(Date date, View view) {
-            Toast.makeText(getContext() , ""+date,
-                    Toast.LENGTH_SHORT).show();
+
+            if(Miscellaneous.mapFechaFondo.get(date) == null)
+            {
+                Toast.makeText(getContext(), "No hay eventos registrados en " + formatter.format(date),
+                        Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                /*
+                //android.support.v4.app.DialogFragment dialogFragment = DialogFragment.instantiate(getActivity(),"");
+                EventoDisplayFragment dialog = new EventoDisplayFragment();
+                dialog.show(getFragmentManager(),"hola");
+                dialog.show((FragmentManager)getFragmentManager(), "epa");
+                dialog.show();
+                */
+            }
         }
     };
 
@@ -51,7 +67,7 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
-
+        Miscellaneous.mapFechaFondo = new HashMap<Date, Drawable>();
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
 
         CaldroidFragment caldroidFragment = new CaldroidFragment();
@@ -76,11 +92,10 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
         ColorDrawable green = new ColorDrawable(Color.GREEN);
         ArrayList<Evento> arregloEventosDelMes = database.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
 
-        HashMap<Date,Drawable> mapFechaFondo = new HashMap<Date, Drawable>();
         for(Evento ev : arregloEventosDelMes){
-            mapFechaFondo.put(ev.getFecha(),green);
+            Miscellaneous.mapFechaFondo.put(ev.getFecha(),green);
         }
-        caldroidFragment.setBackgroundDrawableForDates(mapFechaFondo);
+        caldroidFragment.setBackgroundDrawableForDates(Miscellaneous.mapFechaFondo);
 
         return rootView;
     }
@@ -103,7 +118,6 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
                 if(Miscellaneous.strTipo.equals("Espiritual")) {
                     transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment).commit();
                 }
-
                 break;
         }
     }

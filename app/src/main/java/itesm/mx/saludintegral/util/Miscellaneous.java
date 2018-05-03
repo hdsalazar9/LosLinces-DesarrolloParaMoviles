@@ -1,5 +1,10 @@
 package itesm.mx.saludintegral.util;
 
+import android.graphics.drawable.Drawable;
+
+import java.util.Date;
+import java.util.HashMap;
+
 /**
  * Created by FernandoDavid on 23/04/2018.
  */
@@ -7,6 +12,7 @@ package itesm.mx.saludintegral.util;
 public class Miscellaneous {
     public static String strDatePicker = "";
     public static String strTipo = "";
+    public static HashMap<Date,Drawable> mapFechaFondo;
 
     public static String getMonthFromInt(Integer iMonth){
      String sMonth = null;
