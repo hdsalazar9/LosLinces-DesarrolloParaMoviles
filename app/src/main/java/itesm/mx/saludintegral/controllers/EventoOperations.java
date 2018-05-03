@@ -15,6 +15,7 @@ import java.util.Date;
 import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.Evento;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 /**
  * Created by josec on 14/04/2018.
@@ -108,6 +109,39 @@ public class EventoOperations {
         catch (SQLException e)
         {
             Log.e("SQLList", e.toString());
+        }
+        return listaEventos;
+    }
+
+    public ArrayList<Evento> getAllProductsFromMonthAndType(Integer iMonth, String sType){
+        String sMonth = Miscellaneous.getMonthFromInt(iMonth);
+
+        ArrayList<Evento> listaEventos = new ArrayList<Evento>();
+        String query = "SELECT * FROM "+ DataBaseSchema.EventosTable.TABLE_NAME +
+                " WHERE " + DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " LIKE '%" + sMonth + "%' AND " +
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = " + sType;
+
+        try {
+            Cursor cursor=db.rawQuery(query,null);
+            if(cursor.moveToFirst()){
+                do{
+                    Date dateC=null;
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm");
+                    try {
+                        dateC= dateFormat.parse(cursor.getString(3));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    evento=new Evento(cursor.getInt(0),cursor.getString(1),
+                            cursor.getString(2),dateC, cursor.getString(4));
+                    listaEventos.add(evento);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLException e)
+        {
+            Log.e("AllProductsFromMonth: ", e.toString());
         }
         return listaEventos;
     }
