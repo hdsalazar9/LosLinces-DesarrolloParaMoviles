@@ -93,9 +93,17 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
                  * Checa en qué lugar está (Miscelalaneous.strTipo) y, en base a eso, cambia el fragmento correspondiente
                  * frameLayout_ActivitySocial,frameLayout_ActivityCognicion, etc.
                  */
+                AddEventoFragment addEventoFragment = new AddEventoFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                Toast.makeText(getContext() , "Se despliega el fragmento para añadir un evento",
-                        Toast.LENGTH_SHORT).show();
+                if(Miscellaneous.strTipo.equals("Cognicion")) {
+                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment).commit();
+                }
+
+                if(Miscellaneous.strTipo.equals("Espiritual")) {
+                    transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment).commit();
+                }
+
                 break;
         }
     }

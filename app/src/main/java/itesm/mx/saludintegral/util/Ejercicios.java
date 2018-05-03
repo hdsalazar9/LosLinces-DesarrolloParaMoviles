@@ -7,16 +7,16 @@ package itesm.mx.saludintegral.util;
  */
 
 public class Ejercicios {
-    String cognicion[] = {
+    public static String cognicion[] = {
             "Lectura comprensiva",
             "Ejercicios Matemáticos",
-            "Colorear",
+            "Pintar",
             "Juego de Mesa",
             "Costura",
             "Otro"
     };
 
-    String espiritual[] = {
+    public static String espiritual[] = {
             "Yoga",
             "Tai Chi",
             "Pilates",

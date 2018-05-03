@@ -54,8 +54,14 @@
     <string name="fragment_calendario_add">"Añadir Evento"</string>
 
     <string name="fragment_addevento_nombre">"Nombre: "</string>
+    <string name="fragment_addevento_hint_nombre">"Inserte el nombre del evento."</string>
     <string name="fragment_addevento_descripcion">"Descripcion: "</string>
+    <string name="fragment_addevento_hint_descripcion">"Inserte la descripcion del evento."</string>
     <string name="fragment_addevento_fecha">"Fecha: "</string>
     <string name="fragment_addevento_periodicidad">"Periodicidad: "</string>
+    <string name="fragment_addevento_hint_periodicidad">"¿Se repite? "</string>
     <string name="fragment_addevento_tipo">"Tipo: "</string>
+    <string name="fragment_addevento_semanas">"Número de semanas: "</string>
+    <string name="fragment_addevento_hint_semanas">"(ej. 2)"</string>
+    <string name="fragment_addevento_registrar">"Registrar evento"</string>
 </resources>

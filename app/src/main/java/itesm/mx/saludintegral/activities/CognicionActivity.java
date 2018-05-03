@@ -17,13 +17,6 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class CognicionActivity extends AppCompatActivity {
 
     String strTipo = "Cognicion";
-    CaldroidListener listener = new CaldroidListener() {
-        @Override
-        public void onSelectDate(Date date, View view) {
-            Toast.makeText(getApplicationContext(), ""+date,
-                    Toast.LENGTH_SHORT).show();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
