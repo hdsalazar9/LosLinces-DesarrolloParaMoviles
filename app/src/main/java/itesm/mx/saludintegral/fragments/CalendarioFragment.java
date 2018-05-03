@@ -1,5 +1,8 @@
 package itesm.mx.saludintegral.fragments;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,11 +16,15 @@ import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import itesm.mx.saludintegral.R;
+import itesm.mx.saludintegral.controllers.EventoOperations;
+import itesm.mx.saludintegral.models.Evento;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
 /**
@@ -27,6 +34,8 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class CalendarioFragment extends Fragment implements View.OnClickListener {
 
     Button btnAddEvento;
+    private EventoOperations database;
+    //TODO: OBTENER LOS EVENTOS DE MES Y COLOREAR LOS DIAS QUE SE VEAN AFECTADOS
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     CaldroidListener listener = new CaldroidListener() {
@@ -40,7 +49,7 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Infalte the layout for this fragment
+        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
 
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
@@ -59,6 +68,19 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
         caldroidFragment.setCaldroidListener(listener);
 
         btnAddEvento.setOnClickListener(this);
+
+        //Cambiar de color los dates que tengan eventos registrados
+        database = new EventoOperations(getActivity().getApplicationContext());
+        database.open();
+        Integer intMesABuscar = cal.get(Calendar.MONTH);
+        ColorDrawable green = new ColorDrawable(Color.GREEN);
+        ArrayList<Evento> arregloEventosDelMes = database.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
+
+        HashMap<Date,Drawable> mapFechaFondo = new HashMap<Date, Drawable>();
+        for(Evento ev : arregloEventosDelMes){
+            mapFechaFondo.put(ev.getFecha(),green);
+        }
+        caldroidFragment.setBackgroundDrawableForDates(mapFechaFondo);
 
         return rootView;
     }
@@ -84,5 +106,16 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
 
                 break;
         }
+    }
+
+    @Override
+    public void onResume(){
+        database.open();
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        database.close();
+        super.onPause();
     }
 }
