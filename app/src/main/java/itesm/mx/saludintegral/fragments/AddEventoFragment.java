@@ -88,7 +88,7 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
             }
         });
 
-        if (Miscellaneous.strTipo.equals("Cognicion")) {
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
             rbUno.setText(Ejercicios.cognicion[0]);
             rbDos.setText(Ejercicios.cognicion[1]);
             rbTres.setText(Ejercicios.cognicion[2]);
@@ -97,7 +97,7 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
             rbOtro.setText(Ejercicios.cognicion[5]);
         }
 
-        if (Miscellaneous.strTipo.equals("Espiritual")) {
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
             rbUno.setText(Ejercicios.espiritual[0]);
             rbDos.setText(Ejercicios.espiritual[1]);
             rbTres.setText(Ejercicios.espiritual[2]);

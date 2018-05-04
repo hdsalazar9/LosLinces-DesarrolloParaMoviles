@@ -57,7 +57,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
                 dialog.show(getFragmentManager(),"hola");
                 dialog.show((FragmentManager)getFragmentManager(), "epa");
                 dialog.show();
-                */
+            */
             }
         }
     };
@@ -111,12 +111,16 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
                 AddEventoFragment addEventoFragment = new AddEventoFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                if(Miscellaneous.strTipo.equals("Cognicion")) {
-                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment).commit();
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
+                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 }
 
-                if(Miscellaneous.strTipo.equals("Espiritual")) {
-                    transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment).commit();
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
+                    transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 }
                 break;
         }
@@ -131,5 +135,10 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
     public void onPause(){
         database.close();
         super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        database.close();
+        super.onDetach();
     }
 }

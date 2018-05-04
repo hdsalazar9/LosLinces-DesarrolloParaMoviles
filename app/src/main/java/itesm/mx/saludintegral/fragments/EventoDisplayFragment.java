@@ -16,14 +16,15 @@ import itesm.mx.saludintegral.R;
 
 public class EventoDisplayFragment extends DialogFragment {
     private static final String TAG = "EventoDisplayDialog";
-    private TextView tvCerrar;
+     TextView tvCerrar;
 
     public EventoDisplayFragment() {}
 
-    /*
+/*
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View rootView = getActivity().getLayoutInflater().inflate(R.layout.fragment_eventodisplay)
+
+        View rootView = getActivity().getLayoutInflater().in
 
         tvCerrar = rootView.findViewById(R.id.action_cancel);
 
@@ -36,6 +37,7 @@ public class EventoDisplayFragment extends DialogFragment {
 
 
         return rootView;
+
     }
-    */
-}
+
+*/}

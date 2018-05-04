@@ -77,8 +77,9 @@ public class MedicamentoOperations {
                     boolean b = cursor.getString(9).equals("true");
                         SimpleDateFormat format = new SimpleDateFormat("HH:mm"); // 12 hour format
                         Date d1 = null;
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
-                        try {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy");
+
+                    try {
                             dateC= dateFormat.parse(cursor.getString(7));
                             dateT= dateFormat.parse(cursor.getString(8));
                             d1 = (Date)format.parse(cursor.getString(5));

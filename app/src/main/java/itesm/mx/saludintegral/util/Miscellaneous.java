@@ -14,6 +14,13 @@ public class Miscellaneous {
     public static String strTipo = "";
     public static HashMap<Date,Drawable> mapFechaFondo;
 
+    public static String[] tipos = {
+            "Espiritual",           //0
+            "Cognicion/Actividad",  //1
+            "Cognicion/Finanzas"    //2
+    };
+
+
     public static String getMonthFromInt(Integer iMonth){
      String sMonth = null;
 
