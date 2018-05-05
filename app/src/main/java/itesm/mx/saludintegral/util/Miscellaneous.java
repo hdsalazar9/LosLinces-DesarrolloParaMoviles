@@ -16,8 +16,8 @@ public class Miscellaneous {
 
     public static String[] tipos = {
             "Espiritual",           //0
-            "Cognicion/Actividad",  //1
-            "Cognicion/Finanzas"    //2
+            "Actividad Cognitiva",  //1
+            "Finanzas"              //2
     };
 
 

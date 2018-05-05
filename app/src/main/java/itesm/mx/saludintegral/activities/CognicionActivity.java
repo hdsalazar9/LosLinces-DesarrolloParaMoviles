@@ -61,4 +61,9 @@ public class CognicionActivity extends AppCompatActivity implements FragmentoMen
             t.commit();
         }
     }
+
+    public void onClickCalendario(Date dateFecha) {
+
+    }
+
 }

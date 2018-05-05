@@ -3,6 +3,7 @@ package itesm.mx.saludintegral.fragments;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,30 +15,9 @@ import itesm.mx.saludintegral.R;
  * Created by FernandoDavid on 03/05/2018.
  */
 
-public class EventoDisplayFragment extends DialogFragment {
-    private static final String TAG = "EventoDisplayDialog";
-     TextView tvCerrar;
+public class EventoDisplayFragment extends Fragment {
 
     public EventoDisplayFragment() {}
 
-/*
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        View rootView = getActivity().getLayoutInflater().in
-
-        tvCerrar = rootView.findViewById(R.id.action_cancel);
-
-        tvCerrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDialog().dismiss();
-            }
-        });
-
-
-        return rootView;
-
-    }
-
-*/}
+}
