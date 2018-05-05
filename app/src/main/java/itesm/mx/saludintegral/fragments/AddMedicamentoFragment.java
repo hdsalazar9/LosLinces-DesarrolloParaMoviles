@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -161,7 +162,10 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
             case R.id.btn_addMed:
                 medicamento = newMedicamento();
                 Intent alarmIntent = new Intent(getContext(), Receiver.class);
-                pendingIntent = PendingIntent.getBroadcast(getContext(), (int) medicamento.getId(), alarmIntent, 0);
+                alarmIntent.putExtra("medicina", medicamento.getNombre());
+                alarmIntent.putExtra("whereFrom", "AddMedicamento");
+                alarmIntent.putExtra("id", ((int) medicamento.getId()));
+                pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
                 start(medicamento.getCadaCuanto());
                 break;
 
@@ -192,9 +196,18 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     public void start(int horas) {
 
         AlarmManager manager = (AlarmManager) getContext().getSystemService(getContext().ALARM_SERVICE);
-        int interval = 1000*60*60*horas;
+        int interval = 1000*60*horas;
 
-        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+
+        Calendar calendar = Calendar.getInstance();
+        //calendar.set(dateInicio.getYear(), dateInicio.getMonth(), dateInicio.getDay(), timeHora.getHours(), timeHora.getMinutes());
+        calendar.setTime(dateInicio);
+
+        Log.d("Recibi", String.valueOf(calendar.getTimeInMillis()) );
+        Log.d("luego", String.valueOf(System.currentTimeMillis()));
+
+
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
     }
 
 

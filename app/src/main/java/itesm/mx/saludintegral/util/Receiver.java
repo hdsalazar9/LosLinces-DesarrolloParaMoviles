@@ -33,37 +33,41 @@ public class Receiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context,Intent intent){
 
-        if (Build.VERSION.SDK_INT < 26) {
-            showNotification(context);
-            Log.d("Recibido", "Recibido");
-        }
-        else{
-            showNotification26(context);
-            Log.d("Recibido26", "Recibido26");
+        String whereFrom = intent.getStringExtra("whereFrom");
+
+        if(whereFrom.equals("AddMedicamento")) {
+
+            if (Build.VERSION.SDK_INT < 26) {
+                showNotificationMed(context, intent.getStringExtra("medicina"), intent.getIntExtra("id", 0));
+                Log.d("Recibido", intent.getStringExtra("medicina"));
+            } else {
+                showNotificationMed26(context, intent.getStringExtra("medicina"), intent.getIntExtra("id", 0));
+                Log.d("Recibido26", "Recibido26");
+            }
         }
     }
 
-    private void showNotification(Context context) {
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, ExampleReceiver.class), 0);
+    private void showNotificationMed(Context context, String medicina, int id) {
+        PendingIntent contentIntent = PendingIntent.getActivity(context, id, new Intent(context, ExampleReceiver.class), 0);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.heart_icon)
                         .setVibrate(new long[] { 1000, 1000, 1000 })
                         .setContentTitle("Salud Integral")
-                        .setContentText("Te toca tomar una medicina!")
+                        .setContentText("Tienes agendado tomar tu dosis de: " + medicina)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);
         mBuilder.setAutoCancel(true);
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(1, mBuilder.build());
+        mNotificationManager.notify(id, mBuilder.build());
     }
 
-    private void showNotification26(Context context) {
+    private void showNotificationMed26(Context context, String medicina, int id) {
 
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, SaludActivity.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, id, new Intent(context, SaludActivity.class), 0);
 
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -81,12 +85,12 @@ public class Receiver extends BroadcastReceiver{
                                 R.drawable.medicina_icon))
                         .setVibrate(new long[] { 1000, 1000, 1000 })
                         .setContentTitle("Salud Integral")
-                        .setContentText("Te toca tomar una medicina!")
+                        .setContentText("Tienes agendado tomar tu dosis de: " + medicina)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setAutoCancel(true);
 
-        mNotificationManager.notify(1, mBuilder.build());
+        mNotificationManager.notify(id, mBuilder.build());
     }
 
 }

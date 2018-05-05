@@ -53,7 +53,7 @@ public class ExampleReceiver extends AppCompatActivity {
 
     public void start() {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        int interval = 8000;
+        int interval = 10000;
 
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
         Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
@@ -67,15 +67,17 @@ public class ExampleReceiver extends AppCompatActivity {
 
     public void startAt10() {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        int interval = 1000 * 60 * 2;
+        int interval = 1000 * 60;
 
         /* Set the alarm to start at 10:30 AM */
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setTimeInMillis(System.currentTimeMillis() + 1000*120);
 
         /* Repeating on every 20 minutes interval */
         manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                1000 * 60, pendingIntent);
+                interval, pendingIntent);
     }
+
+    public void schedule(){}
 
 }
