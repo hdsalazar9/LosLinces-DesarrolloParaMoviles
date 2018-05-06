@@ -14,12 +14,13 @@ import java.util.Locale;
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.fragments.CalendarioFragment;
 import itesm.mx.saludintegral.fragments.EventoDisplayFragment;
+import itesm.mx.saludintegral.fragments.EventoZoomFragment;
 import itesm.mx.saludintegral.fragments.FragmentoMenuCognicion;
 import itesm.mx.saludintegral.fragments.ListEventoFragment;
 import itesm.mx.saludintegral.models.Evento;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
-public class CognicionActivity extends AppCompatActivity implements FragmentoMenuCognicion.OnSelectedListener, ListEventoFragment.OnResponseListener, CalendarioFragment.OnSelectFechaValida, EventoDisplayFragment.OnResponseListener{
+public class CognicionActivity extends AppCompatActivity implements FragmentoMenuCognicion.OnSelectedListener, ListEventoFragment.OnResponseListener, CalendarioFragment.OnSelectFechaValida, EventoDisplayFragment.OnResponseListener, EventoZoomFragment.OnResponseListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +62,14 @@ public class CognicionActivity extends AppCompatActivity implements FragmentoMen
                 break;
 
             case 2:
-                EventoDisplayFragment eventoDisplayFragment = new EventoDisplayFragment();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("evento", Parcels.wrap(evento));
-                eventoDisplayFragment.setArguments(bundle);
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frameLayout_ActivityCognicion, eventoDisplayFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                EventoZoomFragment eventoZoomFragment = new EventoZoomFragment();
+                FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+                Bundle args = new Bundle();
+                args.putParcelable("evento",Parcels.wrap(evento));
+                eventoZoomFragment.setArguments(args);
+                t.replace(R.id.frameLayout_ActivityCognicion, eventoZoomFragment);
+                t.addToBackStack(null);
+                t.commit();
                 break;
         }
     }

@@ -76,12 +76,20 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     @Override
     public void onResume(){
         dao.open();
+        dao2.open();
         super.onResume();
     }
     @Override
     public void onPause(){
         dao.close();
+        dao2.close();
         super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        dao.close();
+        dao2.close();
+        super.onDetach();
     }
 
     @Override

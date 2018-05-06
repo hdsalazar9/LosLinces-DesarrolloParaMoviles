@@ -45,6 +45,7 @@ public class EventoDisplayFragment extends Fragment {
         listEventoFragment.setArguments(info);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.listView, listEventoFragment);
+        //transaction.addToBackStack(null);
         transaction.commit();
 
         btnBack.setOnClickListener(new View.OnClickListener() {

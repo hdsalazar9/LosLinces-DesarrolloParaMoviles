@@ -84,4 +84,10 @@ public class Miscellaneous {
         }
         return null;
     }
+
+    //Método que borra todos los elementos del map
+    public static void limpiaMapFechaFondo() {
+        mapFechaFondo = new HashMap<Date,Drawable>();
+        Log.d("Misc","se limpia el map FechaFondo");
+    }
 }
