@@ -46,6 +46,7 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_listevento, container, false);
+        Log.d("onCreateView", "Se creó la ListView");
         listEvento = new ArrayList<Evento>();
         dao = new EventoOperations(getContext());
         dao.open();

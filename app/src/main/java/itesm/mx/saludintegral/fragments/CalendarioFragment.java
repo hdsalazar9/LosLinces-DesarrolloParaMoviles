@@ -81,6 +81,8 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        Log.d("OnCREATEVIEW", "Se crea la view");
         View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
         Miscellaneous.mapFechaFondo = new HashMap<Date, Drawable>();
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
@@ -91,9 +93,11 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
         caldroidFragment.setArguments(args);
 
+
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.calendario, caldroidFragment);
         t.commit();
+
 
         caldroidFragment.setCaldroidListener(listener);
 
@@ -136,16 +140,24 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     @Override
     public void onResume(){
+        Log.d("OnResume", "Se hace resume");
+        /*
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.calendario, caldroidFragment);
+        t.commit();
+        */
         database.open();
         super.onResume();
     }
     @Override
     public void onPause(){
+        Log.d("OnPause", "Ando en onPause");
         database.close();
         super.onPause();
     }
     @Override
     public void onDetach(){
+        Log.d("OnDetach", "Ando en onDetach");
         database.close();
         super.onDetach();
     }
@@ -158,6 +170,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     @Override
     public void onAttach(Context context){
+        Log.d("OnAttach", "Ando en onAttach");
         super.onAttach(context);
 
         Activity activity;

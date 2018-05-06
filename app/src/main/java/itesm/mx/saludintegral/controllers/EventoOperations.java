@@ -132,7 +132,7 @@ public class EventoOperations {
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
                             cursor.getString(2),dateC, cursor.getString(4));
                     listaEventos.add(evento);
-                    System.out.println("UN EVENTO FUE AGREGADO A LA LISTA");
+                    //System.out.println("UN EVENTO FUE AGREGADO A LA LISTA");
                 }while (cursor.moveToNext());
             }
             cursor.close();
@@ -167,13 +167,12 @@ public class EventoOperations {
 
     public ArrayList<Evento> getAllEventosFromDateAndType(Date date, String sType) {
         ArrayList<Evento> listaEventosDelDia = new ArrayList<Evento>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy");
-        //DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Log.d("QUERY",""+date);
         String strFecha = dateFormat.format(date);
 
         String query = "SELECT * FROM "+ DataBaseSchema.EventosTable.TABLE_NAME +
-                " WHERE " + DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " = '" + date + "' AND " +
+                " WHERE " + DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " = '" + dateFormat.format(date) + "' AND " +
                 DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
 
         Log.d("QUERY", query);
