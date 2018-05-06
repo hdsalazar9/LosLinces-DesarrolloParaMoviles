@@ -18,9 +18,10 @@ public class Miscellaneous {
     public static HashMap<Date,Drawable> mapFechaFondo;
 
     public static String[] tipos = {
-            "Espiritual",           //0
+            "Espiritualidad",       //0
             "Actividad Cognitiva",  //1
-            "Finanzas"              //2
+            "Finanzas",             //2
+            "Actividad Física"      //3
     };
 
 

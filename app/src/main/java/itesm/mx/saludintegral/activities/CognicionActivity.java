@@ -1,5 +1,6 @@
 package itesm.mx.saludintegral.activities;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,9 @@ import itesm.mx.saludintegral.fragments.ListEventoFragment;
 import itesm.mx.saludintegral.models.Evento;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
-public class CognicionActivity extends AppCompatActivity implements FragmentoMenuCognicion.OnSelectedListener, ListEventoFragment.OnResponseListener, CalendarioFragment.OnSelectFechaValida, EventoDisplayFragment.OnResponseListener, EventoZoomFragment.OnResponseListener{
+public class CognicionActivity extends AppCompatActivity implements FragmentoMenuCognicion.OnSelectedListener, ListEventoFragment.OnResponseListener, CalendarioFragment.OnSelectFechaValida, EventoDisplayFragment.OnResponseListener, EventoZoomFragment.OnResponseListener {
+
+    int iCurrentFrameLayout = R.id.frameLayout_ActivityCognicion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +32,10 @@ public class CognicionActivity extends AppCompatActivity implements FragmentoMen
 
         //Crear instancia de FragmentoMenuCognicion
         FragmentoMenuCognicion fragmentoMenuCognicion = new FragmentoMenuCognicion();
-        Bundle bundle = new Bundle();
-        //Añade el FragmentoMenuSalud al frameLayout_ActivityCongnicion FrameLayout
+
+        //Añade el FragmentoMenuCognicion al frameLayout_ActivityCongnicion FrameLayout
         getSupportFragmentManager().beginTransaction().add(
-                R.id.frameLayout_ActivityCognicion, fragmentoMenuCognicion).commit();
+                iCurrentFrameLayout, fragmentoMenuCognicion).commit();
     }
 
     public void onSelected(int position){
@@ -47,12 +50,7 @@ public class CognicionActivity extends AppCompatActivity implements FragmentoMen
             Miscellaneous.strTipo = Miscellaneous.tipos[1];
         }
         CalendarioFragment calendarioFragment = new CalendarioFragment();
-
-        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-        t.replace(R.id.frameLayout_ActivityCognicion, calendarioFragment);
-        t.addToBackStack(null);
-        t.commit();
-
+        changeFragmentHabilitaBack(calendarioFragment);
     }
 
     public void onResponse(int position, Evento evento) {
@@ -63,13 +61,10 @@ public class CognicionActivity extends AppCompatActivity implements FragmentoMen
 
             case 2:
                 EventoZoomFragment eventoZoomFragment = new EventoZoomFragment();
-                FragmentTransaction t = getSupportFragmentManager().beginTransaction();
                 Bundle args = new Bundle();
                 args.putParcelable("evento",Parcels.wrap(evento));
                 eventoZoomFragment.setArguments(args);
-                t.replace(R.id.frameLayout_ActivityCognicion, eventoZoomFragment);
-                t.addToBackStack(null);
-                t.commit();
+                changeFragmentHabilitaBack(eventoZoomFragment);
                 break;
         }
     }
@@ -85,8 +80,12 @@ public class CognicionActivity extends AppCompatActivity implements FragmentoMen
         Log.d("DEBUG",strFecha);
         args.putString("Fecha",strFecha);
         eventoDisplayFragment.setArguments(args);
+        changeFragmentHabilitaBack(eventoDisplayFragment);
+    }
+
+    public void changeFragmentHabilitaBack(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout_ActivityCognicion, eventoDisplayFragment);
+        transaction.replace(iCurrentFrameLayout, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
