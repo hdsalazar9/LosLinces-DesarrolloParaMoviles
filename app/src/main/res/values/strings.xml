@@ -8,8 +8,8 @@
     <string name="activity_registro_MensajeInicial">Regístrate para comenzar a usar la aplicación</string>
     <string name="activity_registro_nombre">Nombre</string>
     <string name="activity_registro_nombre_hint">Escribe tu nombre</string>
-    <string name="activity_registro_apodo">Apodo</string>
-    <string name="activity_registro_apodo_hint">Escribe tu apodo</string>
+    <string name="activity_registro_apodo">Apellido</string>
+    <string name="activity_registro_apodo_hint">Escribe tu apellido</string>
     <string name="activity_registro_FechaNacimiento">Fecha de nacimiento</string>
     <string name="activity_registro_FechaNacimiento_hint">Escribe tu fecha de nacimiento</string>
     <string name="activity_registro_pais">País</string>
@@ -73,4 +73,8 @@
     <string name="fragment_eventozoom_fecha">"Fecha"</string>
     <string name="fragment_eventozoom_tipo">"Tipo"</string>
     <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
+
+    <string name="channel_name">"MiCanal"</string>
+    <string name="channel_description">"Este es mi canal"</string>
+
 </resources>
