@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
@@ -229,6 +230,11 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             bitmap = (Bitmap) data.getExtras().get("data");
+
+            //Girar foto
+            Matrix matrix = new Matrix();
+            matrix.postRotate(270);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);

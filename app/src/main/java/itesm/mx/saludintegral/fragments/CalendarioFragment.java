@@ -36,7 +36,6 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class CalendarioFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     Button btnAddEvento;
-
     private EventoOperations dao;
     private CaldroidFragment caldroidFragment;
     OnSelectFechaValida mCallback;
