@@ -141,6 +141,9 @@ public class EventoOperations {
         {
             Log.e("AllProductsFromMonth: ", e.toString());
         }
+
+        Log.d("DB","Cantidad de resultados en el query de getAllProductsFromMonthAndType: "+ listaEventos.size());
+
         return listaEventos;
     }
 
@@ -152,6 +155,7 @@ public class EventoOperations {
                 DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+" = '"+nombreDeEventoABorrar+"' AND " +
                 DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " = '" + Miscellaneous.getStringFromDate(fechaEvento) +
                 "'";
+
         try{
             Cursor cursor = db.rawQuery(query, null);
             if(cursor.moveToFirst()){

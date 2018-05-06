@@ -85,7 +85,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         caldroidFragment = new CaldroidFragment();
         Log.d("OnCREATEVIEW", "Se crea la view");
         View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
-        Miscellaneous.mapFechaFondo = new HashMap<Date, Drawable>();
+        Miscellaneous.limpiaMapFechaFondo();
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
 
         Bundle args = new Bundle();
