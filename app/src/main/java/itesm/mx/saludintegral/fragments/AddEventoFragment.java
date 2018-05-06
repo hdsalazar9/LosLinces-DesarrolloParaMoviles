@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.EventoOperations;
@@ -88,7 +89,7 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
             }
         });
 
-        if (Miscellaneous.strTipo.equals("Cognicion")) {
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
             rbUno.setText(Ejercicios.cognicion[0]);
             rbDos.setText(Ejercicios.cognicion[1]);
             rbTres.setText(Ejercicios.cognicion[2]);
@@ -97,7 +98,7 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
             rbOtro.setText(Ejercicios.cognicion[5]);
         }
 
-        if (Miscellaneous.strTipo.equals("Espiritual")) {
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
             rbUno.setText(Ejercicios.espiritual[0]);
             rbDos.setText(Ejercicios.espiritual[1]);
             rbTres.setText(Ejercicios.espiritual[2]);
@@ -201,7 +202,6 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
         }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-
         Date dateFecha = new Date();
         String strNombre = etNombre.getText().toString();
         String strDescripcion = etDescripcion.getText().toString();

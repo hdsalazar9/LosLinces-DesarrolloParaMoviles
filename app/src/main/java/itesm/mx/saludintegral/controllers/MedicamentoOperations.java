@@ -93,6 +93,7 @@ public class MedicamentoOperations {
                     }
                     ppstime= new java.sql.Time(d1.getTime());
 
+
                     medicamento=new Medicamento(cursor.getInt(0),cursor.getString(1),
                             cursor.getDouble(2),cursor.getInt(3),cursor.getString(4),ppstime, cursor.getInt(6),
                             dateC, dateT,b,

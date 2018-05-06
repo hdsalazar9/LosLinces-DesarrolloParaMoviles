@@ -1,13 +1,16 @@
 package itesm.mx.saludintegral.fragments;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,6 +42,8 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
     Button btnAddEvento;
     private EventoOperations database;
     private CaldroidFragment caldroidFragment = new CaldroidFragment();
+    OnSelectFechaValida mCallback;
+
     //TODO: OBTENER LOS EVENTOS DE MES Y COLOREAR LOS DIAS QUE SE VEAN AFECTADOS
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -52,7 +58,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
             }
             else
             {
-
+                mCallback.onSelectFechaValida(date);
             }
         }
 
@@ -113,12 +119,16 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
                 AddEventoFragment addEventoFragment = new AddEventoFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                if(Miscellaneous.strTipo.equals("Cognicion")) {
-                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment).commit();
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
+                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 }
 
-                if(Miscellaneous.strTipo.equals("Espiritual")) {
-                    transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment).commit();
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
+                    transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 }
                 break;
         }
@@ -134,4 +144,34 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         database.close();
         super.onPause();
     }
+    @Override
+    public void onDetach(){
+        database.close();
+        super.onDetach();
+    }
+
+    //Interfaz para que la actividad pueda responder al click en lista
+    public interface OnSelectFechaValida {
+        public void onSelectFechaValida(Date strFecha);
+
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        Activity activity;
+
+        if(context instanceof  Activity){
+            //Actividad respondera a la interface
+            activity = (Activity) context;
+            try{
+                mCallback = (OnSelectFechaValida) activity;
+            }   catch(ClassCastException e){
+                throw new ClassCastException(activity.toString() +
+                        " must implement OnResponseListener.");
+            }
+        }
+    }
+
 }

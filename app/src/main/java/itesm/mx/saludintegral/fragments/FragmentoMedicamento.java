@@ -106,8 +106,10 @@ public class FragmentoMedicamento extends ListFragment implements AdapterView.On
         i.putExtras(bundle);
         startActivity(i);*/
         //Intent intent = new Intent(getActivity(), FragmentoTomarMed.class);
+
         Medicamento medicamento=(Medicamento)parent.getItemAtPosition(position);
         mCallback.onResponse(2, medicamento);
+
         /*intent.putExtra("medicamento", Parcels.wrap(medicamento));
         startActivity(intent);*/
     }

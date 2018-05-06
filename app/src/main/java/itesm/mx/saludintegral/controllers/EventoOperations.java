@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -121,6 +122,8 @@ public class EventoOperations {
                 " WHERE " + DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " LIKE '___" + sMonth + "%' AND " +
                 DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
 
+        Log.d("QUERY",query);
+
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
@@ -140,6 +143,7 @@ public class EventoOperations {
         }
         return listaEventos;
     }
+
 
     public boolean deleteEvento(String nombreDeEventoABorrar){
         boolean result = false;
@@ -161,4 +165,40 @@ public class EventoOperations {
         return result;
     }
 
+    public ArrayList<Evento> getAllEventosFromDateAndType(Date date, String sType) {
+        ArrayList<Evento> listaEventosDelDia = new ArrayList<Evento>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy");
+        //DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Log.d("QUERY",""+date);
+        String strFecha = dateFormat.format(date);
+
+        String query = "SELECT * FROM "+ DataBaseSchema.EventosTable.TABLE_NAME +
+                " WHERE " + DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " = '" + date + "' AND " +
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
+
+        Log.d("QUERY", query);
+
+        try {
+            Cursor cursor=db.rawQuery(query,null);
+            if(cursor.moveToFirst()){
+                do{
+                    Date dateC=null;
+                    try {
+                        dateC= dateFormat.parse(cursor.getString(3));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    evento = new Evento(cursor.getInt(0),cursor.getString(1),
+                            cursor.getString(2),dateC, cursor.getString(4));
+                    listaEventosDelDia.add(evento);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLException e)
+        {
+            Log.e("AllProductsFromMonth: ", e.toString());
+        }
+        return listaEventosDelDia;
+    }
 }
