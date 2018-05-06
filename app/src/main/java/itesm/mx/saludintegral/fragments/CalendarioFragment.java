@@ -1,12 +1,9 @@
 package itesm.mx.saludintegral.fragments;
 
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,8 +34,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     Button btnAddEvento;
     private EventoOperations database;
-    private CaldroidFragment caldroidFragment = new CaldroidFragment();
-    //TODO: OBTENER LOS EVENTOS DE MES Y COLOREAR LOS DIAS QUE SE VEAN AFECTADOS
+    private CaldroidFragment caldroidFragment;
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     CaldroidListener listener = new CaldroidListener() {
@@ -78,6 +74,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
         Miscellaneous.mapFechaFondo = new HashMap<Date, Drawable>();
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
+        caldroidFragment = new CaldroidFragment();
 
         Bundle args = new Bundle();
         Calendar cal = Calendar.getInstance();

@@ -28,8 +28,15 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
+        if(Miscellaneous.strDatePicker.equals("fechaNacimiento")){
+            DatePickerDialog datePicker = new DatePickerDialog(getActivity(),this, 1970, month, day);
+            datePicker.getDatePicker().getTouchables().get(0).performClick();
+            return datePicker;
+        }
+
         // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, day);
+
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -61,6 +68,11 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
         if(Miscellaneous.strDatePicker.equals("fechaEvento")) {
             etFecha = getActivity().findViewById(R.id.et_addevento_fecha);
+            etFecha.setText(strFecha);
+        }
+
+        if(Miscellaneous.strDatePicker.equals("fechaNacimiento")){
+            etFecha = getActivity().findViewById(R.id.et_activity_registro_fecha);
             etFecha.setText(strFecha);
         }
     }
