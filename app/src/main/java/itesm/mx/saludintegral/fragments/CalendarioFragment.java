@@ -1,16 +1,12 @@
 package itesm.mx.saludintegral.fragments;
 
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +16,6 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,11 +35,10 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class CalendarioFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     Button btnAddEvento;
+
     private EventoOperations dao;
     private CaldroidFragment caldroidFragment;
     OnSelectFechaValida mCallback;
-
-    //TODO: OBTENER LOS EVENTOS DE MES Y COLOREAR LOS DIAS QUE SE VEAN AFECTADOS
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     CaldroidListener listener = new CaldroidListener() {
@@ -87,6 +81,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
         Miscellaneous.limpiaMapFechaFondo();
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
+        caldroidFragment = new CaldroidFragment();
 
         Bundle args = new Bundle();
         Calendar cal = Calendar.getInstance();

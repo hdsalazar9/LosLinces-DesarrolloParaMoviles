@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import java.util.Date;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
+import itesm.mx.saludintegral.fragments.DatePickerFragment;
 import itesm.mx.saludintegral.models.InfoPersonal;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
@@ -33,6 +35,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
     private Button btnContinue;
     private Button btnTomarFoto;
+    private Button btnFecha;
     private EditText etNombre;
     private EditText etApodo;
     private EditText etFechaDeNacimiento;
@@ -54,6 +57,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
         btnContinue = (Button) findViewById(R.id.btn_activity_registro_continuar);
         btnTomarFoto = (Button) findViewById(R.id.btn_activity_registro_TomarFoto);
+        btnFecha = (Button) findViewById(R.id.btn_registro_Fecha);
         etNombre = (EditText) findViewById(R.id.et_activity_registro_nombre);
         etApodo = (EditText) findViewById(R.id.et_activity_registro_apodo);
         etFechaDeNacimiento = (EditText) findViewById(R.id.et_activity_registro_fecha);
@@ -71,6 +75,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
         byteArray = baos.toByteArray();
 
+        etFechaDeNacimiento.setEnabled(false);
+        btnFecha.setOnClickListener(this);
         btnContinue.setOnClickListener(this);
         btnTomarFoto.setOnClickListener(this);
     }
@@ -78,6 +84,11 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.btn_registro_Fecha:
+                Miscellaneous.strDatePicker = "fechaNacimiento";
+                getDatePicked();
+                break;
+
             case R.id.btn_activity_registro_TomarFoto:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //Validar camara celular
@@ -154,6 +165,11 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         }
 
 
+    }
+
+    public void getDatePicked() {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     @Override
