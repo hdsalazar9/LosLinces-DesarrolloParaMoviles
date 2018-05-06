@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.EventoOperations;
@@ -196,7 +197,6 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
         }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-
         Date dateFecha = new Date();
         String strNombre = etNombre.getText().toString();
         String strDescripcion = etDescripcion.getText().toString();

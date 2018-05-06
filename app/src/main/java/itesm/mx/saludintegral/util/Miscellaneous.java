@@ -1,7 +1,10 @@
 package itesm.mx.saludintegral.util;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -63,5 +66,22 @@ public class Miscellaneous {
              break;
      }
      return sMonth;
+    }
+
+    //Metodo que recibe util.Date y lo convierte al patron necesario para utilizarse en a BD
+    public static String getStringFromDate(Date dateToConvert){
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        return df.format(dateToConvert);
+    }
+
+    //Metodo que recibe string en formato "dd-MM-yyyy" y lo convierte a date
+    public static Date getDateFromString(String stringToConvert){
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        try{
+            return df.parse(stringToConvert);
+        } catch (Exception e){
+            Log.d("getStringFromDate",e.getMessage());
+        }
+        return null;
     }
 }

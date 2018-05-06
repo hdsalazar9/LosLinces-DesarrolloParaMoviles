@@ -1,13 +1,16 @@
 package itesm.mx.saludintegral.fragments;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,6 +41,8 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     Button btnAddEvento;
     private EventoOperations database;
+    OnSelectFechaValida mCallback;
+
     //TODO: OBTENER LOS EVENTOS DE MES Y COLOREAR LOS DIAS QUE SE VEAN AFECTADOS
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -52,12 +58,18 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
             else
             {
                 /*
-                //android.support.v4.app.DialogFragment dialogFragment = DialogFragment.instantiate(getActivity(),"");
-                EventoDisplayFragment dialog = new EventoDisplayFragment();
-                dialog.show(getFragmentManager(),"hola");
-                dialog.show((FragmentManager)getFragmentManager(), "epa");
-                dialog.show();
-            */
+                Date fecha = new Date();
+
+                try {
+                    fecha = formatter.parse("05-05-2018");
+                    Log.d("DEBUG","fechaSelccionada, es una fecha valida");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                        //= date;
+                Log.d("DEBUG","La fecha seleccionada es: " + formatter.format(date));
+                */
+                mCallback.onSelectFechaValida(date);
             }
         }
     };
@@ -141,4 +153,29 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         database.close();
         super.onDetach();
     }
+
+    //Interfaz para que la actividad pueda responder al click en lista
+    public interface OnSelectFechaValida {
+        public void onSelectFechaValida(Date strFecha);
+
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        Activity activity;
+
+        if(context instanceof  Activity){
+            //Actividad respondera a la interface
+            activity = (Activity) context;
+            try{
+                mCallback = (OnSelectFechaValida) activity;
+            }   catch(ClassCastException e){
+                throw new ClassCastException(activity.toString() +
+                        " must implement OnResponseListener.");
+            }
+        }
+    }
+
 }
