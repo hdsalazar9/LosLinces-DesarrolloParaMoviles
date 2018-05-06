@@ -119,17 +119,30 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
                 AddEventoFragment addEventoFragment = new AddEventoFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
-                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                }
-
+                //Espiritualidad
                 if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
                     transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
                 }
+
+                //Actividad Cognitiva
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
+                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
+                }
+
+                //Finanzas
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
+                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
+                }
+
+                //Ejercicios Físicos
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
+                    transaction.replace(R.id.frameLayout_ActivitySalud,addEventoFragment);
+                }
+
+
+
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
         }
     }

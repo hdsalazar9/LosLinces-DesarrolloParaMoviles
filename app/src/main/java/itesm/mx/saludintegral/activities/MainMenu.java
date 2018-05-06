@@ -45,6 +45,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         ipo = new InfoPersonalOperations(this);
         ipo.open();
+
         info = ipo.getAllProducts();
 
         ivProfilePicture = (ImageView) findViewById(R.id.ivProfileImage);
@@ -76,6 +77,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
                 /* Ir a actividad de Social */
                 intent=new Intent(this, SocialActivity.class);
                 startActivity(intent);
+
                 break;
             case ("Cognicion"):
                 /* Ir a actividad de Cognicion */
@@ -122,10 +124,12 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
 
+
         ivProfilePicture.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
                 bmp.getHeight(), false));
 
         ivProfilePicture.setOnClickListener(this);
+
     }
 
 }

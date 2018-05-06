@@ -71,6 +71,7 @@
     <string name="fragment_eventozoom_fecha">"Fecha"</string>
     <string name="fragment_eventozoom_tipo">"Tipo"</string>
     <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
+
     <string name="channel_name">"MiCanal"</string>
     <string name="channel_description">"Este es mi canal"</string>
 
