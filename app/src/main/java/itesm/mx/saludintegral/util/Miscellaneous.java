@@ -21,6 +21,7 @@ public class Miscellaneous {
             "Espiritualidad",       //0
             "Actividad Cognitiva",  //1
             "Finanzas",             //2
+            "Actividad Física"      //3
     };
 
 

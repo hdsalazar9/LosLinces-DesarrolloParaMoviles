@@ -72,6 +72,7 @@ public class EspiritualActivity extends AppCompatActivity implements ListEventoF
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     public void changeFragmentNoBack(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(iCurrentFrameLayout, fragment);

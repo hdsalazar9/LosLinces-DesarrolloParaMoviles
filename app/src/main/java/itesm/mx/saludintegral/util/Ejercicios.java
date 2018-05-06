@@ -34,4 +34,13 @@ public class Ejercicios {
             "Otro"
     };
 
+    public static String fisicos[] = {
+            "Caminata",
+            "Natación",
+            "Gimnasio",
+            "Spinning",
+            "Baile",
+            "Otro"
+    };
+
 }

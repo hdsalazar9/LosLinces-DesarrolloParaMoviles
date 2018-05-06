@@ -135,6 +135,11 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
                     transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
                 }
 
+                //Ejercicios Físicos
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
+                    transaction.replace(R.id.frameLayout_ActivitySalud,addEventoFragment);
+                }
+
 
 
                 transaction.addToBackStack(null);
