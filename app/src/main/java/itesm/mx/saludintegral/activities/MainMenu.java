@@ -76,14 +76,9 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
                 break;
             case ("Social"):
                 /* Ir a actividad de Social */
-<<<<<<< HEAD
                 intent=new Intent(this, SocialActivity.class);
                 startActivity(intent);
-||||||| merged common ancestors
-=======
-                intent = new Intent(this, ExampleReceiver.class);
-                startActivity(intent);
->>>>>>> origin/dev-jesus
+
                 break;
             case ("Cognicion"):
                 /* Ir a actividad de Cognicion */
