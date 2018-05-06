@@ -36,13 +36,12 @@ public class Receiver extends BroadcastReceiver{
         String whereFrom = intent.getStringExtra("whereFrom");
 
         if(whereFrom.equals("AddMedicamento")) {
-
             if (Build.VERSION.SDK_INT < 26) {
                 showNotificationMed(context, intent.getStringExtra("medicina"), intent.getIntExtra("id", 0));
                 Log.d("Recibido", intent.getStringExtra("medicina"));
             } else {
                 showNotificationMed26(context, intent.getStringExtra("medicina"), intent.getIntExtra("id", 0));
-                Log.d("Recibido26", "Recibido26");
+                Log.d("Recibido26", intent.getStringExtra("medicina"));
             }
         }
     }

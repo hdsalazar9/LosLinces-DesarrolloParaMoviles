@@ -201,10 +201,19 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
         Calendar calendar = Calendar.getInstance();
         //calendar.set(dateInicio.getYear(), dateInicio.getMonth(), dateInicio.getDay(), timeHora.getHours(), timeHora.getMinutes());
-        calendar.setTime(dateInicio);
 
-        Log.d("Recibi", String.valueOf(calendar.getTimeInMillis()) );
-        Log.d("luego", String.valueOf(System.currentTimeMillis()));
+        String time [] = etHoraIngesta.getText().toString().split(":");
+        String inicio [] = etFechaInicio.getText().toString().split("-");
+
+
+       calendar.set(Integer.parseInt(inicio[2]), //year
+               Integer.parseInt(inicio[0]),      //month
+               Integer.parseInt(inicio[1]),      //day
+               Integer.parseInt(time[0]),        //hour
+               Integer.parseInt(time[1]));       //minute
+
+        Log.d("Recibi", inicio[0]);
+        Log.d("luego", inicio[1]);
 
 
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
