@@ -2,10 +2,14 @@ package itesm.mx.saludintegral.activities;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -13,15 +17,23 @@ import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.util.Miscellaneous;
+import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
+import itesm.mx.saludintegral.models.InfoPersonal;
+
 
 /*
 Main Menu Activity: Referente a "Page 4" del prototipo de Ninjamock
 */
 
-public class MainMenu extends ListActivity implements AdapterView.OnItemClickListener {
+public class MainMenu extends ListActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
+
+    InfoPersonal info;
+    InfoPersonalOperations ipo;
 
     private ArrayAdapter<MenuItem> menuItemArrayAdapter;
     private ArrayList<MenuItem> menuItems;
+    ImageView ivProfilePicture;
+    TextView tvUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +42,15 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         menuItems = getMenuItems();
         menuItemArrayAdapter = new MenuItemAdapter(this, menuItems);
+
+        ipo = new InfoPersonalOperations(this);
+        ipo.open();
+        info = ipo.getAllProducts();
+
+        ivProfilePicture = (ImageView) findViewById(R.id.ivProfileImage);
+        tvUserName = (TextView) findViewById(R.id.tvUserName);
+
+        setUserInfo();
 
         setListAdapter(menuItemArrayAdapter);
 
@@ -70,6 +91,12 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
     }
 
+    @Override
+    public void onClick(View v){
+        Intent intent = new Intent(this, RegistroActivity.class);
+        startActivity(intent);
+    }
+
     public ArrayList<MenuItem> getMenuItems(){
         MenuItem mItem;
         ArrayList<MenuItem> Menu = new ArrayList<>();
@@ -88,4 +115,17 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         return Menu;
     }
+
+    public void setUserInfo(){
+
+        tvUserName.setText(("Hola, " + info.getNombre()));
+
+        Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
+
+        ivProfilePicture.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
+                bmp.getHeight(), false));
+
+        ivProfilePicture.setOnClickListener(this);
+    }
+
 }
