@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -129,6 +130,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
                 long id = database.addEvento(infoPersonal);
                 Toast.makeText(this, "Registrado satisfactoriamente! " + id, Toast.LENGTH_SHORT).show();
+                Log.d("Registro activity:", infoPersonal.toString());
                 Intent i = new Intent(this, MainMenu.class);
                 startActivity(i);
                 break;

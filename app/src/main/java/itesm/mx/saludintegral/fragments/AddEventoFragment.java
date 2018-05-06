@@ -174,7 +174,12 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
 
     public void newEvento() {
         String strSemanas = etSemanas.getText().toString();
-        int iNumero = Integer.parseInt(strSemanas);
+        int iNumero;
+        if(strSemanas.equals("")){
+            iNumero = 0;
+        }else {
+            iNumero = Integer.parseInt(strSemanas);
+        }
 
         Log.d("DEBUG","strSemanas: "+strSemanas);
         Log.d("DEBUG","strSemanas > 0? " + (iNumero>0));

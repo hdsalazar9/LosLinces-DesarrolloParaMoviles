@@ -37,6 +37,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     Button btnAddEvento;
     private EventoOperations database;
+    private CaldroidFragment caldroidFragment = new CaldroidFragment();
     //TODO: OBTENER LOS EVENTOS DE MES Y COLOREAR LOS DIAS QUE SE VEAN AFECTADOS
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -51,17 +52,25 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
             }
             else
             {
-                /*
-                //android.support.v4.app.DialogFragment dialogFragment = DialogFragment.instantiate(getActivity(),"");
-                EventoDisplayFragment dialog = new EventoDisplayFragment();
-                dialog.show(getFragmentManager(),"hola");
-                dialog.show((FragmentManager)getFragmentManager(), "epa");
-                dialog.show();
-                */
+
             }
+        }
+
+        @Override
+        public void onChangeMonth(int month, int year) {
+            pintarDiasDeEventos(month);
         }
     };
 
+    public void pintarDiasDeEventos(Integer intMesABuscar){
+        ColorDrawable green = new ColorDrawable(Color.GREEN);
+        ArrayList<Evento> arregloEventosDelMes = database.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
+
+        for(Evento ev : arregloEventosDelMes){
+            Miscellaneous.mapFechaFondo.put(ev.getFecha(),green);
+        }
+        caldroidFragment.setBackgroundDrawableForDates(Miscellaneous.mapFechaFondo);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +79,6 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         Miscellaneous.mapFechaFondo = new HashMap<Date, Drawable>();
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
 
-        CaldroidFragment caldroidFragment = new CaldroidFragment();
         Bundle args = new Bundle();
         Calendar cal = Calendar.getInstance();
         args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
@@ -89,13 +97,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         database = new EventoOperations(getActivity().getApplicationContext());
         database.open();
         Integer intMesABuscar = cal.get(Calendar.MONTH);
-        ColorDrawable green = new ColorDrawable(Color.GREEN);
-        ArrayList<Evento> arregloEventosDelMes = database.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
-
-        for(Evento ev : arregloEventosDelMes){
-            Miscellaneous.mapFechaFondo.put(ev.getFecha(),green);
-        }
-        caldroidFragment.setBackgroundDrawableForDates(Miscellaneous.mapFechaFondo);
+        pintarDiasDeEventos(intMesABuscar);
 
         return rootView;
     }
