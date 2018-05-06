@@ -145,10 +145,13 @@ public class EventoOperations {
     }
 
 
-    public boolean deleteEvento(String nombreDeEventoABorrar){
+
+    public boolean deleteEvento(String nombreDeEventoABorrar, Date fechaEvento){
         boolean result = false;
         String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+
-                DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+" = '"+nombreDeEventoABorrar+"'";
+                DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+" = '"+nombreDeEventoABorrar+"' AND " +
+                DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " = '" + Miscellaneous.getStringFromDate(fechaEvento) +
+                "'";
         try{
             Cursor cursor = db.rawQuery(query, null);
             if(cursor.moveToFirst()){
@@ -164,6 +167,7 @@ public class EventoOperations {
         }
         return result;
     }
+
 
     public ArrayList<Evento> getAllEventosFromDateAndType(Date date, String sType) {
         ArrayList<Evento> listaEventosDelDia = new ArrayList<Evento>();

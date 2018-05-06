@@ -40,7 +40,7 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class CalendarioFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     Button btnAddEvento;
-    private EventoOperations database;
+    private EventoOperations dao;
     private CaldroidFragment caldroidFragment;
     OnSelectFechaValida mCallback;
 
@@ -70,7 +70,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     public void pintarDiasDeEventos(Integer intMesABuscar){
         ColorDrawable green = new ColorDrawable(Color.GREEN);
-        ArrayList<Evento> arregloEventosDelMes = database.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
+        ArrayList<Evento> arregloEventosDelMes = dao.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
 
         for(Evento ev : arregloEventosDelMes){
             Miscellaneous.mapFechaFondo.put(ev.getFecha(),green);
@@ -105,8 +105,8 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         btnAddEvento.setOnClickListener(this);
 
         //Cambiar de color los dates que tengan eventos registrados
-        database = new EventoOperations(getActivity().getApplicationContext());
-        database.open();
+        dao = new EventoOperations(getActivity().getApplicationContext());
+        dao.open();
         Integer intMesABuscar = cal.get(Calendar.MONTH);
         pintarDiasDeEventos(intMesABuscar);
 
@@ -141,25 +141,17 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     @Override
     public void onResume(){
-        Log.d("OnResume", "Se hace resume");
-        /*
-        FragmentTransaction t = getFragmentManager().beginTransaction();
-        t.replace(R.id.calendario, caldroidFragment);
-        t.commit();
-        */
-        database.open();
+        dao.open();
         super.onResume();
     }
     @Override
     public void onPause(){
-        Log.d("OnPause", "Ando en onPause");
-        database.close();
+        dao.close();
         super.onPause();
     }
     @Override
     public void onDetach(){
-        Log.d("OnDetach", "Ando en onDetach");
-        database.close();
+        dao.close();
         super.onDetach();
     }
 
