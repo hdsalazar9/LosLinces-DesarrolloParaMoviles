@@ -16,12 +16,11 @@
         android:gravity="bottom|center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/action_cancel"
+        <Button
+            android:id="@+id/btn_regresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/fragment_eventodisplay_cerrar" />
+            android:text="Button" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
