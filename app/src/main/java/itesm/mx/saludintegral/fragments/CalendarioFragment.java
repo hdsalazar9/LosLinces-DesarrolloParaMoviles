@@ -41,7 +41,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     Button btnAddEvento;
     private EventoOperations database;
-    private CaldroidFragment caldroidFragment = new CaldroidFragment();
+    private CaldroidFragment caldroidFragment;
     OnSelectFechaValida mCallback;
 
     //TODO: OBTENER LOS EVENTOS DE MES Y COLOREAR LOS DIAS QUE SE VEAN AFECTADOS
@@ -82,6 +82,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        caldroidFragment = new CaldroidFragment();
         Log.d("OnCREATEVIEW", "Se crea la view");
         View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
         Miscellaneous.mapFechaFondo = new HashMap<Date, Drawable>();
