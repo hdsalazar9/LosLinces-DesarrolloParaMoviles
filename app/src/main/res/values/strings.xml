@@ -69,4 +69,8 @@
 
     <string name="row_evento_nombre">"Nombre del evento"</string>
     <string name="row_evento_descripcion">"Descripción"</string>
+
+    <string name="fragment_eventozoom_fecha">"Fecha"</string>
+    <string name="fragment_eventozoom_tipo">"Tipo"</string>
+    <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
 </resources>

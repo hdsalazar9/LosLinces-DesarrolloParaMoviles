@@ -20,7 +20,7 @@
             android:id="@+id/btn_regresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="@string/fragment_eventodisplay_cerrar" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

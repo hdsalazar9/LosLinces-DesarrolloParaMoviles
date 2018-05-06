@@ -336,4 +336,20 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         return medicament;
     }
 
+    @Override
+    public void onResume(){
+        dao.open();
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        dao.close();
+        super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
+    }
+
 }

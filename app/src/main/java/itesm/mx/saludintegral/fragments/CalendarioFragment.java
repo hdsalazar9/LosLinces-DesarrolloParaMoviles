@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class CalendarioFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     Button btnAddEvento;
-    private EventoOperations database;
+    private EventoOperations dao;
     private CaldroidFragment caldroidFragment;
     OnSelectFechaValida mCallback;
 
@@ -63,7 +64,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     public void pintarDiasDeEventos(Integer intMesABuscar){
         ColorDrawable green = new ColorDrawable(Color.GREEN);
-        ArrayList<Evento> arregloEventosDelMes = database.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
+        ArrayList<Evento> arregloEventosDelMes = dao.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
 
         for(Evento ev : arregloEventosDelMes){
             Miscellaneous.mapFechaFondo.put(ev.getFecha(),green);
@@ -74,8 +75,11 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        caldroidFragment = new CaldroidFragment();
+        Log.d("OnCREATEVIEW", "Se crea la view");
         View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
-        Miscellaneous.mapFechaFondo = new HashMap<Date, Drawable>();
+        Miscellaneous.limpiaMapFechaFondo();
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
         caldroidFragment = new CaldroidFragment();
 
@@ -85,17 +89,19 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
         caldroidFragment.setArguments(args);
 
+
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.calendario, caldroidFragment);
         t.commit();
+
 
         caldroidFragment.setCaldroidListener(listener);
 
         btnAddEvento.setOnClickListener(this);
 
         //Cambiar de color los dates que tengan eventos registrados
-        database = new EventoOperations(getActivity().getApplicationContext());
-        database.open();
+        dao = new EventoOperations(getActivity().getApplicationContext());
+        dao.open();
         Integer intMesABuscar = cal.get(Calendar.MONTH);
         pintarDiasDeEventos(intMesABuscar);
 
@@ -130,17 +136,17 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     @Override
     public void onResume(){
-        database.open();
+        dao.open();
         super.onResume();
     }
     @Override
     public void onPause(){
-        database.close();
+        dao.close();
         super.onPause();
     }
     @Override
     public void onDetach(){
-        database.close();
+        dao.close();
         super.onDetach();
     }
 
@@ -152,6 +158,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     @Override
     public void onAttach(Context context){
+        Log.d("OnAttach", "Ando en onAttach");
         super.onAttach(context);
 
         Activity activity;
