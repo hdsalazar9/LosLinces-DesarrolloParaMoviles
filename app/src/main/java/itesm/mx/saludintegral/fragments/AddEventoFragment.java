@@ -107,6 +107,15 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
             rbOtro.setText(Ejercicios.espiritual[5]);
         }
 
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
+            rbUno.setText(Ejercicios.finanzas[0]);
+            rbDos.setText(Ejercicios.finanzas[1]);
+            rbTres.setText(Ejercicios.finanzas[2]);
+            rbCuatro.setText(Ejercicios.finanzas[3]);
+            rbCinco.setText(Ejercicios.finanzas[4]);
+            rbOtro.setText(Ejercicios.finanzas[5]);
+        }
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
