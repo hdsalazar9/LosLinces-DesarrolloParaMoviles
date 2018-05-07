@@ -66,6 +66,7 @@
     <string name="fragment_addevento_semanas">"Número de semanas: "</string>
     <string name="fragment_addevento_hint_semanas">"(ej. 2)"</string>
     <string name="fragment_addevento_registrar">"Registrar evento"</string>
+
     <string name="row_evento_nombre">"Nombre del evento"</string>
     <string name="row_evento_descripcion">"Descripción"</string>
     <string name="fragment_eventozoom_fecha">"Fecha"</string>

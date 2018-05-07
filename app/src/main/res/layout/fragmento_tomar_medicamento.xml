@@ -1,11 +1,12 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFCDD2"
     tools:context="itesm.mx.saludintegral.fragments.FragmentoTomarMedicamento">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment layout
 
 
     <TextView
@@ -107,5 +108,83 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-</android.support.constraint.ConstraintLayout>
+        app:layout_constraintVertical_bias="1.0" />-->
+    <TextView
+        android:id="@+id/textView_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="96dp"
+        android:text="Medicamento"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="93dp"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="41dp"
+        android:layout_marginTop="87dp"
+        app:srcCompat="@drawable/pills" />
+
+    <TextView
+        android:id="@+id/textViewStatusMed"
+        android:layout_width="154dp"
+        android:layout_height="49dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_marginTop="161dp"
+        android:text="Retraso"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:textColor="#D32F2F"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_periodo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_marginTop="232dp"
+        android:text="Frecuencia"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" >
+        <Button
+            android:id="@+id/button_ingerido"
+            android:layout_width="match_parent"
+            android:layout_height="134dp"
+            android:layout_above="@+id/button4"
+            android:layout_centerHorizontal="true"
+            android:background="#8BC34A"
+            android:text="Ya la tomé"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/button_borrar"
+            android:layout_width="match_parent"
+            android:layout_height="133dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:background="#D32F2F"
+            android:text="Eliminar"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+    </LinearLayout>
+    <!--a"#D32F2F"
+    android:background="D />-->
+</RelativeLayout>

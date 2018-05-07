@@ -1,7 +1,11 @@
 package itesm.mx.saludintegral.activities;
 
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+
+import android.support.v4.app.FragmentManager;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,12 +24,16 @@ import itesm.mx.saludintegral.fragments.EventoZoomFragment;
 import itesm.mx.saludintegral.fragments.FragmentoMedicamento;
 import itesm.mx.saludintegral.fragments.FragmentoMenuSalud;
 import itesm.mx.saludintegral.fragments.FragmentoTomarMedicamento;
+
 import itesm.mx.saludintegral.fragments.ListEventoFragment;
 import itesm.mx.saludintegral.models.Evento;
+
+import itesm.mx.saludintegral.fragments.MonitoreoDeSuenoFragment;
+
 import itesm.mx.saludintegral.models.Medicamento;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
-public class SaludActivity extends AppCompatActivity implements FragmentoMenuSalud.OnSelectedListener, FragmentoMedicamento.OnResponseListener, FragmentoTomarMedicamento.OnResponseTomar, ListEventoFragment.OnResponseListener, CalendarioFragment.OnSelectFechaValida, EventoDisplayFragment.OnResponseListener, EventoZoomFragment.OnResponseListener{
+public class SaludActivity extends AppCompatActivity implements FragmentoMenuSalud.OnSelectedListener, FragmentoMedicamento.OnResponseListener, FragmentoTomarMedicamento.OnResponseTomar, AddMedicamentoFragment.OnResponseAgregar, MonitoreoDeSuenoFragment.OnResponseMonitoreo,ListEventoFragment.OnResponseListener, CalendarioFragment.OnSelectFechaValida, EventoDisplayFragment.OnResponseListener, EventoZoomFragment.OnResponseListener{
 
     int iCurrentFrameLayout = R.id.frameLayout_ActivitySalud;
 
@@ -43,12 +51,15 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
     }
 
     public void onSelected(int position){
+        android.support.v4.app.FragmentTransaction transaction;
         switch (position) {
             case 0:
                 FragmentoMedicamento fragmentoMedicamento=new FragmentoMedicamento();
                 changeFragmentHabilitaBack(fragmentoMedicamento);
                 break;
             case 1:
+                MonitoreoDeSuenoFragment monitoreoDeSuenoFragment=new MonitoreoDeSuenoFragment();
+                changeFragmentHabilitaBack(monitoreoDeSuenoFragment);
                 break;
             case 2:
                 break;
@@ -61,14 +72,18 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
     }
 
     public void onResponse(int position, Medicamento medicamento){
-        if(position==2){
+        if(position==2){//Cambia al fragmento de detalle de mdeicamento
+            FragmentManager fm = this.getSupportFragmentManager();
+            fm.popBackStack();
             FragmentoTomarMedicamento fragmentoTomarMedicamento=new FragmentoTomarMedicamento();
             Bundle bundle = new Bundle();
             bundle.putParcelable("medicamento", Parcels.wrap(medicamento));
             fragmentoTomarMedicamento.setArguments(bundle);
             changeFragmentHabilitaBack(fragmentoTomarMedicamento);
         }
-        else{
+        else{//Cambia al fragmento de agregar medicamento
+            FragmentManager fm = this.getSupportFragmentManager();
+            fm.popBackStack();
             AddMedicamentoFragment addMedicamentoFragment=new AddMedicamentoFragment();
             changeFragmentHabilitaBack(addMedicamentoFragment);
         }
@@ -90,6 +105,7 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
         }
     }
 
+
     public void onSelectFechaValida(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
@@ -104,7 +120,19 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
         changeFragmentHabilitaBack(eventoDisplayFragment);
     }
 
-    public void onResponseTomar(){
+    public void onResponseTomar(){//Cierra el fragmento de tomar medicamento y lo reemplaza por la lista de medicamentos
+        FragmentManager fm = this.getSupportFragmentManager();
+        fm.popBackStack();
+        FragmentoMedicamento fragmentoMedicamento=new FragmentoMedicamento();
+        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void onResponseAgregar(){//Cierra el fragmento de agregar medicamento y lo reemplaza por la lista de medicamentos
+        FragmentManager fm = this.getSupportFragmentManager();
+        fm.popBackStack();
         FragmentoMedicamento fragmentoMedicamento=new FragmentoMedicamento();
         changeFragmentHabilitaBack(fragmentoMedicamento);
     }
@@ -112,6 +140,14 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
     public void changeFragmentHabilitaBack(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(iCurrentFrameLayout, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void onResponseMonitoreo(){
+        FragmentoMenuSalud fragmentoMenuSalud=new FragmentoMenuSalud();
+        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout_ActivitySalud, fragmentoMenuSalud);
         transaction.addToBackStack(null);
         transaction.commit();
     }

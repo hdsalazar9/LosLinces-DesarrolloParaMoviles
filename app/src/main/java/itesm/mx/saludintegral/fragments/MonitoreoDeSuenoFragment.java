@@ -1,5 +1,6 @@
-package itesm.mx.saludintegral;
+package itesm.mx.saludintegral.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,19 +8,27 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import itesm.mx.saludintegral.R;
+import itesm.mx.saludintegral.controllers.MonitoreoSuenoOperations;
+import itesm.mx.saludintegral.models.MonitoreoSueno;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MonitoreoDeSueno.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
-public class MonitoreoDeSueno extends Fragment {
+public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickListener{
 
-    private OnFragmentInteractionListener mListener;
-
-    public MonitoreoDeSueno() {
+    OnResponseMonitoreo mCallback;
+    Button btnAceptar, btnEliminar;
+    EditText etHorasSueno;
+    View view;
+    MonitoreoSuenoOperations dao;
+    public MonitoreoDeSuenoFragment() {
         // Required empty public constructor
     }
 
@@ -28,45 +37,64 @@ public class MonitoreoDeSueno extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_monitoreo_de_sueno, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        view=inflater.inflate(R.layout.fragment_monitoreo_de_sueno, container, false);
+        dao = new MonitoreoSuenoOperations(getContext());
+        btnAceptar=(Button)view.findViewById(R.id.button_Aceptar);
+        btnEliminar=(Button)view.findViewById(R.id.button_Canelar);
+        etHorasSueno=(EditText)view.findViewById(R.id.editTextHorasSueno);
+        dao.open();
+        btnAceptar.setOnClickListener(this);
+        btnEliminar.setOnClickListener(this);
+        return view;
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context){
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+
+        Activity activity;
+
+        if(context instanceof  Activity){
+            //Actividad respondera a la interface
+            activity = (Activity) context;
+            try{
+                mCallback = (OnResponseMonitoreo) activity;
+            }   catch(ClassCastException e){
+                throw new ClassCastException(activity.toString() +
+                        " must implement OnResponseMonitoreo.");
+            }
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public interface OnResponseMonitoreo {
+        void onResponseMonitoreo();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    @Override
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.button_Aceptar:
+                addSueno();
+            break;
+        }
+        mCallback.onResponseMonitoreo();
+    }
+
+    public void addSueno(){
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Date currentTime = new Date();
+        Date dateC=null;
+        long n=0;
+        String horaActual=format.format(currentTime);
+        try {
+            dateC= format.parse(horaActual);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        MonitoreoSueno monitoreoSueno;
+        monitoreoSueno = new MonitoreoSueno(n,dateC,Double.parseDouble(etHorasSueno.getText().toString()));
+        n= dao.addEvento(monitoreoSueno);
+        monitoreoSueno.setId(n);
+        Toast.makeText(getContext(), "Evento añadido", Toast.LENGTH_SHORT).show();
     }
 }
