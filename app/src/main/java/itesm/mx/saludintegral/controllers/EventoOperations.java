@@ -143,7 +143,6 @@ public class EventoOperations {
     }
 
 
-
     public boolean deleteEvento(String nombreDeEventoABorrar, Date fechaEvento){
         boolean result = false;
         String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+
