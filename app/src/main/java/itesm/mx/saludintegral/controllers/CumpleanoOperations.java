@@ -110,4 +110,40 @@ public class CumpleanoOperations {
         }
         return listaCumpleanos;
     }
+
+
+    ///Necesita el string de la fecha
+    public boolean birthdayToday(){
+        ArrayList<Cumpleano> listaCumpleanos=new ArrayList<Cumpleano>();
+        String query="SELECT * FROM "+ DataBaseSchema.EventosTable.TABLE_NAME;
+        try {
+            Cursor cursor=db.rawQuery(query,null);
+            if(cursor.moveToFirst()){
+                do{
+                    Date dateC=null;
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
+                    try {
+                        dateC= dateFormat.parse(cursor.getString(2));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    cumpleano=new Cumpleano(cursor.getInt(0),cursor.getString(1),
+                            dateC,cursor.getString(3),cursor.getString(4));
+                    listaCumpleanos.add(cumpleano);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLException e)
+        {
+            Log.e("SQLList", e.toString());
+        }
+
+        if(listaCumpleanos.isEmpty()){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }
