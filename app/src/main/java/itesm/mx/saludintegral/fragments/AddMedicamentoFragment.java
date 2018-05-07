@@ -2,6 +2,7 @@ package itesm.mx.saludintegral.fragments;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -73,6 +74,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     CheckBox cbSabado;
     CheckBox cbDomingo;
 
+    OnResponseAgregar mCallback;
 
     MedicamentoOperations dao;
 
@@ -169,7 +171,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
                 alarmIntent.putExtra("whereFrom", "AddMedicamento");
                 alarmIntent.putExtra("id", ((int) medicamento.getId()));
                 pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
-                start(medicamento.getCadaCuanto());
+                //start(medicamento.getCadaCuanto());
                 break;
 
             case R.id.btn_tomarFotoMed:
@@ -369,11 +371,31 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         medicament = new Medicamento(l, strNombre, dGramaje, iCantidad, strPeriodicidad, timeHora, iCadaCuanto, dateInicio, dateTermino, bAntesDespuesComer, byteFoto);
         long id = dao.addEvento(medicament);
         medicament.setId(id);
-
-        FragmentoMedicamento fragmentoMedicamento = new FragmentoMedicamento();
-        getFragmentManager().beginTransaction().replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento).commit();
-
+        mCallback.onResponseAgregar();
         return medicament;
+    }
+
+    //Interfaz para que la actividad pueda responder al click en lista
+    public interface OnResponseAgregar {
+        public void onResponseAgregar();
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        Activity activity;
+
+        if(context instanceof  Activity){
+            //Actividad respondera a la interface
+            activity = (Activity) context;
+            try{
+                mCallback = (OnResponseAgregar) activity;
+            }   catch(ClassCastException e){
+                throw new ClassCastException(activity.toString() +
+                        " must implement OnResponseTomar.");
+            }
+        }
     }
 
     @Override
