@@ -78,8 +78,8 @@ public class SaludIntegralDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.CumpleanosTable._ID + " INTEGER PRIMARY KEY," +
                 DataBaseSchema.CumpleanosTable.COLUMN_NAME_NOMBRE + " TEXT," +
                 DataBaseSchema.CumpleanosTable.COLUMN_NAME_FECHA + " TEXT," +
-                DataBaseSchema.CumpleanosTable.COLUMN_NAME_TELEFONO + " TEXT," +
-                DataBaseSchema.CumpleanosTable.COLUMN_NAME_TIPO + " TEXT " +
+                DataBaseSchema.CumpleanosTable.COLUMN_NAME_TIPO + " TEXT," +
+                DataBaseSchema.CumpleanosTable.COLUMN_NAME_TELEFONO +" TEXT " +
                 ")";
         Log.i("Producthelper onCreate4", CREATE_CUMPLEANOS_TABLE);
         // Ejecuta la instrucción de sql.

@@ -43,4 +43,13 @@ public class Ejercicios {
             "Otro"
     };
 
+    public static String eventos[] = {
+            "Desayuno",
+            "Comida",
+            "Cena",
+            "Fiesta",
+            "Reunión",
+            "Otro"
+    };
+
 }

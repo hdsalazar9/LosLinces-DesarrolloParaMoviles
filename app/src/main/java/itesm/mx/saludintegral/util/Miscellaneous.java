@@ -21,7 +21,11 @@ public class Miscellaneous {
             "Espiritualidad",       //0
             "Actividad Cognitiva",  //1
             "Finanzas",             //2
-            "Actividad Física"      //3
+            "Actividad Física",     //3
+            "Cumpleaños Amigos",    //4
+            "Eventos Amigos",       //5
+            "Cumpleaños Familia",   //6
+            "Eventos Familia"       //7
     };
 
 

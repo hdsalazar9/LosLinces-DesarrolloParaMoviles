@@ -41,8 +41,8 @@
     <string name="fragment_addmedicamento_hint_cantidadMed">"(ej. 2)"</string>
     <string name="fragment_addmedicamento_hint_horaMed">"(ej. 13:50)"</string>
     <string name="fragment_addmedicamento_hint_cadaCuantoMed">"(ej. 3)"</string>
-    <string name="fragment_addmedicamento_hint_comienzoMed">"(ej. 26-03-2018, DD-MM-AÑO)"</string>
-    <string name="fragment_addmedicamento_hint_terminoMed">"(ej. 04-12-2018, DD-MM-AÑO)"</string>
+    <string name="fragment_addmedicamento_hint_comienzoMed">"(ej. 26-03-2018, DD-MM-AAAA)"</string>
+    <string name="fragment_addmedicamento_hint_terminoMed">"(ej. 04-12-2018, DD-MM-AAAA)"</string>
     <string name="fragment_addmedicamento_lunes">"Lunes"</string>
     <string name="fragment_addmedicamento_martes">"Martes"</string>
     <string name="fragment_addmedicamento_miercoles">"Miércoles"</string>
@@ -67,12 +67,25 @@
     <string name="fragment_addevento_hint_semanas">"(ej. 2)"</string>
     <string name="fragment_addevento_registrar">"Registrar evento"</string>
 
-    <string name="row_evento_nombre">"Nombre del evento"</string>
-    <string name="row_evento_descripcion">"Descripción"</string>
+    <string name="row_evento_nombre">"Nombre del evento: "</string>
+    <string name="row_evento_descripcion">"Descripción: "</string>
 
-    <string name="fragment_eventozoom_fecha">"Fecha"</string>
-    <string name="fragment_eventozoom_tipo">"Tipo"</string>
+    <string name="row_cumpleano_nombre">"Cumpleañero: "</string>
+    <string name="row_cumpleano_telefono">"Teléfono: "</string>
+
+    <string name="fragment_eventozoom_fecha">"Fecha: "</string>
+    <string name="fragment_eventozoom_tipo">"Tipo: "</string>
     <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
+
+    <string name="fragment_listcumpleanos_vacio">"No hay más cumpleaños registrados."</string>
+    <string name="fragment_listeventos_vacio">"No hay más eventos registrados."</string>
+
+    <string name="fragment_cumpleanozoom_fecha">"Fecha: "</string>
+
+    <string name="fragment_addcumple_hint_nombre">"Ingrese el nombre del cumpleañero."</string>
+    <string name="fragment_addcumple_add">"Registrar cumpleaños"</string>
+    <string name="fragment_addcumple_telefono_hint">"Ingrese el teléfono del cumpleañero."</string>
+    <string name="fragment_addcumple_telefono">"Teléfono:"</string>
 
     <string name="channel_name">"MiCanal"</string>
     <string name="channel_description">"Este es mi canal"</string>

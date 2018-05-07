@@ -2,8 +2,8 @@ package itesm.mx.saludintegral.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,16 +18,17 @@ import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
 
 /**
- * Created by FernandoDavid on 03/05/2018.
+ * Created by FernandoDavid on 06/05/2018.
  */
 
-public class FragmentoMenuCognicion extends ListFragment implements AdapterView.OnItemClickListener {
+public class FragmentoFamiliaAmigos extends ListFragment implements AdapterView.OnItemClickListener {
     View view;
     private MenuItemAdapter menuItemAdapter;
     private ArrayList<MenuItem> menuItems;
     OnSelectedListener mCallback;
+    String strFiltro;
 
-    public FragmentoMenuCognicion() {
+    public FragmentoFamiliaAmigos() {
         // Required empty public constructor
     }
 
@@ -35,7 +36,11 @@ public class FragmentoMenuCognicion extends ListFragment implements AdapterView.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragmento_menu_cognicion, container, false);
+        view = inflater.inflate(R.layout.fragmento_menu_familia_amigos, container, false);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            strFiltro = bundle.getString("filtro");
+        }
         menuItems = getItems();
         menuItemAdapter = new MenuItemAdapter(getActivity(), menuItems);
         setListAdapter(menuItemAdapter);
@@ -52,21 +57,44 @@ public class FragmentoMenuCognicion extends ListFragment implements AdapterView.
     }
 
     ArrayList<MenuItem> getItems(){
-        ArrayList<MenuItem> Aux=new ArrayList<>();
-        MenuItem menuItem=new MenuItem("Actividades", R.drawable.medicina_icon);
+        ArrayList<MenuItem> Aux = new ArrayList<>();
+        MenuItem menuItem = new MenuItem("Evento", R.drawable.medicina_icon);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Finanzas", R.drawable.ic_launcher_background);
+        menuItem = new MenuItem("Cumpleaños", R.drawable.ic_launcher_background);
         Aux.add(menuItem);
         return Aux;
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mCallback.onSelected(position);
+        // strFiltro == Familia
+        if(strFiltro.equals("Familia")) {
+            if(position == 0) {
+                // Familia/Evento
+                mCallback.onSelected(0);
+            }
+            else
+            {
+                // Familia/Cumpleaños
+                mCallback.onSelected(1);
+            }
+        }
+        else //strFiltro == Amigos
+        {
+            if(position == 0) {
+                // Amigos/Evento
+                mCallback.onSelected(2);
+            }
+            else
+            {
+                // Amigos/Cumpleaños
+                mCallback.onSelected(3);
+            }
+        }
     }
 
     public interface OnSelectedListener {
-        public void onSelected(int i);
+        public void onSelected(int iPos);
     }
 
     @Override
@@ -86,7 +114,4 @@ public class FragmentoMenuCognicion extends ListFragment implements AdapterView.
             }
         }
     }
-
-
-
 }
