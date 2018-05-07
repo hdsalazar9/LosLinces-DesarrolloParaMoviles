@@ -114,7 +114,6 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
                 android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento);
                 transaction.addToBackStack(null);
-
                 transaction.commit();
                 break;
             case 1:
