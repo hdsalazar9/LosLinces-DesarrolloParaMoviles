@@ -107,6 +107,102 @@ public class EventoOperations {
         return listaEventos;
     }
 
+    public ArrayList<Evento> getAllEventosTypeSalud(){
+        ArrayList<Evento> listaEventos = new ArrayList<>();
+        String query = "SELECT * FROM " + DataBaseSchema.EventosTable.TABLE_NAME + " WHERE "+
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + Miscellaneous.tipos[3]+ "'";
+        try{
+            Cursor cursor=db.rawQuery(query,null);
+            if(cursor.moveToFirst()){
+                do{
+                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
+                    evento=new Evento(cursor.getInt(0),cursor.getString(1),
+                            cursor.getString(2),dateC, cursor.getString(4));
+                    listaEventos.add(evento);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLException e)
+        {
+            Log.e("SQLList", e.toString());
+        }
+        return listaEventos;
+    }
+
+    public ArrayList<Evento> getAllEventosTypeEspiritual(){
+        ArrayList<Evento> listaEventos = new ArrayList<>();
+        String query = "SELECT * FROM " + DataBaseSchema.EventosTable.TABLE_NAME + " WHERE "+
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + Miscellaneous.tipos[0]+ "'";
+        try{
+            Cursor cursor=db.rawQuery(query,null);
+            if(cursor.moveToFirst()){
+                do{
+                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
+                    evento=new Evento(cursor.getInt(0),cursor.getString(1),
+                            cursor.getString(2),dateC, cursor.getString(4));
+                    listaEventos.add(evento);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLException e)
+        {
+            Log.e("SQLList", e.toString());
+        }
+        return listaEventos;
+    }
+
+    public ArrayList<Evento> getAllEventosTypeSocial(){
+        ArrayList<Evento> listaEventos = new ArrayList<>();
+        String query = "SELECT * FROM " + DataBaseSchema.EventosTable.TABLE_NAME + " WHERE "+
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + Miscellaneous.tipos[5]+ "' OR "+
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + Miscellaneous.tipos[7]+ "'";
+        try{
+            Cursor cursor=db.rawQuery(query,null);
+            if(cursor.moveToFirst()){
+                do{
+                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
+                    evento=new Evento(cursor.getInt(0),cursor.getString(1),
+                            cursor.getString(2),dateC, cursor.getString(4));
+                    listaEventos.add(evento);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLException e)
+        {
+            Log.e("SQLList", e.toString());
+        }
+        return listaEventos;
+    }
+
+    public ArrayList<Evento> getAllEventosTypeCognicion(){
+        ArrayList<Evento> listaEventos = new ArrayList<>();
+        String query = "SELECT * FROM " + DataBaseSchema.EventosTable.TABLE_NAME + " WHERE "+
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + Miscellaneous.tipos[1]+ "' OR "+
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + Miscellaneous.tipos[2]+ "'";
+        try{
+            Cursor cursor=db.rawQuery(query,null);
+            if(cursor.moveToFirst()){
+                do{
+                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
+                    evento=new Evento(cursor.getInt(0),cursor.getString(1),
+                            cursor.getString(2),dateC, cursor.getString(4));
+                    listaEventos.add(evento);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLException e)
+        {
+            Log.e("SQLList", e.toString());
+        }
+        return listaEventos;
+    }
+
+
+
     public ArrayList<Evento> getAllProductsFromMonthAndType(Integer iMonth, String sType){
         StringBuilder stringBuilder = new StringBuilder();
         if(iMonth < 10){
@@ -172,7 +268,6 @@ public class EventoOperations {
         ArrayList<Evento> listaEventosDelDia = new ArrayList<Evento>();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Log.d("QUERY",""+date);
-        String strFecha = dateFormat.format(date);
 
         String query = "SELECT * FROM "+ DataBaseSchema.EventosTable.TABLE_NAME +
                 " WHERE " + DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " = '" + dateFormat.format(date) + "' AND " +

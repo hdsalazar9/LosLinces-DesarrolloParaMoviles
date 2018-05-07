@@ -58,7 +58,7 @@ public class BitacoraEventoFragment extends Fragment implements View.OnClickList
         lvEventos.setAdapter(eventAdapter);
 
         btnTodo.setOnClickListener(this);
-        btnSocial.setOnClickListener(this);
+        btnSalud.setOnClickListener(this);
         btnSocial.setOnClickListener(this);
         btnCognicion.setOnClickListener(this);
         btnEspiritual.setOnClickListener(this);
@@ -75,6 +75,7 @@ public class BitacoraEventoFragment extends Fragment implements View.OnClickList
                     sFiltro = "Todo";
                     eventList = evoOp.getAllProducts();
                     Collections.sort(eventList, new Evento());
+                    eventAdapter.notifyDataSetChanged();
                     eventAdapter = new BitacoraEventoAdapter(getContext(),eventList);
                     lvEventos.setAdapter(eventAdapter);
                 }
@@ -82,17 +83,40 @@ public class BitacoraEventoFragment extends Fragment implements View.OnClickList
             case R.id.btn_bitacora_salud:
                 if(!sFiltro.equals("Salud")){
                     sFiltro = "Salud";
-                    //TODO:
-
+                    eventList = evoOp.getAllEventosTypeSalud();
+                    Collections.sort(eventList, new Evento());
+                    eventAdapter = new BitacoraEventoAdapter(getContext(),eventList);
+                    lvEventos.setAdapter(eventAdapter);
                 }
                 break;
             case R.id.btn_bitacora_social:
+                if(!sFiltro.equals("Social")){
+                    sFiltro = "Social";
+                    eventList = evoOp.getAllEventosTypeSocial();
+                    Collections.sort(eventList, new Evento());
+                    eventAdapter = new BitacoraEventoAdapter(getContext(),eventList);
+                    lvEventos.setAdapter(eventAdapter);
+                }
 
                 break;
             case R.id.btn_bitacora_cognicion:
+                if(!sFiltro.equals("Cognicion")){
+                    sFiltro = "Cognicion";
+                    eventList = evoOp.getAllEventosTypeCognicion();
+                    Collections.sort(eventList, new Evento());
+                    eventAdapter = new BitacoraEventoAdapter(getContext(),eventList);
+                    lvEventos.setAdapter(eventAdapter);
+                }
 
                 break;
             case R.id.btn_bitacora_espiritual:
+                if(!sFiltro.equals("Espiritual")){
+                    sFiltro = "Espiritual";
+                    eventList = evoOp.getAllEventosTypeEspiritual();
+                    Collections.sort(eventList, new Evento());
+                    eventAdapter = new BitacoraEventoAdapter(getContext(),eventList);
+                    lvEventos.setAdapter(eventAdapter);
+                }
 
                 break;
         }
