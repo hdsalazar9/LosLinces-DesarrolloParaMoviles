@@ -29,8 +29,8 @@ public class HistorialMedicFragment extends Fragment {
     MedicamentoOperations medOp;
     ListView lvMed;
 
-    ArrayList<HistorialMedicamentoItem> histMedItems;
     ArrayAdapter<HistorialMedicamentoItem> histMedAdapter;
+    ArrayList<HistorialMedicamentoItem> histMedItems;
     ArrayList<TomarMedicamento> tomMedArr;
     ArrayList<Medicamento> medArr;
 
@@ -40,7 +40,7 @@ public class HistorialMedicFragment extends Fragment {
 
         lvMed = rootView.findViewById(R.id.lv_fragment_historialmed);
 
-        //Abrir BD y obtener lista de medicametnos y eventos de tomar medicamento
+        //Abrir BD y obtener lista de medicamentos y eventos de tomar medicamento
         tomMedOp = new TomarMedicamentoOperations(getContext());
         medOp = new MedicamentoOperations(getContext());
 
