@@ -64,18 +64,35 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
     };
 
     public void pintarDiasDeEventos(Integer intMesABuscar){
-        ColorDrawable green = new ColorDrawable(Color.GREEN);
+        ColorDrawable colorDrawable = new ColorDrawable();
+        if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorEspiritual));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorEjercicio));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorFinanzas));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSalud));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[4])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSocial));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[5])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSocial));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[6])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSocial));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[7])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSocial));
+        }
 
         if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[4]) || Miscellaneous.strTipo.equals(Miscellaneous.tipos[6])) {
             ArrayList<Cumpleano> arregloCumpleanosDelMes = dao2.getAllProductsFromMonthAndType(intMesABuscar,Miscellaneous.strTipo);
             for(Cumpleano cu : arregloCumpleanosDelMes) {
-                Miscellaneous.mapFechaFondo.put(cu.getFecha(),green);
+                Miscellaneous.mapFechaFondo.put(cu.getFecha(),colorDrawable);
             }
         }
         else {
             ArrayList<Evento> arregloEventosDelMes = dao.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
             for (Evento ev : arregloEventosDelMes) {
-                Miscellaneous.mapFechaFondo.put(ev.getFecha(), green);
+                Miscellaneous.mapFechaFondo.put(ev.getFecha(), colorDrawable);
             }
         }
         caldroidFragment.setBackgroundDrawableForDates(Miscellaneous.mapFechaFondo);
