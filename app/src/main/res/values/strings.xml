@@ -117,5 +117,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="PerfilMonitoreo">Monitoreo sueño</string>
+    <string name="fragment_monitoreo_fecha">Fecha registrada:</string>
+    <string name="fragment_monitoreo_horas">Horas de sueño:</string>
 
 </resources>

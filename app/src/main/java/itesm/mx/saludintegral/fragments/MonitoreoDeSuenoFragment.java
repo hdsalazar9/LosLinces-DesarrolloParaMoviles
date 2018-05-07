@@ -95,6 +95,6 @@ public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickLi
         monitoreoSueno = new MonitoreoSueno(n,dateC,Double.parseDouble(etHorasSueno.getText().toString()));
         n= dao.addEvento(monitoreoSueno);
         monitoreoSueno.setId(n);
-        Toast.makeText(getContext(), "Evento añadido", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Correctamente registrado", Toast.LENGTH_SHORT).show();
     }
 }
