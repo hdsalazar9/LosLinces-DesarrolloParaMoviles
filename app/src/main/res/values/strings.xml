@@ -84,5 +84,8 @@
     <string name="fragment_perfil_apellido">Apellido:</string>
     <string name="fragment_perfil_nombre">Nombre:</string>
     <string name="fragment_perfil_botonFoto">Nueva foto</string>
+    <string name="fragment_historial_nombremed">Nombre del medicamento:</string>
+    <string name="fragment_historial_fecha">Fecha de ingesta:</string>
+    <string name="fragment_historial_atiempo">Tomado a tiempo:</string>
 
 </resources>

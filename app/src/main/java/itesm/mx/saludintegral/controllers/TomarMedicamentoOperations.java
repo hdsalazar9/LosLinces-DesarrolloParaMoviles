@@ -46,7 +46,6 @@ public class TomarMedicamentoOperations {
             values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_ID_MEDICAMENTO, tomarMedicamento.getIdMedicamento());
             values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_TOMADOATIEMPO, String.valueOf(tomarMedicamento.getTomadoATiempo()));
 
-            //TODO:
             DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
             String fechaTomado = df.format(tomarMedicamento.getFechaHora());
 
@@ -93,6 +92,36 @@ public class TomarMedicamentoOperations {
     public ArrayList<TomarMedicamento> getAllProducts(){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
         String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
+        try {
+            Cursor cursor=db.rawQuery(query,null);
+            if(cursor.moveToFirst()){
+                do{
+                    Date dateC=null;
+                    boolean b = cursor.getString(2).equals("true");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    try {
+                        dateC= dateFormat.parse(cursor.getString(3));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    tomarMedicamento=new TomarMedicamento(cursor.getInt(0),cursor.getInt(1),
+                            b,dateC);
+                    listaTomatMedicamento.add(tomarMedicamento);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLException e)
+        {
+            Log.e("SQLList", e.toString());
+        }
+        return listaTomatMedicamento;
+    }
+
+    public ArrayList<TomarMedicamento> getAllTomarMedicamentoFrom(String medicamentoID){
+        ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
+        String query="SELECT * FROM "+DataBaseSchema.TomarMedicamentoTable.TABLE_NAME +" WHERE "+DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_ID_MEDICAMENTO+
+                " =  \""+medicamentoID+"\"";
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){

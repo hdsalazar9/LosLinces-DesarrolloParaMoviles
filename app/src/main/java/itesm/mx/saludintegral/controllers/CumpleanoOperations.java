@@ -110,10 +110,12 @@ public class CumpleanoOperations {
         try{
             Cursor cursor = db.rawQuery(query,null);
             if(cursor.moveToFirst()){
-                int id= Integer.parseInt(cursor.getString(0));
-                db.delete(DataBaseSchema.CumpleanosTable.TABLE_NAME, DataBaseSchema.CumpleanosTable._ID+" = ?",
-                        new String[]{String.valueOf(id)});
-                result = true;
+                do {
+                    int id = Integer.parseInt(cursor.getString(0));
+                    db.delete(DataBaseSchema.CumpleanosTable.TABLE_NAME, DataBaseSchema.CumpleanosTable._ID + " = ?",
+                            new String[]{String.valueOf(id)});
+                    result = true;
+                } while(cursor.moveToNext());
             }
             cursor.close();
         }

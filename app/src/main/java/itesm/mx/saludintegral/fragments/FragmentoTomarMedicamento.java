@@ -61,8 +61,6 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
                 tvNombre.setText("Nombre: "+medicamento.getNombre());
                 tvTiempo.setText("Tiempo: "+MedicamentoAdapter.getTimeLeft(medicamento.getHora().toString(), medicamento.getCadaCuanto()));
                 tvPeriodo.setText("Periodo: "+String.valueOf(medicamento.getCadaCuanto()));
-
-
         }
         return view;
     }
