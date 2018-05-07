@@ -53,7 +53,11 @@ public class MedicamentoAdapter extends ArrayAdapter<Medicamento> {
         /*Date l=medicamento.getFechaComienzo();
         Toast.makeText(getContext(), l.toString(), Toast.LENGTH_SHORT).show();
 **/
-        tvConsumo.setText("Faltan: "+getTimeTo(medicamento.getHora().toString(),medicamento.getCadaCuanto(), medicamento.getFechaComienzo(), tomarMedicamento));
+        String sTiempo=getTimeTo(medicamento.getHora().toString(),medicamento.getCadaCuanto(), medicamento.getFechaComienzo(), tomarMedicamento);
+        if(!sTiempo.equals("Retraso"))
+            tvConsumo.setText("Faltan: "+sTiempo);
+        else
+            tvConsumo.setText(sTiempo);
         byte[] image=medicamento.getFoto();
         if(image!=null)
         {
@@ -146,59 +150,113 @@ public class MedicamentoAdapter extends ArrayAdapter<Medicamento> {
                     }
                     else resultado="Retraso";
                 }
-                else if(iMinAct==iMinInicial&&!yaTomado(tomarMedicamento, iHoraInicial, iMinInicial,dateActual,cadaCuanto,dateInicio))
-                resultado="Retraso";
-                else
+                else if((yaTomado(tomarMedicamento, iHoraInicial, iMinInicial,dateActual,cadaCuanto,dateInicio))){
+                   double i=(cadaCuanto*60-60)+Math.abs(iMinAct-60)+iMinInicial;
+                   resultado = String.valueOf((int)Math.floor(i/60)) + ":" + getMinutos((int)(i%60)) + " Horas";
+               }
+               else
                     resultado="00:00";
             }
             return resultado;
         }
 
-        /*while(iHoraAct>iHoraInicial+cadaCuanto){
-            iHoraInicial=iHoraInicial+cadaCuanto;
+
+        long difAct=((dateActual.getTimeInMillis()-dateInicio.getTimeInMillis())/(60*1000))-iHoraInicial*60-iMinInicial;
+        long horaPuntual=difAct%(cadaCuanto*60);
+        double dHoras;
+        if(horaPuntual>Math.round(cadaCuanto*60/2)){
+            horaPuntual=difAct+(cadaCuanto*60-horaPuntual);
         }
-        String sHora=(iHoraInicial+cadaCuanto)-iHoraAct<10?"0"+String.valueOf((iHoraInicial+cadaCuanto)-iHoraAct):String.valueOf((iHoraInicial+cadaCuanto)-iHoraAct);
-        resultado=sHora+":"+String.valueOf(iMinInicial-iMinAct);*/
-        TomarMedicamento ultimoTomado=tomarMedicamento.get(tomarMedicamento.size()-1);
-        Calendar dateTomado=Calendar.getInstance();
-        dateTomado.setTime(ultimoTomado.getFechaHora());
-        if(!yaTomado(tomarMedicamento, iHoraInicial, iMinInicial,dateActual,cadaCuanto,dateInicio)){
-            if(dateTomado.getTimeInMillis()<dateActual.getTimeInMillis()){
-                
-            }
-            else
-            return "Retraso";
+        else{
+            horaPuntual=difAct-horaPuntual;
         }
-        long iDif=(dateActual.getTimeInMillis()-dateInicio.getTimeInMillis())/(60*1000)+iMinInicial+iHoraInicial*60;
+        switch (yaTomado2(tomarMedicamento, iHoraInicial, iMinInicial,dateActual,cadaCuanto,dateInicio)){
+            case 0:         //Retraso
+                resultado="Retraso";
+                break;
+            case 1:         //No se ha tomado la siguiente inmediata
+                horaPuntual=(horaPuntual%1440)+iHoraInicial*60+iMinInicial;
+                horaPuntual=horaPuntual-(iMinAct+iHoraAct*60);
+                dHoras=Math.floor(horaPuntual/60);
+                resultado=(int)dHoras+":"+getMinutos((int)(horaPuntual%60))+" Horas";
+                break;
+            case 2:         //Ya se tomó la siguiente inmediata, calcular la siguiente
+                horaPuntual=horaPuntual+cadaCuanto*60;
+                horaPuntual=(horaPuntual%1440)+iHoraInicial*60+iMinInicial;
+                horaPuntual=horaPuntual-(iMinAct+iHoraAct*60);
+                dHoras=Math.floor(horaPuntual/60);
+                resultado=(int)dHoras+":"+getMinutos((int)(horaPuntual%60))+" Horas";
+                break;
+            case 3:         //Calcular la siguiente siguiente inmediata
+                horaPuntual=horaPuntual+cadaCuanto*60;
+                horaPuntual=(horaPuntual%1440)+iHoraInicial*60+iMinInicial;
+                horaPuntual=horaPuntual-(iMinAct+iHoraAct*60);
+                dHoras=Math.floor(horaPuntual/60);
+                resultado=(int)dHoras+":"+getMinutos((int)(horaPuntual%60))+" Horas";
+                break;
+        }
+       /* long iDif=(dateActual.getTimeInMillis()-dateInicio.getTimeInMillis())/(60*1000)+iMinInicial+iHoraInicial*60;
         long i= cadaCuanto*60-(iDif%(60*cadaCuanto))+10;
         double dHoras=Math.floor(i/60);
 
-        resultado=(int)dHoras+":"+getMinutos((int)(i%60))+" Horas";
+        resultado=(int)dHoras+":"+getMinutos((int)(i%60))+" Horas";*/
         return resultado;
     }
 
     public static boolean yaTomado(ArrayList<TomarMedicamento>  tomarMedicamento, int iHoraInicial, int iMinInicial, Calendar dateActual, int cadaCuanto, Calendar dateInicio){
         TomarMedicamento ultimoTomado;
-        try {
-            ultimoTomado=tomarMedicamento.get(tomarMedicamento.size()-1);
-        }
-        catch (Exception e)
-        {
+        if(tomarMedicamento.size()<1)
             return false;
-        }
+        ultimoTomado=tomarMedicamento.get(tomarMedicamento.size()-1);
+
         Calendar dateTomado=Calendar.getInstance();
         dateTomado.setTime(ultimoTomado.getFechaHora());
 
         long iTomadoMin=(dateTomado.getTimeInMillis()-dateInicio.getTimeInMillis())/(60*1000)+iMinInicial+iHoraInicial*60;
         long iDif=(dateActual.getTimeInMillis()-dateInicio.getTimeInMillis())/(60*1000)+iMinInicial+iHoraInicial*60;
         long i= iDif%(60*cadaCuanto);
-        if(i>Math.round(cadaCuanto*60/2)&&dateTomado.getTimeInMillis()<dateActual.getTimeInMillis()){//Checar si está en un nuevo bloque y que no hay ingerido ya la pastilla
+        /*if(i>Math.round(cadaCuanto*60/2)&&dateTomado.getTimeInMillis()<dateActual.getTimeInMillis()){//Checar si está en un nuevo bloque y que no hay ingerido ya la pastilla
             return true;
         }
         else if(i<Math.round(cadaCuanto*60/2)&&iDif-Math.round(cadaCuanto*60/2)-i<iTomadoMin){//Checar que no se haya tomado en su bloque, solo si no ha cruzado al otro bloque
             return true;
+        }*/
+        if(iDif-iTomadoMin<cadaCuanto*60)
+            return true;
+        return false;
+    }
+
+    public static int yaTomado2(ArrayList<TomarMedicamento>  tomarMedicamento, int iHoraInicial, int iMinInicial, Calendar dateActual, int cadaCuanto, Calendar dateInicio) {
+        TomarMedicamento ultimoTomado;
+        if(tomarMedicamento.size()<1)
+            return 0;
+        ultimoTomado=tomarMedicamento.get(tomarMedicamento.size()-1);
+        Calendar dateTomado=Calendar.getInstance();
+        dateTomado.setTime(ultimoTomado.getFechaHora());
+        long difAct=((dateActual.getTimeInMillis()-dateInicio.getTimeInMillis())/(60*1000))-iHoraInicial*60-iMinInicial;
+        long difTomado=((dateTomado.getTimeInMillis()-dateInicio.getTimeInMillis())/(60*1000))-iHoraInicial*60-iMinInicial;
+        long horaPuntual=difAct%(cadaCuanto*60);
+        if(horaPuntual>Math.round(cadaCuanto*60/2)){
+            horaPuntual=difAct+(cadaCuanto*60-horaPuntual);
         }
-        return false;////////////////////TEST CAMBIAR OTRAVEZ  A FALSEEEEEEEEEEEEEEE
+        else{
+            horaPuntual=difAct-horaPuntual;
+        }
+        if(difAct<horaPuntual){
+            if(difTomado<horaPuntual-Math.round(cadaCuanto*60/2)){  //Calcula hora inmediata, no hay medicameto tomado actualmente
+                return 1;
+            }
+            else{
+                return 2;
+            }
+        }
+        else if(difTomado<horaPuntual-Math.round(cadaCuanto*60/2)){
+            return 0;
+        }
+        else{
+            return 3;
+        }
+
     }
 
     public static String getMinutos(int iMinutos){

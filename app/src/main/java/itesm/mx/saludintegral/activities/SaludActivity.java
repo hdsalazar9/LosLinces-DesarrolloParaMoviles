@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.fragments.AddMedicamentoFragment;
+import itesm.mx.saludintegral.fragments.AlimentacionFragment;
 import itesm.mx.saludintegral.fragments.CalendarioFragment;
 import itesm.mx.saludintegral.fragments.EventoDisplayFragment;
 import itesm.mx.saludintegral.fragments.EventoZoomFragment;
@@ -62,6 +63,8 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
                 changeFragmentHabilitaBack(monitoreoDeSuenoFragment);
                 break;
             case 2:
+                AlimentacionFragment alimentacionFragment=new AlimentacionFragment();
+                changeFragmentHabilitaBack(alimentacionFragment);
                 break;
             case 3:
                 Miscellaneous.strTipo = Miscellaneous.tipos[3];
@@ -124,10 +127,7 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
         FragmentManager fm = this.getSupportFragmentManager();
         fm.popBackStack();
         FragmentoMedicamento fragmentoMedicamento=new FragmentoMedicamento();
-        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        changeFragmentHabilitaBack(fragmentoMedicamento);
     }
 
     public void onResponseAgregar(){//Cierra el fragmento de agregar medicamento y lo reemplaza por la lista de medicamentos
@@ -151,4 +151,9 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    /*public void onResponseAlimentacion(){
+        FragmentoMenuSalud fragmentoMenuSalud=new FragmentoMenuSalud();
+        changeFragmentHabilitaBack(fragmentoMenuSalud);
+    }*/
 }

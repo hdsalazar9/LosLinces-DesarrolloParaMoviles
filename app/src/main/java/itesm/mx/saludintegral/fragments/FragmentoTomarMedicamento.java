@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import itesm.mx.saludintegral.controllers.MedicamentoOperations;
 import itesm.mx.saludintegral.controllers.TomarMedicamentoOperations;
 import itesm.mx.saludintegral.models.Medicamento;
 import itesm.mx.saludintegral.models.TomarMedicamento;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 
 /**
@@ -36,7 +38,8 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     MedicamentoOperations dao2;
     Medicamento medicamento;
     OnResponseTomar mCallback;
-    TextView tvNombre, /*tvTiempo,*/ tvPeriodo;
+    TextView tvNombre, tvCadaCuanto, tvGramaje, tvFechaComienzo, tvADComer, tvCantidad, tvFaltan;
+    ImageView ivImagenMed;
     Button btnAgregar, btnBorrar;
     public FragmentoTomarMedicamento() {
         // Required empty public constructor
@@ -53,17 +56,36 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
         dao2 = new MedicamentoOperations(getContext());
         dao2.open();
         tvNombre=(TextView) view.findViewById(R.id.textView_nombre);
-        //tvTiempo=(TextView)view.findViewById(R.id.textView_tiempo);
-        tvPeriodo=(TextView)view.findViewById(R.id.textView_periodo);
+        tvCadaCuanto=(TextView)view.findViewById(R.id.textView_cadaCuanto);
+        tvFaltan=(TextView)view.findViewById(R.id.textView_faltan);
+        tvGramaje=(TextView)view.findViewById(R.id.textView_gramaje);
+        tvFechaComienzo=(TextView)view.findViewById(R.id.textView_fecha);
+        tvADComer=(TextView)view.findViewById(R.id.textView_adComer);
+        tvCantidad=(TextView)view.findViewById(R.id.textView_cantidad);
         btnAgregar=(Button)view.findViewById(R.id.button_ingerido);
         btnBorrar=(Button)view.findViewById(R.id.button_borrar);
+        ivImagenMed=(ImageView)view.findViewById(R.id.imageView_medicamento);
         Bundle args = getArguments();
         medicamento=new Medicamento();
         if(args != null) {
             medicamento =(Medicamento) Parcels.unwrap(args.getParcelable("medicamento"));
                 tvNombre.setText("Nombre: "+medicamento.getNombre());
-                //tvTiempo.setText("Tiempo: "+MedicamentoAdapter.getTimeLeft(medicamento.getHora().toString(), medicamento.getCadaCuanto()));
-               // tvPeriodo.setText("Periodo: "+medicamento.getFechaComienzo().toString());//String.valueOf(medicamento.getCadaCuanto()));
+                String sCada=medicamento.getCadaCuanto()>1?" Horas":" Hora";
+                tvCadaCuanto.setText("Cada: "+String.valueOf(medicamento.getCadaCuanto())+ sCada);
+                ArrayList<TomarMedicamento>  tomarMedicamento=dao.getAllTomarMedicamentoFrom(String.valueOf(medicamento.getId()));
+                String sFalta=MedicamentoAdapter.getTimeTo(medicamento.getHora().toString(),medicamento.getCadaCuanto(), medicamento.getFechaComienzo(), tomarMedicamento);
+                if(!sFalta.equals("Retraso")){
+                    sFalta="Faltan: "+sFalta;
+                    tvFaltan.setText(sFalta);
+                }
+                else
+                {
+                    tvFaltan.setText(sFalta);
+                }
+                tvGramaje.setText("Gramaje: "+String.valueOf(medicamento.getGramaje()));
+                tvFechaComienzo.setText("Comienza: "+ Miscellaneous.getStringFromDate(medicamento.getFechaComienzo()));
+                tvADComer.setText((medicamento.getAntesDespuesDeComer()?"Antes de comer":"Despues de comer"));
+                tvCantidad.setText("Cantidad: "+String.valueOf(medicamento.getCantidad()));
         }
         btnBorrar.setOnClickListener(this);
         btnAgregar.setOnClickListener(this);
