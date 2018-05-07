@@ -1,8 +1,10 @@
 package itesm.mx.saludintegral.fragments;
 
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 import itesm.mx.saludintegral.R;
@@ -78,6 +81,7 @@ public class AddCumpleanosFragment extends Fragment implements View.OnClickListe
         String strFecha = etFecha.getText().toString();
         String strTipo = etTipo.getText().toString();
         String strTel = etTelefono.getText().toString();
+        Calendar calendar = Calendar.getInstance();
 
         if (strNombre.length() == 0) {
             Toast.makeText(getContext(), "Ingresar nombre", Toast.LENGTH_SHORT).show();
@@ -95,10 +99,19 @@ public class AddCumpleanosFragment extends Fragment implements View.OnClickListe
         }
 
         Date dateFecha = Miscellaneous.getDateFromString(strFecha);
-        long l = 0;
-        Cumpleano cumpleano = new Cumpleano(l, strNombre, dateFecha, strTipo, strTel);
-        long id = dao.addEvento(cumpleano);
-        cumpleano.setId(id);
+        int iVeces = 10;
+        do {
+            Log.d("ADDCUMPLEAÑO", "dateFecha: " + dateFecha);
+            long l = 0;
+            Cumpleano cumpleano = new Cumpleano(l, strNombre, dateFecha, strTipo, strTel);
+            long id = dao.addEvento(cumpleano);
+            cumpleano.setId(id);
+            calendar.setTime(dateFecha);
+            calendar.add(Calendar.YEAR,1);
+            dateFecha = calendar.getTime();
+            iVeces--;
+        } while (iVeces >= 0);
+        Toast.makeText(getContext(), "Cumpleaños registrado", Toast.LENGTH_SHORT).show();
         getActivity().onBackPressed();
     }
 

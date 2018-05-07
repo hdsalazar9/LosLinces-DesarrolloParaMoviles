@@ -122,8 +122,6 @@ public class CumpleanoOperations {
                 " WHERE " + DataBaseSchema.CumpleanosTable.COLUMN_NAME_FECHA + " LIKE '___" + sMonth + "%' AND " +
                 DataBaseSchema.CumpleanosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
 
-        Log.d("QUERY",query);
-
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
@@ -132,11 +130,6 @@ public class CumpleanoOperations {
                     cumpleano=new Cumpleano(cursor.getInt(0),cursor.getString(1),
                             dateC, cursor.getString(3), cursor.getString(4));
                     listaCumpleanos.add(cumpleano);
-                    Log.d("QUERY","NOMBRE: " + cumpleano.getNombre());
-                    Log.d("QUERY","FECHA: " + cumpleano.getFecha());
-                    Log.d("QUERY","TIPO: " + cumpleano.getTipo());
-                    Log.d("QUERY","TELEFONO: " + cumpleano.getTelefono());
-
                 }while (cursor.moveToNext());
             }
             cursor.close();
@@ -153,19 +146,19 @@ public class CumpleanoOperations {
 
 
 
-    public boolean deleteCumpleano(String personaName, Date fechaCumple){
+    public boolean deleteCumpleano(String personaName){
         boolean result = false;
         String query="SELECT * FROM "+DataBaseSchema.CumpleanosTable.TABLE_NAME+ " WHERE "+
-                DataBaseSchema.CumpleanosTable.COLUMN_NAME_NOMBRE+" = '"+personaName+"' AND " +
-                DataBaseSchema.CumpleanosTable.COLUMN_NAME_FECHA + " = '" + Miscellaneous.getStringFromDate(fechaCumple) +
-                "'";
+                DataBaseSchema.CumpleanosTable.COLUMN_NAME_NOMBRE+" = '"+personaName+"'";
         try{
             Cursor cursor = db.rawQuery(query,null);
             if(cursor.moveToFirst()){
-                int id= Integer.parseInt(cursor.getString(0));
-                db.delete(DataBaseSchema.CumpleanosTable.TABLE_NAME, DataBaseSchema.CumpleanosTable._ID+" = ?",
-                        new String[]{String.valueOf(id)});
-                result = true;
+                do {
+                    int id = Integer.parseInt(cursor.getString(0));
+                    db.delete(DataBaseSchema.CumpleanosTable.TABLE_NAME, DataBaseSchema.CumpleanosTable._ID + " = ?",
+                            new String[]{String.valueOf(id)});
+                    result = true;
+                } while(cursor.moveToNext());
             }
             cursor.close();
         }

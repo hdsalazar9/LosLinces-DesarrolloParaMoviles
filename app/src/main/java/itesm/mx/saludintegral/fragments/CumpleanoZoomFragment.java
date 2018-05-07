@@ -92,7 +92,7 @@ public class CumpleanoZoomFragment extends Fragment implements View.OnClickListe
     }
 
     public void removeCumpeleano() {
-        dao.deleteCumpleano(cumpleano.getNombre(),cumpleano.getFecha());
+        dao.deleteCumpleano(cumpleano.getNombre());
     }
 
     @Override
