@@ -9,14 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:backgroundTint="@color/background_addmedicamento">
+        android:backgroundTint="@color/background_listasalud">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:background="@color/background_addmedicamento"
+            android:background="@color/background_listasalud"
             android:orientation="vertical">
 
             <LinearLayout
@@ -37,9 +37,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/background_addFoto_addmedicamento"
+                    android:background="@android:color/white"
+                    android:backgroundTint="@android:color/white"
                     android:text="@string/fragment_addmedicamento_fotoMed"
-                    android:textSize="30sp" />
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:textColor="@color/background_listasalud"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -52,6 +57,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/fragment_addmedicamento_nombreMed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -64,10 +70,10 @@
 
                 android:hint="@string/fragment_addmedicamento_hint_nombreMed"
                 android:inputType="textPersonName"
-                android:textColor="@android:color/black"
-                android:textColorHint="?attr/colorBackgroundFloating"
+                android:textColor="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:textColorHint="@android:color/white"/>
 
 
             <TextView
@@ -78,6 +84,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/fragment_addmedicamento_gramajeMed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -90,10 +97,10 @@
 
                 android:hint="@string/fragment_addmedicamento_hint_gramajeMed"
                 android:inputType="numberDecimal"
-                android:textColor="@android:color/black"
-                android:textColorHint="?attr/colorBackgroundFloating"
+                android:textColor="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:textColorHint="@android:color/white"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -103,6 +110,7 @@
                 android:layout_weight="1"
                 android:text="@string/fragment_addmedicamento_cantidadMed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -114,10 +122,10 @@
                 android:ems="10"
                 android:hint="@string/fragment_addmedicamento_hint_cantidadMed"
                 android:inputType="number"
-                android:textColor="@android:color/black"
-                android:textColorHint="?attr/colorBackgroundFloating"
+                android:textColor="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:textColorHint="@android:color/white"/>
 
             <TextView
                 android:id="@+id/textView4"
@@ -127,6 +135,7 @@
                 android:layout_weight="1"
                 android:text="@string/fragment_addmedicamento_periodicidadMed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -137,7 +146,7 @@
                 android:buttonTint="?attr/colorBackgroundFloating"
                 android:text="@string/fragment_addmedicamento_lunes"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                android:textColor="?attr/colorBackgroundFloating"
+                android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
             <CheckBox
@@ -209,6 +218,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/fragment_addmedicamento_horaMed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -221,17 +231,21 @@
 
                 android:hint="@string/fragment_addmedicamento_hint_horaMed"
                 android:inputType="none"
-                android:textColor="@android:color/black"
-                android:textColorHint="?attr/colorBackgroundFloating"
+                android:textColor="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:textColorHint="@android:color/white"/>
 
             <Button
                 android:id="@+id/btn_horaIngesta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/getHora" />
-
+                android:background="@android:color/white"
+                android:text="@string/getHora"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@color/background_listasalud"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <TextView
@@ -242,6 +256,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/fragment_addmedicamento_cadaCuandoMed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -254,10 +269,10 @@
 
                 android:hint="@string/fragment_addmedicamento_hint_cadaCuantoMed"
                 android:inputType="number"
-                android:textColor="@android:color/black"
-                android:textColorHint="?attr/colorBackgroundFloating"
+                android:textColor="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:textColorHint="@android:color/white"/>
 
             <TextView
                 android:id="@+id/textView7"
@@ -267,6 +282,7 @@
                 android:layout_weight="1"
                 android:text="@string/fragment_addmedicamento_comienzoMed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -279,16 +295,21 @@
                 android:hint="@string/fragment_addmedicamento_hint_comienzoMed"
                 android:inputType="textPersonName"
                 android:onClick="onClick"
-                android:textColor="@android:color/black"
-                android:textColorHint="?attr/colorBackgroundFloating"
+                android:textColor="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:textColorHint="@android:color/white"/>
 
             <Button
                 android:id="@+id/btn_fechaInicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/getFecha" />
+                android:background="@android:color/white"
+                android:text="@string/getFecha"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@color/background_listasalud"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -297,6 +318,7 @@
                 android:layout_weight="1"
                 android:text="@string/fragment_addmedicamento_terminoMed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -309,8 +331,8 @@
                 android:ems="10"
                 android:hint="@string/fragment_addmedicamento_hint_terminoMed"
                 android:inputType="textPersonName"
-                android:textColor="@android:color/black"
-                android:textColorHint="?attr/colorBackgroundFloating"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
                 android:textStyle="italic" />
 
@@ -318,7 +340,12 @@
                 android:id="@+id/btn_fechaTermino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/getFecha" />
+                android:background="@android:color/white"
+                android:text="@string/getFecha"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@color/background_listasalud"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -326,6 +353,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_addmedicamento_ingerirAntesDespuesMed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -344,8 +372,9 @@
                     android:buttonTint="@android:color/black"
                     android:text="@string/fragment_addmedicamento_antes"
                     android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp" />
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radio_Despues"
@@ -355,8 +384,9 @@
                     android:buttonTint="@android:color/black"
                     android:text="@string/fragment_addmedicamento_despues"
                     android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp" />
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </RadioGroup>
 
@@ -365,9 +395,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@android:color/white"
                 android:backgroundTint="@color/background_guardar_addmedicamento"
                 android:text="@string/fragment_addmedicamento_addMed"
-                android:textSize="30sp" />
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/row_cumpleano_nombre"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_cumpleano_row_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ajedrez"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textview21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/row_cumpleano_telefono"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_cumpleano_row_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jugar con Paco"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

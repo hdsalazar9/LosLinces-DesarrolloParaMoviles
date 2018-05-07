@@ -1,10 +1,14 @@
 package itesm.mx.saludintegral.fragments;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
@@ -37,6 +41,9 @@ import itesm.mx.saludintegral.controllers.MedicamentoOperations;
 import itesm.mx.saludintegral.models.Medicamento;
 
 import itesm.mx.saludintegral.util.Miscellaneous;
+import itesm.mx.saludintegral.util.Receiver;
+
+import static java.lang.Math.toIntExact;
 
 
 import static android.app.Activity.RESULT_OK;
@@ -94,6 +101,9 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     String strHora="00:00:00";
     int iYearInicio, iMesInicio, iDiaInicio, iYearTermino, iMesTermino, iDiaTermino;
     static final int DIALOG_ID = 0;
+
+
+    private PendingIntent pendingIntent;
 
 
     public AddMedicamentoFragment() {
@@ -161,6 +171,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         etHoraIngesta.setText("00:00");
 
 
+
         return rootView;
     }
 
@@ -170,6 +181,12 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_addMed:
                 medicamento = newMedicamento();
+                Intent alarmIntent = new Intent(getContext(), Receiver.class);
+                alarmIntent.putExtra("medicina", medicamento.getNombre());
+                alarmIntent.putExtra("whereFrom", "AddMedicamento");
+                alarmIntent.putExtra("id", ((int) medicamento.getId()));
+                pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
+                start(medicamento.getCadaCuanto());
                 break;
 
             case R.id.btn_tomarFotoMed:
@@ -197,6 +214,24 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         }
     }
 
+    public void start(int horas) {
+
+        AlarmManager manager = (AlarmManager) getContext().getSystemService(getContext().ALARM_SERVICE);
+        int interval = 1000*60*horas;
+
+
+        Calendar calendar = Calendar.getInstance();
+        //calendar.set(dateInicio.getYear(), dateInicio.getMonth(), dateInicio.getDay(), timeHora.getHours(), timeHora.getMinutes());
+        calendar.setTime(dateInicio);
+
+        Log.d("Recibi", String.valueOf(calendar.getTimeInMillis()) );
+        Log.d("luego", String.valueOf(System.currentTimeMillis()));
+
+
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
+    }
+
+
     public void getHourPicked() {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "TimePicker");
@@ -213,6 +248,11 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             bitmap = (Bitmap) data.getExtras().get("data");
+
+            //Girar foto
+            Matrix matrix = new Matrix();
+            matrix.postRotate(270);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -356,6 +396,22 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
 
         return medicament;
+    }
+
+    @Override
+    public void onResume(){
+        dao.open();
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        dao.close();
+        super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
     }
 
 }

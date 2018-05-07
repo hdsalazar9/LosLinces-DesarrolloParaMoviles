@@ -5,14 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="itesm.mx.saludintegral.activities.RegistroActivity">
+    tools:context="itesm.mx.saludintegral.activities.RegistroActivity"
+    android:background="@color/caldroid_white">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFC129"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Registro"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar6"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar6"
+        app:layout_constraintStart_toStartOf="@+id/toolbar6"
+        app:layout_constraintTop_toTopOf="@+id/toolbar6" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
 
-        android:orientation="vertical">
+        android:layout_height="509dp"
+        android:background="@color/registro_header"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar6">
 
 
         <LinearLayout
@@ -31,9 +61,15 @@
                 android:id="@+id/btn_activity_registro_TomarFoto"
                 android:layout_width="wrap_content"
 
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/activity_registro_TomarFoto" />
+                android:background="#ffc107"
+                android:elevation="0dp"
+                android:text="@string/activity_registro_TomarFoto"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -48,7 +84,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
 
-                android:text="@string/activity_registro_nombre" />
+                android:text="@string/activity_registro_nombre"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <EditText
@@ -58,8 +97,10 @@
                 android:layout_weight="1"
                 android:ems="10"
 
+                android:hint="@string/activity_registro_nombre_hint"
                 android:inputType="textPersonName"
-                android:hint="@string/activity_registro_nombre_hint" />
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black" />
 
         </LinearLayout>
 
@@ -74,7 +115,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
 
-                android:text="@string/activity_registro_apodo" />
+                android:text="@string/activity_registro_apodo"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <EditText
@@ -84,8 +128,10 @@
                 android:layout_weight="1"
                 android:ems="10"
 
+                android:hint="@string/activity_registro_apodo_hint"
                 android:inputType="textPersonName"
-                android:hint="@string/activity_registro_apodo_hint" />
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black" />
 
         </LinearLayout>
 
@@ -100,7 +146,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/activity_registro_FechaNacimiento" />
+                android:text="@string/activity_registro_FechaNacimiento"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <EditText
@@ -110,9 +159,23 @@
                 android:layout_weight="1"
                 android:ems="10"
 
+                android:hint="@string/activity_registro_FechaNacimiento_hint"
                 android:inputType="textPersonName"
-                android:hint="@string/activity_registro_FechaNacimiento_hint" />
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black" />
         </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_registro_Fecha"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@color/registro_boton"
+            android:text="@string/getFecha"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -126,7 +189,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
 
-                android:text="@string/activity_registro_pais" />
+                android:text="@string/activity_registro_pais"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <EditText
@@ -136,8 +202,10 @@
                 android:layout_weight="1"
                 android:ems="10"
 
+                android:hint="@string/activity_registro_pais_hint"
                 android:inputType="textPersonName"
-                android:hint="@string/activity_registro_pais_hint" />
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black" />
 
         </LinearLayout>
 
@@ -152,7 +220,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
 
-                android:text="@string/activity_registro_ciudad" />
+                android:text="@string/activity_registro_ciudad"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <EditText
@@ -162,18 +233,27 @@
                 android:layout_weight="1"
                 android:ems="10"
 
+                android:hint="@string/activity_registro_ciudad_hint"
                 android:inputType="textPersonName"
-                android:hint="@string/activity_registro_ciudad_hint" />
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_activity_registro_continuar"
 
-            android:layout_width="wrap_content"
+            android:layout_width="384dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:background="@color/registro_boton"
             android:text="@string/activity_registro_Continuar"
-            android:layout_gravity="center"/>
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

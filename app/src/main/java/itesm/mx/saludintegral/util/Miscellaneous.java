@@ -17,6 +17,18 @@ public class Miscellaneous {
     public static String strTipo = "";
     public static HashMap<Date,Drawable> mapFechaFondo;
 
+    public static String[] tipos = {
+            "Espiritualidad",       //0
+            "Actividad Cognitiva",  //1
+            "Finanzas",             //2
+            "Actividad Física",     //3
+            "Cumpleaños Amigos",    //4
+            "Eventos Amigos",       //5
+            "Cumpleaños Familia",   //6
+            "Eventos Familia"       //7
+    };
+
+
     public static String getMonthFromInt(Integer iMonth){
      String sMonth = null;
 
@@ -76,5 +88,11 @@ public class Miscellaneous {
             Log.d("getStringFromDate",e.getMessage());
         }
         return null;
+    }
+
+    //Método que borra todos los elementos del map
+    public static void limpiaMapFechaFondo() {
+        mapFechaFondo = new HashMap<Date,Drawable>();
+        Log.d("Misc","se limpia el map FechaFondo");
     }
 }

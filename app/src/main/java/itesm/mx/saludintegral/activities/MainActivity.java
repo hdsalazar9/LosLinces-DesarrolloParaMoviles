@@ -21,17 +21,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-
-        Por ahora, nuestra main activity te dirige al
-        menu principal de actividades.
-
-         */
         InfoPersonalOperations database = new InfoPersonalOperations(getApplicationContext());
         database.open();
-        ArrayList<InfoPersonal> arrInfo = database.getAllProducts();
-        System.out.println(arrInfo.size());
-        if(arrInfo.size() > 0){ //Si no esta vacio, ya se registro mandarlo al menu principal
+        InfoPersonal arrInfo = database.getAllProducts();
+
+        if(arrInfo.getNombre()!=null){ //Si no esta vacio, ya se registro mandarlo al menu principal
             Intent i = new Intent(this, MainMenu.class);
             startActivity(i);
         }
@@ -40,4 +34,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
     }
+
+    @Override
+    public void onBackPressed()
+    {    }
 }
