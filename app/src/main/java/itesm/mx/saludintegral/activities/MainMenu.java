@@ -44,7 +44,6 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         menuItemArrayAdapter = new MenuItemAdapter(this, menuItems);
 
         ipo = new InfoPersonalOperations(this);
-
         ipo.open();
 
         info = ipo.getAllProducts();
@@ -125,8 +124,9 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
 
-        ivProfilePicture.setImageBitmap(Bitmap.createScaledBitmap(bmp, 30,
-                30, false));
+
+        ivProfilePicture.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
+                bmp.getHeight(), false));
 
         ivProfilePicture.setOnClickListener(this);
 

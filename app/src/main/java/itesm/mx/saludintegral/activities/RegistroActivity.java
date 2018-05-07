@@ -2,7 +2,9 @@ package itesm.mx.saludintegral.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -72,7 +74,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         //Get imageview to byte array
         bitmap = ((BitmapDrawable) ivFoto.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byteArray = baos.toByteArray();
 
         etFechaDeNacimiento.setEnabled(false);
@@ -155,12 +157,21 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         //Se tomo exisotamente la foto, guardarla
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             bitmap = (Bitmap) data.getExtras().get("data");
+
+            System.out.println("FOTO REGISTRO WIDTH: " + bitmap.getWidth());
+            System.out.println("FOTO REGISTRO HEIGTH: " + bitmap.getHeight());
+
+            //Girar foto 270 grados
+            Matrix matrix = new Matrix();
+            matrix.postRotate(270);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+
             ivFoto.setImageBitmap(bitmap);
             ivFoto.getLayoutParams().width = 200;
             ivFoto.getLayoutParams().height = 200;
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArray = stream.toByteArray();
         }
 
