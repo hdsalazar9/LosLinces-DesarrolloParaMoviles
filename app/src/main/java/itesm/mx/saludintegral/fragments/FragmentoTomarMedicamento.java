@@ -38,6 +38,7 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     MedicamentoOperations dao2;
     Medicamento medicamento;
     OnResponseTomar mCallback;
+    Boolean bAtiempo = false;
     TextView tvNombre, tvCadaCuanto, tvGramaje, tvFechaComienzo, tvADComer, tvCantidad, tvFaltan;
     ImageView ivImagenMed;
     Button btnAgregar, btnBorrar;
@@ -76,6 +77,7 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
                 ArrayList<TomarMedicamento>  tomarMedicamento=dao.getAllTomarMedicamentoFrom(String.valueOf(medicamento.getId()));
                 String sFalta=MedicamentoAdapter.getTimeTo(medicamento.getHora().toString(),medicamento.getCadaCuanto(), medicamento.getFechaComienzo(), tomarMedicamento);
                 if(!sFalta.equals("Retraso")){
+                    bAtiempo = true;
                     sFalta="Faltan: "+sFalta;
                     tvFaltan.setText(sFalta);
                 }
@@ -134,7 +136,8 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                TomarMedicamento tomar=new TomarMedicamento(n, medicamento.getId(), true, dateC);
+
+                TomarMedicamento tomar=new TomarMedicamento(n, medicamento.getId(), bAtiempo, dateC);
                 newTomarMedicamento(tomar);
                 mCallback.onResponseTomar();
                  break;
