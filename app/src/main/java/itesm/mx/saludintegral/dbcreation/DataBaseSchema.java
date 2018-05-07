@@ -47,8 +47,8 @@ public final class DataBaseSchema {
         public static final String TABLE_NAME = "Cumpleanos";
         public static final String COLUMN_NAME_NOMBRE = "cumple_nombre";
         public static final String COLUMN_NAME_FECHA = "cumple_fecha";
-        public static final String COLUMN_NAME_TELEFONO = "cumple_telefono";
         public static final String COLUMN_NAME_TIPO = "cumple_tipo";
+        public static final String COLUMN_NAME_TELEFONO = "cumple_telefono";
     }
 
     public static class ContactoEmergenciaTable implements BaseColumns {

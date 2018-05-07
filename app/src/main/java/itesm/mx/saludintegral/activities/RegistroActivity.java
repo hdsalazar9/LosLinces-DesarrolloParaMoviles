@@ -109,7 +109,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                     break;
                 }
                 if(etFechaDeNacimiento.getText().toString().equals("")){
-                    //TODO: Checar por si es o no una fecha valida
                     Toast.makeText(this, "Favor de registrar fecha de naciemiento", Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -132,17 +131,11 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 infoPersonal.setFoto(byteArray);
 
                 //Obtener la fecha desde lo escrito por el usuario
-                Date date = null;
-                SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-yyyy");
-                try {
-                    date= dateFormat.parse(etFechaDeNacimiento.getText().toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                Date date = Miscellaneous.getDateFromString(etFechaDeNacimiento.getText().toString());
                 infoPersonal.setFechaNacimiento(date);
 
                 long id = database.addEvento(infoPersonal);
-                Toast.makeText(this, "Registrado satisfactoriamente! " + id, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Registrado satisfactoriamente!", Toast.LENGTH_SHORT).show();
                 Log.d("Registro activity:", infoPersonal.toString());
                 Intent i = new Intent(this, MainMenu.class);
                 startActivity(i);
@@ -157,10 +150,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         //Se tomo exisotamente la foto, guardarla
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             bitmap = (Bitmap) data.getExtras().get("data");
-
-            System.out.println("FOTO REGISTRO WIDTH: " + bitmap.getWidth());
-            System.out.println("FOTO REGISTRO HEIGTH: " + bitmap.getHeight());
-
             //Girar foto 270 grados
             Matrix matrix = new Matrix();
             matrix.postRotate(270);
@@ -174,8 +163,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArray = stream.toByteArray();
         }
-
-
     }
 
     public void getDatePicked() {
@@ -200,4 +187,5 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         database.close();
         super.onPause();
     }
+
 }

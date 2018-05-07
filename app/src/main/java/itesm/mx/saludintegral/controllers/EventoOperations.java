@@ -121,9 +121,6 @@ public class EventoOperations {
         String query = "SELECT * FROM "+ DataBaseSchema.EventosTable.TABLE_NAME +
                 " WHERE " + DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " LIKE '___" + sMonth + "%' AND " +
                 DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
-
-        Log.d("QUERY",query);
-
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
@@ -141,8 +138,6 @@ public class EventoOperations {
         {
             Log.e("AllProductsFromMonth: ", e.toString());
         }
-
-        Log.d("DB","Cantidad de resultados en el query de getAllProductsFromMonthAndType: "+ listaEventos.size());
 
         return listaEventos;
     }
