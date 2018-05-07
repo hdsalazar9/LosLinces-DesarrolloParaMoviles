@@ -171,7 +171,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
                 alarmIntent.putExtra("whereFrom", "AddMedicamento");
                 alarmIntent.putExtra("id", ((int) medicamento.getId()));
                 pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
-                start(medicamento.getCadaCuanto());
+                //start(medicamento.getCadaCuanto());
                 break;
 
             case R.id.btn_tomarFotoMed:

@@ -70,6 +70,7 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
         if(args != null) {
             medicamento =(Medicamento) Parcels.unwrap(args.getParcelable("medicamento"));
                 tvNombre.setText("Nombre: "+medicamento.getNombre());
+
                 String sCada=medicamento.getCadaCuanto()>1?" Horas":" Hora";
                 tvCadaCuanto.setText("Cada: "+String.valueOf(medicamento.getCadaCuanto())+ sCada);
                 ArrayList<TomarMedicamento>  tomarMedicamento=dao.getAllTomarMedicamentoFrom(String.valueOf(medicamento.getId()));
