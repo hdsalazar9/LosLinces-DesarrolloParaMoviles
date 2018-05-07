@@ -68,6 +68,7 @@
     <string name="fragment_addevento_hint_semanas">"(ej. 2)"</string>
     <string name="fragment_addevento_registrar">"Registrar evento"</string>
 
+
     <string name="row_evento_nombre">"Nombre del evento: "</string>
     <string name="row_evento_descripcion">"Descripción: "</string>
 
@@ -76,6 +77,7 @@
 
     <string name="fragment_eventozoom_fecha">"Fecha: "</string>
     <string name="fragment_eventozoom_tipo">"Tipo: "</string>
+
     <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
 
     <string name="fragment_listcumpleanos_vacio">"No hay más cumpleaños registrados."</string>
@@ -112,5 +114,8 @@
     <string name="fragment_bitacora_t2">Tipo:</string>
     <string name="fragment_bitacora_t3">Fecha:</string>
     <string name="fragment_bitacora_t4">Descripción:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
