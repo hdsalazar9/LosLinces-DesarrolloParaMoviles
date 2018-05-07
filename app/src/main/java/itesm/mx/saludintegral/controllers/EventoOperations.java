@@ -54,7 +54,7 @@ public class EventoOperations {
 
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_TIPO, evento.getTipo());
             newRowId=db.insert(DataBaseSchema.EventosTable.TABLE_NAME, null, values);
-            Log.d("Product added", "Product added");
+            Log.d("Evento added", "Evento added");
         }
         catch (SQLException e){
             Log.e("SQLADD", e.toString());
