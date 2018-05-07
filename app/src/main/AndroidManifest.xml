@@ -23,9 +23,12 @@
         <activity android:name=".activities.SaludActivity" />
         <activity android:name=".activities.SocialActivity" />
         <activity android:name=".activities.CognicionActivity" />
-        <activity android:name=".activities.EspiritualActivity"></activity>
+        <activity android:name=".activities.EspiritualActivity" />
         <activity android:name=".activities.ExampleReceiver" />
+
         <receiver android:name=".util.Receiver" />
+
+        <activity android:name=".activities.PerfilActivity"></activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
 import itesm.mx.saludintegral.R;
-import itesm.mx.saludintegral.util.Miscellaneous;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
 import itesm.mx.saludintegral.models.InfoPersonal;
 
@@ -25,7 +25,7 @@ import itesm.mx.saludintegral.models.InfoPersonal;
 Main Menu Activity: Referente a "Page 4" del prototipo de Ninjamock
 */
 
-public class MainMenu extends ListActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
+public class MainMenu extends ListActivity implements AdapterView.OnItemClickListener{
 
     InfoPersonal info;
     InfoPersonalOperations ipo;
@@ -34,6 +34,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
     private ArrayList<MenuItem> menuItems;
     ImageView ivProfilePicture;
     TextView tvUserName;
+    LinearLayout llHolaUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,21 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         ipo = new InfoPersonalOperations(this);
         ipo.open();
-
         info = ipo.getAllProducts();
+        ipo.close();
 
         ivProfilePicture = (ImageView) findViewById(R.id.ivProfileImage);
         tvUserName = (TextView) findViewById(R.id.tvUserName);
+        llHolaUsuario = (LinearLayout) findViewById(R.id.ll_activity_mainmenu_hola);
+
+        llHolaUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(getApplicationContext(), PerfilActivity.class);
+                startActivity(intent);
+            }
+        });
 
         setUserInfo();
 
@@ -59,11 +70,19 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+
+        ipo = new InfoPersonalOperations(this);
+        ipo.open();
+        info = ipo.getAllProducts();
+        ipo.close();
+        setUserInfo();
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         MenuItem menuItem = (MenuItem) parent.getItemAtPosition(position);
-
-        /*  Aqui falta implementar la lógica de la selección
-            de un item del menu. */
 
         Intent intent;
 
@@ -77,7 +96,6 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
                 /* Ir a actividad de Social */
                 intent=new Intent(this, SocialActivity.class);
                 startActivity(intent);
-
                 break;
             case ("Cognicion"):
                 /* Ir a actividad de Cognicion */
@@ -91,12 +109,6 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
                 break;
         }
 
-    }
-
-    @Override
-    public void onClick(View v){
-        Intent intent = new Intent(this, RegistroActivity.class);
-        startActivity(intent);
     }
 
     public ArrayList<MenuItem> getMenuItems(){
@@ -127,9 +139,11 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
 
         ivProfilePicture.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
                 bmp.getHeight(), false));
+    }
 
-        ivProfilePicture.setOnClickListener(this);
-
+    @Override
+    public void onBackPressed() {
+        //No permitir que de back, pues regresaria a registro
     }
 
 }

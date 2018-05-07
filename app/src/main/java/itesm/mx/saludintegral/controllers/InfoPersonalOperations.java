@@ -69,7 +69,7 @@ public class InfoPersonalOperations {
             infoPersonal=null;
             if (cursor.moveToFirst()){
                 do{
-                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(2));
+                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     infoPersonal=new InfoPersonal(cursor.getString(1),
                             cursor.getString(2),dateC,cursor.getString(4),cursor.getString(5),cursor.getBlob(6));
                     listaInfoPersonal.add(infoPersonal);
@@ -90,7 +90,7 @@ public class InfoPersonalOperations {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
-                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(2));
+                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     infoPersonal=new InfoPersonal(cursor.getString(1),
                             cursor.getString(2),dateC,cursor.getString(4),cursor.getString(5),cursor.getBlob(6));
                     listaInfoPersonal = infoPersonal;
