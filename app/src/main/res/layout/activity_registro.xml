@@ -97,6 +97,12 @@
                 android:hint="@string/activity_registro_FechaNacimiento_hint" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btn_registro_Fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/getFecha" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

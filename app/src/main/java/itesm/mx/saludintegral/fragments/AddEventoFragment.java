@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.EventoOperations;
@@ -88,7 +89,17 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
             }
         });
 
-        if (Miscellaneous.strTipo.equals("Cognicion")) {
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
+            rbUno.setText(Ejercicios.espiritual[0]);
+            rbDos.setText(Ejercicios.espiritual[1]);
+            rbTres.setText(Ejercicios.espiritual[2]);
+            rbCuatro.setText(Ejercicios.espiritual[3]);
+            rbCinco.setText(Ejercicios.espiritual[4]);
+            rbOtro.setText(Ejercicios.espiritual[5]);
+        }
+
+
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
             rbUno.setText(Ejercicios.cognicion[0]);
             rbDos.setText(Ejercicios.cognicion[1]);
             rbTres.setText(Ejercicios.cognicion[2]);
@@ -97,13 +108,22 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
             rbOtro.setText(Ejercicios.cognicion[5]);
         }
 
-        if (Miscellaneous.strTipo.equals("Espiritual")) {
-            rbUno.setText(Ejercicios.espiritual[0]);
-            rbDos.setText(Ejercicios.espiritual[1]);
-            rbTres.setText(Ejercicios.espiritual[2]);
-            rbCuatro.setText(Ejercicios.espiritual[3]);
-            rbCinco.setText(Ejercicios.espiritual[4]);
-            rbOtro.setText(Ejercicios.espiritual[5]);
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
+            rbUno.setText(Ejercicios.finanzas[0]);
+            rbDos.setText(Ejercicios.finanzas[1]);
+            rbTres.setText(Ejercicios.finanzas[2]);
+            rbCuatro.setText(Ejercicios.finanzas[3]);
+            rbCinco.setText(Ejercicios.finanzas[4]);
+            rbOtro.setText(Ejercicios.finanzas[5]);
+        }
+
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
+            rbUno.setText(Ejercicios.fisicos[0]);
+            rbDos.setText(Ejercicios.fisicos[1]);
+            rbTres.setText(Ejercicios.fisicos[2]);
+            rbCuatro.setText(Ejercicios.fisicos[3]);
+            rbCinco.setText(Ejercicios.fisicos[4]);
+            rbOtro.setText(Ejercicios.fisicos[5]);
         }
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -174,7 +194,12 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
 
     public void newEvento() {
         String strSemanas = etSemanas.getText().toString();
-        int iNumero = Integer.parseInt(strSemanas);
+        int iNumero;
+        if(strSemanas.equals("")){
+            iNumero = 0;
+        }else {
+            iNumero = Integer.parseInt(strSemanas);
+        }
 
         Log.d("DEBUG","strSemanas: "+strSemanas);
         Log.d("DEBUG","strSemanas > 0? " + (iNumero>0));
@@ -196,7 +221,6 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
         }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-
         Date dateFecha = new Date();
         String strNombre = etNombre.getText().toString();
         String strDescripcion = etDescripcion.getText().toString();
@@ -240,5 +264,21 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
     public void getDatePicked() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    @Override
+    public void onResume(){
+        dao.open();
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        dao.close();
+        super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
     }
 }

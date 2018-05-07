@@ -15,6 +15,7 @@ import java.util.Date;
 import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.MonitoreoSueno;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 /**
  * Created by josec on 14/04/2018.
@@ -41,7 +42,9 @@ public class MonitoreoSuenoOperations {
         long newRowId=0;
         try{
             ContentValues values=new ContentValues();
-            values.put(DataBaseSchema.MonitoreoSuenoTable.COLUMN_NAME_FECHA, monitoreoSueno.getFecha().toString());
+            String fechaDeSueno = Miscellaneous.getStringFromDate(monitoreoSueno.getFecha());
+            values.put(DataBaseSchema.MonitoreoSuenoTable.COLUMN_NAME_FECHA, fechaDeSueno);
+
             values.put(DataBaseSchema.MonitoreoSuenoTable.COLUMN_NAME_HORAS, monitoreoSueno.getHoras().toString());
             newRowId=db.insert(DataBaseSchema.MonitoreoSuenoTable.TABLE_NAME, null, values);
             Log.d("Product added", "Product added");
@@ -61,14 +64,7 @@ public class MonitoreoSuenoOperations {
             monitoreoSueno=null;
             if (cursor.moveToFirst()){
                 do{
-                    Date dateC=null;
-                    //SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy");
-                    try {
-                        dateC= dateFormat.parse(cursor.getString(1));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(1));
                     monitoreoSueno=new MonitoreoSueno(cursor.getInt(0),dateC,cursor.getDouble(2));
                     listaMonitoreoSuenos.add(monitoreoSueno);
                 }while (cursor.moveToNext());
@@ -88,13 +84,7 @@ public class MonitoreoSuenoOperations {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
-                    Date dateC=null;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY");
-                    try {
-                        dateC= dateFormat.parse(cursor.getString(1));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(1));
                     monitoreoSueno=new MonitoreoSueno(cursor.getInt(0),dateC,cursor.getDouble(2));
                     listaMonitoreoSuenos.add(monitoreoSueno);
                 }while (cursor.moveToNext());

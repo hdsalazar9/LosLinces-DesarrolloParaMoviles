@@ -61,9 +61,7 @@ public class Cumpleano {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+    public void setTipo(String tipo) { this.tipo = tipo; }
 
     public String getTelefono() {
         return telefono;

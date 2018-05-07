@@ -24,6 +24,8 @@
         <activity android:name=".activities.SocialActivity" />
         <activity android:name=".activities.CognicionActivity" />
         <activity android:name=".activities.EspiritualActivity"></activity>
+        <activity android:name=".activities.ExampleReceiver" />
+        <receiver android:name=".util.Receiver" />
     </application>
 
 </manifest>

@@ -24,4 +24,23 @@ public class Ejercicios {
             "Chi Kung",
             "Otro"
     };
+
+    public static String finanzas[] = {
+            "Agua",
+            "Gas",
+            "Electricidad",
+            "Teléfono",
+            "Préstamo",
+            "Otro"
+    };
+
+    public static String fisicos[] = {
+            "Caminata",
+            "Natación",
+            "Gimnasio",
+            "Spinning",
+            "Baile",
+            "Otro"
+    };
+
 }

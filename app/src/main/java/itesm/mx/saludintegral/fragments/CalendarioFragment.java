@@ -1,13 +1,13 @@
 package itesm.mx.saludintegral.fragments;
 
-import android.app.DialogFragment;
-import android.app.Fragment;
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +36,9 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class CalendarioFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     Button btnAddEvento;
-    private EventoOperations database;
-    //TODO: OBTENER LOS EVENTOS DE MES Y COLOREAR LOS DIAS QUE SE VEAN AFECTADOS
+    private EventoOperations dao;
+    private CaldroidFragment caldroidFragment;
+    OnSelectFechaValida mCallback;
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     CaldroidListener listener = new CaldroidListener() {
@@ -51,51 +52,58 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
             }
             else
             {
-                /*
-                //android.support.v4.app.DialogFragment dialogFragment = DialogFragment.instantiate(getActivity(),"");
-                EventoDisplayFragment dialog = new EventoDisplayFragment();
-                dialog.show(getFragmentManager(),"hola");
-                dialog.show((FragmentManager)getFragmentManager(), "epa");
-                dialog.show();
-                */
+                mCallback.onSelectFechaValida(date);
             }
+        }
+
+        @Override
+        public void onChangeMonth(int month, int year) {
+            pintarDiasDeEventos(month);
         }
     };
 
+    public void pintarDiasDeEventos(Integer intMesABuscar){
+        ColorDrawable green = new ColorDrawable(Color.GREEN);
+        ArrayList<Evento> arregloEventosDelMes = dao.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
+
+        for(Evento ev : arregloEventosDelMes){
+            Miscellaneous.mapFechaFondo.put(ev.getFecha(),green);
+        }
+        caldroidFragment.setBackgroundDrawableForDates(Miscellaneous.mapFechaFondo);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
-        Miscellaneous.mapFechaFondo = new HashMap<Date, Drawable>();
-        btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
 
-        CaldroidFragment caldroidFragment = new CaldroidFragment();
+        caldroidFragment = new CaldroidFragment();
+        Log.d("OnCREATEVIEW", "Se crea la view");
+        View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
+        Miscellaneous.limpiaMapFechaFondo();
+        btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
+        caldroidFragment = new CaldroidFragment();
+
         Bundle args = new Bundle();
         Calendar cal = Calendar.getInstance();
         args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
         args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
         caldroidFragment.setArguments(args);
 
+
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.calendario, caldroidFragment);
         t.commit();
+
 
         caldroidFragment.setCaldroidListener(listener);
 
         btnAddEvento.setOnClickListener(this);
 
         //Cambiar de color los dates que tengan eventos registrados
-        database = new EventoOperations(getActivity().getApplicationContext());
-        database.open();
+        dao = new EventoOperations(getActivity().getApplicationContext());
+        dao.open();
         Integer intMesABuscar = cal.get(Calendar.MONTH);
-        ColorDrawable green = new ColorDrawable(Color.GREEN);
-        ArrayList<Evento> arregloEventosDelMes = database.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
-
-        for(Evento ev : arregloEventosDelMes){
-            Miscellaneous.mapFechaFondo.put(ev.getFecha(),green);
-        }
-        caldroidFragment.setBackgroundDrawableForDates(Miscellaneous.mapFechaFondo);
+        pintarDiasDeEventos(intMesABuscar);
 
         return rootView;
     }
@@ -111,25 +119,73 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
                 AddEventoFragment addEventoFragment = new AddEventoFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                if(Miscellaneous.strTipo.equals("Cognicion")) {
-                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment).commit();
+                //Espiritualidad
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
+                    transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment);
                 }
 
-                if(Miscellaneous.strTipo.equals("Espiritual")) {
-                    transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment).commit();
+                //Actividad Cognitiva
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
+                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
                 }
+
+                //Finanzas
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
+                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
+                }
+
+                //Ejercicios Físicos
+                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
+                    transaction.replace(R.id.frameLayout_ActivitySalud,addEventoFragment);
+                }
+
+
+
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
         }
     }
 
     @Override
     public void onResume(){
-        database.open();
+        dao.open();
         super.onResume();
     }
     @Override
     public void onPause(){
-        database.close();
+        dao.close();
         super.onPause();
     }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
+    }
+
+    //Interfaz para que la actividad pueda responder al click en lista
+    public interface OnSelectFechaValida {
+        public void onSelectFechaValida(Date strFecha);
+
+    }
+
+    @Override
+    public void onAttach(Context context){
+        Log.d("OnAttach", "Ando en onAttach");
+        super.onAttach(context);
+
+        Activity activity;
+
+        if(context instanceof  Activity){
+            //Actividad respondera a la interface
+            activity = (Activity) context;
+            try{
+                mCallback = (OnSelectFechaValida) activity;
+            }   catch(ClassCastException e){
+                throw new ClassCastException(activity.toString() +
+                        " must implement OnResponseListener.");
+            }
+        }
+    }
+
 }

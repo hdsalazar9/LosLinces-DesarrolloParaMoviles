@@ -46,7 +46,7 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragmento_tomar_medicamento, container, false);
+        view = inflater.inflate(R.layout.fragmento_tomar_medicamento, container, false);
         dao = new TomarMedicamentoOperations(getContext());
         dao.open();
         dao2 = new MedicamentoOperations(getContext());
@@ -76,12 +76,20 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     @Override
     public void onResume(){
         dao.open();
+        dao2.open();
         super.onResume();
     }
     @Override
     public void onPause(){
         dao.close();
+        dao2.close();
         super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        dao.close();
+        dao2.close();
+        super.onDetach();
     }
 
     @Override
