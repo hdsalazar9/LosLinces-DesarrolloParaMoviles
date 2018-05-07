@@ -107,6 +107,14 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
         caldroidFragment.setCaldroidListener(listener);
 
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[4]) || Miscellaneous.strTipo.equals(Miscellaneous.tipos[6])) {
+            btnAddEvento.setText(R.string.fragment_calendario_addCumple);
+        }
+        else
+        {
+            btnAddEvento.setText(R.string.fragment_calendario_add);
+        }
+
         btnAddEvento.setOnClickListener(this);
 
         //Cambiar de color los dates que tengan eventos registrados

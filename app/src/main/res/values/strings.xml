@@ -52,6 +52,7 @@
     <string name="fragment_addmedicamento_domingo">"Domingo"</string>
 
     <string name="fragment_calendario_add">"Añadir Evento"</string>
+    <string name="fragment_calendario_addCumple">"Añadir Cumpleaños"</string>
 
     <string name="fragment_eventodisplay_cerrar">"Cerrar"</string>
 
