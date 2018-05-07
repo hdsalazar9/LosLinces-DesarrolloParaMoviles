@@ -61,10 +61,20 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorEjercicio, null));
                 break;
+            case "Actividades":
+                linearLayout.setBackgroundColor(ResourcesCompat.getColor(
+                        getContext().getResources(),R.color.colorEjercicio, null));
+                break;
+
             case "Espiritual":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorEspiritual, null));
                 break;
+            case "Finanzas":
+                linearLayout.setBackgroundColor(ResourcesCompat.getColor(
+                        getContext().getResources(),R.color.colorFinanzas, null));
+                break;
+
         }
 
         int iSize = (Miscellaneous.iSizeMenu/iCantidadTitles);
