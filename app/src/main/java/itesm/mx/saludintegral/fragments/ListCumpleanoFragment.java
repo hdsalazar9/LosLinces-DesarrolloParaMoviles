@@ -2,8 +2,8 @@ package itesm.mx.saludintegral.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.ListFragment;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +19,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import itesm.mx.saludintegral.R;
+import itesm.mx.saludintegral.adapters.CumpleanoAdapter;
 import itesm.mx.saludintegral.adapters.EventoAdapter;
+import itesm.mx.saludintegral.controllers.CumpleanoOperations;
 import itesm.mx.saludintegral.controllers.EventoOperations;
+import itesm.mx.saludintegral.models.Cumpleano;
 import itesm.mx.saludintegral.models.Evento;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
@@ -28,18 +31,18 @@ import itesm.mx.saludintegral.util.Miscellaneous;
  * Created by FernandoDavid on 05/05/2018.
  */
 
-public class ListEventoFragment extends ListFragment implements AdapterView.OnItemClickListener {
+public class ListCumpleanoFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     View view;
-    EventoAdapter adapter;
-    EventoOperations dao;
-    ArrayList<Evento> listEvento;
+    CumpleanoAdapter adapter;
+    CumpleanoOperations dao;
+    ArrayList<Cumpleano> listCumpleano;
     OnResponseListener mCallback;
     String strFecha;
     Date fechaSeleccionada;
     TextView tvVacio;
 
-    public ListEventoFragment() {
+    public ListCumpleanoFragment() {
         // Required empty public constructor
     }
 
@@ -47,13 +50,13 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_listevento, container, false);
+        view = inflater.inflate(R.layout.fragment_listcumpleano, container, false);
         Log.d("onCreateView", "Se creó la ListView");
-        tvVacio = view.findViewById(R.id.tv_fragment_listevento_vacio);
-        listEvento = new ArrayList<Evento>();
-        dao = new EventoOperations(getContext());
+        tvVacio = view.findViewById(R.id.tv_fragment_listcumpleano_vacio);
+        listCumpleano = new ArrayList<Cumpleano>();
+        dao = new CumpleanoOperations(getContext());
         dao.open();
-        listEvento = null;
+        listCumpleano = null;
         Bundle args = getArguments();
 
         if(args != null) {
@@ -70,16 +73,16 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
             }
         }
 
-        listEvento = mostrarEventos();
-        if (listEvento.size() == 0) {
+        listCumpleano = mostrarCumpleanos();
+        if (listCumpleano.size() == 0) {
             tvVacio.setVisibility(View.VISIBLE);
         }
         else
         {
             tvVacio.setVisibility(View.GONE);
         }
-        Log.d("DEBUG", "Tamano " + String.valueOf(listEvento.size()));
-        adapter = new EventoAdapter(getContext(), listEvento);
+        Log.d("DEBUG", "Tamano " + String.valueOf(listCumpleano.size()));
+        adapter = new CumpleanoAdapter(getContext(), listCumpleano);
         setListAdapter(adapter);
 
         return view;
@@ -94,11 +97,11 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
         super.onActivityCreated(savedInstance);
     }
 
-    public ArrayList<Evento> mostrarEventos() {
-        ArrayList<Evento> eventoList = dao.getAllEventosFromDateAndType(fechaSeleccionada, Miscellaneous.strTipo);
-        if (eventoList != null) {
+    public ArrayList<Cumpleano> mostrarCumpleanos() {
+        ArrayList<Cumpleano> cumpleanoList = dao.getAllCumpleanosFromDateAndType(fechaSeleccionada, Miscellaneous.strTipo);
+        if (cumpleanoList != null) {
             Log.d("DEBUG", "Evento list NO vacia");
-            return eventoList;
+            return cumpleanoList;
         }
         else
         {
@@ -125,13 +128,13 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        Evento evento = (Evento) parent.getItemAtPosition(position);
-        mCallback.onResponse(2, evento);
+        Cumpleano cumpleano = (Cumpleano) parent.getItemAtPosition(position);
+        mCallback.onResponse(2, cumpleano);
     }
 
     //Interfaz para que la actividad pueda responder al click en lista
     public interface OnResponseListener {
-        public void onResponse(int tipo, Evento evento);
+        public void onResponse(int tipo, Cumpleano cumpleano);
     }
 
     @Override

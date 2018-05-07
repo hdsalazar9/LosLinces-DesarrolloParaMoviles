@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -21,11 +20,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
 import itesm.mx.saludintegral.R;
+import itesm.mx.saludintegral.controllers.CumpleanoOperations;
 import itesm.mx.saludintegral.controllers.EventoOperations;
+import itesm.mx.saludintegral.models.Cumpleano;
 import itesm.mx.saludintegral.models.Evento;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
@@ -37,6 +37,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     Button btnAddEvento;
     private EventoOperations dao;
+    private CumpleanoOperations dao2;
     private CaldroidFragment caldroidFragment;
     OnSelectFechaValida mCallback;
 
@@ -63,11 +64,36 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
     };
 
     public void pintarDiasDeEventos(Integer intMesABuscar){
-        ColorDrawable green = new ColorDrawable(Color.GREEN);
-        ArrayList<Evento> arregloEventosDelMes = dao.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
+        ColorDrawable colorDrawable = new ColorDrawable();
+        if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorEspiritual));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorEjercicio));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorFinanzas));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSalud));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[4])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSocial));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[5])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSocial));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[6])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSocial));
+        } else if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[7])) {
+            colorDrawable = new ColorDrawable(getResources().getColor(R.color.colorSocial));
+        }
 
-        for(Evento ev : arregloEventosDelMes){
-            Miscellaneous.mapFechaFondo.put(ev.getFecha(),green);
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[4]) || Miscellaneous.strTipo.equals(Miscellaneous.tipos[6])) {
+            ArrayList<Cumpleano> arregloCumpleanosDelMes = dao2.getAllProductsFromMonthAndType(intMesABuscar,Miscellaneous.strTipo);
+            for(Cumpleano cu : arregloCumpleanosDelMes) {
+                Miscellaneous.mapFechaFondo.put(cu.getFecha(),colorDrawable);
+            }
+        }
+        else {
+            ArrayList<Evento> arregloEventosDelMes = dao.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
+            for (Evento ev : arregloEventosDelMes) {
+                Miscellaneous.mapFechaFondo.put(ev.getFecha(), colorDrawable);
+            }
         }
         caldroidFragment.setBackgroundDrawableForDates(Miscellaneous.mapFechaFondo);
     }
@@ -97,11 +123,21 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
         caldroidFragment.setCaldroidListener(listener);
 
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[4]) || Miscellaneous.strTipo.equals(Miscellaneous.tipos[6])) {
+            btnAddEvento.setText(R.string.fragment_calendario_addCumple);
+        }
+        else
+        {
+            btnAddEvento.setText(R.string.fragment_calendario_add);
+        }
+
         btnAddEvento.setOnClickListener(this);
 
         //Cambiar de color los dates que tengan eventos registrados
         dao = new EventoOperations(getActivity().getApplicationContext());
+        dao2 = new CumpleanoOperations(getActivity().getApplicationContext());
         dao.open();
+        dao2.open();
         Integer intMesABuscar = cal.get(Calendar.MONTH);
         pintarDiasDeEventos(intMesABuscar);
 
@@ -110,37 +146,43 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
     @Override
     public void onClick(View v) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
         switch(v.getId()) {
             case R.id.btn_addEvento:
                 /* Despliega la forma a llenar del tipo de Evento
                  * Checa en qué lugar está (Miscelalaneous.strTipo) y, en base a eso, cambia el fragmento correspondiente
                  * frameLayout_ActivitySocial,frameLayout_ActivityCognicion, etc.
                  */
-                AddEventoFragment addEventoFragment = new AddEventoFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-                //Espiritualidad
-                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
-                    transaction.replace(R.id.frameLayout_ActivityEspiritual,addEventoFragment);
+                //Cumpleanos Familiar/Amigos
+                if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[4]) || Miscellaneous.strTipo.equals(Miscellaneous.tipos[6])) {
+                    AddCumpleanosFragment addCumpleanosFragment = new AddCumpleanosFragment();
+                    transaction.replace(R.id.frameLayout_ActivitySocial, addCumpleanosFragment);
                 }
+                else
+                {
+                    AddEventoFragment addEventoFragment = new AddEventoFragment();
+                    //Espiritualidad
+                    if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
+                        transaction.replace(R.id.frameLayout_ActivityEspiritual, addEventoFragment);
+                    }
 
-                //Actividad Cognitiva
-                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
-                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
+                    //Actividad Cognitiva/Finanzas
+                    if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[1]) || Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
+                        transaction.replace(R.id.frameLayout_ActivityCognicion, addEventoFragment);
+                    }
+
+
+                    //Ejercicios Físicos
+                    if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
+                        transaction.replace(R.id.frameLayout_ActivitySalud, addEventoFragment);
+                    }
+
+                    //Eventos Familia/Amigos
+                    if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[5]) || Miscellaneous.strTipo.equals(Miscellaneous.tipos[7])) {
+                        transaction.replace(R.id.frameLayout_ActivitySocial, addEventoFragment);
+                    }
                 }
-
-                //Finanzas
-                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
-                    transaction.replace(R.id.frameLayout_ActivityCognicion,addEventoFragment);
-                }
-
-                //Ejercicios Físicos
-                if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
-                    transaction.replace(R.id.frameLayout_ActivitySalud,addEventoFragment);
-                }
-
-
-
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
@@ -150,16 +192,19 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
     @Override
     public void onResume(){
         dao.open();
+        dao2.open();
         super.onResume();
     }
     @Override
     public void onPause(){
         dao.close();
+        dao2.close();
         super.onPause();
     }
     @Override
     public void onDetach(){
         dao.close();
+        dao2.close();
         super.onDetach();
     }
 

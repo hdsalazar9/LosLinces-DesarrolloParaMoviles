@@ -3,7 +3,6 @@ package itesm.mx.saludintegral.fragments;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +14,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import com.roomorama.caldroid.CaldroidListener;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
-
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.EventoOperations;
 import itesm.mx.saludintegral.models.Evento;
@@ -90,40 +84,24 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
         });
 
         if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
-            rbUno.setText(Ejercicios.espiritual[0]);
-            rbDos.setText(Ejercicios.espiritual[1]);
-            rbTres.setText(Ejercicios.espiritual[2]);
-            rbCuatro.setText(Ejercicios.espiritual[3]);
-            rbCinco.setText(Ejercicios.espiritual[4]);
-            rbOtro.setText(Ejercicios.espiritual[5]);
+            asignaOpciones(Ejercicios.espiritual);
         }
 
 
         if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
-            rbUno.setText(Ejercicios.cognicion[0]);
-            rbDos.setText(Ejercicios.cognicion[1]);
-            rbTres.setText(Ejercicios.cognicion[2]);
-            rbCuatro.setText(Ejercicios.cognicion[3]);
-            rbCinco.setText(Ejercicios.cognicion[4]);
-            rbOtro.setText(Ejercicios.cognicion[5]);
+            asignaOpciones(Ejercicios.cognicion);
         }
 
         if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
-            rbUno.setText(Ejercicios.finanzas[0]);
-            rbDos.setText(Ejercicios.finanzas[1]);
-            rbTres.setText(Ejercicios.finanzas[2]);
-            rbCuatro.setText(Ejercicios.finanzas[3]);
-            rbCinco.setText(Ejercicios.finanzas[4]);
-            rbOtro.setText(Ejercicios.finanzas[5]);
+            asignaOpciones(Ejercicios.finanzas);
         }
 
         if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
-            rbUno.setText(Ejercicios.fisicos[0]);
-            rbDos.setText(Ejercicios.fisicos[1]);
-            rbTres.setText(Ejercicios.fisicos[2]);
-            rbCuatro.setText(Ejercicios.fisicos[3]);
-            rbCinco.setText(Ejercicios.fisicos[4]);
-            rbOtro.setText(Ejercicios.fisicos[5]);
+            asignaOpciones(Ejercicios.fisicos);
+        }
+
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[5]) || Miscellaneous.strTipo.equals(Miscellaneous.tipos[7])) {
+            asignaOpciones(Ejercicios.eventos);
         }
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -190,6 +168,15 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
                 getDatePicked();
                 break;
         }
+    }
+
+    public void asignaOpciones(String[] strOpciones) {
+        rbUno.setText(strOpciones[0]);
+        rbDos.setText(strOpciones[1]);
+        rbTres.setText(strOpciones[2]);
+        rbCuatro.setText(strOpciones[3]);
+        rbCinco.setText(strOpciones[4]);
+        rbOtro.setText(strOpciones[5]);
     }
 
     public void newEvento() {
