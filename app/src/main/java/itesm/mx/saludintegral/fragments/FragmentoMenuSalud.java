@@ -5,13 +5,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,6 +25,7 @@ import itesm.mx.saludintegral.activities.SaludActivity;
 import itesm.mx.saludintegral.adapters.MedicamentoAdapter;
 import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 
 /**
@@ -32,6 +37,16 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
     private ArrayList<MenuItem> menuItems;
     OnSelectedListener mCallback;
 
+    FrameLayout frameLayout;
+    Boolean bSoloUna;
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            Miscellaneous.refresh(menuItemArrayAdapter);
+        }
+    };
+
     public FragmentoMenuSalud() {
         // Required empty public constructor
     }
@@ -42,6 +57,23 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragmento_menu_salud, container, false);
+
+        bSoloUna = true;
+        frameLayout = view.findViewById(R.id.frameLayout);
+        final ViewTreeObserver observer= frameLayout.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        Log.d("Log", "Height: " + frameLayout.getHeight());
+                        Miscellaneous.iSizeMenu = frameLayout.getHeight();
+                        if(bSoloUna) {
+                            handler.postDelayed(runnable, 1);
+                            bSoloUna = false;
+                        }
+                    }
+                });
+
         menuItems=getItems();
         menuItemArrayAdapter=new MenuItemAdapter(getActivity(), menuItems);
         setListAdapter(menuItemArrayAdapter);
@@ -82,7 +114,6 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
                 android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento);
                 transaction.addToBackStack(null);
-
                 transaction.commit();
                 break;
             case 1:

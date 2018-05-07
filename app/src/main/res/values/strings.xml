@@ -1,14 +1,17 @@
 <resources>
     <string name="app_name">Salud Integral</string>
 
+    <string name="getFecha">"Seleccionar Fecha"</string>
+    <string name="getHora">"Seleccionar Hora"</string>
+
     <string name="activity_registro_TomarFoto">Tomar Foto</string>
     <string name="activity_registro_MensajeInicial">Regístrate para comenzar a usar la aplicación</string>
     <string name="activity_registro_nombre">Nombre</string>
     <string name="activity_registro_nombre_hint">Escribe tu nombre</string>
-    <string name="activity_registro_apodo">Apodo</string>
-    <string name="activity_registro_apodo_hint">Escribe tu apodo</string>
+    <string name="activity_registro_apodo">Apellido</string>
+    <string name="activity_registro_apodo_hint">Escribe tu apellido</string>
     <string name="activity_registro_FechaNacimiento">Fecha de nacimiento</string>
-    <string name="activity_registro_FechaNacimiento_hint">Escribe tu fecha de nacimiento</string>
+    <string name="activity_registro_FechaNacimiento_hint">Elige tu fecha de nacimiento</string>
     <string name="activity_registro_pais">País</string>
     <string name="activity_registro_pais_hint">Escribe tu país</string>
     <string name="activity_registro_ciudad">Ciudad</string>
@@ -19,16 +22,100 @@
     <string name="fragment_tomar_medicamento_eliminar">Eliminar</string>
 
 
-    <string name="fragment_addmedicamento_nombreMed">"Nombre del medicamento:"</string>
-    <string name="fragment_addmedicamento_gramajeMed">"Gramaje:"</string>
+    <string name="fragment_addmedicamento_nombreMed">"Nombre:"</string>
+    <string name="fragment_addmedicamento_gramajeMed">"Gramaje (g/m^2):"</string>
     <string name="fragment_addmedicamento_cantidadMed">"Cantidad a ingerir por recordatorio:"</string>
-    <string name="fragment_addmedicamento_periodicidadMed">"Periodicidad"</string>
+    <string name="fragment_addmedicamento_periodicidadMed">"Periodicidad:"</string>
     <string name="fragment_addmedicamento_horaMed">"Hora de ingesta:"</string>
     <string name="fragment_addmedicamento_cadaCuandoMed">"Cada cuántas horas se ingiere el medicamento:"</string>
     <string name="fragment_addmedicamento_comienzoMed">"Fecha de inicio:"</string>
     <string name="fragment_addmedicamento_terminoMed">"Fecha de término:"</string>
     <string name="fragment_addmedicamento_ingerirAntesDespuesMed">"Ingerir medicamento antes/despues de comer"</string>
-    <string name="fragment_addmedicamento_fotoMed">"Tomar foto del medicamento"</string>
-    <string name="fragment_addmedicamento_addMed">"Añadir"</string>
+    <string name="fragment_addmedicamento_fotoMed">"Agregar foto"</string>
+    <string name="fragment_addmedicamento_addMed">"Guardar"</string>
+    <string name="fragment_addmedicamento_antes">"Antes"</string>
+    <string name="fragment_addmedicamento_despues">"Despues"</string>
+    <string name="fragment_addmedicamento_noAplica">"No Aplica"</string>
+    <string name="fragment_addmedicamento_hint_nombreMed">"(ej. Paracetamol)"</string>
+    <string name="fragment_addmedicamento_hint_gramajeMed">"(ej. 10.5)"</string>
+    <string name="fragment_addmedicamento_hint_cantidadMed">"(ej. 2)"</string>
+    <string name="fragment_addmedicamento_hint_horaMed">"(ej. 13:50)"</string>
+    <string name="fragment_addmedicamento_hint_cadaCuantoMed">"(ej. 3)"</string>
+    <string name="fragment_addmedicamento_hint_comienzoMed">"(ej. 26-03-2018, DD-MM-AAAA)"</string>
+    <string name="fragment_addmedicamento_hint_terminoMed">"(ej. 04-12-2018, DD-MM-AAAA)"</string>
+    <string name="fragment_addmedicamento_lunes">"Lunes"</string>
+    <string name="fragment_addmedicamento_martes">"Martes"</string>
+    <string name="fragment_addmedicamento_miercoles">"Miércoles"</string>
+    <string name="fragment_addmedicamento_jueves">"Jueves"</string>
+    <string name="fragment_addmedicamento_viernes">"Viernes"</string>
+    <string name="fragment_addmedicamento_sabado">"Sábado"</string>
+    <string name="fragment_addmedicamento_domingo">"Domingo"</string>
+
+    <string name="fragment_calendario_add">"Añadir Evento"</string>
+    <string name="fragment_calendario_addCumple">"Añadir Cumpleaños"</string>
+
+    <string name="fragment_eventodisplay_cerrar">"Cerrar"</string>
+
+    <string name="fragment_addevento_nombre">"Nombre: "</string>
+    <string name="fragment_addevento_hint_nombre">"Inserte el nombre del evento."</string>
+    <string name="fragment_addevento_descripcion">"Descripcion: "</string>
+    <string name="fragment_addevento_hint_descripcion">"Inserte la descripcion del evento."</string>
+    <string name="fragment_addevento_fecha">"Fecha: "</string>
+    <string name="fragment_addevento_periodicidad">"Periodicidad: "</string>
+    <string name="fragment_addevento_hint_periodicidad">"¿Se repite? "</string>
+    <string name="fragment_addevento_tipo">"Tipo: "</string>
+    <string name="fragment_addevento_semanas">"Número de semanas: "</string>
+    <string name="fragment_addevento_hint_semanas">"(ej. 2)"</string>
+    <string name="fragment_addevento_registrar">"Registrar evento"</string>
+
+
+    <string name="row_evento_nombre">"Nombre del evento: "</string>
+    <string name="row_evento_descripcion">"Descripción: "</string>
+
+    <string name="row_cumpleano_nombre">"Cumpleañero: "</string>
+    <string name="row_cumpleano_telefono">"Teléfono: "</string>
+
+    <string name="fragment_eventozoom_fecha">"Fecha: "</string>
+    <string name="fragment_eventozoom_tipo">"Tipo: "</string>
+
+    <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
+
+    <string name="fragment_listcumpleanos_vacio">"No hay más cumpleaños registrados."</string>
+    <string name="fragment_listeventos_vacio">"No hay más eventos registrados."</string>
+
+    <string name="fragment_cumpleanozoom_fecha">"Fecha: "</string>
+
+    <string name="fragment_addcumple_hint_nombre">"Ingrese el nombre del cumpleañero."</string>
+    <string name="fragment_addcumple_add">"Registrar cumpleaños"</string>
+    <string name="fragment_addcumple_telefono_hint">"Ingrese el teléfono del cumpleañero."</string>
+    <string name="fragment_addcumple_telefono">"Teléfono:"</string>
+
+    <string name="channel_name">"MiCanal"</string>
+    <string name="channel_description">"Este es mi canal"</string>
+    <string name="InfoPersonal">Información Personal:</string>
+    <string name="editar">Editar Información</string>
+    <string name="HistorialMedicamentos">Historial Medicamentos</string>
+    <string name="BitacoraEventos">Bitacora Eventos</string>
+    <string name="fragment_perfil_fecha">Fecha de nacimiento:</string>
+    <string name="fragment_perfil_pais">Pais:</string>
+    <string name="fragment_perfil_ciudad">Ciudad:</string>
+    <string name="fragment_perfil_apellido">Apellido:</string>
+    <string name="fragment_perfil_nombre">Nombre:</string>
+    <string name="fragment_perfil_botonFoto">Nueva foto</string>
+    <string name="fragment_historial_nombremed">Nombre del medicamento:</string>
+    <string name="fragment_historial_fecha">Fecha de ingesta:</string>
+    <string name="fragment_historial_atiempo">Tomado a tiempo:</string>
+    <string name="fragment_bitacora_todo">Todo</string>
+    <string name="fragment_bitacora_salud">Salud</string>
+    <string name="fragment_bitacora_social">Social</string>
+    <string name="fragment_bitacora_cognicion">Cognicion</string>
+    <string name="fragment_bitacora_espiritual">Espiritual</string>
+    <string name="fragment_bitacora_t1">Nombre:</string>
+    <string name="fragment_bitacora_t2">Tipo:</string>
+    <string name="fragment_bitacora_t3">Fecha:</string>
+    <string name="fragment_bitacora_t4">Descripción:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

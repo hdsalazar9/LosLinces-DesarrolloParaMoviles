@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.Date;
 import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.TomarMedicamento;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 /**
  * Created by josec on 14/04/2018.
@@ -37,15 +39,19 @@ public class TomarMedicamentoOperations {
 
     public void close(){db.close();}
 
-    public long addEvento (TomarMedicamento tomarMedicamento){
+    public long addTomarMedicamento (TomarMedicamento tomarMedicamento){
         long newRowId=0;
         try{
             ContentValues values=new ContentValues();
             values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_ID_MEDICAMENTO, tomarMedicamento.getIdMedicamento());
             values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_TOMADOATIEMPO, String.valueOf(tomarMedicamento.getTomadoATiempo()));
-            values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_FECHAHORA, tomarMedicamento.getFechaHora().toString());
+
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            String fechaTomado = df.format(tomarMedicamento.getFechaHora());
+
+            values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_FECHAHORA, fechaTomado);
             newRowId=db.insert(DataBaseSchema.TomarMedicamentoTable.TABLE_NAME, null, values);
-            Log.d("Product added", "Product added");
+            Log.d("TomarMedicamento added",tomarMedicamento.toString());
         }
         catch (SQLException e){
             Log.e("SQLADD", e.toString());
@@ -53,18 +59,16 @@ public class TomarMedicamentoOperations {
         return newRowId;
     }
 
-    public ArrayList<TomarMedicamento> findEvent(String productName){
+    public ArrayList<TomarMedicamento> getAllTomarMedicamento(){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
-        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
-                " = \""+ productName+"\"";
+        String query="SELECT * FROM "+DataBaseSchema.TomarMedicamentoTable.TABLE_NAME;
         try {
-            Cursor cursor=db.rawQuery(query, null);
-            tomarMedicamento=null;
-            if (cursor.moveToFirst()){
+            Cursor cursor=db.rawQuery(query,null);
+            if(cursor.moveToFirst()){
                 do{
                     Date dateC=null;
                     boolean b = cursor.getString(2).equals("true");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {
@@ -77,22 +81,24 @@ public class TomarMedicamentoOperations {
             }
             cursor.close();
         }
-        catch (SQLException e){
-            Log.e("SQLFIND", e.toString());
+        catch (SQLException e)
+        {
+            Log.e("SQLList", e.toString());
         }
         return listaTomatMedicamento;
     }
 
-    public ArrayList<TomarMedicamento> getAllProducts(){
+    public ArrayList<TomarMedicamento> getAllTomarMedicamentoFrom(String medicamentoID){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
-        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.TomarMedicamentoTable.TABLE_NAME +" WHERE "+DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_ID_MEDICAMENTO+
+                " =  \""+medicamentoID+"\"";
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
                     Date dateC=null;
                     boolean b = cursor.getString(2).equals("true");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {

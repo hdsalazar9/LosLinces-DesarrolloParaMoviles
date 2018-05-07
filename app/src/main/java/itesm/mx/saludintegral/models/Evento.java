@@ -2,6 +2,7 @@ package itesm.mx.saludintegral.models;
 
 import org.parceler.Parcel;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -14,25 +15,23 @@ import java.util.Date;
  */
 
 @Parcel
-public class Evento {
+public class Evento implements Comparator<Evento>{
 
     long id;
     String name;
     String descripcion;
     Date fecha;
-    Boolean periodicidad;
     String tipo;
 
 
     public Evento() {
     }
 
-    public Evento(long id, String name, String descripcion, Date fecha, Boolean periodicidad, String tipo) {
+    public Evento(long id, String name, String descripcion, Date fecha, String tipo) {
         this.id = id;
         this.name = name;
         this.descripcion = descripcion;
         this.fecha = fecha;
-        this.periodicidad = periodicidad;
         this.tipo = tipo;
     }
 
@@ -68,19 +67,16 @@ public class Evento {
         this.fecha = fecha;
     }
 
-    public Boolean getPeriodicidad() {
-        return periodicidad;
-    }
-
-    public void setPeriodicidad(Boolean periodicidad) {
-        this.periodicidad = periodicidad;
-    }
-
     public String getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    @Override
+    public int compare(Evento ev1, Evento ev2) {
+        return ev1.getFecha().compareTo(ev2.getFecha());
     }
 }

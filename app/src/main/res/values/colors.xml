@@ -2,12 +2,17 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff4081</color>
     <color name="colorSalud">#FFFF0000</color>
     <color name="colorSocial">#FF92569E</color>
     <color name="colorEjercicio">#FFE3E316</color>
     <color name="colorEspiritual">#FF2F39A8</color>
+    <color name="colorFinanzas">#2e7d32</color>
     <color name="registro_header">#FFECB3</color>
     <color name="registro_boton">#FFC107</color>
+    <color name="background_addmedicamento">#ffcdd2</color>
+    <color name="background_guardar_addmedicamento">#8bc34a</color>
+    <color name="background_addFoto_addmedicamento">#d32f2f</color>
+    <color name="background_datePicker">#31000000</color>
 
 </resources>
