@@ -54,12 +54,13 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 break;
             case "Cognicion":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
-                        getContext().getResources(),R.color.colorEjercicio, null));
+                        getContext().getResources(),R.color.colorCognicion, null));
                 break;
             case "Espiritual":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorEspiritual, null));
                 break;
+
         }
 
         return convertView;

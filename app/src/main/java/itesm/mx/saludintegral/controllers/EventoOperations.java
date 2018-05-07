@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+
 import android.util.Log;
 
 import java.text.ParseException;
@@ -15,10 +16,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+
 import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.Evento;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 /**
  * Created by josec on 14/04/2018.
@@ -48,8 +52,10 @@ public class EventoOperations {
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE, evento.getName());
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_DESCRICPION, evento.getDescripcion());
 
+
             String dateString = Miscellaneous.getStringFromDate(evento.getFecha());
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_FECHA, dateString);
+
 
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_TIPO, evento.getTipo());
             newRowId=db.insert(DataBaseSchema.EventosTable.TABLE_NAME, null, values);
@@ -70,9 +76,11 @@ public class EventoOperations {
             evento=null;
             if (cursor.moveToFirst()){
                 do{
+
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
                             cursor.getString(2),dateC, cursor.getString(4));
+
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
             }
@@ -94,6 +102,7 @@ public class EventoOperations {
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
                             cursor.getString(2),dateC, cursor.getString(4));
+
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
             }
@@ -105,6 +114,7 @@ public class EventoOperations {
         }
         return listaEventos;
     }
+
 
     public ArrayList<Evento> getAllProductsFromMonthAndType(Integer iMonth, String sType){
         StringBuilder stringBuilder = new StringBuilder();
@@ -160,5 +170,6 @@ public class EventoOperations {
         }
         return result;
     }
+
 
 }

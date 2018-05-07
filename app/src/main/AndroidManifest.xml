@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainMenu" />
+
         <activity android:name=".activities.RegistroActivity" />
         <activity android:name=".activities.SaludActivity" />
         <activity android:name=".activities.SocialActivity" />

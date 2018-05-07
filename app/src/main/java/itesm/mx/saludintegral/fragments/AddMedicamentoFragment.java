@@ -1,6 +1,8 @@
 package itesm.mx.saludintegral.fragments;
 
+
 import android.app.TimePickerDialog;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +31,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.MedicamentoOperations;
 import itesm.mx.saludintegral.models.Medicamento;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 import static android.app.Activity.RESULT_OK;
 
@@ -45,10 +51,13 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     EditText etNombre;
     EditText etGramaje;
     EditText etCantidadIngerir;
+
+
     EditText etHoraIngesta;
     EditText etCadaCuanto;
     EditText etFechaInicio;
     EditText etFechaTermino;
+
     Button btnTomarFoto;
     Button btnAddMed;
     Button btnFechaInicio;
@@ -67,6 +76,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     CheckBox cbDomingo;
 
 
+
     MedicamentoOperations dao;
 
     String strNombre;
@@ -79,10 +89,12 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     Date dateTermino;
     boolean bAntesDespuesComer;
     byte[] byteFoto;
+
     String strAntesDespues = "";
     String strHora="00:00:00";
     int iYearInicio, iMesInicio, iDiaInicio, iYearTermino, iMesTermino, iDiaTermino;
     static final int DIALOG_ID = 0;
+
 
     public AddMedicamentoFragment() {
         // Required empty public constructor.
@@ -96,10 +108,12 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         etNombre = rootView.findViewById(R.id.et_nombreMed);
         etGramaje = rootView.findViewById(R.id.et_gramajeMed);
         etCantidadIngerir = rootView.findViewById(R.id.et_cantidadIngerirMed);
+
         etHoraIngesta = rootView.findViewById(R.id.et_horaIngestaMed);
         etCadaCuanto = rootView.findViewById(R.id.et_cadaCuantoMed);
         etFechaInicio = rootView.findViewById(R.id.et_inicioMed);
         etFechaTermino = rootView.findViewById(R.id.et_terminoMed);
+
         btnTomarFoto = rootView.findViewById(R.id.btn_tomarFotoMed);
         ivFoto = rootView.findViewById(R.id.iv_fotoMed);
         btnAddMed = rootView.findViewById(R.id.btn_addMed);
@@ -115,11 +129,13 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         btnFechaTermino = rootView.findViewById(R.id.btn_fechaTermino);
         btnHoraIngesta = rootView.findViewById(R.id.btn_horaIngesta);
 
+
         dao = new MedicamentoOperations(getContext());
         dao.open();
 
         btnTomarFoto.setOnClickListener(this);
         btnAddMed.setOnClickListener(this);
+
         btnFechaInicio.setOnClickListener(this);
         btnFechaTermino.setOnClickListener(this);
         btnHoraIngesta.setOnClickListener(this);
@@ -144,6 +160,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
         etHoraIngesta.setText("00:00");
 
+
         return rootView;
     }
 
@@ -162,6 +179,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
                     startActivityForResult(intent, REQUEST_CODE );
                 }
                 break;
+
 
             case R.id.btn_fechaInicio:
                 Miscellaneous.strDatePicker = "fechaInicio";
@@ -204,6 +222,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
             ivFoto.setImageBitmap(bitmap);
         }
     }
+
 
     public String getDias() {
         String diasIngesta = "";
@@ -311,6 +330,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         iCadaCuanto = Integer.parseInt(etCadaCuanto.getText().toString());
         String strAntesDespuesComer = strAntesDespues;
         if (strAntesDespuesComer.equals("Antes")) {
+
             bAntesDespuesComer = true;
         } else {
             bAntesDespuesComer = false;
@@ -326,12 +346,14 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
             byteFoto = stream.toByteArray();
         }
         long l =0;
+
         medicament = new Medicamento(l, strNombre, dGramaje, iCantidad, strPeriodicidad, timeHora, iCadaCuanto, dateInicio, dateTermino, bAntesDespuesComer, byteFoto);
         long id = dao.addEvento(medicament);
         medicament.setId(id);
 
         FragmentoMedicamento fragmentoMedicamento = new FragmentoMedicamento();
         getFragmentManager().beginTransaction().replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento).commit();
+
 
         return medicament;
     }

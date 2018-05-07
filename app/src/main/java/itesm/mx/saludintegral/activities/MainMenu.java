@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
 import itesm.mx.saludintegral.R;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 /*
 Main Menu Activity: Referente a "Page 4" del prototipo de Ninjamock

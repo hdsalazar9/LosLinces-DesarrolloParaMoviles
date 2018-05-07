@@ -26,11 +26,14 @@ public class Evento {
     public Evento() {
     }
 
+
     public Evento(long id, String name, String descripcion, Date fecha, String tipo) {
+
         this.id = id;
         this.name = name;
         this.descripcion = descripcion;
         this.fecha = fecha;
+
         this.tipo = tipo;
     }
 
@@ -65,6 +68,7 @@ public class Evento {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
 
     public String getTipo() {
         return tipo;

@@ -40,6 +40,7 @@ public final class DataBaseSchema {
         public static final String COLUMN_NAME_NOMBRE = "eve_nombre";
         public static final String COLUMN_NAME_DESCRICPION = "eve_descripcion";
         public static final String COLUMN_NAME_FECHA = "eve_fecha";
+
         public static final String COLUMN_NAME_TIPO = "eve_tipo";
     }
 

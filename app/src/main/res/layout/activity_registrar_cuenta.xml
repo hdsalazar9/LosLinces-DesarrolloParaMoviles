@@ -61,14 +61,18 @@
         android:layout_alignTop="@+id/imageView2"
         android:background="@color/registro_boton"
         android:text="Tomar foto"
+
+
         android:textSize="30sp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_alignBottom="@+id/editText"
         android:layout_alignStart="@+id/imageView2"
+
         android:text="Nombre"
         android:textColor="@android:color/black"
         android:textSize="24sp" />
@@ -87,8 +91,10 @@
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_alignStart="@+id/editText2"
         android:layout_below="@+id/imageView2"
+
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textPersonName"
@@ -190,6 +196,9 @@
         android:layout_marginBottom="0dp"
         android:background="@color/registro_boton"
         android:text="Continuar"
+
+        android:textAlignment="center"
+
         android:textSize="30sp" />
 
     <!--

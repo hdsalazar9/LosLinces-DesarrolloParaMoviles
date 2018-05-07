@@ -234,8 +234,8 @@
         android:layout_marginBottom="0dp"
         android:background="#8BC34A"
         android:text="Guardar"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+
+        android:textAlignment="center"/>
 
 
 </RelativeLayout>

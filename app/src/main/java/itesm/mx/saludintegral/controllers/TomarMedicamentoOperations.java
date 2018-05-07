@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.text.DateFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,7 +17,9 @@ import java.util.Date;
 import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.TomarMedicamento;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 /**
  * Created by josec on 14/04/2018.
@@ -46,11 +49,13 @@ public class TomarMedicamentoOperations {
             values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_ID_MEDICAMENTO, tomarMedicamento.getIdMedicamento());
             values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_TOMADOATIEMPO, String.valueOf(tomarMedicamento.getTomadoATiempo()));
 
+
             //TODO:
             DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
             String fechaTomado = df.format(tomarMedicamento.getFechaHora());
 
             values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_FECHAHORA, fechaTomado);
+
             newRowId=db.insert(DataBaseSchema.TomarMedicamentoTable.TABLE_NAME, null, values);
             Log.d("Product added", "Product added");
         }
@@ -71,7 +76,9 @@ public class TomarMedicamentoOperations {
                 do{
                     Date dateC=null;
                     boolean b = cursor.getString(2).equals("true");
+
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {
@@ -99,7 +106,9 @@ public class TomarMedicamentoOperations {
                 do{
                     Date dateC=null;
                     boolean b = cursor.getString(2).equals("true");
+
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {

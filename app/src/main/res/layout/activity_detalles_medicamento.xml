@@ -94,7 +94,7 @@
         android:background="#8BC34A"
         android:text="Ya la tomé"
         android:textAlignment="center"
-        android:textSize="30sp" />
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/button4"
@@ -104,8 +104,9 @@
         android:layout_alignParentEnd="true"
         android:background="#D32F2F"
         android:text="Eliminar"
+
         android:textColor="@android:color/white"
-        android:textSize="30sp" />"
-        a"#D32F2F"
-        android:background="D />
+        android:textSize="30sp" />
+
+
 </RelativeLayout>

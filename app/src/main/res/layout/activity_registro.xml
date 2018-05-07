@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="itesm.mx.saludintegral.activities.RegistroActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,9 +30,11 @@
             <Button
                 android:id="@+id/btn_activity_registro_TomarFoto"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/activity_registro_TomarFoto" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -41,7 +47,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 android:text="@string/activity_registro_nombre" />
+
 
             <EditText
                 android:id="@+id/et_activity_registro_nombre"
@@ -49,8 +57,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+
                 android:inputType="textPersonName"
                 android:hint="@string/activity_registro_nombre_hint" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +73,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 android:text="@string/activity_registro_apodo" />
+
 
             <EditText
                 android:id="@+id/et_activity_registro_apodo"
@@ -71,8 +83,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+
                 android:inputType="textPersonName"
                 android:hint="@string/activity_registro_apodo_hint" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -82,10 +96,12 @@
 
             <TextView
                 android:id="@+id/textView4"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/activity_registro_FechaNacimiento" />
+
 
             <EditText
                 android:id="@+id/et_activity_registro_fecha"
@@ -93,9 +109,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+
                 android:inputType="textPersonName"
                 android:hint="@string/activity_registro_FechaNacimiento_hint" />
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,7 +125,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 android:text="@string/activity_registro_pais" />
+
 
             <EditText
                 android:id="@+id/et_activity_registro_pais"
@@ -115,8 +135,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+
                 android:inputType="textPersonName"
                 android:hint="@string/activity_registro_pais_hint" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -129,7 +151,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 android:text="@string/activity_registro_ciudad" />
+
 
             <EditText
                 android:id="@+id/et_activity_registro_ciudad"
@@ -137,15 +161,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+
                 android:inputType="textPersonName"
                 android:hint="@string/activity_registro_ciudad_hint" />
+
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_activity_registro_continuar"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_registro_Continuar"
             android:layout_gravity="center"/>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
