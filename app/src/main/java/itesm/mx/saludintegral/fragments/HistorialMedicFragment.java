@@ -48,6 +48,7 @@ public class HistorialMedicFragment extends Fragment {
         medOp.open();
 
         tomMedArr = tomMedOp.getAllProducts();
+        System.out.println("TAMANOOOO" + tomMedArr.size());
         medArr = medOp.getAllProducts();
 
         tomMedOp.close();
@@ -67,6 +68,7 @@ public class HistorialMedicFragment extends Fragment {
         String nombreMed;
 
         for(TomarMedicamento tmd: tomMedArr){
+            System.out.println("ENTRE A TOMAR MEDICAMENTO GET ITEM ARRAY");
             nombreMed = getNameFromMedId(tmd.getIdMedicamento());
             histItem = new HistorialMedicamentoItem(nombreMed,tmd.getFechaHora(),tmd.getTomadoATiempo());
             auxArr.add(histItem);
