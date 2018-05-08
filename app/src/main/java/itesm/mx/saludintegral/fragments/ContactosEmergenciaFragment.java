@@ -1,6 +1,8 @@
 package itesm.mx.saludintegral.fragments;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,7 +24,7 @@ import itesm.mx.saludintegral.models.ContactoEmergencia;
  * Created by Héctor on 5/7/2018.
  */
 
-public class ContactosEmergenciaFragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener{
+public class ContactosEmergenciaFragment extends Fragment {
 
     ContactoEmergenciaOperations conEmeOp;
 
@@ -45,31 +47,34 @@ public class ContactosEmergenciaFragment extends Fragment implements View.OnClic
         listContacto = conEmeOp.getAllProducts();
         contactoAdapter = new ContactoEmeAdapter(getContext(),listContacto);
         lvContactos.setAdapter(contactoAdapter);
-        lvContactos.setOnItemClickListener(this);
-        btnAddCont.setOnClickListener(this);
+
+        lvContactos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1,
+                                    int position, long arg3) {
+                System.out.println("SI ESTAS PICANDO BIEN DUDE");
+                Uri number = Uri.parse("tel:123456789");
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+                startActivity(callIntent);
+            }
+        });
+
+        btnAddCont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegistroContactoFragment registroFragment = new RegistroContactoFragment();
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout_perfilActivity, registroFragment).
+                        addToBackStack(null).commit();
+            }
+        });
 
         return rootView;
     }
 
     @Override
-    public void onClick(View v) {
-        RegistroContactoFragment registroFragment = new RegistroContactoFragment();
-        getFragmentManager().beginTransaction().replace(R.id.frameLayout_perfilActivity, registroFragment).
-                addToBackStack(null).commit();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //TODO: implementar marcar a esa persona
-
-    }
-
-    @Override
     public void onResume(){
         conEmeOp.open();
-        listContacto = conEmeOp.getAllProducts();
-        contactoAdapter = new ContactoEmeAdapter(getContext(),listContacto);
-        lvContactos.setAdapter(contactoAdapter);
         super.onResume();
     }
     @Override
