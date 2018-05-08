@@ -98,7 +98,7 @@
     <string name="channel_name">"MiCanal"</string>
     <string name="channel_description">"Este es mi canal"</string>
     <string name="InfoPersonal">Información Personal:</string>
-    <string name="editar">Editar Información</string>
+    <string name="editar">Guardar Cambios</string>
     <string name="HistorialMedicamentos">Historial Medicamentos</string>
     <string name="BitacoraEventos">Bitacora Eventos</string>
     <string name="fragment_perfil_fecha">Fecha de nacimiento:</string>

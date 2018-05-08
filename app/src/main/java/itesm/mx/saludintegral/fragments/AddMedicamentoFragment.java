@@ -125,21 +125,12 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         etHoraIngesta = rootView.findViewById(R.id.et_horaIngestaMed);
         etCadaCuanto = rootView.findViewById(R.id.et_cadaCuantoMed);
         etFechaInicio = rootView.findViewById(R.id.et_inicioMed);
-        etFechaTermino = rootView.findViewById(R.id.et_terminoMed);
 
         btnTomarFoto = rootView.findViewById(R.id.btn_tomarFotoMed);
         ivFoto = rootView.findViewById(R.id.iv_fotoMed);
         btnAddMed = rootView.findViewById(R.id.btn_addMed);
         radioGroup = rootView.findViewById(R.id.radioGroup);
-        cbLunes = rootView.findViewById(R.id.cb_Lunes);
-        cbMartes = rootView.findViewById(R.id.cb__Martes);
-        cbMiercoles = rootView.findViewById(R.id.cb_Miercoles);
-        cbJueves = rootView.findViewById(R.id.cb_Jueves);
-        cbViernes = rootView.findViewById(R.id.cb_Viernes);
-        cbSabado = rootView.findViewById(R.id.cb_Sabado);
-        cbDomingo = rootView.findViewById(R.id.cb_Domingo);
         btnFechaInicio = rootView.findViewById(R.id.btn_fechaInicio);
-        btnFechaTermino = rootView.findViewById(R.id.btn_fechaTermino);
         btnHoraIngesta = rootView.findViewById(R.id.btn_horaIngesta);
 
 
@@ -150,11 +141,11 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         btnAddMed.setOnClickListener(this);
 
         btnFechaInicio.setOnClickListener(this);
-        btnFechaTermino.setOnClickListener(this);
+        //btnFechaTermino.setOnClickListener(this);
         btnHoraIngesta.setOnClickListener(this);
-        //etHoraIngesta.setEnabled(false);
+        etHoraIngesta.setEnabled(false);
         etFechaInicio.setEnabled(false);
-        etFechaTermino.setEnabled(false);
+        //etFechaTermino.setEnabled(false);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -203,11 +194,6 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
             case R.id.btn_fechaInicio:
                 Miscellaneous.strDatePicker = "fechaInicio";
-                getDatePicked();
-                break;
-
-            case R.id.btn_fechaTermino:
-                Miscellaneous.strDatePicker = "fechaTermino";
                 getDatePicked();
                 break;
 
@@ -314,7 +300,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     public Medicamento newMedicamento() {
         Log.d("FUNCION","newMedicamento()");
         Medicamento medicament = new Medicamento();
-        strPeriodicidad = getDias();
+        strPeriodicidad = "";
 
         if (etNombre.getText().toString().length() == 0) {
             Toast.makeText(getContext(), "Ingresar nombre de medicamento", Toast.LENGTH_SHORT).show();
@@ -331,10 +317,12 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
             return medicament;
         }
 
+        /*
         if (strPeriodicidad.length() == 0) {
             Toast.makeText(getContext(), "Seleccionar días", Toast.LENGTH_SHORT).show();
             return medicament;
         }
+        */
 
         if (etCadaCuanto.getText().toString().length() == 0) {
             Toast.makeText(getContext(), "Ingresar cada cuánto se debe de consumir el medicamento", Toast.LENGTH_LONG).show();
@@ -346,10 +334,12 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
             return medicament;
         }
 
+        /*
         if (etFechaTermino.getText().length() == 0 ) {
             Toast.makeText(getContext(), "Seleccione fecha de Termino", Toast.LENGTH_SHORT).show();
             return medicament;
         }
+        */
 
         if (strAntesDespues.length() == 0 ) {
             Toast.makeText(getContext(), "Seleccione si se consume antes o después de comer", Toast.LENGTH_SHORT).show();
@@ -366,11 +356,11 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         timeHora = Time.valueOf(strHora);
 
         String strFechaInicio = etFechaInicio.getText().toString();
-        String strFechaTermino = etFechaTermino.getText().toString();
+        //String strFechaTermino = etFechaTermino.getText().toString();
 
         try {
             dateInicio = dateFormat.parse(strFechaInicio);
-            dateTermino = dateFormat.parse(strFechaTermino);
+            dateTermino = dateFormat.parse(strFechaInicio);
         } catch (ParseException e) {
             e.printStackTrace();
         }
