@@ -84,9 +84,9 @@ public class FragmentoMenuCognicion extends ListFragment implements AdapterView.
 
     ArrayList<MenuItem> getItems(){
         ArrayList<MenuItem> Aux=new ArrayList<>();
-        MenuItem menuItem=new MenuItem("Actividades", R.drawable.medicina_icon);
+        MenuItem menuItem=new MenuItem("Actividades", R.drawable.light);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Finanzas", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Finanzas", R.drawable.money);
         Aux.add(menuItem);
         return Aux;
     }
