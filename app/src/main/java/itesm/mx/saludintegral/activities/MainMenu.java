@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -92,6 +93,15 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         setListAdapter(menuItemArrayAdapter);
 
         getListView().setOnItemClickListener(this);
+
+        //Floating button
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Miscellaneous.strTipo = Miscellaneous.tipos[8];
+            }
+        });
 
     }
 
