@@ -114,6 +114,7 @@ public class CumpleanoOperations {
         return listaCumpleanos;
     }
 
+
     public ArrayList<Cumpleano> getAllProductsFromMonthAndType(Integer iMonth, String sType){
         StringBuilder stringBuilder = new StringBuilder();
         if(iMonth < 10){
@@ -128,14 +129,15 @@ public class CumpleanoOperations {
         String query = "SELECT * FROM "+ DataBaseSchema.CumpleanosTable.TABLE_NAME +
                 " WHERE " + DataBaseSchema.CumpleanosTable.COLUMN_NAME_FECHA + " LIKE '___" + sMonth + "%' AND " +
                 DataBaseSchema.CumpleanosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
-
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
+
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(2));
                     cumpleano=new Cumpleano(cursor.getInt(0),cursor.getString(1),
                             dateC, cursor.getString(3), cursor.getString(4));
+
                     listaCumpleanos.add(cumpleano);
                 }while (cursor.moveToNext());
             }
@@ -143,6 +145,7 @@ public class CumpleanoOperations {
         }
         catch (SQLException e)
         {
+
             Log.e("AllProductsFromMonth: ", e.toString());
         }
 

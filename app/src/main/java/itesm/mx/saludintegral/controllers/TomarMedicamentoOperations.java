@@ -94,6 +94,7 @@ public class TomarMedicamentoOperations {
         return listaTomatMedicamento;
     }
 
+
     public ArrayList<TomarMedicamento> getAllProducts(){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
         String query="SELECT * FROM "+DataBaseSchema.TomarMedicamentoTable.TABLE_NAME;

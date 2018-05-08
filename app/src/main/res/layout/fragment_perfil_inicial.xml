@@ -242,7 +242,7 @@
             android:textAlignment="center"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
             android:textColor="@android:color/white"
-            android:textSize="30sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <Button
@@ -256,6 +256,18 @@
             android:textAppearance="@android:style/TextAppearance.Material.Small"
             android:textColor="@android:color/white"
             android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_perfil_monitoreo"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/registro_btn_alt"
+            android:text="@string/PerfilMonitoreo"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
     </LinearLayout>

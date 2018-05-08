@@ -48,6 +48,7 @@ import static java.lang.Math.toIntExact;
 
 
 import static android.app.Activity.RESULT_OK;
+import static java.lang.String.valueOf;
 
 /**
  * Created by FernandoDavid on 15/04/2018.
@@ -219,18 +220,33 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     public void start(int horas) {
 
         AlarmManager manager = (AlarmManager) getContext().getSystemService(getContext().ALARM_SERVICE);
-        int interval = 1000*60*horas;
-
+        int interval = 1000*60*60*horas;
 
         Calendar calendar = Calendar.getInstance();
-        //calendar.set(dateInicio.getYear(), dateInicio.getMonth(), dateInicio.getDay(), timeHora.getHours(), timeHora.getMinutes());
-        calendar.setTime(dateInicio);
+        Calendar ahora = Calendar.getInstance();
+        ahora.setTimeInMillis(System.currentTimeMillis());
 
-        Log.d("Recibi", String.valueOf(calendar.getTimeInMillis()) );
-        Log.d("luego", String.valueOf(System.currentTimeMillis()));
+        String time [] = etHoraIngesta.getText().toString().split(":");
+        String inicio [] = etFechaInicio.getText().toString().split("-");
+
+        calendar.set(Calendar.YEAR, Integer.parseInt(inicio[2]));
+        calendar.set(Calendar.MONTH, Integer.parseInt(inicio[1]));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(inicio[0]));
+        calendar.add(Calendar.MONTH, -1);
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(time[1]));
 
 
-        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
+        Long days = (calendar.get(Calendar.DAY_OF_YEAR) - ahora.get(Calendar.DAY_OF_YEAR)) * 1000*60*60*24L;
+        Long hours = (calendar.get(Calendar.HOUR_OF_DAY) - ahora.get(Calendar.HOUR_OF_DAY)) * 1000*60*60L;
+        Long minutes = (calendar.get(Calendar.MINUTE) - ahora.get(Calendar.MINUTE)) * 1000*60L;
+
+        Long scheduled = ahora.getTimeInMillis() + days + hours + minutes;
+
+         Calendar agendado = Calendar.getInstance();
+         agendado.setTimeInMillis(scheduled);
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, agendado.getTimeInMillis(), interval, pendingIntent);
     }
 
 
