@@ -145,11 +145,7 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
     }
 
     public void onResponseMonitoreo(){
-        FragmentoMenuSalud fragmentoMenuSalud=new FragmentoMenuSalud();
-        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout_ActivitySalud, fragmentoMenuSalud);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        onBackPressed();
     }
 
     /*public void onResponseAlimentacion(){

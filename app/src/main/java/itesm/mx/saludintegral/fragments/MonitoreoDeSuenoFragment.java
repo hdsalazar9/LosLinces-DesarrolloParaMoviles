@@ -77,13 +77,26 @@ public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickLi
                 addSueno();
             break;
         }
-        mCallback.onResponseMonitoreo();
     }
 
     public void addSueno(){
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         Date currentTime = new Date();
         Date dateC=null;
+        String strHoras = etHorasSueno.getText().toString();
+        Double dHoras;
+
+        if(strHoras.length() == 0) {
+            Toast.makeText(getContext(),"Ingrese horas",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        dHoras = Double.parseDouble(strHoras);
+        if(dHoras <= 0) {
+            Toast.makeText(getContext(),"Ingrese horas válidas",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         long n=0;
         String horaActual=format.format(currentTime);
         try {
@@ -91,10 +104,12 @@ public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickLi
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         MonitoreoSueno monitoreoSueno;
-        monitoreoSueno = new MonitoreoSueno(n,dateC,Double.parseDouble(etHorasSueno.getText().toString()));
+        monitoreoSueno = new MonitoreoSueno(n,dateC,dHoras);
         n= dao.addEvento(monitoreoSueno);
         monitoreoSueno.setId(n);
-        Toast.makeText(getContext(), "Correctamente registrado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Evento añadido", Toast.LENGTH_SHORT).show();
+        mCallback.onResponseMonitoreo();
     }
 }

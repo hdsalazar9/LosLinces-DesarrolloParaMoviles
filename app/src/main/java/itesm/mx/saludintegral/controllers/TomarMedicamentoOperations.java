@@ -59,6 +59,36 @@ public class TomarMedicamentoOperations {
         return newRowId;
     }
 
+    public ArrayList<TomarMedicamento> findTomarMedicamento(String productName){
+        ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
+                " = \""+ productName+"\"";
+        try {
+            Cursor cursor=db.rawQuery(query, null);
+            tomarMedicamento=null;
+            if (cursor.moveToFirst()){
+                do{
+                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
+                    boolean b = cursor.getString(2).equals("true");
+                   /* SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    try {
+                        dateC= dateFormat.parse(cursor.getString(3));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }*/
+                    tomarMedicamento=new TomarMedicamento(cursor.getInt(0),cursor.getInt(1),
+                            b,dateC);
+                    listaTomatMedicamento.add(tomarMedicamento);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLException e){
+            Log.e("SQLFIND", e.toString());
+        }
+        return listaTomatMedicamento;
+    }
+
     public ArrayList<TomarMedicamento> getAllTomarMedicamento(){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
         String query="SELECT * FROM "+DataBaseSchema.TomarMedicamentoTable.TABLE_NAME;
