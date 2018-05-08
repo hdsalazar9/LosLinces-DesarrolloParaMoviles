@@ -29,7 +29,7 @@
                     android:layout_width="215dp"
                     android:layout_height="79dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/pills" />
+                    android:src="@drawable/pills" />
 
                 <Button
                     android:id="@+id/btn_tomarFotoMed"

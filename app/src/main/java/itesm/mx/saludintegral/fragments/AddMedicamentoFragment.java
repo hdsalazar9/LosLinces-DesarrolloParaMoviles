@@ -1,12 +1,18 @@
 package itesm.mx.saludintegral.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -24,13 +31,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.MedicamentoOperations;
 import itesm.mx.saludintegral.models.Medicamento;
 import itesm.mx.saludintegral.util.Miscellaneous;
+import itesm.mx.saludintegral.util.Receiver;
+
+import static java.lang.Math.toIntExact;
 
 import static android.app.Activity.RESULT_OK;
+import static java.lang.String.valueOf;
 
 /**
  * Created by FernandoDavid on 15/04/2018.
@@ -63,6 +76,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     CheckBox cbSabado;
     CheckBox cbDomingo;
 
+    OnResponseAgregar mCallback;
 
     MedicamentoOperations dao;
 
@@ -80,6 +94,8 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     String strHora="00:00:00";
     int iYearInicio, iMesInicio, iDiaInicio, iYearTermino, iMesTermino, iDiaTermino;
     static final int DIALOG_ID = 0;
+
+    private PendingIntent pendingIntent;
 
     public AddMedicamentoFragment() {
         // Required empty public constructor.
@@ -141,6 +157,8 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
         etHoraIngesta.setText("00:00");
 
+
+
         return rootView;
     }
 
@@ -150,6 +168,12 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_addMed:
                 medicamento = newMedicamento();
+                Intent alarmIntent = new Intent(getContext(), Receiver.class);
+                alarmIntent.putExtra("medicina", medicamento.getNombre());
+                alarmIntent.putExtra("whereFrom", "AddMedicamento");
+                alarmIntent.putExtra("id", ((int) medicamento.getId()));
+                pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
+                start(medicamento.getCadaCuanto());
                 break;
 
             case R.id.btn_tomarFotoMed:
@@ -176,6 +200,39 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         }
     }
 
+    public void start(int horas) {
+
+        AlarmManager manager = (AlarmManager) getContext().getSystemService(getContext().ALARM_SERVICE);
+        int interval = 1000*60*horas;
+
+        Calendar calendar = Calendar.getInstance();
+        Calendar ahora = Calendar.getInstance();
+        ahora.setTimeInMillis(System.currentTimeMillis());
+
+        String time [] = etHoraIngesta.getText().toString().split(":");
+        String inicio [] = etFechaInicio.getText().toString().split("-");
+
+        calendar.set(Calendar.YEAR, Integer.parseInt(inicio[2]));
+        calendar.set(Calendar.MONTH, Integer.parseInt(inicio[1]));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(inicio[0]));
+        calendar.add(Calendar.MONTH, -1);
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(time[1]));
+
+
+        Long days = (calendar.get(Calendar.DAY_OF_YEAR) - ahora.get(Calendar.DAY_OF_YEAR)) * 1000*60*60*24L;
+        Long hours = (calendar.get(Calendar.HOUR_OF_DAY) - ahora.get(Calendar.HOUR_OF_DAY)) * 1000*60*60L;
+        Long minutes = (calendar.get(Calendar.MINUTE) - ahora.get(Calendar.MINUTE)) * 1000*60L;
+
+        Long scheduled = ahora.getTimeInMillis() + days + hours + minutes;
+
+         Calendar agendado = Calendar.getInstance();
+         agendado.setTimeInMillis(scheduled);
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, agendado.getTimeInMillis(), interval, pendingIntent);
+    }
+
+
     public void getHourPicked() {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "TimePicker");
@@ -192,6 +249,11 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             bitmap = (Bitmap) data.getExtras().get("data");
+
+            //Girar foto
+            Matrix matrix = new Matrix();
+            matrix.postRotate(270);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -232,59 +294,141 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
 
     public Medicamento newMedicamento() {
-        Medicamento medicament;
-        int iDiasSeleccionados=0;
+        Log.d("FUNCION","newMedicamento()");
+        Medicamento medicament = new Medicamento();
         strPeriodicidad = getDias();
 
-        if (strPeriodicidad.length() == 0 || etNombre.getText().toString().length() == 0 || etGramaje.getText().toString().length() == 0 || etCantidadIngerir.getText().toString().length() == 0 || iDiasSeleccionados > 0 || etNombre.getText().toString().length() == 0 || etCadaCuanto.getText().toString().length() == 0 || strAntesDespues.length() == 0) {
-            Toast.makeText(getContext(),"Ingrese todos los datos especificados",Toast.LENGTH_LONG).show();
-            medicament = new Medicamento();
+        if (etNombre.getText().toString().length() == 0) {
+            Toast.makeText(getContext(), "Ingresar nombre de medicamento", Toast.LENGTH_SHORT).show();
+            return medicament;
         }
-        else
-        {
-            strNombre = etNombre.getText().toString();
-            dGramaje = Double.parseDouble(etGramaje.getText().toString());
-            iCantidad = Integer.parseInt(etCantidadIngerir.getText().toString());
-            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-            SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-yyyy");
 
-            // Tiene que ser ingresada en el formato de hh:mm:ss
-            strHora = etHoraIngesta.getText().toString() + ":00";
-            timeHora = Time.valueOf(strHora);
-            try {
-                dateInicio = dateFormat.parse(etFechaInicio.getText().toString());
-                dateTermino = dateFormat.parse(etFechaInicio.getText().toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            iCadaCuanto = Integer.parseInt(etCadaCuanto.getText().toString());
-            String strAntesDespuesComer = strAntesDespues;
-            if (strAntesDespuesComer.equals("Antes")) {
-                bAntesDespuesComer = true;
-            } else {
-                bAntesDespuesComer = false;
-            }
-
-            if (bitmap == null) {
-                ivFoto.buildDrawingCache();
-                bitmap = (Bitmap) ivFoto.getDrawingCache();
-
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
-
-                byteFoto = stream.toByteArray();
-            }
-            long l =0;
-            medicament = new Medicamento(l, strNombre, dGramaje, iCantidad, strPeriodicidad, timeHora, iCadaCuanto, dateInicio, dateTermino, bAntesDespuesComer, byteFoto);
-            long id = dao.addEvento(medicament);
-            medicament.setId(id);
-
-            FragmentoMedicamento fragmentoMedicamento = new FragmentoMedicamento();
-            getFragmentManager().beginTransaction().replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento).commit();
-
-
+        if (etGramaje.getText().toString().length() == 0) {
+            Toast.makeText(getContext(), "Ingresar gramaje", Toast.LENGTH_SHORT).show();
+            return medicament;
         }
+
+        if (etCantidadIngerir.getText().toString().length() == 0) {
+            Toast.makeText(getContext(), "Ingresar cantidad a consumir", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        if (strPeriodicidad.length() == 0) {
+            Toast.makeText(getContext(), "Seleccionar días", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        if (etCadaCuanto.getText().toString().length() == 0) {
+            Toast.makeText(getContext(), "Ingresar cada cuánto se debe de consumir el medicamento", Toast.LENGTH_LONG).show();
+            return medicament;
+        }
+
+        if (etFechaInicio.getText().length() == 0 ) {
+            Toast.makeText(getContext(), "Seleccione fecha de Inicio", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        if (etFechaTermino.getText().length() == 0 ) {
+            Toast.makeText(getContext(), "Seleccione fecha de Termino", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        if (strAntesDespues.length() == 0 ) {
+            Toast.makeText(getContext(), "Seleccione si se consume antes o después de comer", Toast.LENGTH_SHORT).show();
+            return medicament;
+        }
+
+        strNombre = etNombre.getText().toString();
+        dGramaje = Double.parseDouble(etGramaje.getText().toString());
+        iCantidad = Integer.parseInt(etCantidadIngerir.getText().toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
+        // Tiene que ser ingresada en el formato de hh:mm:ss
+        strHora = etHoraIngesta.getText().toString() + ":00";
+        timeHora = Time.valueOf(strHora);
+
+        String strFechaInicio = etFechaInicio.getText().toString();
+        String strFechaTermino = etFechaTermino.getText().toString();
+
+        try {
+            dateInicio = dateFormat.parse(strFechaInicio);
+            dateTermino = dateFormat.parse(strFechaTermino);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("FECHAS","dateInicio: " + dateInicio);
+        Log.d("FECHAS","dateTermino: " + dateTermino);
+
+        Log.d("FECHAS","dateTermino despues de dateInicio?? " + dateTermino.after(dateInicio));
+
+        if(dateInicio.after(dateTermino)) {
+            Toast.makeText(getContext(), "Fecha término tiene que preceder a la fecha de inicio",Toast.LENGTH_LONG).show();
+            return medicament;
+        }
+
+        iCadaCuanto = Integer.parseInt(etCadaCuanto.getText().toString());
+        String strAntesDespuesComer = strAntesDespues;
+        if (strAntesDespuesComer.equals("Antes")) {
+            bAntesDespuesComer = true;
+        } else {
+            bAntesDespuesComer = false;
+        }
+
+        if (bitmap == null) {
+            ivFoto.buildDrawingCache();
+            bitmap = (Bitmap) ivFoto.getDrawingCache();
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
+
+            byteFoto = stream.toByteArray();
+        }
+        long l =0;
+        medicament = new Medicamento(l, strNombre, dGramaje, iCantidad, strPeriodicidad, timeHora, iCadaCuanto, dateInicio, dateTermino, bAntesDespuesComer, byteFoto);
+        long id = dao.addEvento(medicament);
+        medicament.setId(id);
+        mCallback.onResponseAgregar();
         return medicament;
+    }
+
+    //Interfaz para que la actividad pueda responder al click en lista
+    public interface OnResponseAgregar {
+        public void onResponseAgregar();
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        Activity activity;
+
+        if(context instanceof  Activity){
+            //Actividad respondera a la interface
+            activity = (Activity) context;
+            try{
+                mCallback = (OnResponseAgregar) activity;
+            }   catch(ClassCastException e){
+                throw new ClassCastException(activity.toString() +
+                        " must implement OnResponseTomar.");
+            }
+        }
+    }
+
+    @Override
+    public void onResume(){
+        dao.open();
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        dao.close();
+        super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
     }
 
 }

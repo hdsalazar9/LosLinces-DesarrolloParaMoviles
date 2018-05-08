@@ -96,18 +96,17 @@ public class FragmentoMedicamento extends ListFragment implements AdapterView.On
         dao.close();
         super.onPause();
     }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        //Electrodomestico electrodomestico = (Electrodomestico) parent.getItemAtPosition(position);
-        /*Bundle bundle = new Bundle();
-        Intent i = new Intent(Tab1Fragment.this, DetalleActivity.class);
-        bundle.putSerializable("libro",libro);
-        i.putExtras(bundle);
-        startActivity(i);*/
-        //Intent intent = new Intent(getActivity(), FragmentoTomarMed.class);
         Medicamento medicamento=(Medicamento)parent.getItemAtPosition(position);
         mCallback.onResponse(2, medicamento);
+
         /*intent.putExtra("medicamento", Parcels.wrap(medicamento));
         startActivity(intent);*/
     }
