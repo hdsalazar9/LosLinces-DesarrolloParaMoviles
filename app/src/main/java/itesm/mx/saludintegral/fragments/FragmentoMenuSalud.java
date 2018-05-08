@@ -91,13 +91,13 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
 
     ArrayList<MenuItem> getItems(){
         ArrayList<MenuItem> Aux=new ArrayList<>();
-        MenuItem menuItem=new MenuItem("Medicinas", R.drawable.medicina_icon);
+        MenuItem menuItem=new MenuItem("Medicinas", R.drawable.pill);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Monitoreo de sueño", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Monitoreo de sueño", R.drawable.moon);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Alimentación", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Alimentación", R.drawable.food);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Ejercicio", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Ejercicio", R.drawable.run);
         Aux.add(menuItem);
         return Aux;
     }

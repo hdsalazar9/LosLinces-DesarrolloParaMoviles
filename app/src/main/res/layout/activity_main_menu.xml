@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +11,10 @@
     android:background="@android:color/white">
 
 
-
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_activity_mainmenu_hola"
@@ -86,5 +92,4 @@
 
 
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

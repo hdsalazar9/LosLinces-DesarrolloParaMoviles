@@ -84,9 +84,9 @@ public class FragmentoMenuSocial extends ListFragment implements AdapterView.OnI
 
     ArrayList<MenuItem> getItems(){
         ArrayList<MenuItem> Aux = new ArrayList<>();
-        MenuItem menuItem = new MenuItem("Familia", R.drawable.medicina_icon);
+        MenuItem menuItem = new MenuItem("Familia", R.drawable.fam);
         Aux.add(menuItem);
-        menuItem = new MenuItem("Amigos", R.drawable.ic_launcher_background);
+        menuItem = new MenuItem("Amigos", R.drawable.amigos);
         Aux.add(menuItem);
         return Aux;
     }

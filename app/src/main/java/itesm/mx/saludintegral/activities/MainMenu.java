@@ -195,16 +195,16 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         MenuItem mItem;
         ArrayList<MenuItem> Menu = new ArrayList<>();
 
-        mItem = new MenuItem("Salud", R.drawable.medicina_icon);
+        mItem = new MenuItem("Salud", R.drawable.pill);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Social", R.drawable.social_icon);
+        mItem = new MenuItem("Social", R.drawable.social_ok);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Cognicion", R.drawable.exercise_icon);
+        mItem = new MenuItem("Cognicion", R.drawable.light);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Espiritual", R.drawable.spiritual_icon);
+        mItem = new MenuItem("Espiritual", R.drawable.peace);
         Menu.add(mItem);
 
         return Menu;

@@ -90,9 +90,9 @@ public class FragmentoFamiliaAmigos extends ListFragment implements AdapterView.
 
     ArrayList<MenuItem> getItems(){
         ArrayList<MenuItem> Aux = new ArrayList<>();
-        MenuItem menuItem = new MenuItem("Evento", R.drawable.medicina_icon);
+        MenuItem menuItem = new MenuItem("Evento", R.drawable.fam);
         Aux.add(menuItem);
-        menuItem = new MenuItem("Cumpleaños", R.drawable.ic_launcher_background);
+        menuItem = new MenuItem("Cumpleaños", R.drawable.birthday_icon);
         Aux.add(menuItem);
         return Aux;
     }
