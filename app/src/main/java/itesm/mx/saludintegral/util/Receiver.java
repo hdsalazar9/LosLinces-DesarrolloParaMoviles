@@ -56,7 +56,7 @@ public class Receiver extends BroadcastReceiver{
     }
 
     private void showNotificationMed(Context context, String medicina, int id) {
-        PendingIntent contentIntent = PendingIntent.getActivity(context, id, new Intent(context, ExampleReceiver.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, id, new Intent(context, SaludActivity.class), 0);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)

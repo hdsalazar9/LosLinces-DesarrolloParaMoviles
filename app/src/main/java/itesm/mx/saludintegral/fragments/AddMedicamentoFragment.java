@@ -173,7 +173,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
                 alarmIntent.putExtra("whereFrom", "AddMedicamento");
                 alarmIntent.putExtra("id", ((int) medicamento.getId()));
                 pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
-                //start(medicamento.getCadaCuanto());
+                start(medicamento.getCadaCuanto());
                 break;
 
             case R.id.btn_tomarFotoMed:
@@ -203,7 +203,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     public void start(int horas) {
 
         AlarmManager manager = (AlarmManager) getContext().getSystemService(getContext().ALARM_SERVICE);
-        int interval = 1000*60*60*horas;
+        int interval = 1000*60*horas;
 
         Calendar calendar = Calendar.getInstance();
         Calendar ahora = Calendar.getInstance();
