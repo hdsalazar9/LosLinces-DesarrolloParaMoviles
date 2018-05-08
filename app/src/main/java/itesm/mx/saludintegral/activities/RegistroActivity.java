@@ -171,4 +171,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         database.close();
         super.onPause();
     }
+
+    public void setBirthday(){
+
+    }
 }
