@@ -109,11 +109,18 @@ public class CumpleanoOperations {
 
     public ArrayList<Cumpleano> getAllProductsFromMonthAndType(Integer iMonth, String sType){
         StringBuilder stringBuilder = new StringBuilder();
+        Log.d("Query","iMOnth: " + iMonth);
         if(iMonth < 10){
             stringBuilder.append('0');
             stringBuilder.append(iMonth+1);
         }
-        else stringBuilder.append(iMonth+1);
+        else if (iMonth == 12) {
+            stringBuilder.append("01");
+        }
+        else
+        {
+            stringBuilder.append(iMonth+1);
+        }
 
         String sMonth = stringBuilder.toString();
 
@@ -121,6 +128,7 @@ public class CumpleanoOperations {
         String query = "SELECT * FROM "+ DataBaseSchema.CumpleanosTable.TABLE_NAME +
                 " WHERE " + DataBaseSchema.CumpleanosTable.COLUMN_NAME_FECHA + " LIKE '___" + sMonth + "%' AND " +
                 DataBaseSchema.CumpleanosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
+        Log.d("Query",query);
 
         try {
             Cursor cursor=db.rawQuery(query,null);
