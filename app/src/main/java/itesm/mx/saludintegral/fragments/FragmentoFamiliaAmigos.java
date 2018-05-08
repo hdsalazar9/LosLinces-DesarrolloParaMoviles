@@ -64,7 +64,7 @@ public class FragmentoFamiliaAmigos extends ListFragment implements AdapterView.
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        Log.d("Log", "Height: " + frameLayout.getHeight());
+                        //Log.d("Log", "Height: " + frameLayout.getHeight());
                         Miscellaneous.iSizeMenu = frameLayout.getHeight();
                         if(bSoloUna) {
                             handler.postDelayed(runnable, 1);

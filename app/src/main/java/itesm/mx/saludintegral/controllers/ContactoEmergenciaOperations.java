@@ -51,7 +51,7 @@ public class ContactoEmergenciaOperations {
 
     public ArrayList<ContactoEmergencia> findEvent(String productName){
         ArrayList<ContactoEmergencia> listaContactoEmergencia=new ArrayList<ContactoEmergencia>();
-        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
+        String query="SELECT * FROM "+DataBaseSchema.ContactoEmergenciaTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
                 " = \""+ productName+"\"";
         try {
             Cursor cursor=db.rawQuery(query, null);
@@ -73,7 +73,7 @@ public class ContactoEmergenciaOperations {
 
     public ArrayList<ContactoEmergencia> getAllProducts(){
         ArrayList<ContactoEmergencia> listaContactoEmergencia=new ArrayList<ContactoEmergencia>();
-        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.ContactoEmergenciaTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){

@@ -209,8 +209,13 @@ public class EventoOperations {
             stringBuilder.append('0');
             stringBuilder.append(iMonth+1);
         }
-        else stringBuilder.append(iMonth+1);
-
+        else if (iMonth == 12) {
+            stringBuilder.append("01");
+        }
+        else
+        {
+            stringBuilder.append(iMonth+1);
+        }
         String sMonth = stringBuilder.toString();
 
         ArrayList<Evento> listaEventos = new ArrayList<Evento>();
