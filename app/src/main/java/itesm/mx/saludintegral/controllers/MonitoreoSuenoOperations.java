@@ -57,7 +57,7 @@ public class MonitoreoSuenoOperations {
 
     public ArrayList<MonitoreoSueno> findEvent(String productName){
         ArrayList<MonitoreoSueno> listaMonitoreoSuenos=new ArrayList<MonitoreoSueno>();
-        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
+        String query="SELECT * FROM "+DataBaseSchema.MonitoreoSuenoTable.TABLE_NAME+" WHERE "+DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+
                 " = \""+ productName+"\"";
         try {
             Cursor cursor=db.rawQuery(query, null);
@@ -79,7 +79,7 @@ public class MonitoreoSuenoOperations {
 
     public ArrayList<MonitoreoSueno> getAllEvents(){
         ArrayList<MonitoreoSueno> listaMonitoreoSuenos=new ArrayList<MonitoreoSueno>();
-        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.MonitoreoSuenoTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){

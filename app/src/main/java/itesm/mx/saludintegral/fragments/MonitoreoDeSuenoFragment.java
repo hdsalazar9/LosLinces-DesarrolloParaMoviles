@@ -112,4 +112,20 @@ public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickLi
         Toast.makeText(getContext(), "Evento añadido", Toast.LENGTH_SHORT).show();
         mCallback.onResponseMonitoreo();
     }
+
+    @Override
+    public void onResume(){
+        dao.open();
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        dao.close();
+        super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
+    }
 }

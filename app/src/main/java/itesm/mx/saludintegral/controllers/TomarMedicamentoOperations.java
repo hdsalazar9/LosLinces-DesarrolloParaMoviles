@@ -51,7 +51,7 @@ public class TomarMedicamentoOperations {
 
             values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_FECHAHORA, fechaTomado);
             newRowId=db.insert(DataBaseSchema.TomarMedicamentoTable.TABLE_NAME, null, values);
-            Log.d("TomarMedicamento added", "TomarMedicamento added");
+            Log.d("TomarMedicamento added",tomarMedicamento.toString());
         }
         catch (SQLException e){
             Log.e("SQLADD", e.toString());
@@ -89,21 +89,21 @@ public class TomarMedicamentoOperations {
         return listaTomatMedicamento;
     }
 
-    public ArrayList<TomarMedicamento> getAllProducts(){
+    public ArrayList<TomarMedicamento> getAllTomarMedicamento(){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
-        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
+        String query="SELECT * FROM "+DataBaseSchema.TomarMedicamentoTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
-                    Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
+                    Date dateC=null;
                     boolean b = cursor.getString(2).equals("true");
-                    /*SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }*/
+                    }
                     tomarMedicamento=new TomarMedicamento(cursor.getInt(0),cursor.getInt(1),
                             b,dateC);
                     listaTomatMedicamento.add(tomarMedicamento);
