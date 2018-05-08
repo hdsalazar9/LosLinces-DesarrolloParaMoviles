@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import itesm.mx.saludintegral.models.ContactoEmergencia;
  * Created by Héctor on 5/7/2018.
  */
 
-public class ContactosEmergenciaFragment extends Fragment {
+public class ContactosEmergenciaFragment extends Fragment{
 
     ContactoEmergenciaOperations conEmeOp;
 

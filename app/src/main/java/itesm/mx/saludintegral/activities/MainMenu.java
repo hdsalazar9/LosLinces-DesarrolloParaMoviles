@@ -83,6 +83,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
             @Override
             public void onClick(View v) {
                 Intent intent;
+                Miscellaneous.strTipo = "";
                 intent = new Intent(getApplicationContext(), PerfilActivity.class);
                 startActivity(intent);
             }
