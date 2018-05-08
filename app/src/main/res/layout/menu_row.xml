@@ -9,13 +9,26 @@
     <ImageView
         android:id="@+id/ivItemImage"
         android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="8dp"/>
+<!--<<<<<< HEAD-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        android:src="@mipmap/ic_launcher"
+        android:orientation="vertical">
+<!--=======
         android:layout_height="match_parent"
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+>>>>>>> origin/dev_branch_fer-->
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,7 +41,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:text="MenuItem"
-                android:textColor="@android:color/black"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
                 android:textSize="36sp"
                 android:textStyle="bold" />
 

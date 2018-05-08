@@ -23,9 +23,12 @@ import java.util.TimerTask;
 import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
 import itesm.mx.saludintegral.R;
+
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
 import itesm.mx.saludintegral.models.InfoPersonal;
 import itesm.mx.saludintegral.util.Miscellaneous;
+
+
 
 
 /*
@@ -85,6 +88,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
                 Intent intent;
                 Miscellaneous.strTipo = "";
                 intent = new Intent(getApplicationContext(), PerfilActivity.class);
+                Miscellaneous.strTipo = "";
                 startActivity(intent);
             }
         });

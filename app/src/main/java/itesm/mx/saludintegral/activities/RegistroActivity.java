@@ -9,7 +9,9 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +27,9 @@ import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
 import itesm.mx.saludintegral.fragments.DatePickerFragment;
 import itesm.mx.saludintegral.models.InfoPersonal;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -135,8 +139,11 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 infoPersonal.setFechaNacimiento(date);
 
                 long id = database.addEvento(infoPersonal);
+
                 Toast.makeText(this, "Registrado satisfactoriamente!", Toast.LENGTH_SHORT).show();
+
                 Log.d("Registro activity:", infoPersonal.toString());
+
                 Intent i = new Intent(this, MainMenu.class);
                 startActivity(i);
                 break;

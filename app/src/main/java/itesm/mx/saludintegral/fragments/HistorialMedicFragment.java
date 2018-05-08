@@ -47,7 +47,10 @@ public class HistorialMedicFragment extends Fragment {
         tomMedOp.open();
         medOp.open();
 
-        tomMedArr = tomMedOp.getAllTomarMedicamento();
+
+        tomMedArr = tomMedOp.getAllProducts();
+        System.out.println("TAMANOOOO" + tomMedArr.size());
+
         medArr = medOp.getAllProducts();
 
         tomMedOp.close();

@@ -15,7 +15,9 @@ import java.util.Date;
 import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.InfoPersonal;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 /**
  * Created by josec on 14/04/2018.
@@ -45,8 +47,10 @@ public class InfoPersonalOperations {
             values.put(DataBaseSchema.InfoPersonalTable.COLUMN_NAME_NOMBRE, infoPersonal.getNombre());
             values.put(DataBaseSchema.InfoPersonalTable.COLUMN_NAME_APODO, infoPersonal.getApodo());
 
+
             String fechaNacimiento = Miscellaneous.getStringFromDate(infoPersonal.getFechaNacimiento());
             values.put(DataBaseSchema.InfoPersonalTable.COLUMN_NAME_FECHANACIMIENTO, fechaNacimiento);
+
 
             values.put(DataBaseSchema.InfoPersonalTable.COLUMN_NAME_CIUDAD, infoPersonal.getCiudad());
             values.put(DataBaseSchema.InfoPersonalTable.COLUMN_NAME_PAIS, infoPersonal.getPais());
@@ -69,7 +73,9 @@ public class InfoPersonalOperations {
             infoPersonal=null;
             if (cursor.moveToFirst()){
                 do{
+
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
+
                     infoPersonal=new InfoPersonal(cursor.getString(1),
                             cursor.getString(2),dateC,cursor.getString(4),cursor.getString(5),cursor.getBlob(6));
                     listaInfoPersonal.add(infoPersonal);
@@ -90,7 +96,9 @@ public class InfoPersonalOperations {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
+
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
+
                     infoPersonal=new InfoPersonal(cursor.getString(1),
                             cursor.getString(2),dateC,cursor.getString(4),cursor.getString(5),cursor.getBlob(6));
                     listaInfoPersonal = infoPersonal;

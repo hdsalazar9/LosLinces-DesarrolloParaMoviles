@@ -13,23 +13,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="NombreMedicamento"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            android:text="Medicamento"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_row_historial_fecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="FechaDeTomado"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            android:text="Fecha"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_row_historial_Atiempo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:padding="5dp"
             android:text="Tomado a tiempo"
-            android:padding="5dp"/>
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

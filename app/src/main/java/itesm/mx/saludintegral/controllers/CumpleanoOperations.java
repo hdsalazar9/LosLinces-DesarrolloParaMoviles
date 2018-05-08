@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+
 import android.util.Log;
 
 import java.text.DateFormat;
@@ -19,6 +20,7 @@ import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.Cumpleano;
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 /**
  * Created by josec on 14/04/2018.
@@ -51,6 +53,7 @@ public class CumpleanoOperations {
             values.put(DataBaseSchema.CumpleanosTable.COLUMN_NAME_NOMBRE, cumpleano.getNombre());
             String fechaCumpleanos = Miscellaneous.getStringFromDate(cumpleano.getFecha());
             values.put(DataBaseSchema.CumpleanosTable.COLUMN_NAME_FECHA, fechaCumpleanos);
+
             values.put(DataBaseSchema.CumpleanosTable.COLUMN_NAME_TIPO, cumpleano.getTipo());
             values.put(DataBaseSchema.CumpleanosTable.COLUMN_NAME_TELEFONO, cumpleano.getTelefono());
             newRowId=db.insert(DataBaseSchema.CumpleanosTable.TABLE_NAME, null, values);
@@ -71,7 +74,9 @@ public class CumpleanoOperations {
             cumpleano=null;
             if (cursor.moveToFirst()){
                 do{
+
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(2));
+
                     cumpleano=new Cumpleano(cursor.getInt(0),cursor.getString(1),
                             dateC,cursor.getString(3),cursor.getString(4));
                     listaCumpleanos.add(cumpleano);
@@ -92,7 +97,9 @@ public class CumpleanoOperations {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
+
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(2));
+
                     cumpleano=new Cumpleano(cursor.getInt(0),cursor.getString(1),
                             dateC,cursor.getString(3),cursor.getString(4));
                     listaCumpleanos.add(cumpleano);
@@ -178,6 +185,7 @@ public class CumpleanoOperations {
         }
         return result;
     }
+
 
     public ArrayList<Cumpleano> getAllCumpleanosFromDateAndType(Date date, String sType) {
         ArrayList<Cumpleano> listaCumpleanosDelDia = new ArrayList<Cumpleano>();

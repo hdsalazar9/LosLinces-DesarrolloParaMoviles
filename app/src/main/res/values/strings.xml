@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Salud Integral</string>
 
+
     <string name="getFecha">"Seleccionar Fecha"</string>
     <string name="getHora">"Seleccionar Hora"</string>
+
 
     <string name="activity_registro_TomarFoto">Tomar Foto</string>
     <string name="activity_registro_MensajeInicial">Regístrate para comenzar a usar la aplicación</string>
@@ -22,15 +24,18 @@
     <string name="fragment_tomar_medicamento_eliminar">Eliminar</string>
 
 
+
     <string name="fragment_addmedicamento_nombreMed">"Nombre:"</string>
     <string name="fragment_addmedicamento_gramajeMed">"Gramaje (g/m^2):"</string>
     <string name="fragment_addmedicamento_cantidadMed">"Cantidad a ingerir por recordatorio:"</string>
     <string name="fragment_addmedicamento_periodicidadMed">"Periodicidad:"</string>
+
     <string name="fragment_addmedicamento_horaMed">"Hora de ingesta:"</string>
     <string name="fragment_addmedicamento_cadaCuandoMed">"Cada cuántas horas se ingiere el medicamento:"</string>
     <string name="fragment_addmedicamento_comienzoMed">"Fecha de inicio:"</string>
     <string name="fragment_addmedicamento_terminoMed">"Fecha de término:"</string>
     <string name="fragment_addmedicamento_ingerirAntesDespuesMed">"Ingerir medicamento antes/despues de comer"</string>
+
     <string name="fragment_addmedicamento_fotoMed">"Agregar foto"</string>
     <string name="fragment_addmedicamento_addMed">"Guardar"</string>
     <string name="fragment_addmedicamento_antes">"Antes"</string>
@@ -124,5 +129,6 @@
     <string name="add_contacto_telefono">Telefono:</string>
     <string name="add_contacto_nombre">Nombre:</string>
     <string name="hint_registro">Nombre de Contacto</string>
+
 
 </resources>

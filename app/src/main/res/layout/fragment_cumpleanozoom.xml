@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,55 +9,76 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView21"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/row_cumpleano_nombre" />
+            android:text="@string/row_cumpleano_nombre"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_fragmentozoom_nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/textView23"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/row_cumpleano_telefono" />
+            android:text="@string/row_cumpleano_telefono"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_fragmentozoom_telefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/textView25"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_eventozoom_fecha" />
+            android:text="@string/fragment_eventozoom_fecha"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_fragmentozoom_fecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/textView27"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_eventozoom_tipo" />
+            android:text="@string/fragment_eventozoom_tipo"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_fragmentozoom_tipo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,7 +89,12 @@
                 android:id="@+id/btn_eventozoom_eliminarEvento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_eventozoom_eliminar" />
+                android:background="@android:color/white"
+                android:text="@string/fragment_eventozoom_eliminar"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@color/social_header"
+                android:textSize="30sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +107,12 @@
                 android:id="@+id/btn_eventozoom_cerrar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_eventodisplay_cerrar" />
+                android:background="@android:color/white"
+                android:text="@string/fragment_eventodisplay_cerrar"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@color/social_header"
+                android:textSize="30sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

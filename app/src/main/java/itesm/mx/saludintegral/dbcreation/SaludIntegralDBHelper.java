@@ -66,6 +66,7 @@ public class SaludIntegralDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE + " TEXT," +
                 DataBaseSchema.EventosTable.COLUMN_NAME_DESCRICPION + " TEXT," +
                 DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " TEXT," +
+
                 DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " TEXT " +
                 ")";
         Log.i("Producthelper onCreate3", CREATE_EVENTO_TABLE);

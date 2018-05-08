@@ -70,10 +70,12 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorEspiritual, null));
                 break;
+
             case "Finanzas":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorFinanzas, null));
                 break;
+
 
         }
 

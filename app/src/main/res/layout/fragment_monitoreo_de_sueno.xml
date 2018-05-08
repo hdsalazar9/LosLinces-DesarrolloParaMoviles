@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FFCDD2"
+    android:background="@color/background_listasalud"
     tools:context="itesm.mx.saludintegral.fragments.MonitoreoDeSuenoFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,13 +14,14 @@
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" >
+
         <Button
             android:id="@+id/button_Aceptar"
             android:layout_width="match_parent"
             android:layout_height="134dp"
             android:layout_above="@+id/button4"
             android:layout_centerHorizontal="true"
-            android:background="#8BC34A"
+            android:background="@color/background_guardar_addmedicamento"
             android:text="Aceptar"
             android:textAlignment="center"
             android:textSize="30sp" />
@@ -31,10 +32,12 @@
             android:layout_height="133dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:background="#D32F2F"
+            android:background="@android:color/white"
             android:text="Cancelar"
-            android:textColor="@android:color/white"
-            android:textSize="30sp" />
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@color/background_listasalud"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
@@ -45,8 +48,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="46dp"
         android:text="Ingresar la cantidad de horas de sueño"
-        android:textSize="20dp"
-        />
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextHorasSueno"
@@ -54,12 +59,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView20"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
         android:layout_centerInParent="true"
+        android:layout_marginTop="64dp"
         android:ellipsize="start"
+        android:ems="10"
         android:gravity="center_horizontal"
-        android:singleLine="true"/>
+        android:inputType="numberDecimal"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
 
 </RelativeLayout>

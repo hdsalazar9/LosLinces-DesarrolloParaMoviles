@@ -8,7 +8,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import java.sql.Time;
 
+
 import android.database.sqlite.SQLiteException;
+
 import android.util.Log;
 
 import java.text.ParseException;
@@ -19,7 +21,9 @@ import java.util.Date;
 import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.Medicamento;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 /**
  * Created by josec on 14/04/2018.
@@ -51,6 +55,7 @@ public class MedicamentoOperations {
             values.put(DataBaseSchema.MedicamentoTable.COLUMN_NAME_CANTIDAD, medicamento.getCantidad());
             values.put(DataBaseSchema.MedicamentoTable.COLUMN_NAME_PERIOCIDAD, medicamento.getPerodicidad());
 
+
             values.put(DataBaseSchema.MedicamentoTable.COLUMN_NAME_HORA, medicamento.getHora().toString());
             values.put(DataBaseSchema.MedicamentoTable.COLUMN_NAME_CADACUANTO, medicamento.getCadaCuanto());
 
@@ -58,6 +63,7 @@ public class MedicamentoOperations {
             values.put(DataBaseSchema.MedicamentoTable.COLUMN_NAME_COMIENZO, strAux);
             strAux = Miscellaneous.getStringFromDate(medicamento.getFechaTermino());
             values.put(DataBaseSchema.MedicamentoTable.COLUMN_NAME_TERMINO, strAux);
+
 
             values.put(DataBaseSchema.MedicamentoTable.COLUMN_NAME_INGERIRANTESDESPUESCOMIDA, String.valueOf(medicamento.getAntesDespuesDeComer()));
             values.put(DataBaseSchema.MedicamentoTable.COLUMN_NAME_FOTO, medicamento.getFoto());
@@ -80,6 +86,7 @@ public class MedicamentoOperations {
             if (cursor.moveToFirst()){
                 do{
                     java.sql.Time ppstime=null;
+
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(7));
                     Date dateT=Miscellaneous.getDateFromString(cursor.getString(8));
                     boolean b = cursor.getString(9).equals("true");
@@ -116,6 +123,7 @@ public class MedicamentoOperations {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
+
                     Time ppstime;
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(7));
                     Date dateT=Miscellaneous.getDateFromString(cursor.getString(8));
@@ -128,12 +136,15 @@ public class MedicamentoOperations {
                         e.printStackTrace();
                     }
                     ppstime= new java.sql.Time(d1.getTime());
+
                     medicamento=new Medicamento(cursor.getInt(0),cursor.getString(1),
                             cursor.getDouble(2),cursor.getInt(3),cursor.getString(4),ppstime, cursor.getInt(6),
                             dateC, dateT,b,
                             cursor.getBlob(10));
                     listaMedicamentos.add(medicamento);
+
                     Log.d("DATABASE",""+dateC);
+
                 }while (cursor.moveToNext());
             }
             cursor.close();
@@ -144,6 +155,7 @@ public class MedicamentoOperations {
         }
         return listaMedicamentos;
     }
+
 
     public boolean deleteMedicamento(String medicamentoName){
         boolean result=false;
@@ -165,5 +177,6 @@ public class MedicamentoOperations {
         }
         return result;
     }
+
 
 }

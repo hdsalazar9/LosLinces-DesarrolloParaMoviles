@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.text.DateFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,7 +17,9 @@ import java.util.Date;
 import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.TomarMedicamento;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 /**
  * Created by josec on 14/04/2018.
@@ -50,6 +53,7 @@ public class TomarMedicamentoOperations {
             String fechaTomado = df.format(tomarMedicamento.getFechaHora());
 
             values.put(DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_FECHAHORA, fechaTomado);
+
             newRowId=db.insert(DataBaseSchema.TomarMedicamentoTable.TABLE_NAME, null, values);
             Log.d("TomarMedicamento added",tomarMedicamento.toString());
         }
@@ -58,6 +62,7 @@ public class TomarMedicamentoOperations {
         }
         return newRowId;
     }
+
 
     public ArrayList<TomarMedicamento> findTomarMedicamento(String productName){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
@@ -70,12 +75,12 @@ public class TomarMedicamentoOperations {
                 do{
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     boolean b = cursor.getString(2).equals("true");
-                   /* SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                    try {
-                        dateC= dateFormat.parse(cursor.getString(3));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }*/
+
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+
+
                     tomarMedicamento=new TomarMedicamento(cursor.getInt(0),cursor.getInt(1),
                             b,dateC);
                     listaTomatMedicamento.add(tomarMedicamento);
@@ -89,13 +94,15 @@ public class TomarMedicamentoOperations {
         return listaTomatMedicamento;
     }
 
-    public ArrayList<TomarMedicamento> getAllTomarMedicamento(){
+
+    public ArrayList<TomarMedicamento> getAllProducts(){
         ArrayList<TomarMedicamento> listaTomatMedicamento=new ArrayList<TomarMedicamento>();
         String query="SELECT * FROM "+DataBaseSchema.TomarMedicamentoTable.TABLE_NAME;
         try {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
+
                     Date dateC=null;
                     boolean b = cursor.getString(2).equals("true");
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -126,9 +133,12 @@ public class TomarMedicamentoOperations {
             Cursor cursor=db.rawQuery(query,null);
             if(cursor.moveToFirst()){
                 do{
+
                     Date dateC=null;
                     boolean b = cursor.getString(2).equals("true");
+
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
                     try {
                         dateC= dateFormat.parse(cursor.getString(3));
                     } catch (ParseException e) {

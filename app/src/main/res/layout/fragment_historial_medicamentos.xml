@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/registro_background">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/registro_boton"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Historial"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar12"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar12"
+        app:layout_constraintStart_toStartOf="@+id/toolbar12"
+        app:layout_constraintTop_toTopOf="@+id/toolbar12" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,6 +52,8 @@
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:text="@string/fragment_historial_nombremed"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -27,6 +62,8 @@
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:text="@string/fragment_historial_fecha"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -35,6 +72,8 @@
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:text="@string/fragment_historial_atiempo"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
