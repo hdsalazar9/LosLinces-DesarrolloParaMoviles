@@ -24,7 +24,7 @@ public class ContactoEmeAdapter extends ArrayAdapter<ContactoEmergencia> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.bitacora_evento_row, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.contacto_row, parent, false);
         }
 
         ContactoEmergencia conEme = getItem(position);

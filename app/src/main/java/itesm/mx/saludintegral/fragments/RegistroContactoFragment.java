@@ -33,6 +33,9 @@ public class RegistroContactoFragment extends Fragment implements View.OnClickLi
         etNombre = rootView.findViewById(R.id.et_contacto_registro_nombre);
         etTelefono = rootView.findViewById(R.id.et_contacto_registro_telefono);
 
+        conEmeOp = new ContactoEmergenciaOperations(getContext());
+        conEmeOp.open();
+
         btnAdd.setOnClickListener(this);
 
         return rootView;

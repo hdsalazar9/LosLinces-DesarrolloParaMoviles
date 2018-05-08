@@ -61,6 +61,6 @@
             android:id="@+id/btn_contacto_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="@string/fragment_contacto_add" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

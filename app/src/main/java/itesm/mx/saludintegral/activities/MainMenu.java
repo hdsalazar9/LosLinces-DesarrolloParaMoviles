@@ -54,7 +54,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.main_holder);
 
         listViewLinearLayout = findViewById(R.id.ListViewLinearLayout);
         final ViewTreeObserver observer= listViewLinearLayout.getViewTreeObserver();
@@ -95,11 +95,14 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         getListView().setOnItemClickListener(this);
 
         //Floating button
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fabContacto);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Miscellaneous.strTipo = Miscellaneous.tipos[8];
+                Intent intent;
+                intent = new Intent(getApplicationContext(), PerfilActivity.class);
+                startActivity(intent);
             }
         });
 

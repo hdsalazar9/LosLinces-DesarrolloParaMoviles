@@ -1,0 +1,19 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="itesm.mx.saludintegral.activities.MainMenu">
+
+    <include layout="@layout/activity_main_menu" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabContacto"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/background_addmedicamento"
+        app:srcCompat="@drawable/manuser" />
+
+</FrameLayout>

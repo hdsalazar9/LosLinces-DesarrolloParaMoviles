@@ -63,4 +63,23 @@ public class ContactosEmergenciaFragment extends Fragment implements View.OnClic
         //TODO: implementar marcar a esa persona
 
     }
+
+    @Override
+    public void onResume(){
+        conEmeOp.open();
+        listContacto = conEmeOp.getAllProducts();
+        contactoAdapter = new ContactoEmeAdapter(getContext(),listContacto);
+        lvContactos.setAdapter(contactoAdapter);
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        conEmeOp.close();
+        super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        conEmeOp.close();
+        super.onDetach();
+    }
 }

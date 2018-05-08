@@ -23,6 +23,7 @@ public class PerfilActivity extends AppCompatActivity{
         if(Objects.equals(Miscellaneous.strTipo, Miscellaneous.tipos[8])){
             ContactosEmergenciaFragment contactosEmergenciaFragment = new ContactosEmergenciaFragment();
             getSupportFragmentManager().beginTransaction().add(frameLayoutPerfil, contactosEmergenciaFragment).commit();
+            return;
         }
 
         PerfilInicialFragment perfilInicialFragment = new PerfilInicialFragment();
