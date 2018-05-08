@@ -2,7 +2,10 @@ package itesm.mx.saludintegral.fragments;
 
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,6 +30,7 @@ import itesm.mx.saludintegral.controllers.TomarMedicamentoOperations;
 import itesm.mx.saludintegral.models.Medicamento;
 import itesm.mx.saludintegral.models.TomarMedicamento;
 import itesm.mx.saludintegral.util.Miscellaneous;
+import itesm.mx.saludintegral.util.Receiver;
 
 
 /**
@@ -123,6 +127,11 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     public void onClick(View v) {   //*Agregar aquí código de respuesta acertada/equivocada
         switch (v.getId()){
             case R.id.button_borrar:
+                Intent alarmIntent = new Intent(getContext(), Receiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        getContext(), (int) medicamento.getId(), alarmIntent, 0);
+                AlarmManager manager = (AlarmManager) getContext().getSystemService(getContext().ALARM_SERVICE);
+                manager.cancel(pendingIntent);
                 removeProduct();
                 break;
             case R.id.button_ingerido:

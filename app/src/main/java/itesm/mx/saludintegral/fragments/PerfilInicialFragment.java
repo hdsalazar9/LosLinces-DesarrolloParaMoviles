@@ -49,6 +49,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     Button btnBitacoraEventos;
     Button btnHistorialMedicamentos;
     Button btnFoto;
+    Button btnMonitoreo;
     ImageView ivFoto;
 
     @Override
@@ -64,6 +65,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         ivFoto = (ImageView) rootView.findViewById(R.id.iv_perfil_foto);
         btnEdit = (Button) rootView.findViewById(R.id.btn_perfil_editar);
         btnFoto = (Button) rootView.findViewById(R.id.btn_perfil_foto);
+        btnMonitoreo = (Button) rootView.findViewById(R.id.btn_perfil_monitoreo);
         btnBitacoraEventos = (Button) rootView.findViewById(R.id.btn_perfil_bitacoraeventos);
         btnHistorialMedicamentos = (Button) rootView.findViewById(R.id.btn_perfil_historialmedicamentos);
 
@@ -85,6 +87,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         btnBitacoraEventos.setOnClickListener(this);
         btnHistorialMedicamentos.setOnClickListener(this);
         btnFoto.setOnClickListener(this);
+        btnMonitoreo.setOnClickListener(this);
 
         //Get imageview to byte array
         bitmap = ((BitmapDrawable) ivFoto.getDrawable()).getBitmap();
@@ -139,12 +142,17 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
             case R.id.btn_perfil_bitacoraeventos:
                 BitacoraEventoFragment bitacoraEventoFragment = new BitacoraEventoFragment();
                 transaction.replace(R.id.frameLayout_perfilActivity,bitacoraEventoFragment)
-                .addToBackStack(null).commit();
+                        .addToBackStack(null).commit();
                 break;
             case R.id.btn_perfil_historialmedicamentos:
                 HistorialMedicFragment historialMedicFragment = new HistorialMedicFragment();
                 transaction.replace(R.id.frameLayout_perfilActivity,historialMedicFragment)
-                .addToBackStack(null).commit();
+                        .addToBackStack(null).commit();
+                break;
+            case R.id.btn_perfil_monitoreo:
+                PerfilMonitoreoFragment perfilMonitoreoFragment = new PerfilMonitoreoFragment();
+                transaction.replace(R.id.frameLayout_perfilActivity,perfilMonitoreoFragment)
+                        .addToBackStack(null).commit();
                 break;
         }
     }
