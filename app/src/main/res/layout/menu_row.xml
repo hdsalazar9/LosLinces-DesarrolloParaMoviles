@@ -12,11 +12,23 @@
         android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
         android:layout_marginTop="8dp"/>
+<!--<<<<<< HEAD-->
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="116dp"
+        android:src="@mipmap/ic_launcher"
         android:orientation="vertical">
+<!--=======
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>>>>>>> origin/dev_branch_fer-->
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,14 +41,13 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:text="MenuItem"
+                android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="42sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                android:textSize="36sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
     </LinearLayout>
 
 </LinearLayout>
-

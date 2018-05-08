@@ -83,7 +83,7 @@ public class MonitoreoSuenoOperations {
         return listaMonitoreoSuenos;
     }
 
-    public ArrayList<MonitoreoSueno> getAllProducts(){
+    public ArrayList<MonitoreoSueno> getAllEvents(){
         ArrayList<MonitoreoSueno> listaMonitoreoSuenos=new ArrayList<MonitoreoSueno>();
         String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME;
         try {

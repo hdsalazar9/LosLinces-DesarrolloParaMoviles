@@ -82,6 +82,7 @@
 
     <string name="fragment_eventozoom_fecha">"Fecha: "</string>
     <string name="fragment_eventozoom_tipo">"Tipo: "</string>
+
     <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
 
     <string name="fragment_listcumpleanos_vacio">"No hay más cumpleaños registrados."</string>
@@ -106,6 +107,21 @@
     <string name="fragment_perfil_apellido">Apellido:</string>
     <string name="fragment_perfil_nombre">Nombre:</string>
     <string name="fragment_perfil_botonFoto">Nueva foto</string>
+    <string name="fragment_historial_nombremed">Nombre del medicamento:</string>
+    <string name="fragment_historial_fecha">Fecha de ingesta:</string>
+    <string name="fragment_historial_atiempo">Tomado a tiempo:</string>
+    <string name="fragment_bitacora_todo">Todo</string>
+    <string name="fragment_bitacora_salud">Salud</string>
+    <string name="fragment_bitacora_social">Social</string>
+    <string name="fragment_bitacora_cognicion">Cognicion</string>
+    <string name="fragment_bitacora_espiritual">Espiritual</string>
+    <string name="fragment_bitacora_t1">Nombre:</string>
+    <string name="fragment_bitacora_t2">Tipo:</string>
+    <string name="fragment_bitacora_t3">Fecha:</string>
+    <string name="fragment_bitacora_t4">Descripción:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

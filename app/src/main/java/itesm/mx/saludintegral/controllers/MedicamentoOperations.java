@@ -161,6 +161,7 @@ public class MedicamentoOperations {
         boolean result=false;
         String query="SELECT * FROM "+DataBaseSchema.MedicamentoTable.TABLE_NAME+ " WHERE "+DataBaseSchema.MedicamentoTable.COLUMN_NAME_NOMBRE+
                 " =  '"+medicamentoName+"'";
+              //  " =  \""+medicamentoName+"\"";
         try{
             Cursor cursor=db.rawQuery(query, null);
             if(cursor.moveToFirst()){
