@@ -50,25 +50,20 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            refresh();
+            //refresh();
         }
     };
+    Boolean bSoloUnaVez = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_holder);
 
+        Log.d("MAINMENU", "Actualizo el nombre de strtipo");
+        Miscellaneous.strTipo = Miscellaneous.tipos[10];
+
         listViewLinearLayout = findViewById(R.id.ListViewLinearLayout);
-        final ViewTreeObserver observer= listViewLinearLayout.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        Log.d("Log", "Height: " + listViewLinearLayout.getHeight());
-                        Miscellaneous.iSizeMenu = listViewLinearLayout.getHeight();
-                    }
-                });
 
         menuItems = getMenuItems();
         menuItemArrayAdapter = new MenuItemAdapter(this, menuItems);
@@ -97,6 +92,19 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         setListAdapter(menuItemArrayAdapter);
 
         getListView().setOnItemClickListener(this);
+
+        final ViewTreeObserver observer= listViewLinearLayout.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        Log.d("Log", "Height: " + listViewLinearLayout.getHeight());
+                        if (bSoloUnaVez) {
+                            Miscellaneous.iSizeMenu = listViewLinearLayout.getHeight();
+                            bSoloUnaVez = false;
+                        }
+                    }
+                });
 
         //Floating button
         FloatingActionButton fab = findViewById(R.id.fabContacto);
@@ -147,9 +155,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
     public void onResume(){
         super.onResume();
         Log.d("onResumed", "ando en onResumed");
-        //refresh();
-
-        handler.postDelayed(runnable,1);
+        Miscellaneous.strTipo = Miscellaneous.tipos[10];
 
         ipo = new InfoPersonalOperations(this);
         ipo.open();
@@ -168,21 +174,25 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         switch (menuItem.getTitle()){
             case ("Salud"):
                 /* Ir a actividad de Salud */
+                Miscellaneous.strTipo = "";
                 intent=new Intent(this, SaludActivity.class);
                 startActivity(intent);
                 break;
             case ("Social"):
                 /* Ir a actividad de Social */
+                Miscellaneous.strTipo = "";
                 intent=new Intent(this, SocialActivity.class);
                 startActivity(intent);
                 break;
             case ("Cognicion"):
                 /* Ir a actividad de Cognicion */
+                Miscellaneous.strTipo = "";
                 intent=new Intent(this, CognicionActivity.class);
                 startActivity(intent);
                 break;
             case ("Espiritual"):
                 /* Ir a actividad de Espiritual */
+                Miscellaneous.strTipo = "";
                 intent=new Intent(this, EspiritualActivity.class);
                 startActivity(intent);
                 break;

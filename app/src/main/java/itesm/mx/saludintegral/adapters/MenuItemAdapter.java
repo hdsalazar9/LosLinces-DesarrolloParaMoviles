@@ -78,18 +78,20 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 break;
         }
 
-        int iSize = (Miscellaneous.iSizeMenu/iCantidadTitles);
+        //int iSize = (Miscellaneous.iSizeMenu/iCantidadTitles);
         layoutParams = convertView.getLayoutParams();
 
-        /*
-        if (iSize < 350) {
-            layoutParams.height = 350;
-        }
-        else
-        {*/
-            layoutParams.height = iSize;
-            //layoutParams.height = 350;
 
+        //Si estás en el menú principal...
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[10])) {
+            Log.d("DEBUG","Uso el size del menú prinecial");
+            layoutParams.height = (Miscellaneous.iSizeMenu/iCantidadTitles);
+        }
+        else //En cualquier otro manú
+        {
+            Log.d("DEBUG","Uso el size del submenú");
+            layoutParams.height = (Miscellaneous.iSizeSubMenu/iCantidadTitles);
+        }
         Log.d("DEBUG","Altura de cada item: "+ layoutParams.height);
         convertView.setLayoutParams(layoutParams);
 

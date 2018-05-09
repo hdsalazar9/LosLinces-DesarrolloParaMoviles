@@ -24,6 +24,7 @@ public class Miscellaneous {
     public static String strDatePicker = "";
     public static String strTipo = "";
     public static int iSizeMenu = 0;
+    public static int iSizeSubMenu = 0;
     public static HashMap<Date,Drawable> mapFechaFondo;
 
 
@@ -37,7 +38,8 @@ public class Miscellaneous {
             "Cumpleaños Familia",   //6
             "Eventos Familia",      //7 Social
             "Contacto Emergencia",   //8
-            "Perfil"
+            "Perfil",
+            "Main Menu"
     };
 
     //Metodo que recibe util.Date y lo convierte al patron necesario para utilizarse en a BD
