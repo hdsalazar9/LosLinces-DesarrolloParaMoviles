@@ -45,7 +45,7 @@ public class PerfilActivity extends AppCompatActivity implements ListContactoEme
         switch (id) {
             case 0:
                 RegistroContactoFragment registroFragment = new RegistroContactoFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();changeFragmentHabilitaBack(registroFragment);
+                changeFragmentHabilitaBack(registroFragment);
                 break;
 
             case 1:
@@ -77,6 +77,18 @@ public class PerfilActivity extends AppCompatActivity implements ListContactoEme
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(iCurrentFrameLayout, fragment);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[9])) {
+            Intent i = new Intent(this, MainMenu.class);
+            startActivity(i);
+        }
+        else
+        {
+            super.onBackPressed();
+        }
     }
 
 }

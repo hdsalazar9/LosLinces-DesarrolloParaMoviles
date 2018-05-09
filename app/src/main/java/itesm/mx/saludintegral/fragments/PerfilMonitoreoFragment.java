@@ -14,6 +14,7 @@ import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.adapters.MonitoreoArrayAdapter;
 import itesm.mx.saludintegral.controllers.MonitoreoSuenoOperations;
 import itesm.mx.saludintegral.models.MonitoreoSueno;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 /**
  * Created by Héctor on 5/7/2018.
@@ -30,7 +31,7 @@ public class PerfilMonitoreoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_perfil_monitoreo, container, false);
-
+        Miscellaneous.strTipo="";
         lvMonitoreos = rootView.findViewById(R.id.lv_perfil_monitoreo);
         //Abrir BD y obtener monitoreos de sueño
         msOp = new MonitoreoSuenoOperations(getContext());
@@ -51,6 +52,7 @@ public class PerfilMonitoreoFragment extends Fragment {
     @Override
     public void onPause(){
         msOp.close();
+        Miscellaneous.strTipo=Miscellaneous.tipos[9];
         super.onPause();
     }
     @Override

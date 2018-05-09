@@ -80,8 +80,16 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
 
         int iSize = (Miscellaneous.iSizeMenu/iCantidadTitles);
         layoutParams = convertView.getLayoutParams();
-        layoutParams.height = iSize;
-        //layoutParams.height = 350;
+
+        /*
+        if (iSize < 350) {
+            layoutParams.height = 350;
+        }
+        else
+        {*/
+            layoutParams.height = iSize;
+            //layoutParams.height = 350;
+
         Log.d("DEBUG","Altura de cada item: "+ layoutParams.height);
         convertView.setLayoutParams(layoutParams);
 

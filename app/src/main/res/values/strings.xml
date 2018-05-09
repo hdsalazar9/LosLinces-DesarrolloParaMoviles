@@ -92,8 +92,12 @@
 
     <string name="fragment_listcumpleanos_vacio">"No hay más cumpleaños registrados."</string>
     <string name="fragment_listeventos_vacio">"No hay más eventos registrados."</string>
+    <string name="fragment_listcontactos_vacio">"No hay contactos registrados."</string>
+    <string name="fragment_listmeds_vacio">"No hay medicamentos registrados."</string>
 
     <string name="fragment_cumpleanozoom_fecha">"Fecha: "</string>
+
+    <string name="fragment_monisueño_hint">"(ej. 7.5)"</string>
 
     <string name="fragment_addcumple_hint_nombre">"Ingrese el nombre del cumpleañero."</string>
     <string name="fragment_addcumple_add">"Registrar cumpleaños"</string>

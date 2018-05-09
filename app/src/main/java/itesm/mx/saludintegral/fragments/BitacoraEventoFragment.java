@@ -17,6 +17,7 @@ import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.BitacoraEventoAdapter;
 import itesm.mx.saludintegral.controllers.EventoOperations;
 import itesm.mx.saludintegral.models.Evento;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 /**
  * Created by Héctor on 5/6/2018.
@@ -41,7 +42,7 @@ public class BitacoraEventoFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_bitacora_evento, container, false);
-
+        Miscellaneous.strTipo="";
         lvEventos = rootView.findViewById(R.id.lv_bitacora);
         btnTodo = rootView.findViewById(R.id.btn_bitacora_todo);
         btnSalud = rootView.findViewById(R.id.btn_bitacora_salud);
@@ -130,6 +131,7 @@ public class BitacoraEventoFragment extends Fragment implements View.OnClickList
     @Override
     public void onPause(){
         evoOp.close();
+        Miscellaneous.strTipo=Miscellaneous.tipos[9];
         super.onPause();
     }
     @Override

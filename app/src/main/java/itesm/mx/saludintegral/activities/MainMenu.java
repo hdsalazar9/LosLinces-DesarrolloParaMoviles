@@ -86,9 +86,8 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
             @Override
             public void onClick(View v) {
                 Intent intent;
-                Miscellaneous.strTipo = "";
+                Miscellaneous.strTipo = Miscellaneous.tipos[9];
                 intent = new Intent(getApplicationContext(), PerfilActivity.class);
-                Miscellaneous.strTipo = "";
                 startActivity(intent);
             }
         });
@@ -224,6 +223,8 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
     @Override
     public void onBackPressed() {
         //No permitir que de back, pues regresaria a registro
+        this.finishAffinity();
+        //moveTaskToBack(true);
     }
 
     public void refresh(){

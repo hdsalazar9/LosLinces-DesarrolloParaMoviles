@@ -36,7 +36,8 @@ public class Miscellaneous {
             "Eventos Amigos",       //5 Social
             "Cumpleaños Familia",   //6
             "Eventos Familia",      //7 Social
-            "Contacto Emergencia"   //8
+            "Contacto Emergencia",   //8
+            "Perfil"
     };
 
     //Metodo que recibe util.Date y lo convierte al patron necesario para utilizarse en a BD

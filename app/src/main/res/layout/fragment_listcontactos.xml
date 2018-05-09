@@ -13,8 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/fragment_listcumpleanos_vacio"
+            android:text="@string/fragment_listcontactos_vacio"
             android:textAlignment="center"
+            android:textColor="@color/caldroid_black"
             android:textSize="24sp" />
     </LinearLayout>
 

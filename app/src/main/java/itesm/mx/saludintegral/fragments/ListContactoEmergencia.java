@@ -44,8 +44,8 @@ public class ListContactoEmergencia extends ListFragment implements AdapterView.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_listevento, container, false);
-        tvVacio = view.findViewById(R.id.tv_fragment_listevento_vacio);
+        view = inflater.inflate(R.layout.fragment_listcontactos, container, false);
+        tvVacio = view.findViewById(R.id.tv_fragment_listcontacto_vacio);
         listContactos = new ArrayList<ContactoEmergencia>();
         dao = new ContactoEmergenciaOperations(getContext());
         dao.open();
