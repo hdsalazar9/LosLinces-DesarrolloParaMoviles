@@ -82,6 +82,10 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
         adapter = new EventoAdapter(getContext(), listEvento);
         setListAdapter(adapter);
 
+        getListView().setTextFilterEnabled(true);
+        registerForContextMenu(getListView());
+        getListView().setOnItemClickListener(this);
+
         return view;
     }
 
@@ -121,6 +125,11 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
     public void onDetach(){
         dao.close();
         super.onDetach();
+    }
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
     }
 
     @Override

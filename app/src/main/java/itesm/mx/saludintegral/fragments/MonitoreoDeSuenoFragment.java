@@ -128,4 +128,9 @@ public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickLi
         dao.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
+    }
 }

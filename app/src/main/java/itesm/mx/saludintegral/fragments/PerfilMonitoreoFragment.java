@@ -58,4 +58,9 @@ public class PerfilMonitoreoFragment extends Fragment {
         msOp.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        msOp.close();
+        super.onStop();
+    }
 }

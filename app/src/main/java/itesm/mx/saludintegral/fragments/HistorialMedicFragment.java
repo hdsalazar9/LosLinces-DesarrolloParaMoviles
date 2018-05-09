@@ -103,4 +103,9 @@ public class HistorialMedicFragment extends Fragment {
         medOp.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        tomMedOp.close();
+        super.onStop();
+    }
 }

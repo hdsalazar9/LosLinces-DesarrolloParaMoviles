@@ -137,4 +137,9 @@ public class BitacoraEventoFragment extends Fragment implements View.OnClickList
         evoOp.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        evoOp.close();
+        super.onStop();
+    }
 }

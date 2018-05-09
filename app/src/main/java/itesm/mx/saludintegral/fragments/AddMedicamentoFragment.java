@@ -443,4 +443,10 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         super.onDetach();
     }
 
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
+    }
+
 }

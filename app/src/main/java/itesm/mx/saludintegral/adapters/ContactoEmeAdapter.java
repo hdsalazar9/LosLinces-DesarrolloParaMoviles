@@ -30,7 +30,7 @@ public class ContactoEmeAdapter extends ArrayAdapter<ContactoEmergencia> {
         ContactoEmergencia conEme = getItem(position);
 
         TextView tvNombre = (TextView) convertView.findViewById(R.id.tv_contacto_nombre);
-        EditText etFecha = (EditText) convertView.findViewById(R.id.tv_contacto_telefono);
+        TextView etFecha = (TextView) convertView.findViewById(R.id.tv_contacto_telefono);
 
         tvNombre.setText(conEme.getNombre());
         etFecha.setText(conEme.getTelefono());
