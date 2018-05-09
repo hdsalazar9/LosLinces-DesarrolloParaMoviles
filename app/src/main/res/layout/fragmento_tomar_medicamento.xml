@@ -119,15 +119,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="5dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button_ingerido"
-                android:layout_width="165dp"
+                android:layout_width="0dp"
                 android:layout_height="110dp"
                 android:layout_above="@+id/button4"
                 android:layout_centerHorizontal="true"
+                android:layout_weight=".5"
                 android:background="@color/background_guardar_addmedicamento"
                 android:text="Ya la tomé"
                 android:textAlignment="center"
@@ -138,8 +138,9 @@
 
             <Button
                 android:id="@+id/button_borrar"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="110dp"
+                android:layout_weight=".5"
                 android:background="@android:color/white"
                 android:text="Eliminar"
                 android:textAlignment="center"
