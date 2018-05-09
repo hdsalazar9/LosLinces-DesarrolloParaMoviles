@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.activities.ExampleReceiver;
+import itesm.mx.saludintegral.activities.MainMenu;
 import itesm.mx.saludintegral.activities.SaludActivity;
 
 /**
@@ -56,7 +57,7 @@ public class Receiver extends BroadcastReceiver{
     }
 
     private void showNotificationMed(Context context, String medicina, int id) {
-        PendingIntent contentIntent = PendingIntent.getActivity(context, id, new Intent(context, SaludActivity.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, id, new Intent(context, MainMenu.class), 0);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
@@ -75,7 +76,7 @@ public class Receiver extends BroadcastReceiver{
 
     private void showNotificationMed26(Context context, String medicina, int id) {
 
-        PendingIntent contentIntent = PendingIntent.getActivity(context, id, new Intent(context, SaludActivity.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, id, new Intent(context, MainMenu.class), 0);
 
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
