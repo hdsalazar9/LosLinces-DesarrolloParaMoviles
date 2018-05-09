@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Salud Integral</string>
 
+    <string name="seccion_social">Social</string>
+    <string name="seccion_salud">Salud</string>
+    <string name="seccion_cognicnion">"Cognición"</string>
+    <string name="seccion_espiritualidad">Espiritual</string>
+
 
     <string name="getFecha">"Seleccionar Fecha"</string>
     <string name="getHora">"Seleccionar Hora"</string>

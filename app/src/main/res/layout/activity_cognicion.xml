@@ -37,7 +37,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Cognicion"
+        android:text="@string/seccion_cognicnion"
         android:textAlignment="center"
         android:textColor="@color/cognicion_header"
         android:textSize="30sp"

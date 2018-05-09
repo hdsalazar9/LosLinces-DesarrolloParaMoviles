@@ -46,6 +46,7 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
         LinearLayout linearLayout = convertView.findViewById(R.id.ll_menu_row);
 
         tvItemTitle.setText(mItem.getTitle());
+        Log.d("mItemAdapter",mItem.getTitle());
         ivMenuImage.setImageResource(mItem.getImage());
 
         switch (mItem.getTitle()){
@@ -75,8 +76,6 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorFinanzas, null));
                 break;
-
-
         }
 
         int iSize = (Miscellaneous.iSizeMenu/iCantidadTitles);
