@@ -54,9 +54,25 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorSalud, null));
                 break;
+            case "Monitoreo de sueño":
+                linearLayout.setBackgroundColor(ResourcesCompat.getColor(
+                        getContext().getResources(),R.color.colorSaludDos, null));
+                break;
+            case "Ejercicio":
+                linearLayout.setBackgroundColor(ResourcesCompat.getColor(
+                        getContext().getResources(),R.color.colorSaludDos, null));
+                break;
             case "Social":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorSocial, null));
+                break;
+            case "Amigos":
+                linearLayout.setBackgroundColor(ResourcesCompat.getColor(
+                        getContext().getResources(),R.color.colorSocialDos, null));
+                break;
+            case "Cumpleaños":
+                linearLayout.setBackgroundColor(ResourcesCompat.getColor(
+                        getContext().getResources(),R.color.colorSocialDos, null));
                 break;
             case "Cognicion":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
@@ -64,7 +80,7 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 break;
             case "Actividades":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
-                        getContext().getResources(),R.color.colorEjercicio, null));
+                        getContext().getResources(),R.color.colorEjercicioDos, null));
                 break;
 
             case "Espiritual":
