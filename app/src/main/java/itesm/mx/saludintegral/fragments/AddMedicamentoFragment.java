@@ -100,6 +100,8 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     boolean bAntesDespuesComer;
     byte[] byteFoto;
 
+    boolean validMed = false;
+
     String strAntesDespues = "";
     String strHora="00:00:00";
     int iYearInicio, iMesInicio, iDiaInicio, iYearTermino, iMesTermino, iDiaTermino;
@@ -175,12 +177,15 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_addMed:
                 medicamento = newMedicamento();
-                Intent alarmIntent = new Intent(getContext(), Receiver.class);
-                alarmIntent.putExtra("medicina", medicamento.getNombre());
-                alarmIntent.putExtra("whereFrom", "AddMedicamento");
-                alarmIntent.putExtra("id", ((int) medicamento.getId()));
-                pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
-                start(medicamento.getCadaCuanto());
+
+                if(validMed) {
+                    Intent alarmIntent = new Intent(getContext(), Receiver.class);
+                    alarmIntent.putExtra("medicina", medicamento.getNombre());
+                    alarmIntent.putExtra("whereFrom", "AddMedicamento");
+                    alarmIntent.putExtra("id", ((int) medicamento.getId()));
+                    pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
+                    start(medicamento.getCadaCuanto());
+                }
                 break;
 
             case R.id.btn_tomarFotoMed:
@@ -345,6 +350,8 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
             Toast.makeText(getContext(), "Seleccione si se consume antes o después de comer", Toast.LENGTH_SHORT).show();
             return medicament;
         }
+
+        validMed = true;
 
         strNombre = etNombre.getText().toString();
         dGramaje = Double.parseDouble(etGramaje.getText().toString());
