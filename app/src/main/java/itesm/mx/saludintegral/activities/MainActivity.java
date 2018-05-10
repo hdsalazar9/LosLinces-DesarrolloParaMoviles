@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
 import itesm.mx.saludintegral.models.InfoPersonal;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Handler handler = new Handler();
         handler.postDelayed(runnable,3000);
 

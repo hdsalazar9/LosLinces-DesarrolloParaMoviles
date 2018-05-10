@@ -58,6 +58,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        Miscellaneous.strTipo = Miscellaneous.tipos[11];
+
         database = new InfoPersonalOperations(getApplicationContext());
         database.open();
 
@@ -193,5 +195,10 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     public void onPause(){
         database.close();
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(),"Terminar el registro",Toast.LENGTH_SHORT).show();
     }
 }
