@@ -5,6 +5,7 @@ package itesm.mx.saludintegral.activities;
 * */
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -16,11 +17,30 @@ import itesm.mx.saludintegral.models.InfoPersonal;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            cambiaPantalla();
+        }
+    };
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Handler handler = new Handler();
+        handler.postDelayed(runnable,3000);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    public void cambiaPantalla() {
         InfoPersonalOperations database = new InfoPersonalOperations(getApplicationContext());
         database.open();
         InfoPersonal arrInfo = database.getAllProducts();
@@ -35,8 +55,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-
-    }
 }
