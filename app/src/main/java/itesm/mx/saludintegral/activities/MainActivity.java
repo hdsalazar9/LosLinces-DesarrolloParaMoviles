@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -23,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
             cambiaPantalla();
         }
     };
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

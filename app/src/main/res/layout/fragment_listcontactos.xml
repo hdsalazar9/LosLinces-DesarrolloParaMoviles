@@ -16,7 +16,8 @@
             android:text="@string/fragment_listcontactos_vacio"
             android:textAlignment="center"
             android:textColor="@color/caldroid_black"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ListView

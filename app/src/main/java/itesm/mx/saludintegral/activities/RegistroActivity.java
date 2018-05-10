@@ -159,7 +159,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             bitmap = (Bitmap) data.getExtras().get("data");
             //Girar foto 270 grados
             Matrix matrix = new Matrix();
-            matrix.postRotate(270);
+            matrix.postRotate(0);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ivFoto.setImageBitmap(bitmap);
