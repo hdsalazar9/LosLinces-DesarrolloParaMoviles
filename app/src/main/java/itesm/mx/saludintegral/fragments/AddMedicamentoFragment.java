@@ -58,14 +58,11 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
     final static int REQUEST_CODE = 0;
     EditText etNombre;
-    EditText etGramaje;
     EditText etCantidadIngerir;
-
 
     EditText etHoraIngesta;
     EditText etCadaCuanto;
     EditText etFechaInicio;
-    EditText etFechaTermino;
 
     Button btnTomarFoto;
     Button btnAddMed;
@@ -100,6 +97,8 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     boolean bAntesDespuesComer;
     byte[] byteFoto;
 
+    boolean validMed = false;
+
     String strAntesDespues = "";
     String strHora="00:00:00";
     int iYearInicio, iMesInicio, iDiaInicio, iYearTermino, iMesTermino, iDiaTermino;
@@ -119,27 +118,17 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         View rootView = inflater.inflate(R.layout.fragment_addmedicamento, container,false);
 
         etNombre = rootView.findViewById(R.id.et_nombreMed);
-        etGramaje = rootView.findViewById(R.id.et_gramajeMed);
         etCantidadIngerir = rootView.findViewById(R.id.et_cantidadIngerirMed);
 
         etHoraIngesta = rootView.findViewById(R.id.et_horaIngestaMed);
         etCadaCuanto = rootView.findViewById(R.id.et_cadaCuantoMed);
         etFechaInicio = rootView.findViewById(R.id.et_inicioMed);
-        etFechaTermino = rootView.findViewById(R.id.et_terminoMed);
 
         btnTomarFoto = rootView.findViewById(R.id.btn_tomarFotoMed);
         ivFoto = rootView.findViewById(R.id.iv_fotoMed);
         btnAddMed = rootView.findViewById(R.id.btn_addMed);
         radioGroup = rootView.findViewById(R.id.radioGroup);
-        cbLunes = rootView.findViewById(R.id.cb_Lunes);
-        cbMartes = rootView.findViewById(R.id.cb__Martes);
-        cbMiercoles = rootView.findViewById(R.id.cb_Miercoles);
-        cbJueves = rootView.findViewById(R.id.cb_Jueves);
-        cbViernes = rootView.findViewById(R.id.cb_Viernes);
-        cbSabado = rootView.findViewById(R.id.cb_Sabado);
-        cbDomingo = rootView.findViewById(R.id.cb_Domingo);
         btnFechaInicio = rootView.findViewById(R.id.btn_fechaInicio);
-        btnFechaTermino = rootView.findViewById(R.id.btn_fechaTermino);
         btnHoraIngesta = rootView.findViewById(R.id.btn_horaIngesta);
 
 
@@ -150,11 +139,11 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         btnAddMed.setOnClickListener(this);
 
         btnFechaInicio.setOnClickListener(this);
-        btnFechaTermino.setOnClickListener(this);
+        //btnFechaTermino.setOnClickListener(this);
         btnHoraIngesta.setOnClickListener(this);
-        //etHoraIngesta.setEnabled(false);
+        etHoraIngesta.setEnabled(false);
         etFechaInicio.setEnabled(false);
-        etFechaTermino.setEnabled(false);
+        //etFechaTermino.setEnabled(false);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -184,12 +173,15 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_addMed:
                 medicamento = newMedicamento();
-                Intent alarmIntent = new Intent(getContext(), Receiver.class);
-                alarmIntent.putExtra("medicina", medicamento.getNombre());
-                alarmIntent.putExtra("whereFrom", "AddMedicamento");
-                alarmIntent.putExtra("id", ((int) medicamento.getId()));
-                pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
-                start(medicamento.getCadaCuanto());
+
+                if(validMed) {
+                    Intent alarmIntent = new Intent(getContext(), Receiver.class);
+                    alarmIntent.putExtra("medicina", medicamento.getNombre());
+                    alarmIntent.putExtra("whereFrom", "AddMedicamento");
+                    alarmIntent.putExtra("id", ((int) medicamento.getId()));
+                    pendingIntent = PendingIntent.getBroadcast(getContext(), ((int) medicamento.getId()), alarmIntent, 0);
+                    start(medicamento.getCadaCuanto());
+                }
                 break;
 
             case R.id.btn_tomarFotoMed:
@@ -203,11 +195,6 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
             case R.id.btn_fechaInicio:
                 Miscellaneous.strDatePicker = "fechaInicio";
-                getDatePicked();
-                break;
-
-            case R.id.btn_fechaTermino:
-                Miscellaneous.strDatePicker = "fechaTermino";
                 getDatePicked();
                 break;
 
@@ -269,7 +256,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
             //Girar foto
             Matrix matrix = new Matrix();
-            matrix.postRotate(270);
+            matrix.postRotate(0);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -314,27 +301,31 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     public Medicamento newMedicamento() {
         Log.d("FUNCION","newMedicamento()");
         Medicamento medicament = new Medicamento();
-        strPeriodicidad = getDias();
+        strPeriodicidad = "";
 
         if (etNombre.getText().toString().length() == 0) {
             Toast.makeText(getContext(), "Ingresar nombre de medicamento", Toast.LENGTH_SHORT).show();
             return medicament;
         }
 
+        /*
         if (etGramaje.getText().toString().length() == 0) {
             Toast.makeText(getContext(), "Ingresar gramaje", Toast.LENGTH_SHORT).show();
             return medicament;
         }
+        */
 
         if (etCantidadIngerir.getText().toString().length() == 0) {
             Toast.makeText(getContext(), "Ingresar cantidad a consumir", Toast.LENGTH_SHORT).show();
             return medicament;
         }
 
+        /*
         if (strPeriodicidad.length() == 0) {
             Toast.makeText(getContext(), "Seleccionar días", Toast.LENGTH_SHORT).show();
             return medicament;
         }
+        */
 
         if (etCadaCuanto.getText().toString().length() == 0) {
             Toast.makeText(getContext(), "Ingresar cada cuánto se debe de consumir el medicamento", Toast.LENGTH_LONG).show();
@@ -346,18 +337,22 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
             return medicament;
         }
 
+        /*
         if (etFechaTermino.getText().length() == 0 ) {
             Toast.makeText(getContext(), "Seleccione fecha de Termino", Toast.LENGTH_SHORT).show();
             return medicament;
         }
+        */
 
         if (strAntesDespues.length() == 0 ) {
             Toast.makeText(getContext(), "Seleccione si se consume antes o después de comer", Toast.LENGTH_SHORT).show();
             return medicament;
         }
 
+        validMed = true;
+
         strNombre = etNombre.getText().toString();
-        dGramaje = Double.parseDouble(etGramaje.getText().toString());
+        dGramaje = 0.0;
         iCantidad = Integer.parseInt(etCantidadIngerir.getText().toString());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
@@ -366,11 +361,11 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         timeHora = Time.valueOf(strHora);
 
         String strFechaInicio = etFechaInicio.getText().toString();
-        String strFechaTermino = etFechaTermino.getText().toString();
+        //String strFechaTermino = etFechaTermino.getText().toString();
 
         try {
             dateInicio = dateFormat.parse(strFechaInicio);
-            dateTermino = dateFormat.parse(strFechaTermino);
+            dateTermino = dateFormat.parse(strFechaInicio);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -451,6 +446,12 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     public void onDetach(){
         dao.close();
         super.onDetach();
+    }
+
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
     }
 
 }

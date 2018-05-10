@@ -24,7 +24,7 @@ import itesm.mx.saludintegral.models.MonitoreoSueno;
 public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickListener{
 
     OnResponseMonitoreo mCallback;
-    Button btnAceptar, btnEliminar;
+    Button btnAceptar, btnCancelar;
     EditText etHorasSueno;
     View view;
     MonitoreoSuenoOperations dao;
@@ -40,11 +40,11 @@ public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickLi
         view=inflater.inflate(R.layout.fragment_monitoreo_de_sueno, container, false);
         dao = new MonitoreoSuenoOperations(getContext());
         btnAceptar=(Button)view.findViewById(R.id.button_Aceptar);
-        btnEliminar=(Button)view.findViewById(R.id.button_Canelar);
+        btnCancelar=(Button)view.findViewById(R.id.button_Canelar);
         etHorasSueno=(EditText)view.findViewById(R.id.editTextHorasSueno);
         dao.open();
         btnAceptar.setOnClickListener(this);
-        btnEliminar.setOnClickListener(this);
+        btnCancelar.setOnClickListener(this);
         return view;
     }
 
@@ -75,7 +75,10 @@ public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickLi
         switch (v.getId()){
             case R.id.button_Aceptar:
                 addSueno();
-            break;
+                break;
+            case R.id.button_Canelar:
+                mCallback.onResponseMonitoreo();
+                break;
         }
     }
 
@@ -127,5 +130,10 @@ public class MonitoreoDeSuenoFragment extends Fragment implements View.OnClickLi
     public void onDetach(){
         dao.close();
         super.onDetach();
+    }
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
     }
 }

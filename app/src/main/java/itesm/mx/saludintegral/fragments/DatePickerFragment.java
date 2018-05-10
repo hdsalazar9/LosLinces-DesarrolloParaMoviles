@@ -62,10 +62,12 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
             etFecha.setText(strFecha);
         }
 
+        /*
         if(Miscellaneous.strDatePicker.equals("fechaTermino")) {
             etFecha = getActivity().findViewById(R.id.et_terminoMed);
             etFecha.setText(strFecha);
         }
+        */
 
         if(Miscellaneous.strDatePicker.equals("fechaEvento")) {
             etFecha = getActivity().findViewById(R.id.et_addevento_fecha);

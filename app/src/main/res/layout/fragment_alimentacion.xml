@@ -42,7 +42,7 @@
             android:text="Deslizar a la izquierda o derecha para conocer más"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
-            android:textSize="36dp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/textViewEmpty"

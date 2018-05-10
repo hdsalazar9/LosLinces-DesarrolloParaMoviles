@@ -33,6 +33,7 @@ public class CumpleanoZoomFragment extends Fragment implements View.OnClickListe
     TextView tvTipo;
     Button btnEliminar;
     Button btnRegresar;
+    Button btnMarcar;
     OnResponseListener mCallback;
     CumpleanoOperations dao;
 
@@ -49,7 +50,9 @@ public class CumpleanoZoomFragment extends Fragment implements View.OnClickListe
         tvFecha = rootView.findViewById(R.id.tv_fragmentozoom_fecha);
         tvTipo = rootView.findViewById(R.id.tv_fragmentozoom_tipo);
         btnEliminar = rootView.findViewById(R.id.btn_eventozoom_eliminarEvento);
+        btnMarcar = rootView.findViewById(R.id.btn_eventozoom_marcar);
         btnRegresar= rootView.findViewById(R.id.btn_eventozoom_cerrar);
+
 
         dao = new CumpleanoOperations(getContext());
         dao.open();
@@ -67,6 +70,7 @@ public class CumpleanoZoomFragment extends Fragment implements View.OnClickListe
 
         btnEliminar.setOnClickListener(this);
         btnRegresar.setOnClickListener(this);
+        btnMarcar.setOnClickListener(this);
         return rootView;
     }
 
@@ -82,6 +86,10 @@ public class CumpleanoZoomFragment extends Fragment implements View.OnClickListe
                 removeCumpeleano();
                 Toast.makeText(getContext(),"Cumpleaños Eliminado",Toast.LENGTH_SHORT).show();
                 mCallback.onResponse(1,null);
+                break;
+
+            case R.id.btn_eventozoom_marcar:
+                mCallback.onResponse(3,cumpleano);
                 break;
         }
     }

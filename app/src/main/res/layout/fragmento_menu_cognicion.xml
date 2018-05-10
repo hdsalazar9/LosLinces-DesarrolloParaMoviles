@@ -6,55 +6,17 @@
 
     android:background="@color/cognicion_header">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Cognicion"
-        android:textColor="@color/cognicion_header"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/toolbar9"
-        app:layout_constraintTop_toTopOf="@+id/toolbar9"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/relativeLayout"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        app:layout_constraintTop_toTopOf="parent"
         tools:context="itesm.mx.saludintegral.fragments.FragmentoMenuSalud">
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <ListView
+            android:id="@android:id/list"
             android:layout_width="match_parent"
-            android:id="@+id/frameLayout"
-            android:layout_height="match_parent"
-            tools:context="itesm.mx.saludintegral.fragments.FragmentoMenuSalud">
+            android:layout_height="match_parent"></ListView>
+    </FrameLayout>
 
-            <ListView
-                android:id="@android:id/list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></ListView>
-        </FrameLayout>
-    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
 

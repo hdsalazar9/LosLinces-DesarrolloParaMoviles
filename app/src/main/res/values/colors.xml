@@ -7,9 +7,13 @@
 
 
     <color name="colorSalud">#D32F2F</color>
+    <color name="colorSaludDos">#ff5252</color>
     <color name="colorSocial">#9C27B0</color>
+    <color name="colorSocialDos">#c44bd9</color>
     <color name="colorEjercicio">#FBC02D</color>
+    <color name="colorEjercicioDos">#fdce58</color>
     <color name="colorEspiritual">#1976D2</color>
+    <color name="colorEspiritualDos">#4894df</color>
     <color name="colorFinanzas">#04A748</color>
 
     <color name="registro_header">#ffecb3</color>

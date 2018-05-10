@@ -194,4 +194,9 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         ipo.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        ipo.close();
+        super.onStop();
+    }
 }

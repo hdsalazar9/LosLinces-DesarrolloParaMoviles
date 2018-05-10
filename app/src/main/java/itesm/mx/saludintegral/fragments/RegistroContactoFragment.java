@@ -83,4 +83,9 @@ public class RegistroContactoFragment extends Fragment implements View.OnClickLi
         conEmeOp.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        conEmeOp.close();
+        super.onStop();
+    }
 }

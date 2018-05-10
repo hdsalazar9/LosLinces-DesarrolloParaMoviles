@@ -12,77 +12,55 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import itesm.mx.saludintegral.R;
-import itesm.mx.saludintegral.adapters.CumpleanoAdapter;
+import itesm.mx.saludintegral.adapters.ContactoEmeAdapter;
 import itesm.mx.saludintegral.adapters.EventoAdapter;
-import itesm.mx.saludintegral.controllers.CumpleanoOperations;
-import itesm.mx.saludintegral.controllers.EventoOperations;
-import itesm.mx.saludintegral.models.Cumpleano;
+import itesm.mx.saludintegral.controllers.ContactoEmergenciaOperations;
+import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
+import itesm.mx.saludintegral.models.ContactoEmergencia;
 import itesm.mx.saludintegral.models.Evento;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
 /**
- * Created by FernandoDavid on 05/05/2018.
+ * Created by FernandoDavid on 08/05/2018.
  */
 
-public class ListCumpleanoFragment extends ListFragment implements AdapterView.OnItemClickListener {
-
+public class ListContactoEmergencia extends ListFragment implements AdapterView.OnItemClickListener {
     View view;
-    CumpleanoAdapter adapter;
-    CumpleanoOperations dao;
-    ArrayList<Cumpleano> listCumpleano;
+    ContactoEmeAdapter adapter;
+    ContactoEmergenciaOperations dao;
+    ArrayList<ContactoEmergencia> listContactos;
     OnResponseListener mCallback;
-    String strFecha;
-    Date fechaSeleccionada;
     TextView tvVacio;
 
-    public ListCumpleanoFragment() {
-        // Required empty public constructor
+    public ListContactoEmergencia() {
+        //Requires empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_listcumpleano, container, false);
-        Log.d("onCreateView", "Se creó la ListView");
-        tvVacio = view.findViewById(R.id.tv_fragment_listcumpleano_vacio);
-        listCumpleano = new ArrayList<Cumpleano>();
-        dao = new CumpleanoOperations(getContext());
+        view = inflater.inflate(R.layout.fragment_listcontactos, container, false);
+        tvVacio = view.findViewById(R.id.tv_fragment_listcontacto_vacio);
+        listContactos = new ArrayList<ContactoEmergencia>();
+        dao = new ContactoEmergenciaOperations(getContext());
         dao.open();
-        listCumpleano = null;
-        Bundle args = getArguments();
+        listContactos = null;
 
-        if(args != null) {
-            strFecha = args.getString("Fecha");
-            Log.d("ARGS", "strFecha: " + strFecha);
-            //fechaSeleccionada = Miscellaneous.getDateFromString(strFecha);
-            //DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy");
-            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-            try {
-                fechaSeleccionada = dateFormat.parse(strFecha);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-
-        listCumpleano = mostrarCumpleanos();
-        if (listCumpleano.size() == 0) {
+        listContactos = mostrarContactos();
+        if (listContactos.size() == 0) {
             tvVacio.setVisibility(View.VISIBLE);
         }
         else
         {
             tvVacio.setVisibility(View.GONE);
         }
-        Log.d("DEBUG", "Tamano " + String.valueOf(listCumpleano.size()));
-        adapter = new CumpleanoAdapter(getContext(), listCumpleano);
+        Log.d("DEBUG", "Tamano " + String.valueOf(listContactos.size()));
+        adapter = new ContactoEmeAdapter(getContext(), listContactos);
         setListAdapter(adapter);
 
         return view;
@@ -94,14 +72,15 @@ public class ListCumpleanoFragment extends ListFragment implements AdapterView.O
         ls.setTextFilterEnabled(true);
         registerForContextMenu(ls);
         ls.setOnItemClickListener(this);
+        Log.d("onActivityCreated", "Se le puso un listener a la lista");
         super.onActivityCreated(savedInstance);
     }
 
-    public ArrayList<Cumpleano> mostrarCumpleanos() {
-        ArrayList<Cumpleano> cumpleanoList = dao.getAllCumpleanosFromDateAndType(fechaSeleccionada, Miscellaneous.strTipo);
-        if (cumpleanoList != null) {
+    public ArrayList<ContactoEmergencia> mostrarContactos() {
+        ArrayList<ContactoEmergencia> contactoList = dao.getAllProducts();
+        if (contactoList != null) {
             Log.d("DEBUG", "Evento list NO vacia");
-            return cumpleanoList;
+            return contactoList;
         }
         else
         {
@@ -133,13 +112,13 @@ public class ListCumpleanoFragment extends ListFragment implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        Cumpleano cumpleano = (Cumpleano) parent.getItemAtPosition(position);
-        mCallback.onResponse(2, cumpleano);
+        ContactoEmergencia contactoEmergencia = (ContactoEmergencia) parent.getItemAtPosition(position);
+        mCallback.onResponse(1, contactoEmergencia);
     }
 
     //Interfaz para que la actividad pueda responder al click en lista
     public interface OnResponseListener {
-        public void onResponse(int tipo, Cumpleano cumpleano);
+        public void onResponse(int id, ContactoEmergencia contactoEmergencia);
     }
 
     @Override
@@ -159,4 +138,5 @@ public class ListCumpleanoFragment extends ListFragment implements AdapterView.O
             }
         }
     }
+
 }

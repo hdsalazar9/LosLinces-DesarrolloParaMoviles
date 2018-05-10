@@ -77,32 +77,6 @@
 
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="20dp"
-                android:text="@string/fragment_addmedicamento_gramajeMed"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/et_gramajeMed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-
-                android:hint="@string/fragment_addmedicamento_hint_gramajeMed"
-                android:inputType="numberDecimal"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
-
-            <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,88 +100,6 @@
                 android:textSize="24sp"
                 android:textStyle="italic"
                 android:textColorHint="@android:color/white"/>
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:text="@string/fragment_addmedicamento_periodicidadMed"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/cb_Lunes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="?attr/colorBackgroundFloating"
-                android:text="@string/fragment_addmedicamento_lunes"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
-
-            <CheckBox
-                android:id="@+id/cb__Martes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="?attr/colorBackgroundFloating"
-                android:text="@string/fragment_addmedicamento_martes"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                android:textColor="?attr/colorBackgroundFloating"
-                android:textSize="20sp" />
-
-            <CheckBox
-                android:id="@+id/cb_Miercoles"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="?attr/colorBackgroundFloating"
-                android:text="@string/fragment_addmedicamento_miercoles"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                android:textColor="?attr/colorBackgroundFloating"
-                android:textSize="20sp" />
-
-            <CheckBox
-                android:id="@+id/cb_Jueves"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="?attr/colorBackgroundFloating"
-                android:text="@string/fragment_addmedicamento_jueves"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                android:textColor="?attr/colorBackgroundFloating"
-                android:textSize="20sp" />
-
-            <CheckBox
-                android:id="@+id/cb_Viernes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="?attr/colorBackgroundFloating"
-                android:text="@string/fragment_addmedicamento_viernes"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                android:textColor="?attr/colorBackgroundFloating"
-                android:textSize="20sp" />
-
-            <CheckBox
-                android:id="@+id/cb_Sabado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="?attr/colorBackgroundFloating"
-                android:text="@string/fragment_addmedicamento_sabado"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                android:textColor="?attr/colorBackgroundFloating"
-                android:textSize="20sp" />
-
-            <CheckBox
-                android:id="@+id/cb_Domingo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="?attr/colorBackgroundFloating"
-                android:text="@string/fragment_addmedicamento_domingo"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
-                android:textColor="?attr/colorBackgroundFloating"
-                android:textSize="20sp" />
 
 
             <TextView
@@ -302,42 +194,6 @@
 
             <Button
                 android:id="@+id/btn_fechaInicio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:text="@string/getFecha"
-                android:textAppearance="@android:style/TextAppearance.Material.Small"
-                android:textColor="@color/background_listasalud"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/fragment_addmedicamento_terminoMed"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/et_terminoMed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/fragment_addmedicamento_hint_terminoMed"
-                android:inputType="textPersonName"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="italic" />
-
-            <Button
-                android:id="@+id/btn_fechaTermino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
