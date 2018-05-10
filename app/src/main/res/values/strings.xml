@@ -84,6 +84,7 @@
 
     <string name="row_cumpleano_nombre">"Cumpleañero: "</string>
     <string name="row_cumpleano_telefono">"Teléfono: "</string>
+    <string name="row_cumpleano_marcar">"Marcar"</string>
 
     <string name="fragment_eventozoom_fecha">"Fecha: "</string>
     <string name="fragment_eventozoom_tipo">"Tipo: "</string>
