@@ -170,27 +170,26 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         MenuItem menuItem = (MenuItem) parent.getItemAtPosition(position);
 
         Intent intent;
-
         switch (menuItem.getTitle()){
-            case ("Salud"):
+            case ("Salud Física"):
                 /* Ir a actividad de Salud */
                 Miscellaneous.strTipo = "";
                 intent=new Intent(this, SaludActivity.class);
                 startActivity(intent);
                 break;
-            case ("Social"):
+            case ("Salud Psicosocial"):
                 /* Ir a actividad de Social */
                 Miscellaneous.strTipo = "";
                 intent=new Intent(this, SocialActivity.class);
                 startActivity(intent);
                 break;
-            case ("Cognicion"):
+            case ("Activación Cognitiva"):
                 /* Ir a actividad de Cognicion */
                 Miscellaneous.strTipo = "";
                 intent=new Intent(this, CognicionActivity.class);
                 startActivity(intent);
                 break;
-            case ("Espiritual"):
+            case ("Salud Espiritual"):
                 /* Ir a actividad de Espiritual */
                 Miscellaneous.strTipo = "";
                 intent=new Intent(this, EspiritualActivity.class);
@@ -204,16 +203,16 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         MenuItem mItem;
         ArrayList<MenuItem> Menu = new ArrayList<>();
 
-        mItem = new MenuItem("Salud", R.drawable.pill);
+        mItem = new MenuItem(Miscellaneous.titulos[0], R.drawable.pill);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Social", R.drawable.social_ok);
+        mItem = new MenuItem(Miscellaneous.titulos[1], R.drawable.social_ok);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Cognicion", R.drawable.light);
+        mItem = new MenuItem(Miscellaneous.titulos[2], R.drawable.light);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Espiritual", R.drawable.peace);
+        mItem = new MenuItem(Miscellaneous.titulos[3], R.drawable.peace);
         Menu.add(mItem);
 
         return Menu;

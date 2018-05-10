@@ -43,7 +43,7 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     Medicamento medicamento;
     OnResponseTomar mCallback;
     Boolean bAtiempo = false;
-    TextView tvNombre, tvCadaCuanto, tvGramaje, tvFechaComienzo, tvADComer, tvCantidad, tvFaltan;
+    TextView tvNombre, tvCadaCuanto, tvFechaComienzo, tvADComer, tvCantidad, tvFaltan;
     ImageView ivImagenMed;
     Button btnAgregar, btnBorrar;
     public FragmentoTomarMedicamento() {
@@ -63,7 +63,6 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
         tvNombre=(TextView) view.findViewById(R.id.textView_nombre);
         tvCadaCuanto=(TextView)view.findViewById(R.id.textView_cadaCuanto);
         tvFaltan=(TextView)view.findViewById(R.id.textView_faltan);
-        tvGramaje=(TextView)view.findViewById(R.id.textView_gramaje);
         tvFechaComienzo=(TextView)view.findViewById(R.id.textView_fecha);
         tvADComer=(TextView)view.findViewById(R.id.textView_adComer);
         tvCantidad=(TextView)view.findViewById(R.id.textView_cantidad);
@@ -89,7 +88,6 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
                 {
                     tvFaltan.setText(sFalta);
                 }
-                tvGramaje.setText("Gramaje: "+String.valueOf(medicamento.getGramaje()));
                 tvFechaComienzo.setText("Comienza: "+ Miscellaneous.getStringFromDate(medicamento.getFechaComienzo()));
                 tvADComer.setText((medicamento.getAntesDespuesDeComer()?"Antes de comer":"Despues de comer"));
                 tvCantidad.setText("Cantidad: "+String.valueOf(medicamento.getCantidad()));

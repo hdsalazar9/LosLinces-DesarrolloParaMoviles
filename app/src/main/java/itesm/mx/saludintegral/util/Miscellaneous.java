@@ -27,6 +27,13 @@ public class Miscellaneous {
     public static int iSizeSubMenu = 0;
     public static HashMap<Date,Drawable> mapFechaFondo;
 
+    public final static String[] titulos = {
+            "Salud Física",
+            "Salud Psicosocial",
+            "Activación Cognitiva",
+            "Salud Espiritual"
+    };
+
 
     public static String[] tipos = {
             "Espiritualidad",       //0 Espiritual
@@ -40,7 +47,8 @@ public class Miscellaneous {
             "Contacto Emergencia",   //8
             "Perfil",
             "Main Menu",
-            "Loading"
+            "Loading",
+            "SALUD INTEGRAL"
     };
 
     //Metodo que recibe util.Date y lo convierte al patron necesario para utilizarse en a BD

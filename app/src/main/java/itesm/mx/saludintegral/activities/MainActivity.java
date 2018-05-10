@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -27,14 +28,19 @@ public class MainActivity extends AppCompatActivity {
             cambiaPantalla();
         }
     };
+    TextView tvTitulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        tvTitulo = (TextView) findViewById(R.id.tv_titulo_principal);
+
+        tvTitulo.setText(Miscellaneous.tipos[12]);
+
         Handler handler = new Handler();
-        handler.postDelayed(runnable,3000);
+        handler.postDelayed(runnable,1500);
 
     }
 

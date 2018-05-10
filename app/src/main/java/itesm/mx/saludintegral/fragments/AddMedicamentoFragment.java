@@ -58,14 +58,11 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
     final static int REQUEST_CODE = 0;
     EditText etNombre;
-    EditText etGramaje;
     EditText etCantidadIngerir;
-
 
     EditText etHoraIngesta;
     EditText etCadaCuanto;
     EditText etFechaInicio;
-    EditText etFechaTermino;
 
     Button btnTomarFoto;
     Button btnAddMed;
@@ -121,7 +118,6 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         View rootView = inflater.inflate(R.layout.fragment_addmedicamento, container,false);
 
         etNombre = rootView.findViewById(R.id.et_nombreMed);
-        etGramaje = rootView.findViewById(R.id.et_gramajeMed);
         etCantidadIngerir = rootView.findViewById(R.id.et_cantidadIngerirMed);
 
         etHoraIngesta = rootView.findViewById(R.id.et_horaIngestaMed);
@@ -312,10 +308,12 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
             return medicament;
         }
 
+        /*
         if (etGramaje.getText().toString().length() == 0) {
             Toast.makeText(getContext(), "Ingresar gramaje", Toast.LENGTH_SHORT).show();
             return medicament;
         }
+        */
 
         if (etCantidadIngerir.getText().toString().length() == 0) {
             Toast.makeText(getContext(), "Ingresar cantidad a consumir", Toast.LENGTH_SHORT).show();
@@ -354,7 +352,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
         validMed = true;
 
         strNombre = etNombre.getText().toString();
-        dGramaje = Double.parseDouble(etGramaje.getText().toString());
+        dGramaje = 0.0;
         iCantidad = Integer.parseInt(etCantidadIngerir.getText().toString());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 

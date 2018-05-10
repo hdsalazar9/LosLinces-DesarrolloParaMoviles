@@ -50,7 +50,7 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
         ivMenuImage.setImageResource(mItem.getImage());
 
         switch (mItem.getTitle()){
-            case "Salud":
+            case "Salud Física":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorSalud, null));
                 break;
@@ -62,7 +62,7 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorSaludDos, null));
                 break;
-            case "Social":
+            case "Salud Psicosocial":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorSocial, null));
                 break;
@@ -74,7 +74,7 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorSocialDos, null));
                 break;
-            case "Cognicion":
+            case "Activación Cognitiva":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorEjercicio, null));
                 break;
@@ -83,7 +83,7 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
                         getContext().getResources(),R.color.colorEjercicioDos, null));
                 break;
 
-            case "Espiritual":
+            case "Salud Espiritual":
                 linearLayout.setBackgroundColor(ResourcesCompat.getColor(
                         getContext().getResources(),R.color.colorEspiritual, null));
                 break;

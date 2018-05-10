@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Salud Integral</string>
 
-    <string name="seccion_social">Social</string>
-    <string name="seccion_salud">Salud</string>
-    <string name="seccion_cognicnion">"Cognición"</string>
-    <string name="seccion_espiritualidad">Espiritual</string>
+    <string name="seccion_social">"Salud Psicosocial"</string>
+    <string name="seccion_salud">"Salud Física"</string>
+    <string name="seccion_cognicnion">"Activación Cognitiva"</string>
+    <string name="seccion_espiritualidad">"Salud Espiritual"</string>
 
 
     <string name="getFecha">"Seleccionar Fecha"</string>

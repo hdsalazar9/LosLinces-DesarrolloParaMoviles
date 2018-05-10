@@ -77,32 +77,6 @@
 
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="20dp"
-                android:text="@string/fragment_addmedicamento_gramajeMed"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/et_gramajeMed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-
-                android:hint="@string/fragment_addmedicamento_hint_gramajeMed"
-                android:inputType="numberDecimal"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
-
-            <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
