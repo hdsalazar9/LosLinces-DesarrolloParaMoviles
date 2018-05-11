@@ -122,6 +122,11 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
         dao.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){

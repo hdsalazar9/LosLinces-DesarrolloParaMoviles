@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="itesm.mx.saludintegral.activities.MainMenu">
+    tools:context="itesm.mx.saludintegral.activities.MainMenu"
+    android:background="@android:color/white">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_activity_mainmenu_hola"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
 
 
         <LinearLayout
@@ -25,58 +36,50 @@
                 android:layout_height="100dp"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="vertical">
-
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="100dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvUserName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:text="Hola Usuario!"
-                        android:textColor="@android:color/white"
-                        android:textSize="36sp"
-                        android:textStyle="bold" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/Header_principal">
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvUserName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:text="Hola Usuario!"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="36sp"
+                            android:textStyle="bold" />
 
+                    </RelativeLayout>
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ListViewLinearLayout"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:id="@+id/ListViewLinearLayout">
 
             <ListView
                 android:id="@android:id/list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-
             </ListView>
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                app:backgroundTint="@color/colorPrimary"
-                app:srcCompat="@android:drawable/ic_menu_add" />
 
         </LinearLayout>
 
 
-    </LinearLayout>
 
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

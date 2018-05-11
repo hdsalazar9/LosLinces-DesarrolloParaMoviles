@@ -32,7 +32,7 @@ public class FragmentoMenuCognicion extends ListFragment implements AdapterView.
     private ArrayList<MenuItem> menuItems;
     OnSelectedListener mCallback;
     FrameLayout frameLayout;
-    Boolean bSoloUna;
+    Boolean bSoloUna = true;
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
         @Override
@@ -51,24 +51,25 @@ public class FragmentoMenuCognicion extends ListFragment implements AdapterView.
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragmento_menu_cognicion, container, false);
 
-        bSoloUna = true;
         frameLayout = view.findViewById(R.id.frameLayout);
+
+        menuItems = getItems();
+        menuItemAdapter = new MenuItemAdapter(getActivity(), menuItems);
+
         final ViewTreeObserver observer= frameLayout.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
                         Log.d("Log", "Height: " + frameLayout.getHeight());
-                        Miscellaneous.iSizeMenu = frameLayout.getHeight();
                         if(bSoloUna) {
-                            handler.postDelayed(runnable, 1);
+                            Miscellaneous.iSizeSubMenu = frameLayout.getHeight();;
                             bSoloUna = false;
+                            menuItemAdapter.notifyDataSetChanged();
                         }
                     }
                 });
 
-        menuItems = getItems();
-        menuItemAdapter = new MenuItemAdapter(getActivity(), menuItems);
         setListAdapter(menuItemAdapter);
         return view;
     }
@@ -84,9 +85,9 @@ public class FragmentoMenuCognicion extends ListFragment implements AdapterView.
 
     ArrayList<MenuItem> getItems(){
         ArrayList<MenuItem> Aux=new ArrayList<>();
-        MenuItem menuItem=new MenuItem("Actividades", R.drawable.medicina_icon);
+        MenuItem menuItem=new MenuItem("Actividades", R.drawable.light);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Finanzas", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Finanzas", R.drawable.money);
         Aux.add(menuItem);
         return Aux;
     }

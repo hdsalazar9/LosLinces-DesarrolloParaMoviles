@@ -207,6 +207,12 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         dao2.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        dao.close();
+        dao2.close();
+        super.onStop();
+    }
 
     //Interfaz para que la actividad pueda responder al click en lista
     public interface OnSelectFechaValida {

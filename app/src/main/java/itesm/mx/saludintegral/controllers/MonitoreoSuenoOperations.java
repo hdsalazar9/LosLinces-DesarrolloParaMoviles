@@ -15,7 +15,9 @@ import java.util.Date;
 import itesm.mx.saludintegral.dbcreation.DataBaseSchema;
 import itesm.mx.saludintegral.dbcreation.SaludIntegralDBHelper;
 import itesm.mx.saludintegral.models.MonitoreoSueno;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 /**
  * Created by josec on 14/04/2018.
@@ -42,8 +44,10 @@ public class MonitoreoSuenoOperations {
         long newRowId=0;
         try{
             ContentValues values=new ContentValues();
+
             String fechaDeSueno = Miscellaneous.getStringFromDate(monitoreoSueno.getFecha());
             values.put(DataBaseSchema.MonitoreoSuenoTable.COLUMN_NAME_FECHA, fechaDeSueno);
+
 
             values.put(DataBaseSchema.MonitoreoSuenoTable.COLUMN_NAME_HORAS, monitoreoSueno.getHoras().toString());
             newRowId=db.insert(DataBaseSchema.MonitoreoSuenoTable.TABLE_NAME, null, values);
@@ -64,7 +68,9 @@ public class MonitoreoSuenoOperations {
             monitoreoSueno=null;
             if (cursor.moveToFirst()){
                 do{
+
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(1));
+
                     monitoreoSueno=new MonitoreoSueno(cursor.getInt(0),dateC,cursor.getDouble(2));
                     listaMonitoreoSuenos.add(monitoreoSueno);
                 }while (cursor.moveToNext());
@@ -85,6 +91,7 @@ public class MonitoreoSuenoOperations {
             if(cursor.moveToFirst()){
                 do{
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(1));
+
                     monitoreoSueno=new MonitoreoSueno(cursor.getInt(0),dateC,cursor.getDouble(2));
                     listaMonitoreoSuenos.add(monitoreoSueno);
                 }while (cursor.moveToNext());

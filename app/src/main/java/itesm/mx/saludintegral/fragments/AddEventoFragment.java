@@ -268,4 +268,9 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
         dao.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
+    }
 }

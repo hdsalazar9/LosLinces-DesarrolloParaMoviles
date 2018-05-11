@@ -34,7 +34,7 @@ public class FragmentoFamiliaAmigos extends ListFragment implements AdapterView.
     String strFiltro;
 
     FrameLayout frameLayout;
-    Boolean bSoloUna;
+    Boolean bSoloUna = true;
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
         @Override
@@ -57,24 +57,25 @@ public class FragmentoFamiliaAmigos extends ListFragment implements AdapterView.
             strFiltro = bundle.getString("filtro");
         }
 
-        bSoloUna = true;
         frameLayout = view.findViewById(R.id.frameLayout);
+
+        menuItems = getItems();
+        menuItemAdapter = new MenuItemAdapter(getActivity(), menuItems);
+
         final ViewTreeObserver observer= frameLayout.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        //Log.d("Log", "Height: " + frameLayout.getHeight());
-                        Miscellaneous.iSizeMenu = frameLayout.getHeight();
+                        Log.d("Log", "Height: " + frameLayout.getHeight());
                         if(bSoloUna) {
-                            handler.postDelayed(runnable, 1);
+                            Miscellaneous.iSizeSubMenu = frameLayout.getHeight();;
                             bSoloUna = false;
+                            menuItemAdapter.notifyDataSetChanged();
                         }
                     }
                 });
 
-        menuItems = getItems();
-        menuItemAdapter = new MenuItemAdapter(getActivity(), menuItems);
         setListAdapter(menuItemAdapter);
         return view;
     }
@@ -90,9 +91,9 @@ public class FragmentoFamiliaAmigos extends ListFragment implements AdapterView.
 
     ArrayList<MenuItem> getItems(){
         ArrayList<MenuItem> Aux = new ArrayList<>();
-        MenuItem menuItem = new MenuItem("Evento", R.drawable.medicina_icon);
+        MenuItem menuItem = new MenuItem("Evento", R.drawable.fam);
         Aux.add(menuItem);
-        menuItem = new MenuItem("Cumpleaños", R.drawable.ic_launcher_background);
+        menuItem = new MenuItem("Cumpleaños", R.drawable.birthday_icon);
         Aux.add(menuItem);
         return Aux;
     }

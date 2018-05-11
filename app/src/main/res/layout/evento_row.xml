@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="25dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp">
 
         <TextView
             android:id="@+id/textView20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/row_evento_nombre"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:textSize="30sp" />
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_evento_row_nombreEvento"
@@ -23,6 +30,7 @@
             android:layout_height="wrap_content"
             android:text="Ajedrez"
             android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+            android:textColor="@android:color/white"
             android:textSize="24sp" />
 
         <TextView
@@ -31,8 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="@string/row_evento_descripcion"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:textSize="30sp" />
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_evento_row_descripcion"
@@ -40,6 +50,7 @@
             android:layout_height="wrap_content"
             android:text="Jugar con Paco"
             android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+            android:textColor="@android:color/white"
             android:textSize="24sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

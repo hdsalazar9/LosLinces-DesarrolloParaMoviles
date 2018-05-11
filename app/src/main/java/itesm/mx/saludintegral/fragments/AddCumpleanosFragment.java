@@ -138,4 +138,10 @@ public class AddCumpleanosFragment extends Fragment implements View.OnClickListe
         super.onDetach();
     }
 
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
+    }
+
 }

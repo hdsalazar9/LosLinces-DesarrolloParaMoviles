@@ -23,9 +23,12 @@ import java.util.TimerTask;
 import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
 import itesm.mx.saludintegral.R;
+
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
 import itesm.mx.saludintegral.models.InfoPersonal;
 import itesm.mx.saludintegral.util.Miscellaneous;
+
+
 
 
 /*
@@ -47,25 +50,20 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            refresh();
+            //refresh();
         }
     };
+    Boolean bSoloUnaVez = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_holder);
 
+        Log.d("MAINMENU", "Actualizo el nombre de strtipo");
+        Miscellaneous.strTipo = Miscellaneous.tipos[10];
+
         listViewLinearLayout = findViewById(R.id.ListViewLinearLayout);
-        final ViewTreeObserver observer= listViewLinearLayout.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        Log.d("Log", "Height: " + listViewLinearLayout.getHeight());
-                        Miscellaneous.iSizeMenu = listViewLinearLayout.getHeight();
-                    }
-                });
 
         menuItems = getMenuItems();
         menuItemArrayAdapter = new MenuItemAdapter(this, menuItems);
@@ -83,7 +81,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
             @Override
             public void onClick(View v) {
                 Intent intent;
-                Miscellaneous.strTipo = "";
+                Miscellaneous.strTipo = Miscellaneous.tipos[9];
                 intent = new Intent(getApplicationContext(), PerfilActivity.class);
                 startActivity(intent);
             }
@@ -94,6 +92,19 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         setListAdapter(menuItemArrayAdapter);
 
         getListView().setOnItemClickListener(this);
+
+        final ViewTreeObserver observer= listViewLinearLayout.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        Log.d("Log", "Height: " + listViewLinearLayout.getHeight());
+                        if (bSoloUnaVez) {
+                            Miscellaneous.iSizeMenu = listViewLinearLayout.getHeight();
+                            bSoloUnaVez = false;
+                        }
+                    }
+                });
 
         //Floating button
         FloatingActionButton fab = findViewById(R.id.fabContacto);
@@ -144,9 +155,7 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
     public void onResume(){
         super.onResume();
         Log.d("onResumed", "ando en onResumed");
-        //refresh();
-
-        handler.postDelayed(runnable,1);
+        Miscellaneous.strTipo = Miscellaneous.tipos[10];
 
         ipo = new InfoPersonalOperations(this);
         ipo.open();
@@ -161,25 +170,28 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         MenuItem menuItem = (MenuItem) parent.getItemAtPosition(position);
 
         Intent intent;
-
         switch (menuItem.getTitle()){
-            case ("Salud"):
+            case ("Salud Física"):
                 /* Ir a actividad de Salud */
+                Miscellaneous.strTipo = "";
                 intent=new Intent(this, SaludActivity.class);
                 startActivity(intent);
                 break;
-            case ("Social"):
+            case ("Salud Psicosocial"):
                 /* Ir a actividad de Social */
+                Miscellaneous.strTipo = "";
                 intent=new Intent(this, SocialActivity.class);
                 startActivity(intent);
                 break;
-            case ("Cognicion"):
+            case ("Activación Cognitiva"):
                 /* Ir a actividad de Cognicion */
+                Miscellaneous.strTipo = "";
                 intent=new Intent(this, CognicionActivity.class);
                 startActivity(intent);
                 break;
-            case ("Espiritual"):
+            case ("Salud Espiritual"):
                 /* Ir a actividad de Espiritual */
+                Miscellaneous.strTipo = "";
                 intent=new Intent(this, EspiritualActivity.class);
                 startActivity(intent);
                 break;
@@ -191,16 +203,16 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
         MenuItem mItem;
         ArrayList<MenuItem> Menu = new ArrayList<>();
 
-        mItem = new MenuItem("Salud", R.drawable.medicina_icon);
+        mItem = new MenuItem(Miscellaneous.titulos[0], R.drawable.pill);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Social", R.drawable.social_icon);
+        mItem = new MenuItem(Miscellaneous.titulos[1], R.drawable.social_ok);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Cognicion", R.drawable.exercise_icon);
+        mItem = new MenuItem(Miscellaneous.titulos[2], R.drawable.light);
         Menu.add(mItem);
 
-        mItem = new MenuItem("Espiritual", R.drawable.spiritual_icon);
+        mItem = new MenuItem(Miscellaneous.titulos[3], R.drawable.peace);
         Menu.add(mItem);
 
         return Menu;
@@ -220,6 +232,8 @@ public class MainMenu extends ListActivity implements AdapterView.OnItemClickLis
     @Override
     public void onBackPressed() {
         //No permitir que de back, pues regresaria a registro
+        this.finishAffinity();
+        //moveTaskToBack(true);
     }
 
     public void refresh(){

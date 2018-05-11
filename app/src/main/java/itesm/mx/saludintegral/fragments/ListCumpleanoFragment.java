@@ -125,6 +125,11 @@ public class ListCumpleanoFragment extends ListFragment implements AdapterView.O
         dao.close();
         super.onDetach();
     }
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){

@@ -9,7 +9,9 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +27,9 @@ import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
 import itesm.mx.saludintegral.fragments.DatePickerFragment;
 import itesm.mx.saludintegral.models.InfoPersonal;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,6 +57,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+
+        Miscellaneous.strTipo = Miscellaneous.tipos[11];
 
         database = new InfoPersonalOperations(getApplicationContext());
         database.open();
@@ -135,8 +141,11 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 infoPersonal.setFechaNacimiento(date);
 
                 long id = database.addEvento(infoPersonal);
+
                 Toast.makeText(this, "Registrado satisfactoriamente!", Toast.LENGTH_SHORT).show();
+
                 Log.d("Registro activity:", infoPersonal.toString());
+
                 Intent i = new Intent(this, MainMenu.class);
                 startActivity(i);
                 break;
@@ -152,7 +161,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             bitmap = (Bitmap) data.getExtras().get("data");
             //Girar foto 270 grados
             Matrix matrix = new Matrix();
-            matrix.postRotate(270);
+            matrix.postRotate(0);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ivFoto.setImageBitmap(bitmap);
@@ -186,5 +195,10 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     public void onPause(){
         database.close();
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(),"Terminar el registro",Toast.LENGTH_SHORT).show();
     }
 }

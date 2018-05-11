@@ -1,138 +1,152 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FFCDD2"
-    tools:context="itesm.mx.saludintegral.fragments.FragmentoTomarMedicamento">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textView_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="31dp"
-        android:layout_marginTop="28dp"
-        android:layout_toStartOf="@+id/imageView_medicamento"
-        android:text="Medicamento"
-        android:textColor="@android:color/black"
-        android:textSize="30sp" />
-
-    <ImageView
-        android:id="@+id/imageView_medicamento"
-        android:layout_width="93dp"
-        android:layout_height="64dp"
-        android:layout_alignBottom="@+id/textView_faltan"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="17dp"
-        app:srcCompat="@drawable/pills" />
-
-
-    <!--android:layout_alignEnd="@+id/imageView_medicamento"
-        android:layout_below="@+id/textView_nombre"
-        android:layout_marginEnd="62dp"-->
-    <TextView
-        android:id="@+id/textView_faltan"
-        android:layout_width="254dp"
-        android:layout_height="49dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView_nombre"
-        android:layout_marginTop="30dp"
-        android:text="Retraso"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:textColor="#D32F2F"
-        android:textSize="36sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView_cadaCuanto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView_fecha"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="40dp"
-        android:text="Frecuencia"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView_gramaje"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView7"
-        android:layout_marginTop="232dp"
-        android:text="Gramaje"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView_fecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView_gramaje"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="42dp"
-        android:text="Fecha"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView_adComer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
-        android:layout_alignParentStart="true"
-        android:text="A-D Comer"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView_cantidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView_gramaje"
-        android:text="Cantidad"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/background_listasalud"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/linearLayout">
-        <Button
-            android:id="@+id/button_ingerido"
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_above="@+id/button4"
-            android:layout_centerHorizontal="true"
-            android:background="#8BC34A"
-            android:text="Ya la tomé"
-            android:textAlignment="center"
-            android:textSize="30sp" />
+        tools:context="itesm.mx.saludintegral.fragments.FragmentoTomarMedicamento">
 
-        <Button
-            android:id="@+id/button_borrar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                android:text="Medicamento"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView_medicamento"
+                android:layout_width="93dp"
+                android:layout_height="64dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="23dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/pills" />
+        </LinearLayout>
+
+
+        <!--android:layout_alignEnd="@+id/imageView_medicamento"
+            android:layout_below="@+id/textView_nombre"
+            android:layout_marginEnd="62dp"-->
+        <TextView
+            android:id="@+id/textView_faltan"
+            android:layout_width="254dp"
+            android:layout_height="49dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="Retraso"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textColor="@android:color/white"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_cadaCuanto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView_fecha"
+            android:layout_alignParentStart="true"
+            android:text="Frecuencia"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView_gramaje"
+            android:layout_alignParentStart="true"
+            android:text="Fecha"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_adComer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="A-D Comer"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_cantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:text="Cantidad"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:background="#D32F2F"
-            android:text="Eliminar"
-            android:textColor="@android:color/white"
-            android:textSize="30sp" />
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_ingerido"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_above="@+id/button4"
+                android:layout_centerHorizontal="true"
+                android:layout_weight=".5"
+                android:background="@color/background_guardar_addmedicamento"
+                android:text="Ya la tomé"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_borrar"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight=".5"
+                android:background="@android:color/white"
+                android:text="Eliminar"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@color/colorSalud"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
+

@@ -15,7 +15,9 @@
             android:gravity="center"
             android:text="@string/fragment_listeventos_vacio"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textColor="@color/caldroid_white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ListView

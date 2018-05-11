@@ -12,14 +12,14 @@
             android:id="@+id/calendario"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4">
+            android:layout_weight=".72">
 
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight=".28"
             android:gravity="bottom"
             android:orientation="vertical">
 
@@ -28,8 +28,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:background="@color/calendario_boton"
                 android:text="@string/fragment_calendario_add"
-                android:textSize="24sp" />
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/black"
+                android:textSize="36sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

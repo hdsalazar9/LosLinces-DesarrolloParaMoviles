@@ -1,5 +1,7 @@
 package itesm.mx.saludintegral.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.parceler.Parcels;
 
@@ -106,6 +109,18 @@ public class SocialActivity extends AppCompatActivity implements FragmentoMenuSo
                 args.putParcelable("cumpleano", Parcels.wrap(cumpleano));
                 cumpleanoZoomFragment.setArguments(args);
                 changeFragmentHabilitaBack(cumpleanoZoomFragment);
+                break;
+
+            case 3:
+                Uri uri = Uri.parse("tel:" + cumpleano.getTelefono());
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                if(intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(this,"No hay app de marcar.",Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }

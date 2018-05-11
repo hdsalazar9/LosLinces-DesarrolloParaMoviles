@@ -38,14 +38,7 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
     OnSelectedListener mCallback;
 
     FrameLayout frameLayout;
-    Boolean bSoloUna;
-    Handler handler = new Handler();
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            Miscellaneous.refresh(menuItemArrayAdapter);
-        }
-    };
+    Boolean bSoloUna = true;;
 
     public FragmentoMenuSalud() {
         // Required empty public constructor
@@ -58,25 +51,28 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragmento_menu_salud, container, false);
 
-        bSoloUna = true;
         frameLayout = view.findViewById(R.id.frameLayout);
+
+        menuItems=getItems();
+        menuItemArrayAdapter=new MenuItemAdapter(getActivity(), menuItems);
+
         final ViewTreeObserver observer= frameLayout.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
                         Log.d("Log", "Height: " + frameLayout.getHeight());
-                        Miscellaneous.iSizeMenu = frameLayout.getHeight();
                         if(bSoloUna) {
-                            handler.postDelayed(runnable, 1);
+                            Miscellaneous.iSizeSubMenu = frameLayout.getHeight();;
                             bSoloUna = false;
+                            menuItemArrayAdapter.notifyDataSetChanged();
                         }
                     }
                 });
 
-        menuItems=getItems();
-        menuItemArrayAdapter=new MenuItemAdapter(getActivity(), menuItems);
         setListAdapter(menuItemArrayAdapter);
+
+
         return view;
     }
 
@@ -91,13 +87,13 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
 
     ArrayList<MenuItem> getItems(){
         ArrayList<MenuItem> Aux=new ArrayList<>();
-        MenuItem menuItem=new MenuItem("Medicinas", R.drawable.medicina_icon);
+        MenuItem menuItem=new MenuItem("Medicinas", R.drawable.pill);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Monitoreo de sueño", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Monitoreo de sueño", R.drawable.moon);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Alimentación", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Alimentación", R.drawable.food);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Ejercicio", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Ejercicio", R.drawable.run);
         Aux.add(menuItem);
         return Aux;
     }
@@ -123,6 +119,12 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
             case 3:
                 break;
         }*/
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        menuItemArrayAdapter.notifyDataSetChanged();
     }
 
     public interface OnSelectedListener {

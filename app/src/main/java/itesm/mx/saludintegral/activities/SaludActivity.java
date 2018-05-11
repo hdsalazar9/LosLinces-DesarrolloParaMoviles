@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 
 import org.parceler.Parcels;
 
@@ -37,6 +39,8 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class SaludActivity extends AppCompatActivity implements FragmentoMenuSalud.OnSelectedListener, FragmentoMedicamento.OnResponseListener, FragmentoTomarMedicamento.OnResponseTomar, AddMedicamentoFragment.OnResponseAgregar, MonitoreoDeSuenoFragment.OnResponseMonitoreo,ListEventoFragment.OnResponseListener, CalendarioFragment.OnSelectFechaValida, EventoDisplayFragment.OnResponseListener, EventoZoomFragment.OnResponseListener{
 
     int iCurrentFrameLayout = R.id.frameLayout_ActivitySalud;
+    FrameLayout frameLayout;
+    Boolean bSoloUnaVez = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,6 @@ public class SaludActivity extends AppCompatActivity implements FragmentoMenuSal
 
         //Crear instancia de FragmentoMenuSalud
         FragmentoMenuSalud fragmentoMenuSalud = new FragmentoMenuSalud();
-        Bundle bundle = new Bundle();
         //Añade el FragmentoMenuSalud al frameLayout_ActivitySalud FrameLayout
         getSupportFragmentManager().beginTransaction().add(
                 iCurrentFrameLayout, fragmentoMenuSalud).commit();

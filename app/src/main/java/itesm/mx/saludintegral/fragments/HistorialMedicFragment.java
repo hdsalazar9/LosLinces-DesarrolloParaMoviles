@@ -18,6 +18,7 @@ import itesm.mx.saludintegral.controllers.MedicamentoOperations;
 import itesm.mx.saludintegral.controllers.TomarMedicamentoOperations;
 import itesm.mx.saludintegral.models.Medicamento;
 import itesm.mx.saludintegral.models.TomarMedicamento;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 /**
  * Created by Héctor on 5/6/2018.
@@ -37,7 +38,7 @@ public class HistorialMedicFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_historial_medicamentos, container, false);
-
+        Miscellaneous.strTipo="";
         lvMed = rootView.findViewById(R.id.lv_fragment_historialmed);
 
         //Abrir BD y obtener lista de medicamentos y eventos de tomar medicamento
@@ -47,7 +48,10 @@ public class HistorialMedicFragment extends Fragment {
         tomMedOp.open();
         medOp.open();
 
-        tomMedArr = tomMedOp.getAllTomarMedicamento();
+
+        tomMedArr = tomMedOp.getAllProducts();
+        System.out.println("TAMANOOOO" + tomMedArr.size());
+
         medArr = medOp.getAllProducts();
 
         tomMedOp.close();
@@ -92,6 +96,7 @@ public class HistorialMedicFragment extends Fragment {
     public void onPause(){
         tomMedOp.close();
         medOp.close();
+        Miscellaneous.strTipo=Miscellaneous.tipos[9];
         super.onPause();
     }
     @Override
@@ -99,5 +104,10 @@ public class HistorialMedicFragment extends Fragment {
         tomMedOp.close();
         medOp.close();
         super.onDetach();
+    }
+    @Override
+    public void onStop(){
+        tomMedOp.close();
+        super.onStop();
     }
 }
