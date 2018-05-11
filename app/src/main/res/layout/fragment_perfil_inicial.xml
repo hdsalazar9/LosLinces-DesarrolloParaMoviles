@@ -140,15 +140,13 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/et_perfil_pais"
+                <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Pais"
-                    android:textColor="@android:color/black" />
+                    android:id="@+id/spinnerCountry"
+                    android:popupBackground="@color/registro_boton"
+                    />
 
             </LinearLayout>
 

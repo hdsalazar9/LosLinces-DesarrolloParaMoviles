@@ -13,16 +13,21 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Locale;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
@@ -46,7 +51,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     private EditText etNombre;
     private EditText etApodo;
     private EditText etFechaDeNacimiento;
-    private EditText etPais;
+    private Spinner country;
+   // private EditText etPais;
     private EditText etCiudad;
     private ImageView ivFoto;
 
@@ -70,9 +76,30 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         etNombre = (EditText) findViewById(R.id.et_activity_registro_nombre);
         etApodo = (EditText) findViewById(R.id.et_activity_registro_apodo);
         etFechaDeNacimiento = (EditText) findViewById(R.id.et_activity_registro_fecha);
-        etPais = (EditText) findViewById(R.id.et_activity_registro_pais);
+       // etPais = (EditText) findViewById(R.id.et_activity_registro_pais);
         etCiudad = (EditText) findViewById(R.id.et_activity_registro_ciudad);
         ivFoto = (ImageView) findViewById(R.id.iv_activity_registro_foto);
+        country = (Spinner) findViewById(R.id.spinnerCountry);
+        //Ingresa datos al spinner
+        Locale[] locales = Locale.getAvailableLocales();
+        ArrayList<String> countries = new ArrayList<String>();
+        for (Locale locale : locales) {
+            String country = locale.getDisplayCountry();
+            if (country.trim().length() > 0 && !countries.contains(country)) {
+                countries.add(country);
+            }
+        }
+        Collections.sort(countries);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, countries);
+        dataAdapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        country.setAdapter(dataAdapter);
+        for (int i=0; i<countries.size(); i++){
+            if(countries.get(i).equals("México")||countries.get(i).equals("Mexico")){
+                country.setSelection(i);
+            }
+        }
 
         if(savedInstanceState != null){
             byteArray = savedInstanceState.getByteArray("picture");
@@ -123,10 +150,10 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this, "Favor de registrar fecha de naciemiento", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if(etPais.getText().toString().equals("")){
+                /*if(etPais.getText().toString().equals("")){
                     Toast.makeText(this, "Favor de registrar país", Toast.LENGTH_SHORT).show();
                     break;
-                }
+                }*/
                 if(etCiudad.getText().toString().equals("")){
                     Toast.makeText(this, "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
                     break;
@@ -138,7 +165,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 infoPersonal.setNombre(etNombre.getText().toString());
                 infoPersonal.setApodo(etApodo.getText().toString());
                 infoPersonal.setCiudad(etCiudad.getText().toString());
-                infoPersonal.setPais(etPais.getText().toString());
+                infoPersonal.setPais(country.getSelectedItem().toString());
                 infoPersonal.setFoto(byteArray);
 
                 //Obtener la fecha desde lo escrito por el usuario
@@ -206,4 +233,5 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(),"Terminar el registro",Toast.LENGTH_SHORT).show();
     }
+
 }
