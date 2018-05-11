@@ -96,7 +96,6 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     public TomarMedicamento newTomarMedicamento(TomarMedicamento tomarMedicamento){
         long id = dao.addTomarMedicamento(tomarMedicamento);
         tomarMedicamento.setId(id);
-        //listAux.add(evento);
         return tomarMedicamento;
     }
 
@@ -141,7 +140,7 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
                     e.printStackTrace();
                 }
 
-                TomarMedicamento tomar=new TomarMedicamento(n, medicamento.getId(), bAtiempo, dateC);
+                TomarMedicamento tomar=new TomarMedicamento(n, medicamento.getId(),medicamento.getNombre(), bAtiempo, dateC);
                 newTomarMedicamento(tomar);
                 mCallback.onResponseTomar();
                  break;
