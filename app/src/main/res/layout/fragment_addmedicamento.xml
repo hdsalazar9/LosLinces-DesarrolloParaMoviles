@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
 
             android:background="@color/background_listasalud"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,9 +73,9 @@
                 android:hint="@string/fragment_addmedicamento_hint_nombreMed"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
 
             <TextView
@@ -98,9 +99,9 @@
                 android:hint="@string/fragment_addmedicamento_hint_cantidadMed"
                 android:inputType="number"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
 
             <TextView
@@ -125,9 +126,9 @@
                 android:hint="@string/fragment_addmedicamento_hint_horaMed"
                 android:inputType="none"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
             <Button
                 android:id="@+id/btn_horaIngesta"
@@ -163,9 +164,9 @@
                 android:hint="@string/fragment_addmedicamento_hint_cadaCuantoMed"
                 android:inputType="number"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -189,9 +190,9 @@
                 android:inputType="textPersonName"
                 android:onClick="onClick"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
             <Button
                 android:id="@+id/btn_fechaInicio"

@@ -44,7 +44,6 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
     OnResponseTomar mCallback;
     Boolean bAtiempo = false;
     TextView tvNombre, tvCadaCuanto, tvFechaComienzo, tvADComer, tvCantidad, tvFaltan;
-    ImageView ivImagenMed;
     Button btnAgregar, btnBorrar;
     public FragmentoTomarMedicamento() {
         // Required empty public constructor
@@ -68,29 +67,27 @@ public class FragmentoTomarMedicamento extends Fragment implements View.OnClickL
         tvCantidad=(TextView)view.findViewById(R.id.textView_cantidad);
         btnAgregar=(Button)view.findViewById(R.id.button_ingerido);
         btnBorrar=(Button)view.findViewById(R.id.button_borrar);
-        ivImagenMed=(ImageView)view.findViewById(R.id.imageView_medicamento);
         Bundle args = getArguments();
         medicamento=new Medicamento();
         if(args != null) {
             medicamento =(Medicamento) Parcels.unwrap(args.getParcelable("medicamento"));
-                tvNombre.setText("Nombre: "+medicamento.getNombre());
+                tvNombre.setText(medicamento.getNombre());
 
                 String sCada=medicamento.getCadaCuanto()>1?" Horas":" Hora";
-                tvCadaCuanto.setText("Cada: "+String.valueOf(medicamento.getCadaCuanto())+ sCada);
+                tvCadaCuanto.setText(String.valueOf(medicamento.getCadaCuanto())+ sCada);
                 ArrayList<TomarMedicamento>  tomarMedicamento=dao.getAllTomarMedicamentoFrom(String.valueOf(medicamento.getId()));
                 String sFalta=MedicamentoAdapter.getTimeTo(medicamento.getHora().toString(),medicamento.getCadaCuanto(), medicamento.getFechaComienzo(), tomarMedicamento);
                 if(!sFalta.equals("Retraso")){
                     bAtiempo = true;
-                    sFalta="Faltan: "+sFalta;
                     tvFaltan.setText(sFalta);
                 }
                 else
                 {
                     tvFaltan.setText(sFalta);
                 }
-                tvFechaComienzo.setText("Comienza: "+ Miscellaneous.getStringFromDate(medicamento.getFechaComienzo()));
+                tvFechaComienzo.setText(Miscellaneous.getStringFromDate(medicamento.getFechaComienzo()));
                 tvADComer.setText((medicamento.getAntesDespuesDeComer()?"Antes de comer":"Despues de comer"));
-                tvCantidad.setText("Cantidad: "+String.valueOf(medicamento.getCantidad()));
+                tvCantidad.setText(String.valueOf(medicamento.getCantidad()));
         }
         btnBorrar.setOnClickListener(this);
         btnAgregar.setOnClickListener(this);

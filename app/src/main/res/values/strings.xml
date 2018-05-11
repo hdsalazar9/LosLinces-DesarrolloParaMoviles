@@ -89,6 +89,10 @@
     <string name="fragment_eventozoom_fecha">"Fecha: "</string>
     <string name="fragment_eventozoom_tipo">"Tipo: "</string>
 
+    <string name="fragment_tomarmed_status">"Estatus: "</string>
+    <string name="fragment_tomarmed_ingesta">"Ingesta: "</string>
+    <string name="fragment_tomarmed_cantidad">"Cantidad: "</string>
+
     <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
 
     <string name="fragment_listcumpleanos_vacio">"No hay más cumpleaños registrados."</string>
