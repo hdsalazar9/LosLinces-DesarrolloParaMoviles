@@ -15,14 +15,16 @@ import java.util.Date;
 public class TomarMedicamento {
     long id;
     long idMedicamento;
+    String sNombreMed;
     Boolean tomadoATiempo;
     Date fechaHora;
 
     public TomarMedicamento() {}
 
-    public TomarMedicamento(long id, long idMedicamento, Boolean tomadoATiempo, Date fechaHora) {
+    public TomarMedicamento(long id, long idMedicamento,String sNombreMed, Boolean tomadoATiempo, Date fechaHora) {
         this.id = id;
         this.idMedicamento = idMedicamento;
+        this.sNombreMed = sNombreMed;
         this.tomadoATiempo = tomadoATiempo;
         this.fechaHora = fechaHora;
     }
@@ -41,6 +43,14 @@ public class TomarMedicamento {
 
     public void setIdMedicamento(long idMedicamento) {
         this.idMedicamento = idMedicamento;
+    }
+
+    public String getsNombreMed() {
+        return sNombreMed;
+    }
+
+    public void setsNombreMed(String sNombreMed) {
+        this.sNombreMed = sNombreMed;
     }
 
     public Boolean getTomadoATiempo() {
