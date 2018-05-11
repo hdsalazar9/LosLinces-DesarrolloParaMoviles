@@ -52,25 +52,19 @@
 
             <ImageView
                 android:id="@+id/iv_activity_registro_foto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="3"
                 android:padding="10dp"
                 app:srcCompat="@drawable/manuser" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_activity_registro_TomarFoto"
-                android:layout_width="wrap_content"
-
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#ffc107"
-                android:elevation="0dp"
-                android:text="@string/activity_registro_TomarFoto"
-                android:textAppearance="@android:style/TextAppearance.Material.Small"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:background="@color/registro_btn_alt"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
 
         </LinearLayout>
 
@@ -246,20 +240,26 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_activity_registro_continuar"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
 
-            android:layout_width="384dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="60dp"
-            android:background="@color/registro_boton"
-            android:text="@string/activity_registro_Continuar"
-            android:textAlignment="center"
-            android:textAppearance="@android:style/TextAppearance.Material.Small"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            <Button
+                android:id="@+id/btn_activity_registro_continuar"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/registro_boton"
+                android:text="@string/activity_registro_Continuar"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

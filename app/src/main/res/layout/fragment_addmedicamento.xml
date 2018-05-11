@@ -27,24 +27,25 @@
 
                 <ImageView
                     android:id="@+id/iv_fotoMed"
-                    android:layout_width="215dp"
-                    android:layout_height="79dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/pills" />
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="3"
+                    android:src="@drawable/med" />
 
-                <Button
-                    android:id="@+id/btn_tomarFotoMed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@android:color/white"
-                    android:backgroundTint="@android:color/white"
-                    android:text="@string/fragment_addmedicamento_fotoMed"
-                    android:textAlignment="center"
-                    android:textAppearance="@android:style/TextAppearance.Material.Small"
-                    android:textColor="@color/background_listasalud"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/btn_tomarFotoMed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/ic_launcher_background"
+                        app:srcCompat="@android:drawable/ic_menu_camera" />
+                </LinearLayout>
 
             </LinearLayout>
 

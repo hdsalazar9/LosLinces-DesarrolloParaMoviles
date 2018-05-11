@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +49,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     Button btnEdit;
     Button btnBitacoraEventos;
     Button btnHistorialMedicamentos;
-    Button btnFoto;
+    ImageButton btnFoto;
     Button btnMonitoreo;
     ImageView ivFoto;
 
@@ -64,7 +65,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         tvFecha = (TextView) rootView.findViewById(R.id.tv_perfil_fechanacimiento);
         ivFoto = (ImageView) rootView.findViewById(R.id.iv_perfil_foto);
         btnEdit = (Button) rootView.findViewById(R.id.btn_perfil_editar);
-        btnFoto = (Button) rootView.findViewById(R.id.btn_perfil_foto);
+        btnFoto = (ImageButton) rootView.findViewById(R.id.btn_perfil_foto);
         btnMonitoreo = (Button) rootView.findViewById(R.id.btn_perfil_monitoreo);
         btnBitacoraEventos = (Button) rootView.findViewById(R.id.btn_perfil_bitacoraeventos);
         btnHistorialMedicamentos = (Button) rootView.findViewById(R.id.btn_perfil_historialmedicamentos);

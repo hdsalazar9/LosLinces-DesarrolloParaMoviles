@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     private byte[] byteArray;
 
     private Button btnContinue;
-    private Button btnTomarFoto;
+    private ImageButton btnTomarFoto;
     private Button btnFecha;
     private EditText etNombre;
     private EditText etApodo;
@@ -64,7 +65,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         database.open();
 
         btnContinue = (Button) findViewById(R.id.btn_activity_registro_continuar);
-        btnTomarFoto = (Button) findViewById(R.id.btn_activity_registro_TomarFoto);
+        btnTomarFoto = (ImageButton) findViewById(R.id.btn_activity_registro_TomarFoto);
         btnFecha = (Button) findViewById(R.id.btn_registro_Fecha);
         etNombre = (EditText) findViewById(R.id.et_activity_registro_nombre);
         etApodo = (EditText) findViewById(R.id.et_activity_registro_apodo);
@@ -165,8 +166,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ivFoto.setImageBitmap(bitmap);
-            ivFoto.getLayoutParams().width = 200;
-            ivFoto.getLayoutParams().height = 200;
+            //ivFoto.getLayoutParams().width = 200;
+            //ivFoto.getLayoutParams().height = 200;
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
