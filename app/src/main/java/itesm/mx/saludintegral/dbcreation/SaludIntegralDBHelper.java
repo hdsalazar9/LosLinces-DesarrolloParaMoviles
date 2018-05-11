@@ -66,6 +66,7 @@ public class SaludIntegralDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE + " TEXT," +
                 DataBaseSchema.EventosTable.COLUMN_NAME_DESCRICPION + " TEXT," +
                 DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " TEXT," +
+
                 DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " TEXT " +
                 ")";
         Log.i("Producthelper onCreate3", CREATE_EVENTO_TABLE);
@@ -78,8 +79,8 @@ public class SaludIntegralDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.CumpleanosTable._ID + " INTEGER PRIMARY KEY," +
                 DataBaseSchema.CumpleanosTable.COLUMN_NAME_NOMBRE + " TEXT," +
                 DataBaseSchema.CumpleanosTable.COLUMN_NAME_FECHA + " TEXT," +
-                DataBaseSchema.CumpleanosTable.COLUMN_NAME_TELEFONO + " TEXT," +
-                DataBaseSchema.CumpleanosTable.COLUMN_NAME_TIPO + " TEXT " +
+                DataBaseSchema.CumpleanosTable.COLUMN_NAME_TIPO + " TEXT," +
+                DataBaseSchema.CumpleanosTable.COLUMN_NAME_TELEFONO +" TEXT " +
                 ")";
         Log.i("Producthelper onCreate4", CREATE_CUMPLEANOS_TABLE);
         // Ejecuta la instrucción de sql.

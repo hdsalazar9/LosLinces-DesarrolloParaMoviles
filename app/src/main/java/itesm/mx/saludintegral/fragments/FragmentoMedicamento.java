@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.parceler.Parcels;
 
@@ -35,6 +36,7 @@ public class FragmentoMedicamento extends ListFragment implements AdapterView.On
     byte[] array;
     ArrayList<Medicamento> listMedicamento;
     OnResponseListener mCallback;
+    TextView tvVacio;
 
     public FragmentoMedicamento() {
         // Required empty public constructor
@@ -47,10 +49,19 @@ public class FragmentoMedicamento extends ListFragment implements AdapterView.On
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragmento_medicamento, container, false);
         FloatingActionButton btn = (FloatingActionButton) view.findViewById(R.id.fab);
+        tvVacio = view.findViewById(R.id.tv_fragment_listmeds_vacio);
         dao = new MedicamentoOperations(getContext());
         dao.open();
         array=null;
         listMedicamento = mostrarMedicamentos();
+        if (listMedicamento.size() == 0) {
+            tvVacio.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tvVacio.setVisibility(View.GONE);
+        }
+
         //listAux=listEvento;
         adapter = new MedicamentoAdapter(getContext(), listMedicamento);
         setListAdapter(adapter);
@@ -96,18 +107,22 @@ public class FragmentoMedicamento extends ListFragment implements AdapterView.On
         dao.close();
         super.onPause();
     }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
+    }
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        //Electrodomestico electrodomestico = (Electrodomestico) parent.getItemAtPosition(position);
-        /*Bundle bundle = new Bundle();
-        Intent i = new Intent(Tab1Fragment.this, DetalleActivity.class);
-        bundle.putSerializable("libro",libro);
-        i.putExtras(bundle);
-        startActivity(i);*/
-        //Intent intent = new Intent(getActivity(), FragmentoTomarMed.class);
         Medicamento medicamento=(Medicamento)parent.getItemAtPosition(position);
         mCallback.onResponse(2, medicamento);
+
         /*intent.putExtra("medicamento", Parcels.wrap(medicamento));
         startActivity(intent);*/
     }

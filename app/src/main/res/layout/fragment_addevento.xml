@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#607D8B">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,9 +22,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_addevento_nombre"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textColor="@color/caldroid_white"
-                android:textSize="30sp" />
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/et_addevento_nombre"
@@ -31,6 +35,8 @@
                 android:ems="10"
                 android:hint="@string/fragment_addevento_hint_nombre"
                 android:inputType="textPersonName"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp" />
 
             <LinearLayout
@@ -49,7 +55,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="RadioButton"
-                        android:textSize="20sp" />
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
 
                     <RadioButton
                         android:id="@+id/rb_opcionDos"
@@ -57,7 +64,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="RadioButton"
-                        android:textSize="20sp" />
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
 
                     <RadioButton
                         android:id="@+id/rb_opcionTres"
@@ -65,7 +73,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="RadioButton"
-                        android:textSize="20sp" />
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
 
                     <RadioButton
                         android:id="@+id/rb_opcionCuatro"
@@ -73,7 +82,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="RadioButton"
-                        android:textSize="20sp" />
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
 
                     <RadioButton
                         android:id="@+id/rb_opcionCinco"
@@ -81,7 +91,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="RadioButton"
-                        android:textSize="20sp" />
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
 
                     <RadioButton
                         android:id="@+id/rb_opcionOtro"
@@ -89,7 +100,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="RadioButton"
-                        android:textSize="20sp" />
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -107,9 +119,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_addevento_descripcion"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textColor="@color/caldroid_white"
-                android:textSize="30sp" />
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/et_addevento_descripcion"
@@ -118,6 +131,7 @@
                 android:ems="10"
                 android:hint="@string/fragment_addevento_hint_descripcion"
                 android:inputType="textPersonName"
+                android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
             <TextView
@@ -125,24 +139,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_addevento_fecha"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textColor="@color/caldroid_white"
-                android:textSize="30sp" />
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/et_addevento_fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Fecha"
+                android:hint="@string/fragment_addmedicamento_hint_comienzoMed"
                 android:inputType="none"
+                android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
             <Button
                 android:id="@+id/btn_fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/getFecha" />
+                android:background="@android:color/white"
+                android:text="@string/getFecha"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,9 +176,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/fragment_addevento_periodicidad"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                    android:textColor="@color/caldroid_white"
-                    android:textSize="30sp" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView19"
@@ -165,9 +187,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/fragment_addevento_semanas"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                    android:textColor="@color/caldroid_white"
-                    android:textSize="30sp" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -181,7 +204,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/fragment_addevento_hint_periodicidad"
-                    android:textSize="20sp" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/et_addevento_periodicidad"
@@ -191,6 +217,7 @@
                     android:ems="10"
                     android:hint="@string/fragment_addevento_hint_semanas"
                     android:inputType="number"
+                    android:textColor="@android:color/white"
                     android:textSize="24sp" />
 
             </LinearLayout>
@@ -200,9 +227,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_addevento_tipo"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textColor="@color/caldroid_white"
-                android:textSize="30sp" />
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/et_addevento_tipo"
@@ -211,11 +239,12 @@
                 android:ems="10"
                 android:inputType="none"
                 android:text="Name"
+                android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="119dp"
                 android:gravity="bottom"
                 android:orientation="vertical">
 
@@ -223,7 +252,14 @@
                     android:id="@+id/btn_registerEvento"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/fragment_addevento_registrar" />
+                    android:background="@android:color/white"
+                    android:paddingBottom="30dp"
+                    android:text="@string/fragment_addevento_registrar"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

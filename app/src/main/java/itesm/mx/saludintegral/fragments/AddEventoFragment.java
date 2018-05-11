@@ -3,7 +3,6 @@ package itesm.mx.saludintegral.fragments;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +14,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import com.roomorama.caldroid.CaldroidListener;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.EventoOperations;
 import itesm.mx.saludintegral.models.Evento;
@@ -88,22 +83,25 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
             }
         });
 
-        if (Miscellaneous.strTipo.equals("Cognicion")) {
-            rbUno.setText(Ejercicios.cognicion[0]);
-            rbDos.setText(Ejercicios.cognicion[1]);
-            rbTres.setText(Ejercicios.cognicion[2]);
-            rbCuatro.setText(Ejercicios.cognicion[3]);
-            rbCinco.setText(Ejercicios.cognicion[4]);
-            rbOtro.setText(Ejercicios.cognicion[5]);
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[0])) {
+            asignaOpciones(Ejercicios.espiritual);
         }
 
-        if (Miscellaneous.strTipo.equals("Espiritual")) {
-            rbUno.setText(Ejercicios.espiritual[0]);
-            rbDos.setText(Ejercicios.espiritual[1]);
-            rbTres.setText(Ejercicios.espiritual[2]);
-            rbCuatro.setText(Ejercicios.espiritual[3]);
-            rbCinco.setText(Ejercicios.espiritual[4]);
-            rbOtro.setText(Ejercicios.espiritual[5]);
+
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[1])) {
+            asignaOpciones(Ejercicios.cognicion);
+        }
+
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[2])) {
+            asignaOpciones(Ejercicios.finanzas);
+        }
+
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[3])) {
+            asignaOpciones(Ejercicios.fisicos);
+        }
+
+        if (Miscellaneous.strTipo.equals(Miscellaneous.tipos[5]) || Miscellaneous.strTipo.equals(Miscellaneous.tipos[7])) {
+            asignaOpciones(Ejercicios.eventos);
         }
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -172,9 +170,23 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
         }
     }
 
+    public void asignaOpciones(String[] strOpciones) {
+        rbUno.setText(strOpciones[0]);
+        rbDos.setText(strOpciones[1]);
+        rbTres.setText(strOpciones[2]);
+        rbCuatro.setText(strOpciones[3]);
+        rbCinco.setText(strOpciones[4]);
+        rbOtro.setText(strOpciones[5]);
+    }
+
     public void newEvento() {
         String strSemanas = etSemanas.getText().toString();
-        int iNumero = Integer.parseInt(strSemanas);
+        int iNumero;
+        if(strSemanas.equals("")){
+            iNumero = 0;
+        }else {
+            iNumero = Integer.parseInt(strSemanas);
+        }
 
         Log.d("DEBUG","strSemanas: "+strSemanas);
         Log.d("DEBUG","strSemanas > 0? " + (iNumero>0));
@@ -196,7 +208,6 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
         }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-
         Date dateFecha = new Date();
         String strNombre = etNombre.getText().toString();
         String strDescripcion = etDescripcion.getText().toString();
@@ -240,5 +251,26 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
     public void getDatePicked() {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    @Override
+    public void onResume(){
+        dao.open();
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        dao.close();
+        super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
+    }
+    @Override
+    public void onStop(){
+        dao.close();
+        super.onStop();
     }
 }

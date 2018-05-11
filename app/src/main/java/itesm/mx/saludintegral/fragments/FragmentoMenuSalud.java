@@ -5,13 +5,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,6 +25,7 @@ import itesm.mx.saludintegral.activities.SaludActivity;
 import itesm.mx.saludintegral.adapters.MedicamentoAdapter;
 import itesm.mx.saludintegral.adapters.MenuItem;
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
+import itesm.mx.saludintegral.util.Miscellaneous;
 
 
 /**
@@ -32,6 +37,9 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
     private ArrayList<MenuItem> menuItems;
     OnSelectedListener mCallback;
 
+    FrameLayout frameLayout;
+    Boolean bSoloUna = true;;
+
     public FragmentoMenuSalud() {
         // Required empty public constructor
     }
@@ -42,9 +50,29 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragmento_menu_salud, container, false);
+
+        frameLayout = view.findViewById(R.id.frameLayout);
+
         menuItems=getItems();
         menuItemArrayAdapter=new MenuItemAdapter(getActivity(), menuItems);
+
+        final ViewTreeObserver observer= frameLayout.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        Log.d("Log", "Height: " + frameLayout.getHeight());
+                        if(bSoloUna) {
+                            Miscellaneous.iSizeSubMenu = frameLayout.getHeight();;
+                            bSoloUna = false;
+                            menuItemArrayAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
         setListAdapter(menuItemArrayAdapter);
+
+
         return view;
     }
 
@@ -59,13 +87,13 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
 
     ArrayList<MenuItem> getItems(){
         ArrayList<MenuItem> Aux=new ArrayList<>();
-        MenuItem menuItem=new MenuItem("Medicinas", R.drawable.medicina_icon);
+        MenuItem menuItem=new MenuItem("Medicinas", R.drawable.pill);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Monitoreo de sueño", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Monitoreo de sueño", R.drawable.moon);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Alimentación", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Alimentación", R.drawable.food);
         Aux.add(menuItem);
-        menuItem=new MenuItem("Ejercicio", R.drawable.ic_launcher_background);
+        menuItem=new MenuItem("Ejercicio", R.drawable.run);
         Aux.add(menuItem);
         return Aux;
     }
@@ -82,7 +110,6 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
                 android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frameLayout_ActivitySalud, fragmentoMedicamento);
                 transaction.addToBackStack(null);
-
                 transaction.commit();
                 break;
             case 1:
@@ -92,6 +119,12 @@ public class FragmentoMenuSalud extends ListFragment implements AdapterView.OnIt
             case 3:
                 break;
         }*/
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        menuItemArrayAdapter.notifyDataSetChanged();
     }
 
     public interface OnSelectedListener {

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_addevento_nombre"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/et_fragment_addcumpleanos_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fragment_addcumple_hint_nombre"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_eventozoom_fecha"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/et_fragment_addcumpleanos_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fragment_addmedicamento_hint_comienzoMed"
+            android:inputType="none"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:text="@string/getFecha"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@color/social_header"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_addcumple_telefono"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/et_fragment_addcumpleanos_teléfono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fragment_addcumple_telefono_hint"
+            android:inputType="phone"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_addevento_tipo"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/et_fragment_addcumpleanos_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_fragment_addcumpleanos_registrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:text="@string/fragment_addcumple_add"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                android:textColor="@color/social_header"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

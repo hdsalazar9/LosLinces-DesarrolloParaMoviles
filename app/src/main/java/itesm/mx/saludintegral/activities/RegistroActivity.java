@@ -2,10 +2,16 @@ package itesm.mx.saludintegral.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +25,11 @@ import java.util.Date;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
+import itesm.mx.saludintegral.fragments.DatePickerFragment;
 import itesm.mx.saludintegral.models.InfoPersonal;
+
 import itesm.mx.saludintegral.util.Miscellaneous;
+
 
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,6 +41,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
     private Button btnContinue;
     private Button btnTomarFoto;
+    private Button btnFecha;
     private EditText etNombre;
     private EditText etApodo;
     private EditText etFechaDeNacimiento;
@@ -48,11 +58,14 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        Miscellaneous.strTipo = Miscellaneous.tipos[11];
+
         database = new InfoPersonalOperations(getApplicationContext());
         database.open();
 
         btnContinue = (Button) findViewById(R.id.btn_activity_registro_continuar);
         btnTomarFoto = (Button) findViewById(R.id.btn_activity_registro_TomarFoto);
+        btnFecha = (Button) findViewById(R.id.btn_registro_Fecha);
         etNombre = (EditText) findViewById(R.id.et_activity_registro_nombre);
         etApodo = (EditText) findViewById(R.id.et_activity_registro_apodo);
         etFechaDeNacimiento = (EditText) findViewById(R.id.et_activity_registro_fecha);
@@ -67,9 +80,11 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         //Get imageview to byte array
         bitmap = ((BitmapDrawable) ivFoto.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byteArray = baos.toByteArray();
 
+        etFechaDeNacimiento.setEnabled(false);
+        btnFecha.setOnClickListener(this);
         btnContinue.setOnClickListener(this);
         btnTomarFoto.setOnClickListener(this);
     }
@@ -77,6 +92,11 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.btn_registro_Fecha:
+                Miscellaneous.strDatePicker = "fechaNacimiento";
+                getDatePicked();
+                break;
+
             case R.id.btn_activity_registro_TomarFoto:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //Validar camara celular
@@ -95,7 +115,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                     break;
                 }
                 if(etFechaDeNacimiento.getText().toString().equals("")){
-                    //TODO: Checar por si es o no una fecha valida
                     Toast.makeText(this, "Favor de registrar fecha de naciemiento", Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -118,17 +137,15 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 infoPersonal.setFoto(byteArray);
 
                 //Obtener la fecha desde lo escrito por el usuario
-                Date date = null;
-                SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-yyyy");
-                try {
-                    date= dateFormat.parse(etFechaDeNacimiento.getText().toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                Date date = Miscellaneous.getDateFromString(etFechaDeNacimiento.getText().toString());
                 infoPersonal.setFechaNacimiento(date);
 
                 long id = database.addEvento(infoPersonal);
-                Toast.makeText(this, "Registrado satisfactoriamente! " + id, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(this, "Registrado satisfactoriamente!", Toast.LENGTH_SHORT).show();
+
+                Log.d("Registro activity:", infoPersonal.toString());
+
                 Intent i = new Intent(this, MainMenu.class);
                 startActivity(i);
                 break;
@@ -142,16 +159,24 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         //Se tomo exisotamente la foto, guardarla
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             bitmap = (Bitmap) data.getExtras().get("data");
+            //Girar foto 270 grados
+            Matrix matrix = new Matrix();
+            matrix.postRotate(0);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+
             ivFoto.setImageBitmap(bitmap);
             ivFoto.getLayoutParams().width = 200;
             ivFoto.getLayoutParams().height = 200;
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArray = stream.toByteArray();
         }
+    }
 
-
+    public void getDatePicked() {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     @Override
@@ -170,5 +195,10 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     public void onPause(){
         database.close();
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(),"Terminar el registro",Toast.LENGTH_SHORT).show();
     }
 }

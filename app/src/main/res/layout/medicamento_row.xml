@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/image_producto"
-        android:layout_width="131dp"
-        android:layout_height="135dp"
-        android:src="@mipmap/ic_launcher" />
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="124dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp">
 
-        <TextView
-            android:id="@+id/text_nombre"
+        <ImageView
+            android:id="@+id/image_producto"
+            android:layout_width="131dp"
+            android:layout_height="135dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="74dp"
-            android:hint="nombre"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text_consumo"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:hint="consumo"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/text_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="nombre"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/text_consumo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="consumo"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
