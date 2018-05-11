@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.io.ByteArrayOutputStream;
 
@@ -47,10 +48,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     EditText etPais;
     TextView tvFecha;
     Button btnEdit;
-    Button btnBitacoraEventos;
-    Button btnHistorialMedicamentos;
     ImageButton btnFoto;
-    Button btnMonitoreo;
     ImageView ivFoto;
 
     @Override
@@ -66,13 +64,11 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         ivFoto = (ImageView) rootView.findViewById(R.id.iv_perfil_foto);
         btnEdit = (Button) rootView.findViewById(R.id.btn_perfil_editar);
         btnFoto = (ImageButton) rootView.findViewById(R.id.btn_perfil_foto);
-        btnMonitoreo = (Button) rootView.findViewById(R.id.btn_perfil_monitoreo);
-        btnBitacoraEventos = (Button) rootView.findViewById(R.id.btn_perfil_bitacoraeventos);
-        btnHistorialMedicamentos = (Button) rootView.findViewById(R.id.btn_perfil_historialmedicamentos);
 
         ipo = new InfoPersonalOperations(getActivity().getApplicationContext());
         ipo.open();
         info = ipo.getAllProducts();
+
 
         etNombre.setText(info.getNombre());
         etApellido.setText(info.getApodo());
@@ -85,10 +81,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                 bmp.getHeight(), false));
 
         btnEdit.setOnClickListener(this);
-        btnBitacoraEventos.setOnClickListener(this);
-        btnHistorialMedicamentos.setOnClickListener(this);
         btnFoto.setOnClickListener(this);
-        btnMonitoreo.setOnClickListener(this);
 
         //Get imageview to byte array
         bitmap = ((BitmapDrawable) ivFoto.getDrawable()).getBitmap();
@@ -143,21 +136,6 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
 
                 long id = ipo.addEvento(info);
                 Toast.makeText(getActivity().getApplicationContext(), "Editado satisfactoriamente", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btn_perfil_bitacoraeventos:
-                BitacoraEventoFragment bitacoraEventoFragment = new BitacoraEventoFragment();
-                transaction.replace(R.id.frameLayout_perfilActivity,bitacoraEventoFragment)
-                        .addToBackStack(null).commit();
-                break;
-            case R.id.btn_perfil_historialmedicamentos:
-                HistorialMedicFragment historialMedicFragment = new HistorialMedicFragment();
-                transaction.replace(R.id.frameLayout_perfilActivity,historialMedicFragment)
-                        .addToBackStack(null).commit();
-                break;
-            case R.id.btn_perfil_monitoreo:
-                PerfilMonitoreoFragment perfilMonitoreoFragment = new PerfilMonitoreoFragment();
-                transaction.replace(R.id.frameLayout_perfilActivity,perfilMonitoreoFragment)
-                        .addToBackStack(null).commit();
                 break;
         }
     }
