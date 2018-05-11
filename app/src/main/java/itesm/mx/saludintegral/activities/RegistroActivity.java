@@ -104,6 +104,10 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, REQUEST_CODE);
                 }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"No se detectó cámara",Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.btn_activity_registro_continuar:

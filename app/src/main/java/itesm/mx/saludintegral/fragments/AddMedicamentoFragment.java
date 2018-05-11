@@ -191,6 +191,10 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
                 if(intent.resolveActivity(getContext().getPackageManager()) != null) {
                     startActivityForResult(intent, REQUEST_CODE );
                 }
+                else
+                {
+                    Toast.makeText(getContext(),"No se detectó cámara",Toast.LENGTH_SHORT).show();
+                }
                 break;
 
 
