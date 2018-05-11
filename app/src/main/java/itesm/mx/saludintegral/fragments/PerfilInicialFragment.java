@@ -12,13 +12,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Locale;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
@@ -43,7 +48,8 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     EditText etNombre;
     EditText etApellido;
     EditText etCiudad;
-    EditText etPais;
+    //EditText etPais;
+    Spinner country;
     TextView tvFecha;
     Button btnEdit;
     Button btnBitacoraEventos;
@@ -59,8 +65,8 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         etNombre = (EditText) rootView.findViewById(R.id.et_perfil_nombre);
         etApellido = (EditText) rootView.findViewById(R.id.et_perfil_apellido);
         etCiudad = (EditText) rootView.findViewById(R.id.et_perfil_ciudad);
-        etPais = (EditText) rootView.findViewById(R.id.et_perfil_pais);
-
+        //etPais = (EditText) rootView.findViewById(R.id.et_perfil_pais);
+        country=rootView.findViewById(R.id.spinnerCountry);
         tvFecha = (TextView) rootView.findViewById(R.id.tv_perfil_fechanacimiento);
         ivFoto = (ImageView) rootView.findViewById(R.id.iv_perfil_foto);
         btnEdit = (Button) rootView.findViewById(R.id.btn_perfil_editar);
@@ -73,10 +79,32 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         ipo.open();
         info = ipo.getAllProducts();
 
+        //Agrega paises al spinner
+        Locale[] locales = Locale.getAvailableLocales();
+        ArrayList<String> countries = new ArrayList<String>();
+        for (Locale locale : locales) {
+            String country = locale.getDisplayCountry();
+            if (country.trim().length() > 0 && !countries.contains(country)) {
+                countries.add(country);
+            }
+        }
+        Collections.sort(countries);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_item, countries);
+        dataAdapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        country.setAdapter(dataAdapter);
+        for (int i=0; i<countries.size(); i++){
+            if(countries.get(i).equals(info.getPais())||countries.get(i).equals(info.getPais())){
+                country.setSelection(i);
+            }
+        }
+
+
         etNombre.setText(info.getNombre());
         etApellido.setText(info.getApodo());
         etCiudad.setText(info.getCiudad());
-        etPais.setText(info.getPais());
+        //etPais.setText(info.getPais());
         tvFecha.setText(Miscellaneous.getStringFromDate(info.getFechaNacimiento()));
 
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
@@ -121,10 +149,10 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                     Toast.makeText(getContext(), "Favor de registrar apodo", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if(etPais.getText().toString().equals("")){
+                /*if(etPais.getText().toString().equals("")){
                     Toast.makeText(getContext(), "Favor de registrar país", Toast.LENGTH_SHORT).show();
                     break;
-                }
+                }*/
                 if(etCiudad.getText().toString().equals("")){
                     Toast.makeText(getContext(), "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
                     break;
@@ -133,7 +161,8 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                 info.setNombre(etNombre.getText().toString());
                 info.setApodo(etApellido.getText().toString());
                 info.setCiudad(etCiudad.getText().toString());
-                info.setPais(etPais.getText().toString());
+                //info.setPais(etPais.getText().toString());
+                info.setPais(country.getSelectedItem().toString());
                 info.setFoto(byteArray);
 
                 long id = ipo.addEvento(info);

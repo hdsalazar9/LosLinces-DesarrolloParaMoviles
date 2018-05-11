@@ -200,17 +200,28 @@
                 android:textStyle="bold" />
 
 
-            <EditText
-                android:id="@+id/et_activity_registro_pais"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
 
-                android:hint="@string/activity_registro_pais_hint"
-                android:inputType="textPersonName"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/black" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/spinnerCountry"
+                android:popupBackground="@color/registro_boton"
+                />
+
+
+            <!-- <EditText
+                 android:id="@+id/et_activity_registro_pais"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:ems="10"
+
+                 android:hint="@string/activity_registro_pais_hint"
+                 android:inputType="textPersonName"
+                 android:textColor="@android:color/black"
+                 android:textColorHint="@android:color/black" />-->
+
 
         </LinearLayout>
 
@@ -230,9 +241,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-
-
-            <EditText
+             <EditText
                 android:id="@+id/et_activity_registro_ciudad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -243,7 +252,6 @@
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black" />
-
         </LinearLayout>
 
         <Button
