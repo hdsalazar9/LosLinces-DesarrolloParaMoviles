@@ -50,11 +50,13 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     Button btnEdit;
     ImageButton btnFoto;
     ImageView ivFoto;
+    Boolean bEditable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_perfil_inicial, container, false);
 
+        bEditable = false;
         etNombre = (EditText) rootView.findViewById(R.id.et_perfil_nombre);
         etApellido = (EditText) rootView.findViewById(R.id.et_perfil_apellido);
         etCiudad = (EditText) rootView.findViewById(R.id.et_perfil_ciudad);
@@ -69,12 +71,17 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         ipo.open();
         info = ipo.getAllProducts();
 
-
+        btnFoto.setVisibility(View.INVISIBLE);
         etNombre.setText(info.getNombre());
         etApellido.setText(info.getApodo());
         etCiudad.setText(info.getCiudad());
         etPais.setText(info.getPais());
         tvFecha.setText(Miscellaneous.getStringFromDate(info.getFechaNacimiento()));
+
+        etNombre.setEnabled(false);
+        etApellido.setEnabled(false);
+        etCiudad.setEnabled(false);
+        etPais.setEnabled(false);
 
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
         ivFoto.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
@@ -96,7 +103,6 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     public void onClick(View v){
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
         switch (v.getId()){
             case R.id.btn_perfil_foto:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -111,31 +117,52 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                 break;
             case R.id.btn_perfil_editar:
                 //Editar
-                if(etNombre.getText().toString().equals("")) { //Si esta vacio el campo de nombre
-                    Toast.makeText(getContext(), "Favor de registrar nombre", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                if(etApellido.getText().toString().equals("")){
-                    Toast.makeText(getContext(), "Favor de registrar apodo", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                if(etPais.getText().toString().equals("")){
-                    Toast.makeText(getContext(), "Favor de registrar país", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                if(etCiudad.getText().toString().equals("")){
-                    Toast.makeText(getContext(), "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
-                    break;
-                }
+                if (bEditable)
+                {
+                    if (etNombre.getText().toString().equals("")) { //Si esta vacio el campo de nombre
+                        Toast.makeText(getContext(), "Favor de registrar nombre", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (etApellido.getText().toString().equals("")) {
+                        Toast.makeText(getContext(), "Favor de registrar apodo", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (etPais.getText().toString().equals("")) {
+                        Toast.makeText(getContext(), "Favor de registrar país", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (etCiudad.getText().toString().equals("")) {
+                        Toast.makeText(getContext(), "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-                info.setNombre(etNombre.getText().toString());
-                info.setApodo(etApellido.getText().toString());
-                info.setCiudad(etCiudad.getText().toString());
-                info.setPais(etPais.getText().toString());
-                info.setFoto(byteArray);
+                    info.setNombre(etNombre.getText().toString());
+                    info.setApodo(etApellido.getText().toString());
+                    info.setCiudad(etCiudad.getText().toString());
+                    info.setPais(etPais.getText().toString());
+                    info.setFoto(byteArray);
 
-                long id = ipo.addEvento(info);
-                Toast.makeText(getActivity().getApplicationContext(), "Editado satisfactoriamente", Toast.LENGTH_SHORT).show();
+                    long id = ipo.addEvento(info);
+                    Toast.makeText(getActivity().getApplicationContext(), "Editado satisfactoriamente", Toast.LENGTH_SHORT).show();
+                    bEditable = false;
+                    btnEdit.setText(getResources().getString(R.string.seccion_emepzaredicion));
+                    btnFoto.setVisibility(View.INVISIBLE);
+                    etNombre.setEnabled(false);
+                    etApellido.setEnabled(false);
+                    etCiudad.setEnabled(false);
+                    etPais.setEnabled(false);
+                    bEditable = false;
+                }
+                else
+                {
+                    btnFoto.setVisibility(View.VISIBLE);
+                    etNombre.setEnabled(true);
+                    etApellido.setEnabled(true);
+                    etCiudad.setEnabled(true);
+                    etPais.setEnabled(true);
+                    bEditable = true;
+                    btnEdit.setText(getResources().getString(R.string.editar));
+                }
                 break;
         }
     }
