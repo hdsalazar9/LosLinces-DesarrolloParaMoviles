@@ -109,6 +109,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         etApellido.setEnabled(false);
         etCiudad.setEnabled(false);
         //etPais.setEnabled(false);
+        country.setEnabled(false);
 
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
         ivFoto.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
@@ -178,10 +179,6 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                         Toast.makeText(getContext(), "Favor de registrar apodo", Toast.LENGTH_SHORT).show();
                         return;
                     }
-//                    if (etPais.getText().toString().equals("")) {
-//                        Toast.makeText(getContext(), "Favor de registrar país", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
                     if (etCiudad.getText().toString().equals("")) {
                         Toast.makeText(getContext(), "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
                         return;
@@ -190,7 +187,6 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                     info.setNombre(etNombre.getText().toString());
                     info.setApodo(etApellido.getText().toString());
                     info.setCiudad(etCiudad.getText().toString());
-//                    info.setPais(etPais.getText().toString());
                     info.setFoto(byteArray);
 
                     long id = ipo.addEvento(info);
@@ -201,7 +197,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                     etNombre.setEnabled(false);
                     etApellido.setEnabled(false);
                     etCiudad.setEnabled(false);
-//                    etPais.setEnabled(false);
+                    country.setEnabled(false);
                     bEditable = false;
                 }
                 else
@@ -210,7 +206,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                     etNombre.setEnabled(true);
                     etApellido.setEnabled(true);
                     etCiudad.setEnabled(true);
-//                    etPais.setEnabled(true);
+                    country.setEnabled(true);
                     bEditable = true;
                     btnEdit.setText(getResources().getString(R.string.editar));
                 }

@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -90,10 +92,19 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             }
         }
         Collections.sort(countries);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, countries);
-        dataAdapter
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countries) {
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+
+                ((TextView) v).setTextSize(18);
+                ((TextView) v).setTextColor(
+                        getResources().getColorStateList(R.color.caldroid_black)
+                );
+
+                return v;
+            }
+        };
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         country.setAdapter(dataAdapter);
         for (int i=0; i<countries.size(); i++){
             if(countries.get(i).equals("México")||countries.get(i).equals("Mexico")){
