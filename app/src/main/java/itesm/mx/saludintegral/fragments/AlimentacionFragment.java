@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class AlimentacionFragment extends Fragment implements View.OnTouchListen
 
     View view;
     TextView tvTip;
+    ImageView ivAlimentacion;
     GestureDetectorCompat mDetector;
     int indice=0;
     public AlimentacionFragment() {
@@ -39,6 +41,8 @@ public class AlimentacionFragment extends Fragment implements View.OnTouchListen
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_alimentacion, container, false);
         tvTip=view.findViewById(R.id.textViewTip);
+        ivAlimentacion=view.findViewById(R.id.imageViewAlimentacion);
+        ivAlimentacion.setImageResource(TipsAlimentacion.iResources[0]);
         tvTip.setText(TipsAlimentacion.sTips[0]);
         MyGestureListener myGestureListener=new MyGestureListener(getContext());
         mDetector=new GestureDetectorCompat(getContext(), myGestureListener);
@@ -101,6 +105,7 @@ public class AlimentacionFragment extends Fragment implements View.OnTouchListen
                     indice=0;
                 }
                 tvTip.setText(TipsAlimentacion.sTips[indice]);
+                ivAlimentacion.setImageResource(TipsAlimentacion.iResources[indice]);
             }
             if(e1.getX()<e2.getX()){
                 Log.d(LISTENER_TAG, "onFlingLet");
@@ -109,6 +114,7 @@ public class AlimentacionFragment extends Fragment implements View.OnTouchListen
                     indice=TipsAlimentacion.sTips.length-1;
                 }
                 tvTip.setText(TipsAlimentacion.sTips[indice]);
+                ivAlimentacion.setImageResource(TipsAlimentacion.iResources[indice]);
             }
             return true;
         }
