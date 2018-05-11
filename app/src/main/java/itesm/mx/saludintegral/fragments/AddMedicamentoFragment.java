@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.RadioGroup;
@@ -64,7 +65,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
     EditText etCadaCuanto;
     EditText etFechaInicio;
 
-    Button btnTomarFoto;
+    ImageButton btnTomarFoto;
     Button btnAddMed;
     Button btnFechaInicio;
     Button btnFechaTermino;
@@ -189,6 +190,10 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
                 if(intent.resolveActivity(getContext().getPackageManager()) != null) {
                     startActivityForResult(intent, REQUEST_CODE );
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No se detectó cámara",Toast.LENGTH_SHORT).show();
                 }
                 break;
 
