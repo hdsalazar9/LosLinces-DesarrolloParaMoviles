@@ -117,8 +117,8 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         etNombre.setEnabled(false);
         etApellido.setEnabled(false);
         etCiudad.setEnabled(false);
-        //etPais.setEnabled(false);
         country.setEnabled(false);
+
 
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
         ivFoto.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
@@ -206,7 +206,6 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                     etNombre.setEnabled(false);
                     etApellido.setEnabled(false);
                     etCiudad.setEnabled(false);
-                    country.setEnabled(false);
                     bEditable = false;
                 }
                 else
