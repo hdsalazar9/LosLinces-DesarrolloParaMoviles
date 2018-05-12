@@ -91,6 +91,7 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         }
         else {
             ArrayList<Evento> arregloEventosDelMes = dao.getAllProductsFromMonthAndType(intMesABuscar, Miscellaneous.strTipo);
+            Log.d("Tamaño de la lista: ",String.valueOf(arregloEventosDelMes.size()));
             for (Evento ev : arregloEventosDelMes) {
                 Miscellaneous.mapFechaFondo.put(ev.getFecha(), colorDrawable);
             }
