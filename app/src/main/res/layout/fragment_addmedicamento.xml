@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
 
             android:background="@color/background_listasalud"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,24 +28,35 @@
 
                 <ImageView
                     android:id="@+id/iv_fotoMed"
-                    android:layout_width="215dp"
-                    android:layout_height="79dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/pills" />
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="3"
+                    android:src="@drawable/med" />
 
-                <Button
-                    android:id="@+id/btn_tomarFotoMed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@android:color/white"
-                    android:backgroundTint="@android:color/white"
-                    android:text="@string/fragment_addmedicamento_fotoMed"
-                    android:textAlignment="center"
-                    android:textAppearance="@android:style/TextAppearance.Material.Small"
-                    android:textColor="@color/background_listasalud"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/btn_tomarFotoMed"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@color/ic_launcher_background"
+                        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -71,9 +83,9 @@
                 android:hint="@string/fragment_addmedicamento_hint_nombreMed"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
 
             <TextView
@@ -97,9 +109,9 @@
                 android:hint="@string/fragment_addmedicamento_hint_cantidadMed"
                 android:inputType="number"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
 
             <TextView
@@ -124,9 +136,9 @@
                 android:hint="@string/fragment_addmedicamento_hint_horaMed"
                 android:inputType="none"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
             <Button
                 android:id="@+id/btn_horaIngesta"
@@ -162,9 +174,9 @@
                 android:hint="@string/fragment_addmedicamento_hint_cadaCuantoMed"
                 android:inputType="number"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -188,9 +200,9 @@
                 android:inputType="textPersonName"
                 android:onClick="onClick"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:textColorHint="@android:color/white"/>
+                android:textStyle="italic" />
 
             <Button
                 android:id="@+id/btn_fechaInicio"

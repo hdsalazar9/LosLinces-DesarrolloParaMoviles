@@ -53,19 +53,34 @@ public class EventoOperations {
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE, evento.getName());
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_DESCRICPION, evento.getDescripcion());
 
-
             String dateString = Miscellaneous.getStringFromDate(evento.getFecha());
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_FECHA, dateString);
 
 
             values.put(DataBaseSchema.EventosTable.COLUMN_NAME_TIPO, evento.getTipo());
+            values.put(DataBaseSchema.EventosTable.COLUMN_NAME_IDEVENTOS,"0");
             newRowId=db.insert(DataBaseSchema.EventosTable.TABLE_NAME, null, values);
-            Log.d("Evento added", "Evento added");
+            Log.d("Evento added", "Evento added: ");
         }
         catch (SQLException e){
             Log.e("SQLADD", e.toString());
         }
         return newRowId;
+    }
+
+    public long addIdEventos(long idEventos, long idEvento){
+        String query="UPDATE "+DataBaseSchema.EventosTable.TABLE_NAME+ " SET "+ DataBaseSchema.EventosTable.COLUMN_NAME_IDEVENTOS+" = '"+String.valueOf(idEventos)+"' WHERE "+DataBaseSchema.EventosTable._ID+
+                " = "+ String.valueOf(idEvento);
+        try {
+            //Cursor cursor = db.rawQuery(query, null);
+            db.execSQL(query);
+            Log.d("SQL UPDATED","SQL UPDATED EVENTOS");
+        }
+        catch (SQLException e){
+            Log.e("SQLFIND", e.toString());
+        }
+        Log.d("ID VUELTA", String.valueOf(idEvento));
+        return idEvento;
     }
 
     public ArrayList<Evento> findEvent(String productName){
@@ -80,7 +95,7 @@ public class EventoOperations {
 
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC, cursor.getString(4));
+                            cursor.getString(2),dateC, cursor.getString(4), Integer.parseInt(cursor.getString(5)));
 
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
@@ -102,7 +117,7 @@ public class EventoOperations {
                 do{
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC, cursor.getString(4));
+                            cursor.getString(2),dateC, cursor.getString(4), Integer.parseInt(cursor.getString(5)));
 
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
@@ -127,7 +142,7 @@ public class EventoOperations {
                 do{
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC, cursor.getString(4));
+                            cursor.getString(2),dateC, cursor.getString(4), Integer.parseInt(cursor.getString(5)));
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
             }
@@ -150,7 +165,7 @@ public class EventoOperations {
                 do{
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC, cursor.getString(4));
+                            cursor.getString(2),dateC, cursor.getString(4), Integer.parseInt(cursor.getString(5)));
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
             }
@@ -174,7 +189,7 @@ public class EventoOperations {
                 do{
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC, cursor.getString(4));
+                            cursor.getString(2),dateC, cursor.getString(4), Integer.parseInt(cursor.getString(5)));
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
             }
@@ -198,7 +213,7 @@ public class EventoOperations {
                 do{
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC, cursor.getString(4));
+                            cursor.getString(2),dateC, cursor.getString(4), Integer.parseInt(cursor.getString(5)));
                     listaEventos.add(evento);
                 }while (cursor.moveToNext());
             }
@@ -239,7 +254,7 @@ public class EventoOperations {
                 do{
                     Date dateC=Miscellaneous.getDateFromString(cursor.getString(3));
                     evento=new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC, cursor.getString(4));
+                            cursor.getString(2),dateC, cursor.getString(4), Integer.parseInt(cursor.getString(5)));
                     listaEventos.add(evento);
                     //System.out.println("UN EVENTO FUE AGREGADO A LA LISTA");
                 }while (cursor.moveToNext());
@@ -278,7 +293,54 @@ public class EventoOperations {
         return result;
     }
 
+    public boolean deleteEventosIguales(String nombreDeEventoABorrar, long tipoEvento){
+        boolean result = false;
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+
+                DataBaseSchema.EventosTable.COLUMN_NAME_NOMBRE+" = '"+nombreDeEventoABorrar+"' AND " +
+                DataBaseSchema.EventosTable.COLUMN_NAME_IDEVENTOS + " = '" + String.valueOf(tipoEvento) +
+                "'";
 
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if(cursor.moveToFirst()){
+                do {
+                    int id = Integer.parseInt(cursor.getString(0));
+                    db.delete(DataBaseSchema.EventosTable.TABLE_NAME, DataBaseSchema.EventosTable._ID + " = ?",
+                            new String[]{String.valueOf(id)});
+                    result = true;
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLiteException e){
+            Log.e("EliminarEvento: ", e.toString());
+        }
+        return result;
+    }
+
+
+    public boolean deleteAllEventosSeccion(String sType){
+        boolean result = false;
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
+
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if(cursor.moveToFirst()){
+                do {
+                    int id = Integer.parseInt(cursor.getString(0));
+                    db.delete(DataBaseSchema.EventosTable.TABLE_NAME, DataBaseSchema.EventosTable._ID + " = ?",
+                            new String[]{String.valueOf(id)});
+                    result = true;
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLiteException e){
+            Log.e("ElimEventosDeSeccion:", e.toString());
+        }
+        return result;
+    }
 
     public ArrayList<Evento> getAllEventosFromDateAndType(Date date, String sType) {
         ArrayList<Evento> listaEventosDelDia = new ArrayList<Evento>();
@@ -302,7 +364,7 @@ public class EventoOperations {
                         e.printStackTrace();
                     }
                     evento = new Evento(cursor.getInt(0),cursor.getString(1),
-                            cursor.getString(2),dateC, cursor.getString(4));
+                            cursor.getString(2),dateC, cursor.getString(4), Integer.parseInt(cursor.getString(5)));
                     listaEventosDelDia.add(evento);
                 }while (cursor.moveToNext());
             }

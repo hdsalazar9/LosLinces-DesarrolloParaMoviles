@@ -12,13 +12,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Locale;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
@@ -43,51 +50,82 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     EditText etNombre;
     EditText etApellido;
     EditText etCiudad;
-    EditText etPais;
+    //EditText etPais;
+    Spinner country;
     TextView tvFecha;
     Button btnEdit;
-    Button btnBitacoraEventos;
-    Button btnHistorialMedicamentos;
-    Button btnFoto;
-    Button btnMonitoreo;
+    ImageButton btnFoto;
     ImageView ivFoto;
+    Boolean bEditable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_perfil_inicial, container, false);
 
+        bEditable = false;
         etNombre = (EditText) rootView.findViewById(R.id.et_perfil_nombre);
         etApellido = (EditText) rootView.findViewById(R.id.et_perfil_apellido);
         etCiudad = (EditText) rootView.findViewById(R.id.et_perfil_ciudad);
-        etPais = (EditText) rootView.findViewById(R.id.et_perfil_pais);
-
+        //etPais = (EditText) rootView.findViewById(R.id.et_perfil_pais);
+        country=rootView.findViewById(R.id.spinnerCountry);
         tvFecha = (TextView) rootView.findViewById(R.id.tv_perfil_fechanacimiento);
         ivFoto = (ImageView) rootView.findViewById(R.id.iv_perfil_foto);
         btnEdit = (Button) rootView.findViewById(R.id.btn_perfil_editar);
-        btnFoto = (Button) rootView.findViewById(R.id.btn_perfil_foto);
-        btnMonitoreo = (Button) rootView.findViewById(R.id.btn_perfil_monitoreo);
-        btnBitacoraEventos = (Button) rootView.findViewById(R.id.btn_perfil_bitacoraeventos);
-        btnHistorialMedicamentos = (Button) rootView.findViewById(R.id.btn_perfil_historialmedicamentos);
+        btnFoto = (ImageButton) rootView.findViewById(R.id.btn_perfil_foto);
 
         ipo = new InfoPersonalOperations(getActivity().getApplicationContext());
         ipo.open();
         info = ipo.getAllProducts();
 
+        //Agrega paises al spinner
+        Locale[] locales = Locale.getAvailableLocales();
+        ArrayList<String> countries = new ArrayList<String>();
+        for (Locale locale : locales) {
+            String country = locale.getDisplayCountry();
+            if (country.trim().length() > 0 && !countries.contains(country)) {
+                countries.add(country);
+            }
+        }
+        Collections.sort(countries);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, countries){
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+
+                ((TextView) v).setTextSize(18);
+                ((TextView) v).setTextColor(
+                        getResources().getColorStateList(R.color.caldroid_black)
+                );
+
+                return v;
+            }
+        };
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        country.setAdapter(dataAdapter);
+        for (int i=0; i<countries.size(); i++){
+            if(countries.get(i).equals(info.getPais())||countries.get(i).equals(info.getPais())){
+                country.setSelection(i);
+            }
+        }
+
+        btnFoto.setVisibility(View.INVISIBLE);
         etNombre.setText(info.getNombre());
         etApellido.setText(info.getApodo());
         etCiudad.setText(info.getCiudad());
-        etPais.setText(info.getPais());
+        //etPais.setText(info.getPais());
         tvFecha.setText(Miscellaneous.getStringFromDate(info.getFechaNacimiento()));
+
+        etNombre.setEnabled(false);
+        etApellido.setEnabled(false);
+        etCiudad.setEnabled(false);
+        country.setEnabled(false);
+
 
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
         ivFoto.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
                 bmp.getHeight(), false));
 
         btnEdit.setOnClickListener(this);
-        btnBitacoraEventos.setOnClickListener(this);
-        btnHistorialMedicamentos.setOnClickListener(this);
         btnFoto.setOnClickListener(this);
-        btnMonitoreo.setOnClickListener(this);
 
         //Get imageview to byte array
         bitmap = ((BitmapDrawable) ivFoto.getDrawable()).getBitmap();
@@ -102,13 +140,16 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     public void onClick(View v){
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
         switch (v.getId()){
             case R.id.btn_perfil_foto:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //Validar camara celular
                 if (intent.resolveActivity(getContext().getPackageManager()) != null) {
                     startActivityForResult(intent, REQUEST_CODE);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No se detectó cámara",Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_perfil_editar:
@@ -121,10 +162,10 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                     Toast.makeText(getContext(), "Favor de registrar apodo", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if(etPais.getText().toString().equals("")){
+                /*if(etPais.getText().toString().equals("")){
                     Toast.makeText(getContext(), "Favor de registrar país", Toast.LENGTH_SHORT).show();
                     break;
-                }
+                }*/
                 if(etCiudad.getText().toString().equals("")){
                     Toast.makeText(getContext(), "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
                     break;
@@ -133,26 +174,50 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                 info.setNombre(etNombre.getText().toString());
                 info.setApodo(etApellido.getText().toString());
                 info.setCiudad(etCiudad.getText().toString());
-                info.setPais(etPais.getText().toString());
+                //info.setPais(etPais.getText().toString());
+                info.setPais(country.getSelectedItem().toString());
                 info.setFoto(byteArray);
 
-                long id = ipo.addEvento(info);
-                Toast.makeText(getActivity().getApplicationContext(), "Editado satisfactoriamente", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btn_perfil_bitacoraeventos:
-                BitacoraEventoFragment bitacoraEventoFragment = new BitacoraEventoFragment();
-                transaction.replace(R.id.frameLayout_perfilActivity,bitacoraEventoFragment)
-                        .addToBackStack(null).commit();
-                break;
-            case R.id.btn_perfil_historialmedicamentos:
-                HistorialMedicFragment historialMedicFragment = new HistorialMedicFragment();
-                transaction.replace(R.id.frameLayout_perfilActivity,historialMedicFragment)
-                        .addToBackStack(null).commit();
-                break;
-            case R.id.btn_perfil_monitoreo:
-                PerfilMonitoreoFragment perfilMonitoreoFragment = new PerfilMonitoreoFragment();
-                transaction.replace(R.id.frameLayout_perfilActivity,perfilMonitoreoFragment)
-                        .addToBackStack(null).commit();
+                if (bEditable)
+                {
+                    if (etNombre.getText().toString().equals("")) { //Si esta vacio el campo de nombre
+                        Toast.makeText(getContext(), "Favor de registrar nombre", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (etApellido.getText().toString().equals("")) {
+                        Toast.makeText(getContext(), "Favor de registrar apodo", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (etCiudad.getText().toString().equals("")) {
+                        Toast.makeText(getContext(), "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    info.setNombre(etNombre.getText().toString());
+                    info.setApodo(etApellido.getText().toString());
+                    info.setCiudad(etCiudad.getText().toString());
+                    info.setFoto(byteArray);
+
+                    long id = ipo.addEvento(info);
+                    Toast.makeText(getActivity().getApplicationContext(), "Editado satisfactoriamente", Toast.LENGTH_SHORT).show();
+                    bEditable = false;
+                    btnEdit.setText(getResources().getString(R.string.seccion_emepzaredicion));
+                    btnFoto.setVisibility(View.INVISIBLE);
+                    etNombre.setEnabled(false);
+                    etApellido.setEnabled(false);
+                    etCiudad.setEnabled(false);
+                    bEditable = false;
+                }
+                else
+                {
+                    btnFoto.setVisibility(View.VISIBLE);
+                    etNombre.setEnabled(true);
+                    etApellido.setEnabled(true);
+                    etCiudad.setEnabled(true);
+                    country.setEnabled(true);
+                    bEditable = true;
+                    btnEdit.setText(getResources().getString(R.string.editar));
+                }
                 break;
         }
     }
@@ -160,18 +225,19 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+        int iSize = 600;
 
         //Se tomo exisotamente la foto, guardarla
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             bitmap = (Bitmap) data.getExtras().get("data");
             //Girar foto 270 grados
             Matrix matrix = new Matrix();
-            matrix.postRotate(270);
+            matrix.postRotate(90);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ivFoto.setImageBitmap(bitmap);
-            ivFoto.getLayoutParams().width = 200;
-            ivFoto.getLayoutParams().height = 200;
+            ivFoto.getLayoutParams().width = iSize;
+            ivFoto.getLayoutParams().height = iSize;
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);

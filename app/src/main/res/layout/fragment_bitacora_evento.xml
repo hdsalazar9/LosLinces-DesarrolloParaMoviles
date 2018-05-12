@@ -64,7 +64,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/registro_boton"
+                android:background="@color/background_guardar_addmedicamento"
                 android:text="@string/fragment_bitacora_todo"
                 android:textAlignment="center"
                 android:textSize="14sp"

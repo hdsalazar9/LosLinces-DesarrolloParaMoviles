@@ -13,15 +13,23 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Locale;
 
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.InfoPersonalOperations;
@@ -40,12 +48,13 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     private byte[] byteArray;
 
     private Button btnContinue;
-    private Button btnTomarFoto;
+    private ImageButton btnTomarFoto;
     private Button btnFecha;
     private EditText etNombre;
     private EditText etApodo;
     private EditText etFechaDeNacimiento;
-    private EditText etPais;
+    private Spinner country;
+   // private EditText etPais;
     private EditText etCiudad;
     private ImageView ivFoto;
 
@@ -64,14 +73,44 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         database.open();
 
         btnContinue = (Button) findViewById(R.id.btn_activity_registro_continuar);
-        btnTomarFoto = (Button) findViewById(R.id.btn_activity_registro_TomarFoto);
+        btnTomarFoto = (ImageButton) findViewById(R.id.btn_activity_registro_TomarFoto);
         btnFecha = (Button) findViewById(R.id.btn_registro_Fecha);
         etNombre = (EditText) findViewById(R.id.et_activity_registro_nombre);
         etApodo = (EditText) findViewById(R.id.et_activity_registro_apodo);
         etFechaDeNacimiento = (EditText) findViewById(R.id.et_activity_registro_fecha);
-        etPais = (EditText) findViewById(R.id.et_activity_registro_pais);
+       // etPais = (EditText) findViewById(R.id.et_activity_registro_pais);
         etCiudad = (EditText) findViewById(R.id.et_activity_registro_ciudad);
         ivFoto = (ImageView) findViewById(R.id.iv_activity_registro_foto);
+        country = (Spinner) findViewById(R.id.spinnerCountry);
+        //Ingresa datos al spinner
+        Locale[] locales = Locale.getAvailableLocales();
+        ArrayList<String> countries = new ArrayList<String>();
+        for (Locale locale : locales) {
+            String country = locale.getDisplayCountry();
+            if (country.trim().length() > 0 && !countries.contains(country)) {
+                countries.add(country);
+            }
+        }
+        Collections.sort(countries);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countries) {
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+
+                ((TextView) v).setTextSize(18);
+                ((TextView) v).setTextColor(
+                        getResources().getColorStateList(R.color.caldroid_black)
+                );
+
+                return v;
+            }
+        };
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        country.setAdapter(dataAdapter);
+        for (int i=0; i<countries.size(); i++){
+            if(countries.get(i).equals("México")||countries.get(i).equals("Mexico")){
+                country.setSelection(i);
+            }
+        }
 
         if(savedInstanceState != null){
             byteArray = savedInstanceState.getByteArray("picture");
@@ -103,6 +142,10 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, REQUEST_CODE);
                 }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"No se detectó cámara",Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.btn_activity_registro_continuar:
@@ -118,10 +161,10 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this, "Favor de registrar fecha de naciemiento", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if(etPais.getText().toString().equals("")){
+                /*if(etPais.getText().toString().equals("")){
                     Toast.makeText(this, "Favor de registrar país", Toast.LENGTH_SHORT).show();
                     break;
-                }
+                }*/
                 if(etCiudad.getText().toString().equals("")){
                     Toast.makeText(this, "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
                     break;
@@ -133,7 +176,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 infoPersonal.setNombre(etNombre.getText().toString());
                 infoPersonal.setApodo(etApodo.getText().toString());
                 infoPersonal.setCiudad(etCiudad.getText().toString());
-                infoPersonal.setPais(etPais.getText().toString());
+                infoPersonal.setPais(country.getSelectedItem().toString());
                 infoPersonal.setFoto(byteArray);
 
                 //Obtener la fecha desde lo escrito por el usuario
@@ -161,12 +204,12 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             bitmap = (Bitmap) data.getExtras().get("data");
             //Girar foto 270 grados
             Matrix matrix = new Matrix();
-            matrix.postRotate(0);
+            matrix.postRotate(90);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ivFoto.setImageBitmap(bitmap);
-            ivFoto.getLayoutParams().width = 200;
-            ivFoto.getLayoutParams().height = 200;
+            //ivFoto.getLayoutParams().width = 200;
+            //ivFoto.getLayoutParams().height = 200;
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -201,4 +244,5 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(),"Terminar el registro",Toast.LENGTH_SHORT).show();
     }
+
 }

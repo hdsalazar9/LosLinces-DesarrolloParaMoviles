@@ -27,13 +27,11 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class HistorialMedicFragment extends Fragment {
 
     TomarMedicamentoOperations tomMedOp;
-    MedicamentoOperations medOp;
     ListView lvMed;
 
     ArrayAdapter<HistorialMedicamentoItem> histMedAdapter;
     ArrayList<HistorialMedicamentoItem> histMedItems;
     ArrayList<TomarMedicamento> tomMedArr;
-    ArrayList<Medicamento> medArr;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,19 +41,9 @@ public class HistorialMedicFragment extends Fragment {
 
         //Abrir BD y obtener lista de medicamentos y eventos de tomar medicamento
         tomMedOp = new TomarMedicamentoOperations(getContext());
-        medOp = new MedicamentoOperations(getContext());
-
         tomMedOp.open();
-        medOp.open();
-
-
         tomMedArr = tomMedOp.getAllProducts();
-        System.out.println("TAMANOOOO" + tomMedArr.size());
-
-        medArr = medOp.getAllProducts();
-
         tomMedOp.close();
-        medOp.close();
 
         //Obtener lista para desplegar y ponersela a la lista
         histMedItems = getItemsForArray();
@@ -68,41 +56,30 @@ public class HistorialMedicFragment extends Fragment {
     private ArrayList<HistorialMedicamentoItem> getItemsForArray(){
         ArrayList<HistorialMedicamentoItem> auxArr = new ArrayList<>();
         HistorialMedicamentoItem histItem;
-        String nombreMed;
 
         for(TomarMedicamento tmd: tomMedArr){
-            nombreMed = getNameFromMedId(tmd.getIdMedicamento());
-            histItem = new HistorialMedicamentoItem(nombreMed,tmd.getFechaHora(),tmd.getTomadoATiempo());
+            histItem = new HistorialMedicamentoItem(tmd.getsNombreMed(),tmd.getFechaHora(),tmd.getTomadoATiempo());
             auxArr.add(histItem);
         }
 
         return auxArr;
     }
 
-    private String getNameFromMedId(long idABuscar){
-        for(Medicamento md: medArr){
-            if(md.getId() == idABuscar) return md.getNombre();
-        }
-        return "Unnamed";
-    }
-
     @Override
     public void onResume(){
         tomMedOp.open();
-        medOp.open();
         super.onResume();
     }
     @Override
     public void onPause(){
         tomMedOp.close();
-        medOp.close();
         Miscellaneous.strTipo=Miscellaneous.tipos[9];
+
         super.onPause();
     }
     @Override
     public void onDetach(){
         tomMedOp.close();
-        medOp.close();
         super.onDetach();
     }
     @Override

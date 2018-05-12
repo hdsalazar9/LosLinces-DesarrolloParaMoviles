@@ -5,6 +5,8 @@
     <string name="seccion_salud">"Salud Física"</string>
     <string name="seccion_cognicnion">"Activación Cognitiva"</string>
     <string name="seccion_espiritualidad">"Salud Espiritual"</string>
+    <string name="seccion_perfil">"Perfil"</string>
+    <string name="seccion_emepzaredicion">"Editar datos"</string>
 
 
     <string name="getFecha">"Seleccionar Fecha"</string>
@@ -65,6 +67,7 @@
     <string name="fragment_calendario_addCumple">"Añadir Cumpleaños"</string>
 
     <string name="fragment_eventodisplay_cerrar">"Cerrar"</string>
+    <string name="fragment_eventodisplay_eliminar">"Eliminar todos los eventos"</string>
 
     <string name="fragment_addevento_nombre">"Nombre: "</string>
     <string name="fragment_addevento_hint_nombre">"Inserte el nombre del evento."</string>
@@ -89,7 +92,12 @@
     <string name="fragment_eventozoom_fecha">"Fecha: "</string>
     <string name="fragment_eventozoom_tipo">"Tipo: "</string>
 
+    <string name="fragment_tomarmed_status">"Estatus: "</string>
+    <string name="fragment_tomarmed_ingesta">"Ingesta: "</string>
+    <string name="fragment_tomarmed_cantidad">"Cantidad: "</string>
+
     <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
+    <string name="fragment_eventoszoom_eliminar">"Eliminar todas las ocurrencias"</string>
 
     <string name="fragment_listcumpleanos_vacio">"No hay más cumpleaños registrados."</string>
     <string name="fragment_listeventos_vacio">"No hay más eventos registrados."</string>

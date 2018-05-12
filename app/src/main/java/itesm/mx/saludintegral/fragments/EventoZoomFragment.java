@@ -29,7 +29,7 @@ public class EventoZoomFragment extends Fragment implements View.OnClickListener
     TextView tvDesscripcion;
     TextView tvFecha;
     TextView tvTipo;
-    Button btnEliminar;
+    Button btnEliminar, btnEliminarTodos;
     Button btnRegresar;
     OnResponseListener mCallback;
     EventoOperations dao;
@@ -48,6 +48,7 @@ public class EventoZoomFragment extends Fragment implements View.OnClickListener
         tvTipo = rootView.findViewById(R.id.tv_fragmentozoom_tipo);
         btnEliminar = rootView.findViewById(R.id.btn_eventozoom_eliminarEvento);
         btnRegresar= rootView.findViewById(R.id.btn_eventozoom_cerrar);
+        btnEliminarTodos=rootView.findViewById(R.id.btn_eventozoom_eliminarEventos);
 
         dao = new EventoOperations(getContext());
         dao.open();
@@ -64,6 +65,7 @@ public class EventoZoomFragment extends Fragment implements View.OnClickListener
 
         btnEliminar.setOnClickListener(this);
         btnRegresar.setOnClickListener(this);
+        btnEliminarTodos.setOnClickListener(this);
         return rootView;
     }
 
@@ -80,6 +82,11 @@ public class EventoZoomFragment extends Fragment implements View.OnClickListener
                 Toast.makeText(getContext(),"Evento Eliminado",Toast.LENGTH_SHORT).show();
                 mCallback.onResponse(1,null);
                 break;
+            case R.id.btn_eventozoom_eliminarEventos:
+                removeAllEventos();
+                Toast.makeText(getContext(),"Eventos Eliminados",Toast.LENGTH_SHORT).show();
+                mCallback.onResponse(1,null);
+                break;
         }
     }
 
@@ -92,6 +99,9 @@ public class EventoZoomFragment extends Fragment implements View.OnClickListener
         dao.deleteEvento(evento.getName(),evento.getFecha());
     }
 
+    public void removeAllEventos(){
+        dao.deleteEventosIguales(evento.getName(),evento.getIdEventos());
+    }
     @Override
     public void onAttach(Context context){
         super.onAttach(context);

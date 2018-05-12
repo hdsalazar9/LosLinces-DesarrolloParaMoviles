@@ -33,6 +33,7 @@ public final class DataBaseSchema {
         public static final String COLUMN_NAME_ID_MEDICAMENTO = "tomed_ID_medicamento";
         public static final String COLUMN_NAME_TOMADOATIEMPO = "tomed_tomadoATiempo";
         public static final String COLUMN_NAME_FECHAHORA = "tomed_fechaHora";
+        public static final String COLLUMN_NAME_NOMBREMED ="tomed_nombreMed";
     }
 
     public static class EventosTable implements BaseColumns {
@@ -40,8 +41,8 @@ public final class DataBaseSchema {
         public static final String COLUMN_NAME_NOMBRE = "eve_nombre";
         public static final String COLUMN_NAME_DESCRICPION = "eve_descripcion";
         public static final String COLUMN_NAME_FECHA = "eve_fecha";
-
         public static final String COLUMN_NAME_TIPO = "eve_tipo";
+        public static final String COLUMN_NAME_IDEVENTOS="eve_id";
     }
 
     public static class CumpleanosTable implements BaseColumns {
