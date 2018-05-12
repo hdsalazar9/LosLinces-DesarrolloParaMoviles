@@ -39,13 +39,23 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <ImageButton
-                        android:id="@+id/btn_tomarFotoMed"
+                    <Space
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/btn_tomarFotoMed"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
                         android:background="@color/ic_launcher_background"
                         app:srcCompat="@android:drawable/ic_menu_camera" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -87,10 +87,19 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
             }
         }
         Collections.sort(countries);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_item, countries);
-        dataAdapter
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, countries){
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+
+                ((TextView) v).setTextSize(18);
+                ((TextView) v).setTextColor(
+                        getResources().getColorStateList(R.color.caldroid_black)
+                );
+
+                return v;
+            }
+        };
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         country.setAdapter(dataAdapter);
         for (int i=0; i<countries.size(); i++){
             if(countries.get(i).equals(info.getPais())||countries.get(i).equals(info.getPais())){
@@ -108,7 +117,8 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         etNombre.setEnabled(false);
         etApellido.setEnabled(false);
         etCiudad.setEnabled(false);
-        //etPais.setEnabled(false);
+        country.setEnabled(false);
+
 
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
         ivFoto.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
@@ -178,10 +188,6 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                         Toast.makeText(getContext(), "Favor de registrar apodo", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    /*if (etPais.getText().toString().equals("")) {
-                        Toast.makeText(getContext(), "Favor de registrar país", Toast.LENGTH_SHORT).show();
-                        return;
-                    }*/
                     if (etCiudad.getText().toString().equals("")) {
                         Toast.makeText(getContext(), "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
                         return;
@@ -190,7 +196,6 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                     info.setNombre(etNombre.getText().toString());
                     info.setApodo(etApellido.getText().toString());
                     info.setCiudad(etCiudad.getText().toString());
-                    //info.setPais(etPais.getText().toString());
                     info.setFoto(byteArray);
 
                     long id = ipo.addEvento(info);
@@ -201,7 +206,6 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                     etNombre.setEnabled(false);
                     etApellido.setEnabled(false);
                     etCiudad.setEnabled(false);
-                  //  etPais.setEnabled(false);
                     bEditable = false;
                 }
                 else
@@ -210,7 +214,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                     etNombre.setEnabled(true);
                     etApellido.setEnabled(true);
                     etCiudad.setEnabled(true);
-                    //etPais.setEnabled(true);
+                    country.setEnabled(true);
                     bEditable = true;
                     btnEdit.setText(getResources().getString(R.string.editar));
                 }
@@ -221,18 +225,19 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+        int iSize = 600;
 
         //Se tomo exisotamente la foto, guardarla
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             bitmap = (Bitmap) data.getExtras().get("data");
             //Girar foto 270 grados
             Matrix matrix = new Matrix();
-            matrix.postRotate(270);
+            matrix.postRotate(90);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ivFoto.setImageBitmap(bitmap);
-            ivFoto.getLayoutParams().width = 200;
-            ivFoto.getLayoutParams().height = 200;
+            ivFoto.getLayoutParams().width = iSize;
+            ivFoto.getLayoutParams().height = iSize;
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);

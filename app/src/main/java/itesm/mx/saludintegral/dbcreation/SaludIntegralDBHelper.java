@@ -53,7 +53,8 @@ public class SaludIntegralDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.MedicamentoTable._ID + " INTEGER PRIMARY KEY," +
                 DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_ID_MEDICAMENTO + " INTEGER," +
                 DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_TOMADOATIEMPO + " TEXT," +
-                DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_FECHAHORA + " BLOB " +
+                DataBaseSchema.TomarMedicamentoTable.COLUMN_NAME_FECHAHORA + " BLOB," +
+                DataBaseSchema.TomarMedicamentoTable.COLLUMN_NAME_NOMBREMED +  " TEXT"+
                 ")";
         Log.i("Producthelper onCreate2", CREATE_TOMARMEDICAMENTO_TABLE);
         // Ejecuta la instrucción de sql.

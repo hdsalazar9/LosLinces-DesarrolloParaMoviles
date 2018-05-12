@@ -261,7 +261,7 @@ public class AddMedicamentoFragment extends Fragment implements View.OnClickList
 
             //Girar foto
             Matrix matrix = new Matrix();
-            matrix.postRotate(0);
+            matrix.postRotate(90);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
