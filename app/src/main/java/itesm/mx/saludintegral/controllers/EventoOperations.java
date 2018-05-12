@@ -319,6 +319,28 @@ public class EventoOperations {
     }
 
 
+    public boolean deleteAllEventosSeccion(String sType){
+        boolean result = false;
+        String query="SELECT * FROM "+DataBaseSchema.EventosTable.TABLE_NAME+" WHERE "+
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " = '" + sType + "'";
+
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            if(cursor.moveToFirst()){
+                do {
+                    int id = Integer.parseInt(cursor.getString(0));
+                    db.delete(DataBaseSchema.EventosTable.TABLE_NAME, DataBaseSchema.EventosTable._ID + " = ?",
+                            new String[]{String.valueOf(id)});
+                    result = true;
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        catch (SQLiteException e){
+            Log.e("ElimEventosDeSeccion:", e.toString());
+        }
+        return result;
+    }
 
     public ArrayList<Evento> getAllEventosFromDateAndType(Date date, String sType) {
         ArrayList<Evento> listaEventosDelDia = new ArrayList<Evento>();
