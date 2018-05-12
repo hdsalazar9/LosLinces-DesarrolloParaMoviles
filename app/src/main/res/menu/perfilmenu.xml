@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+|   <item android:title="Medicamentos"
+    android:id="@+id/historial"></item>
+    <item android:title="Bitacora"
+    android:id="@+id/bitacora"></item>
+    <item android:title="Monitoreo"
+    android:id="@+id/suenos"></item>
+
+</menu>

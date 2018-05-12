@@ -5,6 +5,8 @@
     <string name="seccion_salud">"Salud Física"</string>
     <string name="seccion_cognicnion">"Activación Cognitiva"</string>
     <string name="seccion_espiritualidad">"Salud Espiritual"</string>
+    <string name="seccion_perfil">"Perfil"</string>
+    <string name="seccion_emepzaredicion">"Editar datos"</string>
 
 
     <string name="getFecha">"Seleccionar Fecha"</string>
@@ -88,6 +90,10 @@
 
     <string name="fragment_eventozoom_fecha">"Fecha: "</string>
     <string name="fragment_eventozoom_tipo">"Tipo: "</string>
+
+    <string name="fragment_tomarmed_status">"Estatus: "</string>
+    <string name="fragment_tomarmed_ingesta">"Ingesta: "</string>
+    <string name="fragment_tomarmed_cantidad">"Cantidad: "</string>
 
     <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
     <string name="fragment_eventoszoom_eliminar">"Eliminar todas las ocurrencias"</string>
