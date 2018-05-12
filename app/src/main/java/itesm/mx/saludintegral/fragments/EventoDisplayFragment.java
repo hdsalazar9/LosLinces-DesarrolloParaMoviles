@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import itesm.mx.saludintegral.R;
+import itesm.mx.saludintegral.controllers.EventoOperations;
 import itesm.mx.saludintegral.models.Evento;
 import itesm.mx.saludintegral.util.Miscellaneous;
 
@@ -24,8 +25,9 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 
 public class EventoDisplayFragment extends Fragment {
 
-    Button btnBack;
+    Button btnBack, btnEliminar;
     OnResponseListener mCallback;
+    EventoOperations dao;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,8 +36,11 @@ public class EventoDisplayFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_eventodisplay,container,false);
 
         btnBack = rootView.findViewById(R.id.btn_regresar);
+        btnEliminar=rootView.findViewById(R.id.btn_eliminarTodosEventos);
         ListEventoFragment listEventoFragment = new ListEventoFragment();
         Bundle info = getArguments();
+        dao=new EventoOperations(getContext());
+        dao.open();
 
         if (info != null) {
             String strFecha = info.getString("Fecha");
@@ -54,7 +59,13 @@ public class EventoDisplayFragment extends Fragment {
                 mCallback.onResponse(1,null);
             }
         });
-
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dao.deleteAllEventosSeccion(Miscellaneous.strTipo);
+                mCallback.onResponse(1,null);
+            }
+        });
         return rootView;
     }
 
@@ -79,6 +90,22 @@ public class EventoDisplayFragment extends Fragment {
                         " must implement OnResponseListener.");
             }
         }
+    }
+
+    @Override
+    public void onResume(){
+        dao.open();
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        dao.close();
+        super.onPause();
+    }
+    @Override
+    public void onDetach(){
+        dao.close();
+        super.onDetach();
     }
 
 }
