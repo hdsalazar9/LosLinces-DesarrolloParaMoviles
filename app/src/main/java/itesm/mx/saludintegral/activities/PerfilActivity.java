@@ -41,19 +41,20 @@ public class PerfilActivity extends AppCompatActivity implements ListContactoEme
         toolbar = (Toolbar) findViewById(R.id.toolbar_perfil);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+        getSupportActionBar().show();
         tvPerfil = findViewById(R.id.tv_perfil);
-
+        tvPerfil.setVisibility(View.VISIBLE);
 
         //Reutilizar actividad para mostrar contactos de emergencia
         if(Objects.equals(Miscellaneous.strTipo, Miscellaneous.tipos[8])){
+            getSupportActionBar().hide();
+            tvPerfil.setVisibility(View.INVISIBLE);
             ContactosEmergenciaFragment contactosEmergenciaFragment = new ContactosEmergenciaFragment();
             changeFragmentNoBack(contactosEmergenciaFragment);
-            //getSupportFragmentManager().beginTransaction().add(frameLayoutPerfil, contactosEmergenciaFragment).commit();
         }
         else {
             PerfilInicialFragment perfilInicialFragment = new PerfilInicialFragment();
             changeFragmentHabilitaBack(perfilInicialFragment);
-            //getSupportFragmentManager().beginTransaction().add(frameLayoutPerfil, perfilInicialFragment).commit();
         }
     }
 
@@ -130,9 +131,15 @@ public class PerfilActivity extends AppCompatActivity implements ListContactoEme
         }
         else
         {
-            tvPerfil.setVisibility(View.VISIBLE);
-            getSupportActionBar().show();
-            super.onBackPressed();
+            if(Miscellaneous.strTipo.equals(Miscellaneous.tipos[8])){
+                super.onBackPressed();
+            }
+            else
+            {
+                tvPerfil.setVisibility(View.VISIBLE);
+                getSupportActionBar().show();
+                super.onBackPressed();
+            }
         }
     }
 
