@@ -232,7 +232,7 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
         }
 
 
-        do {
+        /*do {
             Log.d("ADDEVENTO", "dateFecha: " + dateFecha);
             long l = 0;
             Evento evento = new Evento(l, strNombre, strDescripcion, dateFecha, strTipo);
@@ -244,6 +244,31 @@ public class AddEventoFragment extends Fragment implements View.OnClickListener 
             iVeces--;
         } while (iVeces >= 0);
 
+        long l = 0;
+        long lIdEventos=0;*/
+        long lIdEventos=0;
+        Evento evento = new Evento(0, strNombre, strDescripcion, dateFecha, strTipo,0);
+        long id = dao.addEvento(evento);
+        evento.setId(id);
+        calendar.setTime(dateFecha);
+        calendar.add(Calendar.DATE,7);
+        dateFecha = calendar.getTime();
+        lIdEventos=id;
+        evento.setIdEventos(lIdEventos);
+        Log.d("PRUEBA: ", String.valueOf(id));
+        Log.d("PRUEBA b: ", String.valueOf(iVeces));
+
+        dao.addIdEventos(lIdEventos,id);
+        for(int i=1;i<=iVeces;i++){
+            evento = new Evento(0, strNombre, strDescripcion, dateFecha, strTipo,lIdEventos);
+            id = dao.addEvento(evento);
+            evento.setId(id);
+            calendar.setTime(dateFecha);
+            calendar.add(Calendar.DATE,7);
+            dateFecha = calendar.getTime();
+            evento.setIdEventos(lIdEventos);
+            dao.addIdEventos(lIdEventos,id);
+        }
         Toast.makeText(getContext(), "Evento registrado", Toast.LENGTH_SHORT).show();
         getActivity().onBackPressed();
     }

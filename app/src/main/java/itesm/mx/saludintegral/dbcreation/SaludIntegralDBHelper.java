@@ -68,7 +68,8 @@ public class SaludIntegralDBHelper extends SQLiteOpenHelper {
                 DataBaseSchema.EventosTable.COLUMN_NAME_DESCRICPION + " TEXT," +
                 DataBaseSchema.EventosTable.COLUMN_NAME_FECHA + " TEXT," +
 
-                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " TEXT " +
+                DataBaseSchema.EventosTable.COLUMN_NAME_TIPO + " TEXT, " +
+                DataBaseSchema.EventosTable.COLUMN_NAME_IDEVENTOS+ " TEXT "+
                 ")";
         Log.i("Producthelper onCreate3", CREATE_EVENTO_TABLE);
         // Ejecuta la instrucción de sql.

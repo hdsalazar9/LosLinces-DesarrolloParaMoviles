@@ -22,20 +22,20 @@ public class Evento implements Comparator<Evento>{
     String descripcion;
     Date fecha;
     String tipo;
-
+    long idEventos;
 
     public Evento() {
     }
 
 
-    public Evento(long id, String name, String descripcion, Date fecha, String tipo) {
+    public Evento(long id, String name, String descripcion, Date fecha, String tipo, long idEventos) {
 
         this.id = id;
         this.name = name;
         this.descripcion = descripcion;
         this.fecha = fecha;
-
         this.tipo = tipo;
+        this.idEventos=idEventos;
     }
 
     public long getId() {
@@ -78,6 +78,10 @@ public class Evento implements Comparator<Evento>{
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public long getIdEventos(){return idEventos;}
+
+    public void setIdEventos(long idEventos){this.idEventos=idEventos;}
 
     @Override
     public int compare(Evento ev1, Evento ev2) {

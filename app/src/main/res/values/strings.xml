@@ -96,6 +96,7 @@
     <string name="fragment_tomarmed_cantidad">"Cantidad: "</string>
 
     <string name="fragment_eventozoom_eliminar">"Eliminar"</string>
+    <string name="fragment_eventoszoom_eliminar">"Eliminar todas las ocurrencias"</string>
 
     <string name="fragment_listcumpleanos_vacio">"No hay más cumpleaños registrados."</string>
     <string name="fragment_listeventos_vacio">"No hay más eventos registrados."</string>
