@@ -172,7 +172,7 @@
                     android:layout_weight="1"
                     android:text="@string/fragment_perfil_fecha"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -181,7 +181,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Fecha de Nacimiento"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
