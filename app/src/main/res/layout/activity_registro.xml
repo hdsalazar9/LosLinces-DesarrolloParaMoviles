@@ -237,7 +237,7 @@
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
 
                 android:text="@string/activity_registro_ciudad"
@@ -247,7 +247,7 @@
              <EditText
                 android:id="@+id/et_activity_registro_ciudad"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
 
@@ -255,6 +255,14 @@
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black" />
+            <Spinner
+                android:id="@+id/spinnerCity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/caldroid_black"
+                android:popupBackground="@color/registro_boton"
+                />
         </LinearLayout>
 
         <LinearLayout

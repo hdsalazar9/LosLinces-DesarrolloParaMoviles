@@ -116,7 +116,7 @@
                 <TextView
                     android:id="@+id/textView28"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/fragment_perfil_ciudad"
                     android:textColor="@android:color/black"
@@ -126,12 +126,22 @@
                 <EditText
                     android:id="@+id/et_perfil_ciudad"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:text="Ciudad"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"/>
+                    <!--android:visibility="invisible"-->
+
+                <Spinner
+                    android:id="@+id/spinnerCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/caldroid_black"
+                    android:popupBackground="@color/registro_boton"
+                    />
 
             </LinearLayout>
 

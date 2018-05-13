@@ -14,6 +14,7 @@ import android.util.Log;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,10 +54,12 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     private EditText etNombre;
     private EditText etApodo;
     private EditText etFechaDeNacimiento;
-    private Spinner country;
+    private Spinner country, city;
    // private EditText etPais;
     private EditText etCiudad;
     private ImageView ivFoto;
+    private Boolean bSpinEt;
+    private String sCiduadActual;
 
     private InfoPersonalOperations database;
 
@@ -82,6 +85,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         etCiudad = (EditText) findViewById(R.id.et_activity_registro_ciudad);
         ivFoto = (ImageView) findViewById(R.id.iv_activity_registro_foto);
         country = (Spinner) findViewById(R.id.spinnerCountry);
+        bSpinEt=true;
+        city=findViewById(R.id.spinnerCity);
         //Ingresa datos al spinner
         Locale[] locales = Locale.getAvailableLocales();
         ArrayList<String> countries = new ArrayList<String>();
@@ -106,11 +111,58 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         };
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         country.setAdapter(dataAdapter);
-        for (int i=0; i<countries.size(); i++){
+
+        /*for (int i=0; i<countries.size(); i++){
             if(countries.get(i).equals("México")||countries.get(i).equals("Mexico")){
                 country.setSelection(i);
+                iPais=i;
             }
+        }*/
+        country.setSelection(158);
+        ArrayAdapter<String> cityAdapter=setSpinnerData(country.getSelectedItemPosition());
+        if(cityAdapter!=null){
+            city.setAdapter(cityAdapter);
+            etCiudad.setVisibility(View.GONE);
+            bSpinEt=true;
+            city.setSelection(0);
+            sCiduadActual=city.getSelectedItem().toString();
         }
+        else{
+            city.setVisibility(View.GONE);
+            bSpinEt=false;
+            city.setAdapter(null);
+
+        }
+        country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                /* if(158==position|| 9==position|| 36==position|| 178==position|| 23 ==position||64 ==position||44 ==position||41==position|| 82==position ){
+
+                }*/
+                ArrayAdapter<String> cityAdapter=setSpinnerData(country.getSelectedItemPosition());
+                if(cityAdapter!=null){
+                    city.setVisibility(View.VISIBLE);
+                    city.setAdapter(cityAdapter);
+                    etCiudad.setVisibility(View.GONE);
+                    bSpinEt=true;
+                }
+                else{
+                    etCiudad.setVisibility(View.VISIBLE);
+                    city.setVisibility(View.GONE);
+                    bSpinEt=false;
+                    if(city.getAdapter()!=null)
+                        etCiudad.setText(city.getSelectedItem().toString());
+                    else
+                        etCiudad.setText("");
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         if(savedInstanceState != null){
             byteArray = savedInstanceState.getByteArray("picture");
@@ -165,17 +217,23 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(this, "Favor de registrar país", Toast.LENGTH_SHORT).show();
                     break;
                 }*/
-                if(etCiudad.getText().toString().equals("")){
+                if(etCiudad.getText().toString().equals("")&&!bSpinEt){
                     Toast.makeText(this, "Favor de registrar ciudad", Toast.LENGTH_SHORT).show();
                     break;
                 }
-
+                String sCiudad;
+                if(bSpinEt){
+                    sCiudad=city.getSelectedItem().toString();
+                }
+                else{
+                    sCiudad=etCiudad.getText().toString();
+                }
                 ////Crear objeto infopersonal y guardarlo en base de datos
                 InfoPersonal infoPersonal = new InfoPersonal();
 
                 infoPersonal.setNombre(etNombre.getText().toString());
                 infoPersonal.setApodo(etApodo.getText().toString());
-                infoPersonal.setCiudad(etCiudad.getText().toString());
+                infoPersonal.setCiudad(sCiudad);
                 infoPersonal.setPais(country.getSelectedItem().toString());
                 infoPersonal.setFoto(byteArray);
 
@@ -244,5 +302,62 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(),"Terminar el registro",Toast.LENGTH_SHORT).show();
     }
+
+    ArrayAdapter<String> setSpinnerData(int iPais){
+        String s[];//new ArrayList<String>();//getResources().getStringArray(R.array.estados_mexico);
+        switch(iPais){
+            case 158:   //Mexico
+                //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_mexico) );
+                s=getResources().getStringArray(R.array.estados_mexico);
+                break;
+            case 9:     //Argentina
+                //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_argentina) );
+                s=getResources().getStringArray(R.array.estados_argentina);
+                break;
+            case 36:      //Canadá
+                //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_canada) );
+                s=getResources().getStringArray(R.array.estados_canada);
+                break;
+            case 178:     //Perú
+                //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_peru) );
+                s=getResources().getStringArray(R.array.estados_peru);
+                break;
+            case 23:      //Bolivia
+                //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_bolivia) );
+                s=getResources().getStringArray(R.array.estados_bolivia);
+                break;
+            case 64:        //Estados Unidos
+                //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_estados_unidos) );
+                s=getResources().getStringArray(R.array.estados_estados_unidos);
+                break;
+            case 44:        //Colombia
+                //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_colombia) );
+                s=getResources().getStringArray(R.array.estados_colombia);
+                break;
+            case 41:        //Chile
+                //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_chile) );
+                s=getResources().getStringArray(R.array.estados_chile);
+                break;
+            case 82:        //Guatemala
+                //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_guatemala) );
+                s=getResources().getStringArray(R.array.estados_guatemala);
+                break;
+            default:
+                return null;
+        }
+        return new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,s){
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+
+                ((TextView) v).setTextSize(18);
+                ((TextView) v).setTextColor(
+                        getResources().getColorStateList(R.color.caldroid_black)
+                );
+
+                return v;
+            }
+        };
+    }
+
 
 }
