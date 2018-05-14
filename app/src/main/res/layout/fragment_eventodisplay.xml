@@ -15,15 +15,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom|center"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/btn_eliminarTodosEventos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:text="@string/fragment_eventodisplay_eliminar"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/textViewX"
             android:layout_width="match_parent"

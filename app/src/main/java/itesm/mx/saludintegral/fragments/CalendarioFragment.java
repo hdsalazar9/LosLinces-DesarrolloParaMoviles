@@ -35,11 +35,14 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 
 public class CalendarioFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
-    Button btnAddEvento;
+    Button btnAddEvento, btnEliminar;
     private EventoOperations dao;
     private CumpleanoOperations dao2;
     private CaldroidFragment caldroidFragment;
     OnSelectFechaValida mCallback;
+    private Integer intMesABuscar;
+    Calendar cal;
+    View rootView;
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     CaldroidListener listener = new CaldroidListener() {
@@ -105,13 +108,14 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
 
         caldroidFragment = new CaldroidFragment();
         Log.d("OnCREATEVIEW", "Se crea la view");
-        View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
+        rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
         Miscellaneous.limpiaMapFechaFondo();
         btnAddEvento = rootView.findViewById(R.id.btn_addEvento);
+        btnEliminar=rootView.findViewById(R.id.btn_eliminarTodosEventos);
         caldroidFragment = new CaldroidFragment();
 
         Bundle args = new Bundle();
-        Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance();
         args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
         args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
         caldroidFragment.setArguments(args);
@@ -133,14 +137,15 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
         }
 
         btnAddEvento.setOnClickListener(this);
-
+        btnEliminar.setOnClickListener(this);
         //Cambiar de color los dates que tengan eventos registrados
         dao = new EventoOperations(getActivity().getApplicationContext());
         dao2 = new CumpleanoOperations(getActivity().getApplicationContext());
         dao.open();
         dao2.open();
-        Integer intMesABuscar = cal.get(Calendar.MONTH);
+        intMesABuscar = cal.get(Calendar.MONTH);
         pintarDiasDeEventos(intMesABuscar);
+
 
         return rootView;
     }
@@ -186,6 +191,11 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
                 }
                 transaction.addToBackStack(null);
                 transaction.commit();
+                break;
+            case R.id.btn_eliminarTodosEventos:
+                dao.deleteAllEventosSeccion(Miscellaneous.strTipo);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(this).attach(this).commit();
                 break;
         }
     }
