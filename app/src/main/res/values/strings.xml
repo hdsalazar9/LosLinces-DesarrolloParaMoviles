@@ -23,7 +23,7 @@
     <string name="activity_registro_FechaNacimiento_hint">Elige tu fecha de nacimiento</string>
     <string name="activity_registro_pais">"País"</string>
     <string name="activity_registro_pais_hint">"Escribe tu país"</string>
-    <string name="activity_registro_ciudad">Ciudad</string>
+    <string name="activity_registro_ciudad">Estado/Provincia</string>
     <string name="activity_registro_ciudad_hint">Escribe tu ciudad</string>
     <string name="activity_registro_Continuar">Continuar</string>
 
@@ -122,7 +122,7 @@
     <string name="BitacoraEventos">"Bitácora Eventos"</string>
     <string name="fragment_perfil_fecha">Fecha de nacimiento:</string>
     <string name="fragment_perfil_pais">"Pais:"</string>
-    <string name="fragment_perfil_ciudad">Ciudad:</string>
+    <string name="fragment_perfil_ciudad">Estado/Provincia:</string>
     <string name="fragment_perfil_apellido">Apellido:</string>
     <string name="fragment_perfil_nombre">Nombre:</string>
     <string name="fragment_perfil_botonFoto">Nueva foto</string>
@@ -149,5 +149,289 @@
     <string name="add_contacto_nombre">Nombre: </string>
     <string name="hint_registro">Nombre de Contacto</string>
 
+
+    <string-array name="estados_estados_unidos">
+        <item>Alabama</item>
+        <item>Alaska</item>
+        <item>Arizona</item>
+        <item>Arkansas</item>
+        <item>California</item>
+        <item>Colorado</item>
+        <item>Connecticut</item>
+        <item>Delaware</item>
+        <item>Florida</item>
+        <item>Georgia</item>
+        <item>Hawaii</item>
+        <item>Idaho</item>
+        <item>Illinois Indiana</item>
+        <item>Iowa</item>
+        <item>Kansas</item>
+        <item>Kentucky</item>
+        <item>Louisiana</item>
+        <item>Maine</item>
+        <item>Maryland</item>
+        <item>Massachusetts</item>
+        <item>Michigan</item>
+        <item>Minnesota</item>
+        <item>Mississippi</item>
+        <item>Missouri</item>
+        <item>Montana Nebraska</item>
+        <item>Nevada</item>
+        <item>New Hampshire</item>
+        <item>New Jersey</item>
+        <item>New Mexico</item>
+        <item>New York</item>
+        <item>North Carolina</item>
+        <item>North Dakota</item>
+        <item>Ohio</item>
+        <item>Oklahoma</item>
+        <item>Oregon</item>
+        <item>Pennsylvania Rhode Island</item>
+        <item>South Carolina</item>
+        <item>South Dakota</item>
+        <item>Tennessee</item>
+        <item>Texas</item>
+        <item>Utah</item>
+        <item>Vermont</item>
+        <item>Virginia</item>
+        <item>Washington</item>
+        <item>West Virginia</item>
+        <item>Wisconsin</item>
+        <item>Wyoming</item>
+    </string-array>
+
+    <string-array name="estados_guatemala">
+        <item>Alta Verapaz</item>
+        <item>Baja Verapaz</item>
+        <item>Chimaltenango</item>
+        <item>Chiquimula</item>
+        <item>Petén</item>
+        <item>El Progreso</item>
+        <item>Quiché</item>
+        <item>Escuintla</item>
+        <item>Guatemala</item>
+        <item>Huehuetenango</item>
+        <item>Izabal</item>
+        <item>Jalapa</item>
+        <item>Jutiapa</item>
+        <item>Quetzaltenango</item>
+        <item>Retalhuleu</item>
+        <item>Sacatepéquez</item>
+        <item>San Marcos</item>
+        <item>Santa Rosa</item>
+        <item>Sololá</item>
+        <item>Suchitepéquez</item>
+        <item>Totonicapán</item>
+        <item>Zacapa</item>
+    </string-array>
+
+    <string-array name="estados_colombia">
+        <item>Amazonas</item>
+        <item>Antioquia</item>
+        <item>Arauca</item>
+        <item>Atlántico</item>
+        <item>Bogotá</item>
+        <item>Bolívar</item>
+        <item>Boyacá</item>
+        <item>Caldas</item>
+        <item>Caquetá</item>
+        <item>Casanare</item>
+        <item>Cauca</item>
+        <item>Cesar</item>
+        <item>Chocó</item>
+        <item>Córdoba</item>
+        <item>Cundinamarca</item>
+        <item>Guainía</item>
+        <item>Guaviare</item>
+        <item>Huila</item>
+        <item>La Guajira</item>
+        <item>Magdalena</item>
+        <item>Meta</item>
+        <item>Nariño</item>
+        <item>Norte de Santander</item>
+        <item>Putumayo</item>
+        <item>Quindío</item>
+        <item>Risaralda</item>
+        <item>San Andrés y Providencia</item>
+        <item>Santander</item>
+        <item>Sucre</item>
+        <item>Tolima</item>
+        <item>Valle del Cauca</item>
+        <item>Vaupés</item>
+        <item>Vichada</item>
+    </string-array>
+
+    <string-array name="estados_chile">
+        <item>Provincia de Arica</item>
+        <item>Provincia de Parinacota</item>
+        <item>Provincia de Iquique</item>
+        <item>Provincia del Tamarugal</item>
+        <item>Provincia de Tocopilla</item>
+        <item>Provincia de El Loa</item>
+        <item>Provincia de Antofagasta</item>
+        <item>Provincia de Chañaral</item>
+        <item>Provincia de Copiapó</item>
+        <item>Provincia de Huasco</item>
+        <item>Provincia de Elqui</item>
+        <item>Provincia de Limarí</item>
+        <item>Provincia de Choapa</item>
+        <item>Provincia de Petorca </item>
+        <item>Provincia de Los Andes</item>
+        <item>Provincia de San Felipe de Aconcagua</item>
+        <item>Provincia de Quillota</item>
+        <item>Provincia de Valparaíso</item>
+        <item>Provincia de San Antonio</item>
+        <item>Provincia de Isla de Pascua</item>
+        <item>Provincia de Marga Marga</item>
+        <item>Provincia de Chacabuco</item>
+        <item>Provincia de Santiago</item>
+        <item>Provincia de Cordillera	Puente</item>
+        <item>Provincia de Maipo</item>
+        <item>Provincia de Melipilla</item>
+        <item>Provincia de Talagante</item>
+        <item>Provincia de Cachapoal</item>
+        <item>Provincia de Colchagua </item>
+        <item>Provincia de Cardenal Caro</item>
+        <item>Provincia de Curicó</item>
+        <item>Provincia de Talca</item>
+        <item>Provincia de Linares</item>
+        <item>Provincia de Cauquenes</item>
+        <item>Provincia de Ñuble</item>
+        <item>Provincia de Biobío</item>
+        <item>Provincia de Concepción</item>
+        <item>Provincia de Arauco</item>
+        <item>Provincia de Malleco</item>
+        <item>Provincia de Cautín</item>
+        <item>Provincia de Valdivia</item>
+        <item>Provincia del Ranco	</item>
+        <item>Provincia de Osorno	</item>
+        <item>Provincia de Llanquihue	</item>
+        <item>Provincia de Chiloé</item>
+        <item>Provincia de Palena</item>
+        <item>Provincia de Coyhaique</item>
+        <item>Provincia de Aysén</item>
+        <item>Provincia de General Carrera</item>
+        <item>Provincia de Capitán Prat</item>
+        <item>Provincia de Última Esperanza</item>
+        <item>Provincia de Magallanes</item>
+        <item>Provincia de Tierra del Fuego</item>
+        <item>Provincia de la Antártica Chilena</item>
+    </string-array>
+
+    <string-array name="estados_mexico">
+        <item>Aguascalientes</item>
+        <item>Baja California</item>
+        <item>Baja California Sur</item>
+        <item>Campeche</item>
+        <item>Coahuila de Zaragoza</item>
+        <item>Colima</item>
+        <item>Chiapas</item>
+        <item>Chihuahua</item>
+        <item>Distrito Federal</item>
+        <item>Durango</item>
+        <item>Guanajuato</item>
+        <item>Guerrero</item>
+        <item>Hidalgo</item>
+        <item>Jalisco</item>
+        <item>México</item>
+        <item>Michoacán de Ocampo</item>
+        <item>Morelos</item>
+        <item>Nayarit</item>
+        <item>Nuevo León</item>
+        <item>Oaxaca</item>
+        <item>Puebla</item>
+        <item>Querétaro</item>
+        <item>Quintana Roo</item>
+        <item>San Luis Potosí</item>
+        <item>Sinaloa</item>
+        <item>Sonora</item>
+        <item>Tabasco</item>
+        <item>Tamaulipas</item>
+        <item>Tlaxcala</item>
+        <item>Veracruz</item>
+        <item>Yucatán</item>
+        <item>Zacatecas</item>
+    </string-array>
+
+    <string-array name="estados_canada">
+        <item>Alberta</item>
+        <item>British Columbia</item>
+        <item>Manitoba</item>
+        <item>New Brunswick</item>
+        <item>Newfoundland and Labrador</item>
+        <item>Nova Scotia</item>
+        <item>Ontario</item>
+        <item>Prince Edward Island</item>
+        <item>Quebec</item>
+        <item>Saskatchewan</item>
+        <item>Northwest Territories</item>
+        <item>Nunavut</item>
+        <item>Yukon</item>
+    </string-array>
+
+    <string-array name="estados_argentina">
+        <item>Buenos Aires</item>
+        <item>Catamarca</item>
+        <item>Chaco</item>
+        <item>Chubut</item>
+        <item>Córdoba</item>
+        <item>Corrientes</item>
+        <item>Entre Ríos</item>
+        <item>Formosa</item>
+        <item>Jujuy</item>
+        <item>La Pampa</item>
+        <item>La Rioja</item>
+        <item>Mendoza</item>
+        <item>Misiones</item>
+        <item>Neuquén</item>
+        <item>Río Negro</item>
+        <item>Salta</item>
+        <item>San Juan</item>
+        <item>Santa Cruz</item>
+        <item>Santa Fe</item>
+        <item>Santiago del Estero</item>
+        <item>Tierra del Fuego</item>
+        <item>Tucumán</item>
+    </string-array>
+
+    <string-array name="estados_peru">
+        <item>Amazonas</item>
+        <item>Áncash</item>
+        <item>Apurímac</item>
+        <item>Arequipa</item>
+        <item>Ayacucho</item>
+        <item>Cajamarca</item>
+        <item>Callao</item>
+        <item>Cuzco</item>
+        <item>Huancavelica</item>
+        <item>Huánuco</item>
+        <item>Ica</item>
+        <item>Junín</item>
+        <item>La Libertad</item>
+        <item>Lambayeque</item>
+        <item>Lima</item>
+        <item>Loreto</item>
+        <item>Madre de Dios</item>
+        <item>Moquegua</item>
+        <item>Pasco</item>
+        <item>Piura</item>
+        <item>Puno</item>
+        <item>San Martín</item>
+        <item>Tacna</item>
+        <item>Tumbes</item>
+        <item>Ucayali</item>
+    </string-array>
+
+    <string-array name="estados_bolivia">
+        <item>Beni</item>
+        <item>Chuquisaca</item>
+        <item>Cochabamba</item>
+        <item>La Paz</item>
+        <item>Oruro</item>
+        <item>Pando</item>
+        <item>Potosí</item>
+        <item>Santa Cruz</item>
+        <item>Tarija</item>
+    </string-array>
 
 </resources>
