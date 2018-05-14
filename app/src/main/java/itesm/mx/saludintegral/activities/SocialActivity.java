@@ -36,7 +36,7 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 public class SocialActivity extends AppCompatActivity implements FragmentoMenuSocial.OnSelectedListener, FragmentoFamiliaAmigos.OnSelectedListener, ListEventoFragment.OnResponseListener, CalendarioFragment.OnSelectFechaValida, EventoDisplayFragment.OnResponseListener, EventoZoomFragment.OnResponseListener, CumpleanoDisplayFragment.OnResponseListener, ListCumpleanoFragment.OnResponseListener, CumpleanoZoomFragment.OnResponseListener {
 
     int iCurrentFrameLayout = R.id.frameLayout_ActivitySocial;
-    TextView tvVacía;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

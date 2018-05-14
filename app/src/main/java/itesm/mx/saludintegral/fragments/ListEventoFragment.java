@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,6 +41,7 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
     String strFecha;
     Date fechaSeleccionada;
     TextView tvVacio;
+    ListView ls;
 
     public ListEventoFragment() {
         // Required empty public constructor
@@ -47,10 +51,12 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Miscellaneous.limpiaEliminarEventos();
         view = inflater.inflate(R.layout.fragment_listevento, container, false);
         Log.d("onCreateView", "Se creó la ListView");
         tvVacio = view.findViewById(R.id.tv_fragment_listevento_vacio);
         listEvento = new ArrayList<Evento>();
+
         dao = new EventoOperations(getContext());
         dao.open();
         listEvento = null;
@@ -87,7 +93,7 @@ public class ListEventoFragment extends ListFragment implements AdapterView.OnIt
 
     @Override
     public void onActivityCreated(Bundle savedInstance) {
-        ListView ls = (ListView) view.findViewById(android.R.id.list);
+        ls = (ListView) view.findViewById(android.R.id.list);
         ls.setTextFilterEnabled(true);
         registerForContextMenu(ls);
         ls.setOnItemClickListener(this);

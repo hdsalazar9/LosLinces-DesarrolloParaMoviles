@@ -67,7 +67,7 @@
     <string name="fragment_calendario_addCumple">"Añadir Cumpleaños"</string>
 
     <string name="fragment_eventodisplay_cerrar">"Cerrar"</string>
-    <string name="fragment_eventodisplay_eliminar">"Eliminar todos los eventos"</string>
+    <string name="fragment_eventodisplay_eliminar">"Eliminar eventos seleccionados"</string>
 
     <string name="fragment_addevento_nombre">"Nombre: "</string>
     <string name="fragment_addevento_hint_nombre">"Inserte el nombre del evento."</string>

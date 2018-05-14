@@ -46,7 +46,6 @@ public class EventoZoomFragment extends Fragment implements View.OnClickListener
         tvDesscripcion = rootView.findViewById(R.id.tv_fragmentozoom_descripcion);
         tvFecha = rootView.findViewById(R.id.tv_fragmentozoom_fecha);
         tvTipo = rootView.findViewById(R.id.tv_fragmentozoom_tipo);
-        btnEliminar = rootView.findViewById(R.id.btn_eventozoom_eliminarEvento);
         btnRegresar= rootView.findViewById(R.id.btn_eventozoom_cerrar);
         btnEliminarTodos=rootView.findViewById(R.id.btn_eventozoom_eliminarEventos);
 

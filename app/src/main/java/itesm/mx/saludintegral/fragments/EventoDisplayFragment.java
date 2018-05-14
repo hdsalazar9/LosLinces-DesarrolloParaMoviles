@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import itesm.mx.saludintegral.R;
 import itesm.mx.saludintegral.controllers.EventoOperations;
 import itesm.mx.saludintegral.models.Evento;
@@ -28,6 +30,8 @@ public class EventoDisplayFragment extends Fragment {
     Button btnBack, btnEliminar;
     OnResponseListener mCallback;
     EventoOperations dao;
+    TextView tvFecha;
+    String strFecha;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,22 +39,23 @@ public class EventoDisplayFragment extends Fragment {
         Log.d("CREATE","SE CREA LA VISTA DE EVENTODISPLAYFRAGMENT");
         View rootView = inflater.inflate(R.layout.fragment_eventodisplay,container,false);
 
+        tvFecha = rootView.findViewById(R.id.tv_eventodisplay_fecha);
         btnBack = rootView.findViewById(R.id.btn_regresar);
         btnEliminar=rootView.findViewById(R.id.btn_eliminarTodosEventos);
-        ListEventoFragment listEventoFragment = new ListEventoFragment();
+        final ListEventoFragment listEventoFragment = new ListEventoFragment();
         Bundle info = getArguments();
         dao=new EventoOperations(getContext());
         dao.open();
 
         if (info != null) {
-            String strFecha = info.getString("Fecha");
+            strFecha = info.getString("Fecha");
             Log.d("DEBUG",strFecha);
         }
 
+        tvFecha.setText(strFecha);
         listEventoFragment.setArguments(info);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.listView, listEventoFragment);
-        //transaction.addToBackStack(null);
         transaction.commit();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +67,9 @@ public class EventoDisplayFragment extends Fragment {
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dao.deleteAllEventosSeccion(Miscellaneous.strTipo);
+                for(Evento ev : Miscellaneous.eliminarEventos){
+                    dao.deleteEvento(ev.getName(),Miscellaneous.getDateFromString(strFecha));
+                }
                 mCallback.onResponse(1,null);
             }
         });

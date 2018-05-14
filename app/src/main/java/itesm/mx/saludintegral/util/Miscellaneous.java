@@ -10,10 +10,12 @@ import android.widget.ListView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 import itesm.mx.saludintegral.adapters.MenuItemAdapter;
+import itesm.mx.saludintegral.models.Evento;
 
 /**
  * Created by FernandoDavid on 23/04/2018.
@@ -26,6 +28,7 @@ public class Miscellaneous {
     public static int iSizeMenu = 0;
     public static int iSizeSubMenu = 0;
     public static HashMap<Date,Drawable> mapFechaFondo;
+    public static ArrayList<Evento> eliminarEventos;
 
     public final static String[] titulos = {
             "Salud Física",
@@ -72,6 +75,12 @@ public class Miscellaneous {
     public static void limpiaMapFechaFondo() {
         mapFechaFondo = new HashMap<Date,Drawable>();
         Log.d("Misc","se limpia el map FechaFondo");
+    }
+
+    //Método que borra todos los elementos del arraylist
+    public static void limpiaEliminarEventos() {
+        eliminarEventos = new ArrayList<Evento>();
+        Log.d("Misc","se limpia el arrayList eliminarEventos");
     }
 
     //Método que actualiza el tamaño de una lista

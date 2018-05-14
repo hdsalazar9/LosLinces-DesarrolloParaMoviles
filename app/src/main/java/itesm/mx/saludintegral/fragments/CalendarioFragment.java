@@ -102,7 +102,6 @@ public class CalendarioFragment extends android.support.v4.app.Fragment implemen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         caldroidFragment = new CaldroidFragment();
         Log.d("OnCREATEVIEW", "Se crea la view");
         View rootView = inflater.inflate(R.layout.fragment_calendario, container, false);
