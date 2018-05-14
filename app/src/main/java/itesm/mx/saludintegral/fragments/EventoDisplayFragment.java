@@ -27,7 +27,7 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 
 public class EventoDisplayFragment extends Fragment {
 
-    Button btnBack, btnEliminar;
+    Button btnBack;
     OnResponseListener mCallback;
     EventoOperations dao;
     TextView tvFecha;
@@ -41,6 +41,7 @@ public class EventoDisplayFragment extends Fragment {
 
         tvFecha = rootView.findViewById(R.id.tv_eventodisplay_fecha);
         btnBack = rootView.findViewById(R.id.btn_regresar);
+
         btnEliminar=rootView.findViewById(R.id.btn_eliminarTodosEventos);
         final ListEventoFragment listEventoFragment = new ListEventoFragment();
         Bundle info = getArguments();
