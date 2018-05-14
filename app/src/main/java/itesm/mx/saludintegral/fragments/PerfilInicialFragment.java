@@ -81,16 +81,8 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         info = ipo.getAllProducts();
         bSpinEt=false;
         //Agrega paises al spinner
-        //Locale[] locales = Locale.getAvailableLocales();
         List<String> countries = Arrays.asList(getResources().getStringArray(R.array.paises));
-        /*for (Locale locale : locales) {
-            String country = locale.getDisplayCountry();
-            if (country.trim().length() > 0 && !countries.contains(country)) {
-                countries.add(country);
-            }
-        }*/
 
-        //Collections.sort(countries);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, countries){
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = super.getView(position, convertView, parent);
@@ -132,10 +124,8 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                /* if(158==position|| 9==position|| 36==position|| 178==position|| 23 ==position||64 ==position||44 ==position||41==position|| 82==position ){
 
-                }*/
-                Toast.makeText(getContext(), "Index: "+String.valueOf(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Index: "+String.valueOf(position), Toast.LENGTH_SHORT).show();
                 ArrayAdapter<String> cityAdapter=setSpinnerData(country.getSelectedItemPosition());
                 if(cityAdapter!=null){
                     city.setVisibility(View.VISIBLE);
