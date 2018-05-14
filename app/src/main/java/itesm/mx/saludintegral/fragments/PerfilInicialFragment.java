@@ -59,7 +59,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     Button btnEdit;
     ImageButton btnFoto;
     ImageView ivFoto;
-    Boolean bEditable, bSpinEt;
+    Boolean bEditable, bSpinEt, bFirstTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,6 +80,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         ipo.open();
         info = ipo.getAllProducts();
         bSpinEt=false;
+        bFirstTime=true;
         //Agrega paises al spinner
         List<String> countries = Arrays.asList(getResources().getStringArray(R.array.paises));
 
@@ -109,10 +110,11 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
 
         ArrayAdapter<String> cityAdapter=setSpinnerData(iPais);
         if(cityAdapter!=null){
+            cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             city.setAdapter(cityAdapter);
-            etCiudad.setVisibility(View.GONE);
+            city.setVisibility(View.GONE);
             bSpinEt=true;
-            setCiudad(iPais);
+            setCiudad();
         }
         else{
             city.setVisibility(View.GONE);
@@ -128,10 +130,14 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                 //Toast.makeText(getContext(), "Index: "+String.valueOf(position), Toast.LENGTH_SHORT).show();
                 ArrayAdapter<String> cityAdapter=setSpinnerData(country.getSelectedItemPosition());
                 if(cityAdapter!=null){
+                    cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     city.setVisibility(View.VISIBLE);
                     city.setAdapter(cityAdapter);
                     etCiudad.setVisibility(View.GONE);
                     bSpinEt=true;
+                    if(bFirstTime)
+                        setCiudad();
+                    bFirstTime=false;
                 }
                 else{
                     etCiudad.setVisibility(View.VISIBLE);
@@ -141,7 +147,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                         etCiudad.setText(city.getSelectedItem().toString());
                     else
                         etCiudad.setText(info.getCiudad());
-
+                    bFirstTime=false;
                 }
             }
 
@@ -163,7 +169,7 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
         etCiudad.setEnabled(false);
         country.setEnabled(false);
         city.setEnabled(false);
-
+        city.setVisibility(View.GONE);
         Bitmap bmp = BitmapFactory.decodeByteArray(info.getFoto(), 0, info.getFoto().length);
         ivFoto.setImageBitmap(Bitmap.createScaledBitmap(bmp, bmp.getWidth(),
                 bmp.getHeight(), false));
@@ -269,6 +275,14 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
                 }
                 else
                 {
+                    if(bSpinEt){
+                        city.setVisibility(View.VISIBLE);
+                        etCiudad.setVisibility(View.GONE);
+                    }
+                    else{
+                        etCiudad.setVisibility(View.VISIBLE);
+                        city.setVisibility(View.GONE);
+                    }
                     btnFoto.setVisibility(View.VISIBLE);
                     etNombre.setEnabled(true);
                     etApellido.setEnabled(true);
@@ -328,43 +342,43 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
     }
 
     ArrayAdapter<String> setSpinnerData(int iPais){
-        String s[];//new ArrayList<String>();//getResources().getStringArray(R.array.estados_mexico);
+        List<String> s;//new ArrayList<String>();//getResources().getStringArray(R.array.estados_mexico);
         switch(iPais){
             case 153:   //Mexico
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_mexico) );
-                s=getResources().getStringArray(R.array.estados_mexico);
+                s=Arrays.asList(getResources().getStringArray(R.array.estados_mexico));
             break;
             case 10:     //Argentina
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_argentina) );
-                s=getResources().getStringArray(R.array.estados_argentina);
+                s=Arrays.asList(getResources().getStringArray(R.array.estados_argentina));
             break;
             case 37:      //Canadá
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_canada) );
-                s=getResources().getStringArray(R.array.estados_canada);
+                s=Arrays.asList(getResources().getStringArray(R.array.estados_canada));
             break;
             case 178:     //Perú
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_peru) );
-                s=getResources().getStringArray(R.array.estados_peru);
+                s=Arrays.asList(getResources().getStringArray(R.array.estados_peru));
             break;
             case 25:      //Bolivia
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_bolivia) );
-                s=getResources().getStringArray(R.array.estados_bolivia);
+                s=Arrays.asList(getResources().getStringArray(R.array.estados_bolivia));
             break;
             case 66:        //Estados Unidos
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_estados_unidos) );
-                s=getResources().getStringArray(R.array.estados_estados_unidos);
+                s=Arrays.asList(getResources().getStringArray(R.array.estados_estados_unidos));
             break;
             case 46:        //Colombia
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_colombia) );
-                s=getResources().getStringArray(R.array.estados_colombia);
+                s=Arrays.asList(getResources().getStringArray(R.array.estados_colombia));
             break;
             case 42:        //Chile
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_chile) );
-                s=getResources().getStringArray(R.array.estados_chile);
+                s=Arrays.asList(getResources().getStringArray(R.array.estados_chile));
             break;
             case 83:        //Guatemala
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_guatemala) );
-                s=getResources().getStringArray(R.array.estados_guatemala);
+                s=Arrays.asList(getResources().getStringArray(R.array.estados_guatemala));
             break;
             default:
                 return null;
@@ -382,11 +396,10 @@ public class PerfilInicialFragment extends Fragment implements  View.OnClickList
             }
         };
     }
-    public void setCiudad(int iPais){
+    public void setCiudad(){
             for (int i=0; i<city.getAdapter().getCount();i++){
                 if (city.getItemAtPosition(i).equals(info.getCiudad())) {
                     city.setSelection(i);
-                    info.setCiudad(city.getItemAtPosition(i).toString());
                 }
             }
     }
