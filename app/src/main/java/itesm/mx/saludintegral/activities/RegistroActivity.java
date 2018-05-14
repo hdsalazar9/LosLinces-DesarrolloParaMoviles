@@ -28,8 +28,10 @@ import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import itesm.mx.saludintegral.R;
@@ -88,14 +90,15 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         bSpinEt=true;
         city=findViewById(R.id.spinnerCity);
         //Ingresa datos al spinner
-        Locale[] locales = Locale.getAvailableLocales();
+        /*Locale[] locales = Locale.getAvailableLocales();
         ArrayList<String> countries = new ArrayList<String>();
         for (Locale locale : locales) {
             String country = locale.getDisplayCountry();
             if (country.trim().length() > 0 && !countries.contains(country)) {
                 countries.add(country);
             }
-        }
+        }*/
+        List<String> countries = Arrays.asList(getResources().getStringArray(R.array.paises));
         Collections.sort(countries);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countries) {
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -306,15 +309,15 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     ArrayAdapter<String> setSpinnerData(int iPais){
         String s[];//new ArrayList<String>();//getResources().getStringArray(R.array.estados_mexico);
         switch(iPais){
-            case 158:   //Mexico
+            case 153:   //Mexico
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_mexico) );
                 s=getResources().getStringArray(R.array.estados_mexico);
-                break;
-            case 9:     //Argentina
+            break;
+            case 10:     //Argentina
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_argentina) );
                 s=getResources().getStringArray(R.array.estados_argentina);
                 break;
-            case 36:      //Canadá
+            case 37:      //Canadá
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_canada) );
                 s=getResources().getStringArray(R.array.estados_canada);
                 break;
@@ -322,23 +325,23 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_peru) );
                 s=getResources().getStringArray(R.array.estados_peru);
                 break;
-            case 23:      //Bolivia
+            case 25:      //Bolivia
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_bolivia) );
                 s=getResources().getStringArray(R.array.estados_bolivia);
                 break;
-            case 64:        //Estados Unidos
+            case 66:        //Estados Unidos
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_estados_unidos) );
                 s=getResources().getStringArray(R.array.estados_estados_unidos);
                 break;
-            case 44:        //Colombia
+            case 46:        //Colombia
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_colombia) );
                 s=getResources().getStringArray(R.array.estados_colombia);
                 break;
-            case 41:        //Chile
+            case 42:        //Chile
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_chile) );
                 s=getResources().getStringArray(R.array.estados_chile);
                 break;
-            case 82:        //Guatemala
+            case 83:        //Guatemala
                 //return new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.estados_guatemala) );
                 s=getResources().getStringArray(R.array.estados_guatemala);
                 break;
