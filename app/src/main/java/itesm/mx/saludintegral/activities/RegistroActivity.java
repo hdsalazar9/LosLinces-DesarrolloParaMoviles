@@ -90,16 +90,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         bSpinEt=true;
         city=findViewById(R.id.spinnerCity);
         //Ingresa datos al spinner
-        /*Locale[] locales = Locale.getAvailableLocales();
-        ArrayList<String> countries = new ArrayList<String>();
-        for (Locale locale : locales) {
-            String country = locale.getDisplayCountry();
-            if (country.trim().length() > 0 && !countries.contains(country)) {
-                countries.add(country);
-            }
-        }*/
+
         List<String> countries = Arrays.asList(getResources().getStringArray(R.array.paises));
-        Collections.sort(countries);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countries) {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = super.getView(position, convertView, parent);
@@ -115,13 +107,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         country.setAdapter(dataAdapter);
 
-        /*for (int i=0; i<countries.size(); i++){
-            if(countries.get(i).equals("México")||countries.get(i).equals("Mexico")){
-                country.setSelection(i);
-                iPais=i;
-            }
-        }*/
-        country.setSelection(158);
+
+        country.setSelection(153);
         ArrayAdapter<String> cityAdapter=setSpinnerData(country.getSelectedItemPosition());
         if(cityAdapter!=null){
             city.setAdapter(cityAdapter);
@@ -139,9 +126,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                /* if(158==position|| 9==position|| 36==position|| 178==position|| 23 ==position||64 ==position||44 ==position||41==position|| 82==position ){
-
-                }*/
+                //Toast.makeText(getApplicationContext(), "Index: "+String.valueOf(position), Toast.LENGTH_SHORT).show();
                 ArrayAdapter<String> cityAdapter=setSpinnerData(country.getSelectedItemPosition());
                 if(cityAdapter!=null){
                     city.setVisibility(View.VISIBLE);
