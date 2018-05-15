@@ -5,7 +5,6 @@ android {
         config {
             keyAlias 'passwordLosLinces'
             keyPassword 'losLincesMoviles'
-            storeFile file('D:/AndroidDev/AndroidStudio/LosLinces-DesarrolloParaMoviles/app/build/outputs/apk/debug')
             storePassword 'losLincesMoviles'
         }
     }
