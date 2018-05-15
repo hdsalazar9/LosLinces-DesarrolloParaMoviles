@@ -29,7 +29,7 @@ public class EventoZoomFragment extends Fragment implements View.OnClickListener
     TextView tvDesscripcion;
     TextView tvFecha;
     TextView tvTipo;
-    Button btnEliminar, btnEliminarTodos;
+    Button btnEliminarTodos;
     Button btnRegresar;
     OnResponseListener mCallback;
     EventoOperations dao;
@@ -62,7 +62,6 @@ public class EventoZoomFragment extends Fragment implements View.OnClickListener
             tvTipo.setText(evento.getTipo());
         }
 
-        btnEliminar.setOnClickListener(this);
         btnRegresar.setOnClickListener(this);
         btnEliminarTodos.setOnClickListener(this);
         return rootView;

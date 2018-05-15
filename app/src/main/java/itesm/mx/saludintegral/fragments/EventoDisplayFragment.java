@@ -27,7 +27,7 @@ import itesm.mx.saludintegral.util.Miscellaneous;
 
 public class EventoDisplayFragment extends Fragment {
 
-    Button btnBack;
+    Button btnEliminar, btnBack;
     OnResponseListener mCallback;
     EventoOperations dao;
     TextView tvFecha;

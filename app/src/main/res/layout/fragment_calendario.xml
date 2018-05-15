@@ -39,13 +39,12 @@
                 android:id="@+id/btn_eliminarTodosEventos"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:background="@android:color/holo_red_dark"
-                android:text="@string/fragment_eventodisplay_eliminar"
+                android:text="@string/fragment_eventodisplay_eliminarTodosEventos"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
